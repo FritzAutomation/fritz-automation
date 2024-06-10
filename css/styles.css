@@ -24,6 +24,7 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-size: 20px;
+    padding-bottom: 1000px;
 }
 
 a {
@@ -321,6 +322,25 @@ h3 {
             flex: 1;
             p {
                 margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+.work-experience {
+    .jobs {
+        display: flex;
+        gap: 30px;
+        @media (max-width: 1024px){
+            flex-direction: column;
+        }
+        article {
+            background-color: var(--yellow-100);
+            padding: 30px;
+            border-radius: 30px;
+            flex: 1;
+            h3 {
+                margin-top: 20px;
             }
         }
     }
