@@ -484,6 +484,11 @@ h3 {
     }
 }
 
+.footer {
+    color: var(--base);
+    text-align: center;
+}
+
 /* .chatbot {
     .chatbot-blue {
         background-color: var(--blue-100);
