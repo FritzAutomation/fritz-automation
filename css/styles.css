@@ -363,6 +363,7 @@ h3 {
                     left: 0;
                     height: 100%;
                     object-fit: cover;
+                    transition: ease 3s all;
                 }
                 figcaption {
                     position: absolute;
@@ -375,13 +376,16 @@ h3 {
                     padding: 10px;
                     opacity: 0;
                     visibility: hidden;
-                    transition: ease 3s all;
+                    transition: ease 0.3s all;
                 }
                 
                 &:hover {
                     figcaption {
                         opacity: 1;
                         visibility: visible;
+                    }
+                    img {
+                        transform: scale(1.2);
                     }
                 }
             }
