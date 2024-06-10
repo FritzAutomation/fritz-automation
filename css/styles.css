@@ -414,6 +414,21 @@ h3 {
             padding: 30px;
             background-color: var(--base-100);
             border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                object-fit: cover;
+                transition: ease 3s all;
+            }
+            &:hover {
+                img {
+                    transform: scale(1.2);
+                }
+            }
             @media (max-width: 768px) {
                 height: 240px;
             }
