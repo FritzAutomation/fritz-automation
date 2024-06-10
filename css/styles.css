@@ -341,7 +341,51 @@ h3 {
             flex: 1;
             h3 {
                 margin-top: 20px;
+                margin-bottom: 10px;
             }
+            div {
+                font-weight: 600;
+                margin-bottom: 5px;
+                color: var(--base-800)
+            }
+            p {
+                margin-bottom: 10px;
+            }
+            figure {
+                width: 100%;
+                padding-top: 56.25%;
+                overflow: hidden;
+                position: relative;
+                border-radius: 15px;
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                figcaption {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: var(--base-100);
+                    text-align: center;
+                    padding: 10px;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: ease 3s all;
+                }
+                
+                &:hover {
+                    figcaption {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+
         }
     }
 }
