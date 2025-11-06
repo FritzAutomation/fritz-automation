@@ -15,7 +15,7 @@ class Skill(models.Model):
 
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other')
-    icon = models.ImageField(upload_to='skills/', blank=True, null=True)
+    icon = models.URLField(max_length=500, blank=True, null=True, help_text='URL to skill icon image')
     proficiency = models.IntegerField(default=50, help_text='Proficiency level 0-100')
     order = models.IntegerField(default=0, help_text='Display order')
     is_active = models.BooleanField(default=True)
@@ -39,7 +39,7 @@ class WorkExperience(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True, help_text='Leave blank if current position')
     description = models.TextField()
-    image = models.ImageField(upload_to='work_experience/', blank=True, null=True)
+    image = models.URLField(max_length=500, blank=True, null=True, help_text='URL to company/position image')
     is_current = models.BooleanField(default=False)
     order = models.IntegerField(default=0, help_text='Display order (0 = most recent)')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -79,7 +79,7 @@ class Project(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     short_description = models.CharField(max_length=255, help_text='Brief one-liner description')
     description = models.TextField()
-    image = models.ImageField(upload_to='projects/')
+    image = models.URLField(max_length=500, help_text='URL to project image')
     github_url = models.URLField(blank=True, null=True)
     live_url = models.URLField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='completed')
@@ -142,8 +142,8 @@ class SiteSettings(models.Model):
         'Specializing in backend technologies with Python, I am currently '
         'expanding my skills to include front-end technologies.'
     )
-    hero_image = models.ImageField(upload_to='site/', blank=True, null=True)
-    resume_file = models.FileField(upload_to='resumes/', blank=True, null=True)
+    hero_image = models.URLField(max_length=500, blank=True, null=True, help_text='URL to hero image')
+    resume_file = models.URLField(max_length=500, blank=True, null=True, help_text='URL to resume PDF')
 
     # Social Links
     github_url = models.URLField(blank=True)
