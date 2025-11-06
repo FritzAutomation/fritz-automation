@@ -23,7 +23,7 @@ class SkillAdmin(admin.ModelAdmin):
 
     def icon_preview(self, obj):
         if obj.icon:
-            return format_html('<img src="{}" width="30" height="30" style="object-fit: contain;" />', obj.icon.url)
+            return format_html('<img src="{}" width="30" height="30" style="object-fit: contain;" />', obj.icon)
         return '-'
     icon_preview.short_description = 'Icon'
 
@@ -102,7 +102,7 @@ class WorkExperienceAdmin(admin.ModelAdmin):
 
     def image_preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.image)
         return '-'
     image_preview.short_description = 'Image'
 
@@ -154,7 +154,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def image_preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" width="80" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+            return format_html('<img src="{}" width="80" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.image)
         return '-'
     image_preview.short_description = 'Image'
 
