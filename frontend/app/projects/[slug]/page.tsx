@@ -190,7 +190,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <div>
                 <div className="font-semibold">Completed</div>
                 <div className="text-sm text-gray-500">
-                  {new Date(project.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                  {project.created_at ? new Date(project.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Date not available'}
                 </div>
               </div>
             </div>
