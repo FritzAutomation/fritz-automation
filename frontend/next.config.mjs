@@ -31,6 +31,23 @@ const nextConfig = {
         hostname: 'www.fritzautomation.dev',
         pathname: '/media/**',
       },
+      // External image sources
+      {
+        protocol: 'https',
+        hostname: 'cdn.simpleicons.org', // Simple Icons
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn-icons-png.flaticon.com', // Flaticon
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com', // Imgur
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', // Unsplash
+      },
     ],
   },
   async rewrites() {
