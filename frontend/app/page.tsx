@@ -157,11 +157,6 @@ export default async function Home() {
                   <span className="text-lg font-semibold text-gray-800">
                     {skill.name}
                   </span>
-                  {skill.proficiency && (
-                    <span className="pl-4 pr-10 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full min-w-[50px] text-center">
-                      {skill.proficiency}%
-                    </span>
-                  )}
                 </div>
               ))}
             </div>
@@ -203,29 +198,17 @@ export default async function Home() {
                 </div>
 
                 {skills.length > 0 ? (
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-3">
                     {skills.slice(0, 8).map((skill, index) => (
-                      <div key={skill.id} className="fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            {skill.icon && (
-                              <OptimizedImage src={skill.icon} alt="" width={20} height={20} objectFit="contain" />
-                            )}
-                            <span className="font-semibold text-gray-800">{skill.name}</span>
-                          </div>
-                          <span className="text-sm font-bold text-primary">
-                            {skill.proficiency}%
-                          </span>
-                        </div>
-                        <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full transition-all duration-1000 ease-out"
-                            style={{
-                              width: `${skill.proficiency}%`,
-                              transitionDelay: `${index * 100}ms`
-                            }}
-                          />
-                        </div>
+                      <div
+                        key={skill.id}
+                        className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors fade-in"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        {skill.icon && (
+                          <OptimizedImage src={skill.icon} alt="" width={20} height={20} objectFit="contain" />
+                        )}
+                        <span className="font-semibold text-gray-800">{skill.name}</span>
                       </div>
                     ))}
                   </div>
