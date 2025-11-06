@@ -6,7 +6,7 @@ from .models import Skill, WorkExperience, Project, ContactMessage, SiteSettings
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'proficiency_display', 'icon_preview', 'is_active', 'order', 'project_count')
+    list_display = ('name', 'category', 'icon_preview', 'is_active', 'order', 'project_count')
     list_filter = ('category', 'is_active')
     search_fields = ('name',)
     list_editable = ('order', 'is_active')
@@ -14,7 +14,7 @@ class SkillAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'category', 'proficiency', 'icon')
+            'fields': ('name', 'category', 'icon')
         }),
         ('Display Settings', {
             'fields': ('order', 'is_active')
@@ -26,19 +26,6 @@ class SkillAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" width="30" height="30" style="object-fit: contain;" />', obj.icon)
         return '-'
     icon_preview.short_description = 'Icon'
-
-    def proficiency_display(self, obj):
-        color = '#22c55e' if obj.proficiency >= 80 else '#eab308' if obj.proficiency >= 60 else '#ef4444'
-        return format_html(
-            '<div style="display: flex; align-items: center; gap: 8px;">'
-            '<div style="width: 100px; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden;">'
-            '<div style="width: {}%; height: 100%; background: {};"></div>'
-            '</div>'
-            '<span style="font-weight: 600;">{} %</span>'
-            '</div>',
-            obj.proficiency, color, obj.proficiency
-        )
-    proficiency_display.short_description = 'Proficiency'
 
     def project_count(self, obj):
         count = obj.projects.count()

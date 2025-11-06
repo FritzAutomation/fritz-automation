@@ -5,7 +5,7 @@ from .models import Skill, WorkExperience, Project, ContactMessage, SiteSettings
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ['id', 'name', 'category', 'icon', 'proficiency', 'order', 'is_active']
+        fields = ['id', 'name', 'category', 'icon', 'order', 'is_active']
 
 
 class WorkExperienceSerializer(serializers.ModelSerializer):

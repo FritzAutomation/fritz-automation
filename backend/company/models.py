@@ -16,7 +16,6 @@ class Skill(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other')
     icon = models.URLField(max_length=500, blank=True, null=True, help_text='URL to skill icon image')
-    proficiency = models.IntegerField(default=50, help_text='Proficiency level 0-100')
     order = models.IntegerField(default=0, help_text='Display order')
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
