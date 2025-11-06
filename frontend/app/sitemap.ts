@@ -1,11 +1,12 @@
 import { MetadataRoute } from 'next';
 import { getProjects } from '@/lib/api';
+import type { Project } from '@/types';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.fritzautomation.dev';
 
   // Fetch all projects for dynamic routes
-  let projects = [];
+  let projects: Project[] = [];
   try {
     projects = await getProjects();
   } catch (error) {
@@ -29,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic project routes
-  const projectRoutes = projects.map((project: any) => ({
+  const projectRoutes = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
     lastModified: new Date(project.updated_at || project.created_at || new Date()),
     changeFrequency: 'monthly' as const,
