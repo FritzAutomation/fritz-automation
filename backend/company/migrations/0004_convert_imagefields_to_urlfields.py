@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('company', '0002_rename_from_portfolio'),
+        ('company', '0003_clear_image_data'),
     ]
 
     operations = [
