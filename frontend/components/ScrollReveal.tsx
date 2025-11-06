@@ -47,7 +47,7 @@ export default function ScrollReveal({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && entry.target instanceof HTMLElement) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translate(0, 0)';
             // Optionally unobserve after animation
