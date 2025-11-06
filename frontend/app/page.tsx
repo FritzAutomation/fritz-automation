@@ -158,7 +158,7 @@ export default async function Home() {
                     {skill.name}
                   </span>
                   {skill.proficiency && (
-                    <span className="px-4 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full min-w-[50px] text-center">
+                    <span className="pl-4 pr-10 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full min-w-[50px] text-center">
                       {skill.proficiency}%
                     </span>
                   )}
