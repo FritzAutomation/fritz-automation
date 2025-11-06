@@ -34,7 +34,7 @@ const nextConfig = {
       // External image sources
       {
         protocol: 'https',
-        hostname: 'cdn.simpleicons.org', // Simple Icons
+        hostname: 'cdn.simpleicons.org', // Simple Icons (SVG)
       },
       {
         protocol: 'https',
@@ -47,6 +47,18 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com', // Unsplash
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.icons8.com', // Icons8 (PNG)
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net', // jsDelivr CDN
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.python.org', // Python.org logos
       },
     ],
   },
