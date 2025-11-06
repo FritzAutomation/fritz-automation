@@ -149,7 +149,7 @@ export default async function Home() {
               {[...skills, ...skills].map((skill, index) => (
                 <div
                   key={`${skill.id}-${index}`}
-                  className="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
+                  className="inline-flex items-center gap-3 pl-6 pr-8 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
                 >
                   {skill.icon && (
                     <OptimizedImage src={skill.icon} alt="" width={24} height={24} objectFit="contain" />
