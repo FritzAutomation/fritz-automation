@@ -6,9 +6,9 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate static params for all projects
@@ -26,7 +26,8 @@ export async function generateStaticParams() {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
-    const project = await getProject(params.slug);
+    const { slug } = await params;
+    const project = await getProject(slug);
 
     return {
       title: `${project.title} - Fritz Automation | Joshua Fritzjunker`,
@@ -65,10 +66,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
+  const { slug } = await params;
   let project;
 
   try {
-    project = await getProject(params.slug);
+    project = await getProject(slug);
   } catch (error) {
     notFound();
   }
