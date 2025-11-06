@@ -20,9 +20,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . .
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
+# Make startup script executable
+RUN chmod +x start.sh
 
-# Run migrations and start server
-CMD python manage.py migrate --noinput && \
-    gunicorn config.wsgi --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 60 --log-file -
+# Run startup script
+CMD ["./start.sh"]
