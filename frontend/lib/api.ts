@@ -30,12 +30,12 @@ const fixImageUrl = (url: string | null | undefined): string | null => {
 
 // Helper to fix all image URLs in an object
 const fixImageUrls = <T extends Record<string, any>>(obj: T): T => {
-  const fixed = { ...obj };
+  const fixed = { ...obj } as any;
   if (fixed.image) fixed.image = fixImageUrl(fixed.image);
   if (fixed.icon) fixed.icon = fixImageUrl(fixed.icon);
   if (fixed.hero_image) fixed.hero_image = fixImageUrl(fixed.hero_image);
   if (fixed.resume_file) fixed.resume_file = fixImageUrl(fixed.resume_file);
-  return fixed;
+  return fixed as T;
 };
 
 // API functions
