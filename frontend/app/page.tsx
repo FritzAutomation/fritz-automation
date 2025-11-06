@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import ScrollToTop from '@/components/ScrollToTop';
 import ScrollReveal from '@/components/ScrollReveal';
 import OptimizedImage from '@/components/OptimizedImage';
+import AnimatedCodeHero from '@/components/AnimatedCodeHero';
 import type { Skill, Project, WorkExperience, SiteSettings } from '@/types';
 
 export const metadata = {
@@ -130,32 +131,9 @@ export default async function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Hero Image / Illustration */}
+            {/* Animated Code Editor + Terminal */}
             <ScrollReveal direction="right" delay={200}>
-            <div className="relative">
-              <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 shadow-2xl">
-                <OptimizedImage
-                  src={settings.hero_image}
-                  alt="Fritz Automation - Custom Software Solutions"
-                  fill
-                  priority
-                  objectFit="cover"
-                  fallback={
-                    <div className="flex items-center justify-center h-full">
-                      <div className="text-center p-8">
-                        <div className="text-8xl mb-4">⚙️</div>
-                        <div className="text-6xl mb-4">💻</div>
-                        <div className="text-4xl font-bold gradient-text mb-2">Fritz Automation</div>
-                        <p className="text-gray-600">Intelligent Automation Solutions</p>
-                      </div>
-                    </div>
-                  }
-                />
-              </div>
-              {/* Decorative elements */}
-              <div className="absolute -z-10 top-10 right-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
-              <div className="absolute -z-10 bottom-10 left-10 w-72 h-72 bg-secondary/20 rounded-full blur-3xl"></div>
-            </div>
+              <AnimatedCodeHero />
             </ScrollReveal>
           </div>
         </div>
