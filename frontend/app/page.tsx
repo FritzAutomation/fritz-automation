@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import ScrollToTop from '@/components/ScrollToTop';
 import ScrollReveal from '@/components/ScrollReveal';
 import OptimizedImage from '@/components/OptimizedImage';
+import type { Skill, Project, WorkExperience, SiteSettings } from '@/types';
 
 export const metadata = {
   title: 'Fritz Automation | Custom Automation Solutions & Software Development',
@@ -35,10 +36,10 @@ export const revalidate = 0;
 
 export default async function Home() {
   // Fetch data server-side with error handling
-  let skills = [];
-  let projects = [];
-  let experience = [];
-  let settings = {
+  let skills: Skill[] = [];
+  let projects: Project[] = [];
+  let experience: WorkExperience[] = [];
+  let settings: SiteSettings = {
     site_title: 'Fritz Automation',
     tagline: 'Software Developer & Designer',
     about_text: 'Welcome to Fritz Automation!',
