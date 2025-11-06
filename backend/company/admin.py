@@ -265,7 +265,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
 class SiteSettingsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('General', {
-            'fields': ('site_title', 'tagline', 'about_text', 'hero_image', 'resume_file')
+            'fields': ('site_title', 'tagline', 'about_text', 'resume_file')
         }),
         ('Social Links', {
             'fields': ('email', 'github_url', 'linkedin_url', 'twitter_url')
