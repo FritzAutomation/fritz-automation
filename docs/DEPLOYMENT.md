@@ -1,336 +1,292 @@
-# Deployment Guide - Fritz Automation Portfolio
+# Fritz Automation - Deployment Guide
 
-This guide will help you deploy your Django + Next.js portfolio to production.
+This guide will walk you through deploying the Fritz Automation application using **Vercel** (frontend) and **Railway** (backend).
 
-## Architecture Overview
+## Prerequisites
 
-- **Frontend (Next.js):** Vercel
-- **Backend (Django):** Railway or Render
-- **Domain:** Your custom domain
-- **Database:** PostgreSQL (provided by Railway/Render)
-
----
-
-## 📋 Prerequisites
-
-1. GitHub account with your code pushed
-2. Domain name (e.g., fritzautomation.dev)
-3. Accounts on:
-   - [Vercel](https://vercel.com) (free)
-   - [Railway](https://railway.app) or [Render](https://render.com) (free tier)
+- GitHub account
+- Vercel account (free tier available)
+- Railway account (free tier available with $5 monthly credit)
+- Your application code pushed to a GitHub repository
 
 ---
 
-## Part 1: Deploy Django Backend (Railway - Recommended)
+## Part 1: Deploy Backend to Railway
 
-### Step 1: Create Railway Account
+### Step 1: Create Railway Project
 
-1. Go to [railway.app](https://railway.app)
-2. Sign up with GitHub
-3. Click "New Project"
+1. Go to [Railway.app](https://railway.app/) and sign in
+2. Click **"New Project"**
+3. Select **"Deploy from GitHub repo"**
+4. Choose your `fritz-automation` repository
+5. Railway will automatically detect the Django app in the `backend` folder
 
-### Step 2: Deploy Backend
+### Step 2: Add PostgreSQL Database
 
-1. Click "Deploy from GitHub repo"
-2. Select your `fritz-automation` repository
-3. Railway will auto-detect it's a Django app
-4. Click "Add variables" and set:
+1. In your Railway project, click **"+ New"**
+2. Select **"Database" → "PostgreSQL"**
+3. Railway will automatically provision a PostgreSQL database
+4. The `DATABASE_URL` environment variable will be automatically set
+
+### Step 3: Configure Environment Variables
+
+In Railway, go to your Django service → **Variables** tab and add:
 
 ```
+SECRET_KEY=your-generated-secret-key-here
 DEBUG=False
-SECRET_KEY=your-long-random-secret-key-here
-ALLOWED_HOSTS=your-project.railway.app,api.fritzautomation.dev
-CORS_ALLOWED_ORIGINS=https://www.fritzautomation.dev,https://fritzautomation.dev
+ALLOWED_HOSTS=your-railway-app.up.railway.app
+CORS_ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+CSRF_TRUSTED_ORIGINS=https://your-vercel-app.vercel.app
+SITE_URL=https://your-vercel-app.vercel.app
+
+# Email Configuration (Gmail example)
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-gmail-app-password
+DEFAULT_FROM_EMAIL=Fritz Automation <noreply@yourdomain.com>
+ADMIN_EMAIL=your-admin@email.com
+
+# Security Settings
+SECURE_SSL_REDIRECT=True
+SECURE_HSTS_SECONDS=31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_PRELOAD=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
 ```
 
-### Step 3: Add PostgreSQL Database
+**Important Notes:**
+- Replace `your-railway-app.up.railway.app` with your actual Railway domain (found in Settings)
+- Replace `your-vercel-app.vercel.app` with your Vercel domain (you'll get this after deploying frontend)
+- Generate a secure SECRET_KEY using: `python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`
+- For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833)
 
-1. In your Railway project, click "New"
-2. Select "Database" → "PostgreSQL"
-3. Railway automatically connects it and sets `DATABASE_URL`
+### Step 4: Set Root Directory
 
-### Step 4: Configure Root Directory
-
-1. In Railway project settings, set:
-   - **Root Directory:** `backend`
-   - **Start Command:** `gunicorn config.wsgi:application`
+1. In Railway, go to **Settings → Service Settings**
+2. Set **Root Directory** to `backend`
+3. Railway will now run from the backend folder
 
 ### Step 5: Deploy
 
-1. Click "Deploy"
-2. Wait for build to complete (~2-3 minutes)
-3. Copy your Railway URL: `https://your-project.railway.app`
-
-### Step 6: Run Migrations & Create Superuser
-
-1. In Railway, click on your service
-2. Go to "Settings" → "Deploy"
-3. Add these commands in "Build Command":
-   ```
-   python manage.py migrate
-   python manage.py collectstatic --noinput
-   ```
-4. To create superuser, use Railway CLI:
-   ```bash
-   railway run python manage.py createsuperuser
-   ```
+1. Railway will automatically deploy when you push to your main branch
+2. Monitor the deployment logs in Railway dashboard
+3. Once deployed, note your Railway URL (e.g., `https://fritz-automation-backend-production.up.railway.app`)
 
 ---
 
-## Part 2: Deploy Next.js Frontend (Vercel)
+## Part 2: Deploy Frontend to Vercel
 
-### Step 1: Create Vercel Account
+### Step 1: Create Vercel Project
 
-1. Go to [vercel.com](https://vercel.com)
-2. Sign up with GitHub
-3. Click "New Project"
+1. Go to [Vercel.com](https://vercel.com/) and sign in
+2. Click **"Add New..." → "Project"**
+3. Import your GitHub repository
+4. Vercel will detect it's a Next.js project
 
-### Step 2: Import Repository
+### Step 2: Configure Project Settings
 
-1. Select your `fritz-automation` repository
-2. Configure:
-   - **Framework Preset:** Next.js
-   - **Root Directory:** `frontend`
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `.next`
+1. **Root Directory**: Set to `frontend`
+2. **Framework Preset**: Next.js (should auto-detect)
+3. **Build Command**: `npm run build` (default)
+4. **Output Directory**: `.next` (default)
 
 ### Step 3: Set Environment Variables
 
-Click "Environment Variables" and add:
+In Vercel project settings → **Environment Variables**, add:
 
 ```
-NEXT_PUBLIC_API_URL=https://your-project.railway.app/api
-NEXT_PUBLIC_SITE_URL=https://www.fritzautomation.dev
+NEXT_PUBLIC_API_URL=https://your-railway-app.up.railway.app/api
 ```
 
-Replace `your-project.railway.app` with your actual Railway URL.
+Replace with your actual Railway backend URL from Part 1, Step 5.
 
 ### Step 4: Deploy
 
-1. Click "Deploy"
-2. Wait for build (~2-3 minutes)
-3. Your site will be live at `https://your-project.vercel.app`
+1. Click **"Deploy"**
+2. Vercel will build and deploy your frontend
+3. Once deployed, you'll get a URL like `https://fritz-automation.vercel.app`
 
----
+### Step 5: Update Backend Environment Variables
 
-## Part 3: Connect Your Domain
+Now that you have your Vercel URL, go back to Railway and update these variables:
 
-### Connect Domain to Vercel (Frontend)
-
-1. In Vercel project, go to "Settings" → "Domains"
-2. Add your domain: `fritzautomation.dev` and `www.fritzautomation.dev`
-3. Vercel will provide DNS records to add
-
-### Connect Domain to Railway (Backend - Optional)
-
-1. In Railway project, go to "Settings" → "Domains"
-2. Click "Generate Domain" or add custom: `api.fritzautomation.dev`
-3. Add DNS records provided by Railway
-
-### Configure DNS (at your domain registrar)
-
-Add these records:
-
-**For Vercel (Frontend):**
 ```
-Type: A
-Name: @
-Value: 76.76.21.21
-
-Type: CNAME
-Name: www
-Value: cname.vercel-dns.com
+CORS_ALLOWED_ORIGINS=https://your-actual-vercel-url.vercel.app
+CSRF_TRUSTED_ORIGINS=https://your-actual-vercel-url.vercel.app
+SITE_URL=https://your-actual-vercel-url.vercel.app
+ALLOWED_HOSTS=your-railway-app.up.railway.app
 ```
 
-**For Railway (Backend - if using custom domain):**
+This ensures your backend accepts requests from your frontend.
+
+---
+
+## Part 3: Custom Domains (Optional)
+
+### Railway Custom Domain
+
+1. In Railway project → **Settings → Domains**
+2. Click **"Add Custom Domain"**
+3. Enter your domain (e.g., `api.yourdomain.com`)
+4. Add the CNAME record to your DNS provider
+
+### Vercel Custom Domain
+
+1. In Vercel project → **Settings → Domains**
+2. Click **"Add"**
+3. Enter your domain (e.g., `yourdomain.com`)
+4. Follow DNS configuration instructions
+
+**After adding custom domains, update environment variables accordingly!**
+
+---
+
+## Part 4: Initial Setup & Superuser
+
+### Create Django Superuser
+
+1. In Railway, go to your Django service
+2. Open the **CLI** tab (or use Railway CLI locally)
+3. Run: `python manage.py createsuperuser`
+4. Follow prompts to create your admin account
+
+OR use Railway CLI locally:
+```bash
+railway login
+railway link
+railway run python backend/manage.py createsuperuser
 ```
-Type: CNAME
-Name: api
-Value: your-project.railway.app
+
+---
+
+## Post-Deployment Checklist
+
+- [ ] Backend deployed successfully on Railway
+- [ ] PostgreSQL database connected
+- [ ] Frontend deployed successfully on Vercel
+- [ ] Environment variables set correctly
+- [ ] CORS configured properly (check browser console)
+- [ ] Created superuser account
+- [ ] Tested admin login at `https://your-backend/admin/`
+- [ ] Tested client portal login
+- [ ] Email notifications working (test contact form)
+- [ ] Verified SSL certificates (HTTPS)
+
+---
+
+## Troubleshooting
+
+### CORS Errors
+- Ensure `CORS_ALLOWED_ORIGINS` in Railway includes your Vercel URL
+- Check that URLs don't have trailing slashes
+- Verify `CSRF_TRUSTED_ORIGINS` is set
+
+### Static Files Not Loading
+- Run `python manage.py collectstatic` in Railway CLI
+- Check that `STATIC_ROOT` is set in settings
+- Verify WhiteNoise is in `MIDDLEWARE`
+
+### Database Errors
+- Ensure `DATABASE_URL` is set (Railway sets this automatically)
+- Check PostgreSQL service is running in Railway
+- Verify migrations ran successfully (check Railway logs)
+
+### 500 Errors
+- Set `DEBUG=True` temporarily to see error details
+- Check Railway deployment logs
+- Verify all environment variables are set
+
+---
+
+## Continuous Deployment
+
+Both platforms support automatic deployments:
+
+- **Railway**: Automatically deploys when you push to your main branch
+- **Vercel**: Automatically deploys on every push to main
+
+To disable auto-deploy:
+- Railway: Settings → Service → Disable auto-deploy
+- Vercel: Project Settings → Git → Disable Production deployments
+
+---
+
+## Monitoring
+
+### Railway
+- View logs in real-time: **Deployments → Latest → Logs**
+- Monitor metrics: CPU, Memory, Network usage
+- Set up alerts for downtime
+
+### Vercel
+- View deployment logs in dashboard
+- Analytics available on Pro plan
+- Speed Insights for performance monitoring
+
+---
+
+## Backup Strategy
+
+### Database Backups
+Railway provides automatic daily backups for PostgreSQL. To manually backup:
+
+```bash
+railway link
+railway run pg_dump $DATABASE_URL > backup.sql
 ```
 
----
-
-## Part 4: Update Django Settings
-
-After deploying, update your Railway environment variables:
-
-1. Go to Railway → Variables
-2. Update:
-   ```
-   ALLOWED_HOSTS=api.fritzautomation.dev,your-project.railway.app
-   CORS_ALLOWED_ORIGINS=https://www.fritzautomation.dev,https://fritzautomation.dev
-   ```
+### Media Files
+If using uploaded files (avatars, project files), consider:
+- AWS S3 for file storage
+- Cloudinary for image optimization
+- Railway Volumes for persistent storage
 
 ---
 
-## Part 5: Update Next.js Environment Variables
+## Scaling
 
-1. Go to Vercel → Settings → Environment Variables
-2. Update:
-   ```
-   NEXT_PUBLIC_API_URL=https://api.fritzautomation.dev/api
-   ```
-   (or keep using the Railway URL)
+### Railway
+- Vertical scaling: Settings → Resources (increase RAM/CPU)
+- Horizontal scaling: Pro plan required
 
-3. Redeploy to apply changes
-
----
-
-## Part 6: Final Steps
-
-### 1. Upload Content via Django Admin
-
-1. Go to `https://api.fritzautomation.dev/admin`
-2. Login with your superuser credentials
-3. Add your:
-   - Skills
-   - Projects
-   - Work Experience
-   - Site Settings
-
-### 2. Test Your Site
-
-1. Visit `https://www.fritzautomation.dev`
-2. Check:
-   - All images load
-   - Projects display
-   - Navigation works
-   - Contact page works
-
-### 3. Enable HTTPS (Automatic)
-
-Both Vercel and Railway automatically provide SSL certificates. No action needed!
+### Vercel
+- Automatically scales based on traffic
+- Edge network for global performance
+- No configuration needed
 
 ---
 
-## 🔧 Troubleshooting
-
-### Images Not Loading
-
-**Problem:** Images show broken icon
-**Solution:**
-1. Check `NEXT_PUBLIC_API_URL` is set correctly in Vercel
-2. Verify images exist in Railway Django admin
-3. Check CORS settings in Railway
-
-### API Errors
-
-**Problem:** API calls fail
-**Solution:**
-1. Check `CORS_ALLOWED_ORIGINS` includes your Vercel domain
-2. Verify `ALLOWED_HOSTS` includes your Railway domain
-3. Check Railway logs for errors
-
-### Build Fails
-
-**Backend:**
-- Check `requirements.txt` is complete
-- Verify root directory is set to `backend`
-- Check Railway logs
-
-**Frontend:**
-- Verify `NEXT_PUBLIC_API_URL` is set
-- Check `package.json` is in `frontend` directory
-- Review Vercel build logs
-
----
-
-## 📊 Monitoring
-
-### Backend (Railway)
-- View logs: Railway → Service → Logs
-- Monitor resources: Railway → Metrics
-
-### Frontend (Vercel)
-- View logs: Vercel → Deployments → Logs
-- Analytics: Vercel → Analytics
-
----
-
-## 💰 Cost Breakdown
+## Cost Estimation
 
 ### Free Tier Limits
 
 **Railway:**
-- $5/month free credit
-- Enough for small portfolio (~500 hours/month)
+- $5 monthly credit (free)
+- ~500 hours of runtime
+- 1GB RAM, shared CPU
+- Good for MVP testing
 
 **Vercel:**
 - 100GB bandwidth/month
 - Unlimited deployments
-- Completely free for hobby projects
+- Serverless functions
+- Good for most small-mid apps
 
-**Total Monthly Cost:** $0 (within free tiers)
-
----
-
-## 🚀 Going to Production
-
-When you outgrow free tiers:
-
-1. **Railway Pro:** $20/month
-   - More resources
-   - Higher uptime
-   - Priority support
-
-2. **Vercel Pro:** $20/month
-   - Analytics
-   - More bandwidth
-   - Team features
+**When to Upgrade:**
+- Railway: When you exceed $5/month credit (~high traffic)
+- Vercel: When bandwidth exceeds 100GB
 
 ---
 
-## 📝 Updating Your Site
+## Need Help?
 
-### Update Content
-1. Go to Django admin
-2. Add/edit content
-3. Changes appear immediately
+- Railway Docs: https://docs.railway.app/
+- Vercel Docs: https://vercel.com/docs
+- Django Deployment: https://docs.djangoproject.com/en/stable/howto/deployment/
 
-### Update Code
-
-**Backend:**
-```bash
-git add .
-git commit -m "Update backend"
-git push
-```
-Railway auto-deploys on push
-
-**Frontend:**
-```bash
-git add .
-git commit -m "Update frontend"
-git push
-```
-Vercel auto-deploys on push
-
----
-
-## Alternative: Render Instead of Railway
-
-If you prefer Render:
-
-1. Go to [render.com](https://render.com)
-2. Create "New Web Service"
-3. Connect GitHub repo
-4. Set:
-   - **Root Directory:** `backend`
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `gunicorn config.wsgi:application`
-5. Add PostgreSQL database
-6. Set same environment variables
-
-Process is nearly identical to Railway.
-
----
-
-## 🎉 You're Live!
-
-Your portfolio is now deployed and accessible worldwide at:
-- **Frontend:** https://www.fritzautomation.dev
-- **Backend:** https://api.fritzautomation.dev
-- **Admin:** https://api.fritzautomation.dev/admin
-
-Good luck with your business! 🚀
+Good luck with your deployment! 🚀
