@@ -1,0 +1,28 @@
+{% extends "portal/emails/base.html" %}
+
+{% block title %}New Ticket Created - {{ site_name }}{% endblock %}
+
+{% block content %}
+<h2>New Support Ticket Created</h2>
+
+<p>A new support ticket has been submitted by <strong>{{ ticket.created_by.get_full_name|default:ticket.created_by.username }}</strong>.</p>
+
+<div class="info-box">
+    <p><strong>Ticket #:</strong> {{ ticket.id }}</p>
+    <p><strong>Title:</strong> {{ ticket.title }}</p>
+    <p><strong>Type:</strong> {{ ticket.get_ticket_type_display }}</p>
+    <p><strong>Priority:</strong> {{ ticket.get_priority_display }}</p>
+    {% if ticket.project %}<p><strong>Project:</strong> {{ ticket.project.title }}</p>{% endif %}
+</div>
+
+<p><strong>Description:</strong></p>
+<p>{{ ticket.description|linebreaks }}</p>
+
+<p style="text-align: center;">
+    <a href="{{ ticket_url }}" class="button">View Ticket</a>
+</p>
+
+<p style="color: #666; font-size: 14px;">
+    Click the button above to respond to this ticket in your portal dashboard.
+</p>
+{% endblock %}

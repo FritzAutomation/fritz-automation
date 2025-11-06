@@ -1,0 +1,36 @@
+{% extends "portal/emails/base.html" %}
+
+{% block title %}Welcome to {{ site_name }} Client Portal{% endblock %}
+
+{% block content %}
+<h2>Welcome to Fritz Automation!</h2>
+
+<p>Hi {{ user.first_name|default:user.username }},</p>
+
+<p>Welcome to the Fritz Automation Client Portal! We're excited to work with you{% if client_profile.company_name %} and {{ client_profile.company_name }}{% endif %}.</p>
+
+<p>Your account has been created and you now have access to:</p>
+
+<ul>
+    <li><strong>Project Dashboard</strong> - Track progress on all your projects</li>
+    <li><strong>Support Tickets</strong> - Submit and manage support requests</li>
+    <li><strong>File Sharing</strong> - Access project files and deliverables</li>
+    <li><strong>Real-time Updates</strong> - Get notified of project milestones</li>
+</ul>
+
+<div class="info-box">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+</div>
+
+<p style="text-align: center;">
+    <a href="{{ portal_url }}" class="button">Access Your Portal</a>
+</p>
+
+<p>If you have any questions or need assistance, feel free to create a support ticket in the portal or email us directly.</p>
+
+<p>We look forward to working with you!</p>
+
+<p>Best regards,<br>
+The Fritz Automation Team</p>
+{% endblock %}

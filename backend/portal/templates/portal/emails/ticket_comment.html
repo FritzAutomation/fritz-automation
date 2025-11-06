@@ -1,0 +1,28 @@
+{% extends "portal/emails/base.html" %}
+
+{% block title %}New Response on Ticket #{{ ticket.id }} - {{ site_name }}{% endblock %}
+
+{% block content %}
+<h2>New Response on Your Ticket</h2>
+
+<p>Hi {{ ticket.created_by.first_name|default:ticket.created_by.username }},</p>
+
+<p><strong>{{ comment.user.get_full_name|default:comment.user.username }}</strong> has responded to your ticket:</p>
+
+<div class="info-box">
+    <p><strong>Ticket #:</strong> {{ ticket.id }}</p>
+    <p><strong>Title:</strong> {{ ticket.title }}</p>
+    <p><strong>Status:</strong> {{ ticket.get_status_display }}</p>
+</div>
+
+<p><strong>Response:</strong></p>
+<p>{{ comment.comment|linebreaks }}</p>
+
+<p style="text-align: center;">
+    <a href="{{ ticket_url }}" class="button">View Ticket & Reply</a>
+</p>
+
+<p style="color: #666; font-size: 14px;">
+    You can reply to this ticket directly in your client portal.
+</p>
+{% endblock %}
