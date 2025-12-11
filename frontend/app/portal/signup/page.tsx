@@ -140,6 +140,7 @@ export default function SignupPage() {
                   type="password"
                   required
                   minLength={8}
+                  autoComplete="new-password"
                   value={formData.password}
                   onChange={handleChange}
                   className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -157,6 +158,7 @@ export default function SignupPage() {
                   type="password"
                   required
                   minLength={8}
+                  autoComplete="new-password"
                   value={formData.password_confirm}
                   onChange={handleChange}
                   className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"

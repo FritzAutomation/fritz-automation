@@ -83,7 +83,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <nav className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center gap-2 group">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">
-                JF
+                FA
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
                 Fritz Automation
