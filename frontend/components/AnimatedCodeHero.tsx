@@ -4,34 +4,40 @@ import { useEffect, useState } from 'react';
 
 const codeSnippets = [
   {
-    code: `# Fritz Automation Solutions
-def automate_workflow():
-    tasks = fetch_pending_tasks()
-    for task in tasks:
-        process_automatically(task)
-    return "✓ All tasks completed!"`,
-    output: `$ python automate.py\n> Connecting to system...\n> Processing 127 tasks...\n> ✓ All tasks completed successfully!\n> Runtime: 0.3s`
+    code: `# Excel Report Automation
+import openpyxl
+from datetime import datetime
+
+wb = openpyxl.load_workbook('sales.xlsx')
+sheet = wb.active
+total = sum(row[2].value for row in sheet[2:])
+sheet['E1'] = f'Generated: {datetime.now()}'
+wb.save('sales_report.xlsx')`,
+    output: `$ python generate_report.py\n> Loading sales.xlsx...\n> Processing 2,847 rows...\n> Calculating totals: $847,293.50\n> Adding timestamp...\n> ✓ Saved sales_report.xlsx\n> Runtime: 1.2s`
   },
   {
-    code: `# API Integration & Data Processing
+    code: `# Web Scraping & Data Collection
+from bs4 import BeautifulSoup
 import requests
 
-def sync_data():
-    response = requests.get(api_url)
-    data = response.json()
-    transform_and_save(data)
-    return f"Synced {len(data)} records"`,
-    output: `$ python sync.py\n> Fetching data from API...\n> Transforming 1,547 records...\n> Saving to database...\n> ✓ Synced 1,547 records\n> Status: Success`
+resp = requests.get(url, headers=headers)
+soup = BeautifulSoup(resp.text, 'html.parser')
+prices = [p.text for p in soup.select('.price')]
+with open('prices.csv', 'w') as f:
+    f.writelines(prices)`,
+    output: `$ python scrape_prices.py\n> Fetching product data...\n> Parsing 156 product pages...\n> Extracting price information...\n> ✓ Exported to prices.csv\n> 156 records saved`
   },
   {
-    code: `# Custom Django Web Applications
-from django.shortcuts import render
+    code: `# Automated Email Reports
+import smtplib
+from email.mime.multipart import MIMEMultipart
 
-def dashboard_view(request):
-    analytics = get_analytics()
-    return render(request, 'dashboard.html',
-                  {'analytics': analytics})`,
-    output: `$ python manage.py runserver\n> System check identified no issues.\n> Django version 5.0.1\n> Starting development server...\n> ✓ Server running at http://127.0.0.1:8000/`
+msg = MIMEMultipart()
+msg['Subject'] = 'Daily Analytics Report'
+msg.attach(MIMEText(report_html, 'html'))
+msg.attach(MIMEBase('application', 'xlsx'))
+server.send_message(msg)`,
+    output: `$ python send_report.py\n> Generating analytics report...\n> Attaching spreadsheet...\n> Connecting to SMTP server...\n> ✓ Email sent to 12 recipients\n> Status: Delivered`
   }
 ];
 
@@ -151,17 +157,36 @@ export default function AnimatedCodeHero() {
 
 // Simple syntax highlighting
 function highlightSyntax(line: string): string {
-  // Comments
-  line = line.replace(/(#.*$)/g, '<span style="color: #6a9955">$1</span>');
+  // Escape HTML entities first
+  line = line
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Comments (must be first to avoid highlighting inside comments)
+  if (line.includes('#')) {
+    const commentIndex = line.indexOf('#');
+    const beforeComment = line.slice(0, commentIndex);
+    const comment = line.slice(commentIndex);
+    line = highlightCode(beforeComment) + `<span style="color:#6a9955">${comment}</span>`;
+    return line;
+  }
+
+  return highlightCode(line);
+}
+
+function highlightCode(line: string): string {
+  // Strings (single and double quotes)
+  line = line.replace(/(&apos;[^&apos;]*&apos;|'[^']*'|"[^"]*")/g, '<span style="color:#ce9178">$1</span>');
 
   // Keywords
-  line = line.replace(/\b(def|class|import|from|return|for|in|if|else|elif)\b/g, '<span style="color: #c586c0">$1</span>');
+  line = line.replace(/\b(def|class|import|from|return|for|in|if|else|elif|with|as|and|or|not|True|False|None)\b/g, '<span style="color:#c586c0">$1</span>');
 
-  // Function names
-  line = line.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g, '<span style="color: #dcdcaa">$1</span>(');
+  // Function calls
+  line = line.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\(/g, '<span style="color:#dcdcaa">$1</span>(');
 
-  // Strings
-  line = line.replace(/(['"`])(?:(?=(\\?))\2.)*?\1/g, '<span style="color: #ce9178">$&</span>');
+  // Numbers
+  line = line.replace(/\b(\d+)\b/g, '<span style="color:#b5cea8">$1</span>');
 
   return line;
 }
