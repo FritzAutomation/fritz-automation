@@ -108,7 +108,7 @@ export default function NewTicketPage() {
                   value={formData.title}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 placeholder-gray-400"
                   placeholder="Brief summary of the issue or request"
                 />
               </div>
@@ -123,7 +123,7 @@ export default function NewTicketPage() {
                   name="project"
                   value={formData.project}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 >
                   <option value="">No specific project</option>
                   {projects.map((project) => (
@@ -147,7 +147,7 @@ export default function NewTicketPage() {
                     value={formData.ticket_type}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                   >
                     <option value="bug">Bug Report</option>
                     <option value="feature">Feature Request</option>
@@ -168,7 +168,7 @@ export default function NewTicketPage() {
                     value={formData.priority}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                   >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -190,7 +190,7 @@ export default function NewTicketPage() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none text-gray-900 placeholder-gray-400"
                   placeholder="Please provide detailed information about your issue or request. Include any relevant steps to reproduce, expected behavior, or context that might help us assist you better."
                 />
               </div>
