@@ -53,10 +53,10 @@ export default function Header({ siteTitle }: HeaderProps) {
               </li>
               <li>
                 <Link
-                  href="#projects"
+                  href="#industries"
                   className="px-4 py-2 rounded-lg text-gray-700 hover:text-primary hover:bg-primary/5 transition-colors font-medium"
                 >
-                  Our Work
+                  Industries
                 </Link>
               </li>
               <li>
@@ -198,14 +198,14 @@ export default function Header({ siteTitle }: HeaderProps) {
               </li>
               <li style={{ animation: mobileMenuOpen ? 'slideIn 0.3s ease-out 0.3s both' : 'none' }}>
                 <Link
-                  href="#projects"
+                  href="#industries"
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:bg-white/10 transition-all font-medium group"
                 >
                   <svg className="w-5 h-5 text-primary-light group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
-                  Our Work
+                  Industries
                 </Link>
               </li>
               <li style={{ animation: mobileMenuOpen ? 'slideIn 0.3s ease-out 0.35s both' : 'none' }}>
@@ -250,7 +250,7 @@ export default function Header({ siteTitle }: HeaderProps) {
 
           {/* Social Links */}
           <div className="border-t border-white/10 pt-6" style={{ animation: mobileMenuOpen ? 'slideIn 0.3s ease-out 0.55s both' : 'none' }}>
-            <p className="text-gray-400 text-sm mb-4">Connect with me</p>
+            <p className="text-gray-400 text-sm mb-4">Connect with us</p>
             <div className="flex gap-3">
               <a
                 href="https://github.com/FritzAutomation"

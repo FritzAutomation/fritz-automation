@@ -74,18 +74,18 @@ export default async function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
               <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-semibold">
-                ⚡ Automation Solutions
+                ⚡ Enterprise Automation Solutions
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                <span className="block text-gray-600 text-2xl md:text-3xl font-normal mb-2">Welcome to</span>
-                <span className="gradient-text">Fritz Automation</span>
+                <span className="block text-gray-600 text-2xl md:text-3xl font-normal mb-2">Stop Wasting Hours on</span>
+                <span className="gradient-text">Manual Processes</span>
               </h1>
               <p className="text-xl md:text-2xl mb-6 text-gray-700 font-medium">
-                Custom automation solutions built with Python and modern web technologies
+                We build automation systems that eliminate repetitive work and scale with your business
               </p>
               <p className="mb-8 text-gray-600 text-lg leading-relaxed">
-                We specialize in process automation, system integration, and custom software development.
-                Transform your business with intelligent automation solutions tailored to your needs.
+                With 20+ years of manufacturing experience, we understand operational challenges firsthand.
+                Our solutions process 100,000+ records daily for enterprise clients.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -114,19 +114,19 @@ export default async function Home() {
                   <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium">Python Experts</span>
+                  <span className="text-sm font-medium">20+ Years Experience</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-600">
                   <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium">Full-Stack Solutions</span>
+                  <span className="text-sm font-medium">Enterprise Scale</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-600">
                   <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium">Custom Built</span>
+                  <span className="text-sm font-medium">100K+ Daily Records</span>
                 </div>
               </div>
             </ScrollReveal>
@@ -261,15 +261,15 @@ export default async function Home() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-2xl p-6 border-2 border-primary/10 hover:border-primary/30 transition-colors">
                   <div className="text-3xl font-bold text-primary mb-1">
-                    {skills.length}+
+                    20+
                   </div>
-                  <div className="text-sm text-gray-600">Technologies</div>
+                  <div className="text-sm text-gray-600">Years in Manufacturing</div>
                 </div>
                 <div className="bg-white rounded-2xl p-6 border-2 border-primary/10 hover:border-primary/30 transition-colors">
                   <div className="text-3xl font-bold text-primary mb-1">
-                    {projects.length + 1}+
+                    100K+
                   </div>
-                  <div className="text-sm text-gray-600">Projects Delivered</div>
+                  <div className="text-sm text-gray-600">Daily Records Processed</div>
                 </div>
               </div>
 
@@ -561,152 +561,90 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="py-20 md:py-32 bg-white">
+      {/* Industries We Serve */}
+      <section id="industries" className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <ScrollReveal>
           <div className="text-center mb-16">
             <div className="inline-block mb-4 px-4 py-2 bg-secondary/20 rounded-full text-secondary-dark text-sm font-semibold">
-              💼 Our Work
+              🏭 Industries We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="block text-gray-600 text-xl md:text-2xl font-medium mb-2">Recent Projects</span>
-              <span className="gradient-text">Our Work</span>
+              <span className="block text-gray-600 text-xl md:text-2xl font-medium mb-2">Built for Business</span>
+              <span className="gradient-text">Solutions That Scale</span>
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Explore our recent automation projects and custom solutions built for clients
+              Our automation expertise spans multiple industries, from manufacturing floors to executive dashboards
             </p>
           </div>
           </ScrollReveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Featured Game Project */}
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <ScrollReveal delay={0} direction="up">
-              <Link
-                href="/game"
-                className="group relative bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl overflow-hidden shadow-md hover-lift border-2 border-purple-200"
-              >
-                {/* Project Image */}
-                <div className="relative aspect-video bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-600 overflow-hidden">
-                  <div className="flex items-center justify-center h-full">
-                    <div className="text-center">
-                      <div className="text-8xl mb-2">🐉</div>
-                      <div className="text-white font-bold text-2xl">Dragon Repeller</div>
-                    </div>
-                  </div>
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                      <span className="text-sm font-semibold">Play Game</span>
-                      <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
-                  </div>
-                  {/* Featured badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-semibold rounded-full flex items-center gap-1">
-                      ⭐ Interactive
-                    </span>
-                  </div>
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    Dragon Repeller RPG
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">
-                    A playable text-based RPG game built with React. Battle monsters, collect weapons, and defeat the dragon!
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
-                      React
-                    </span>
-                    <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-                      TypeScript
-                    </span>
-                    <span className="px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded-full">
-                      Game Logic
-                    </span>
-                  </div>
-                </div>
-              </Link>
+              <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all text-center">
+                <div className="text-5xl mb-4">🏭</div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Manufacturing</h3>
+                <p className="text-gray-600 text-sm">
+                  MES systems, production tracking, quality control automation
+                </p>
+              </div>
             </ScrollReveal>
 
-            {projects.length > 0 && (
-              projects.map((project, index) => (
-                <ScrollReveal key={project.id} delay={index * 100} direction="up">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover-lift"
-                >
-                  {/* Project Image */}
-                  <div className="relative aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
-                    <OptimizedImage
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      objectFit="cover"
-                      className="group-hover:scale-110 transition-transform duration-500"
-                      fallback={
-                        <div className="flex items-center justify-center h-full text-6xl">
-                          🚀
-                        </div>
-                      }
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                        <span className="text-sm font-semibold">View Project</span>
-                        <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </div>
-                    </div>
-                    {/* Status badge */}
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
-                        {project.status === 'completed' ? 'Completed' : 'In Progress'}
-                      </span>
-                    </div>
-                  </div>
+            <ScrollReveal delay={100} direction="up">
+              <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all text-center">
+                <div className="text-5xl mb-4">📊</div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Finance & Accounting</h3>
+                <p className="text-gray-600 text-sm">
+                  Automated reporting, data reconciliation, financial dashboards
+                </p>
+              </div>
+            </ScrollReveal>
 
-                  {/* Project Info */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">
-                      {project.short_description}
-                    </p>
+            <ScrollReveal delay={200} direction="up">
+              <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all text-center">
+                <div className="text-5xl mb-4">📦</div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Supply Chain</h3>
+                <p className="text-gray-600 text-sm">
+                  Inventory management, logistics tracking, vendor integrations
+                </p>
+              </div>
+            </ScrollReveal>
 
-                    {/* Technologies */}
-                    {project.technologies && project.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.slice(0, 3).map((tech) => (
-                          <span
-                            key={tech.id}
-                            className="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full"
-                          >
-                            {tech.name}
-                          </span>
-                        ))}
-                        {project.technologies.length > 3 && (
-                          <span className="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-medium rounded-full">
-                            +{project.technologies.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </Link>
-                </ScrollReveal>
-              ))
-            )}
+            <ScrollReveal delay={300} direction="up">
+              <div className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all text-center">
+                <div className="text-5xl mb-4">🏢</div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Operations</h3>
+                <p className="text-gray-600 text-sm">
+                  Workflow automation, process optimization, real-time monitoring
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
+
+          {/* Call to action */}
+          <ScrollReveal delay={400}>
+            <div className="mt-16 text-center">
+              <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl p-8 md:p-12 border border-gray-100">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
+                  Not Sure If Automation Is Right for You?
+                </h3>
+                <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+                  If your team spends hours on repetitive data entry, report generation, or manual processes,
+                  we can help you reclaim that time. Let's discuss your specific challenges.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                >
+                  Schedule a Free Consultation
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -791,8 +729,8 @@ export default async function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#projects" className="text-gray-400 hover:text-white transition-colors">
-                    Our Work
+                  <Link href="#industries" className="text-gray-400 hover:text-white transition-colors">
+                    Industries
                   </Link>
                 </li>
                 <li>

@@ -41,13 +41,13 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/#projects"
+            href="/services"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary border-2 border-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all shadow-md hover:shadow-lg"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            View Projects
+            View Services
           </Link>
         </div>
 
@@ -61,8 +61,8 @@ export default function NotFound() {
             <Link href="/#experience" className="text-primary hover:underline">
               Experience
             </Link>
-            <Link href="/#projects" className="text-primary hover:underline">
-              Projects
+            <Link href="/services" className="text-primary hover:underline">
+              Services
             </Link>
             <Link href="/contact" className="text-primary hover:underline">
               Contact
