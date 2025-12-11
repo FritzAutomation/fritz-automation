@@ -124,18 +124,20 @@ export default function AboutPage() {
 
                 <div className="prose prose-lg text-gray-700 leading-relaxed space-y-4">
                   <p>
-                    Joshua founded Fritz Automation with a mission to help businesses harness the power of automation
-                    and custom software solutions. With extensive experience in full-stack development, he specializes
-                    in Python backend development and modern web technologies.
+                    With over 20 years in manufacturing and 14 years at CNH Industrial, Joshua brings a unique perspective
+                    to automation—one grounded in real-world operational challenges. As a self-taught developer, he identified
+                    opportunities to transform manual processes into automated systems and built mission-critical solutions
+                    that process over 100,000 datasets daily.
                   </p>
                   <p>
-                    His expertise spans Django, FastAPI, React, and Next.js, enabling him to build end-to-end solutions
-                    that are both powerful and user-friendly. Joshua has a passion for solving complex problems with
-                    elegant, maintainable code.
+                    His experience spans building financial accounting systems (Manufacturing Index), plant-wide MES
+                    visualizations, and enterprise data pipelines. This deep understanding of both the shop floor and
+                    executive reporting needs allows him to create solutions that truly solve business problems.
                   </p>
                   <p>
-                    When he's not coding, Joshua is exploring new technologies, contributing to open-source projects,
-                    and helping other developers grow their skills.
+                    Joshua founded Fritz Automation to bring this same results-driven approach to businesses of all sizes.
+                    His expertise in Python, Django, FastAPI, React, and Next.js enables him to build end-to-end solutions
+                    that are powerful, scalable, and user-friendly.
                   </p>
                 </div>
 

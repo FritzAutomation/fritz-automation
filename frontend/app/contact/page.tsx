@@ -72,10 +72,10 @@ export default function ContactPage() {
               📧 Get In Touch
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              <span className="gradient-text">Contact Me</span>
+              <span className="gradient-text">Contact Us</span>
             </h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Have a project in mind or want to discuss opportunities? I'd love to hear from you!
+              Have a project in mind or want to discuss automation solutions? We'd love to hear from you!
             </p>
           </div>
 
@@ -134,7 +134,7 @@ export default function ContactPage() {
               <div className="bg-gradient-to-r from-primary to-primary-light rounded-2xl p-8 text-white">
                 <h3 className="text-xl font-bold mb-3">Response Time</h3>
                 <p className="text-primary-lighter">
-                  I typically respond to messages within 24 hours. Looking forward to connecting with you!
+                  We typically respond to messages within 24 hours. Looking forward to connecting with you!
                 </p>
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function ContactPage() {
                       required
                       rows={6}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                      placeholder="Tell me about your project or inquiry..."
+                      placeholder="Tell us about your project or inquiry..."
                     />
                   </div>
 
@@ -216,7 +216,7 @@ export default function ContactPage() {
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        <span className="font-semibold">Message sent successfully! I'll get back to you soon.</span>
+                        <span className="font-semibold">Message sent successfully! We'll get back to you soon.</span>
                       </div>
                     </div>
                   )}
