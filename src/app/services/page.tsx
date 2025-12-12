@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
+import { ServiceCard } from '@/components/services/ServiceCard'
 import Link from 'next/link'
 
 interface Service {
@@ -190,59 +191,14 @@ export default async function ServicesPage() {
       {/* Services Grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16">
+          <div className="space-y-24">
             {displayServices.map((service, index) => (
-              <div
+              <ServiceCard
                 key={service.id}
-                className={`grid md:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'md:flex-row-reverse' : ''
-                }`}
-              >
-                <div className={index % 2 === 1 ? 'md:order-2' : ''}>
-                  <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6">
-                    <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={iconMap[service.icon || 'cog']} />
-                    </svg>
-                  </div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-4">{service.title}</h2>
-                  <p className="text-lg text-slate-600 mb-6">{service.description}</p>
-
-                  <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">What We Deliver</h3>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-slate-600">
-                          <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {service.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                  <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl p-8 border border-slate-200">
-                    <div className="aspect-video bg-slate-200 rounded-lg flex items-center justify-center">
-                      <svg className="w-24 h-24 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d={iconMap[service.icon || 'cog']} />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                service={service}
+                index={index}
+                iconPath={iconMap[service.icon || 'cog']}
+              />
             ))}
           </div>
         </div>
