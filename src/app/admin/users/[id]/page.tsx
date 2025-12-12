@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { getStatusColor, getRoleColor, formatStatus } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { UserRoleForm } from './UserRoleForm'
@@ -63,25 +64,6 @@ export default async function AdminUserDetailPage({
 
   if (!user) {
     notFound()
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'open': return 'bg-blue-500/20 text-blue-400'
-      case 'in_progress': return 'bg-yellow-500/20 text-yellow-400'
-      case 'resolved': return 'bg-green-500/20 text-green-400'
-      case 'closed': return 'bg-slate-500/20 text-slate-400'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
-  }
-
-  const getRoleColor = (role: string) => {
-    switch (role) {
-      case 'superadmin': return 'bg-red-500/20 text-red-400'
-      case 'admin': return 'bg-orange-500/20 text-orange-400'
-      case 'client': return 'bg-blue-500/20 text-blue-400'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
   }
 
   return (
@@ -155,7 +137,7 @@ export default async function AdminUserDetailPage({
                         <p className="text-white font-medium">{ticket.subject}</p>
                       </div>
                       <span className={`px-2 py-0.5 rounded text-xs font-medium ${getStatusColor(ticket.status)}`}>
-                        {ticket.status.replace('_', ' ')}
+                        {formatStatus(ticket.status)}
                       </span>
                     </div>
                     <p className="text-sm text-slate-400 mt-1">

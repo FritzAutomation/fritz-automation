@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { getStatusColor, getPriorityColor, formatStatus } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { TicketMessages } from './TicketMessages'
@@ -80,27 +81,6 @@ export default async function TicketDetailPage({
     notFound()
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'open': return 'bg-blue-100 text-blue-700'
-      case 'in_progress': return 'bg-yellow-100 text-yellow-700'
-      case 'waiting': return 'bg-purple-100 text-purple-700'
-      case 'resolved': return 'bg-green-100 text-green-700'
-      case 'closed': return 'bg-slate-100 text-slate-700'
-      default: return 'bg-slate-100 text-slate-700'
-    }
-  }
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return 'bg-red-100 text-red-700'
-      case 'high': return 'bg-orange-100 text-orange-700'
-      case 'normal': return 'bg-slate-100 text-slate-700'
-      case 'low': return 'bg-slate-50 text-slate-500'
-      default: return 'bg-slate-100 text-slate-700'
-    }
-  }
-
   return (
     <div>
       <div className="mb-6">
@@ -120,10 +100,10 @@ export default async function TicketDetailPage({
               <h1 className="text-2xl font-bold text-slate-900">{ticket.subject}</h1>
             </div>
             <div className="flex gap-2">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(ticket.status)}`}>
-                {ticket.status.replace('_', ' ')}
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(ticket.status, 'light')}`}>
+                {formatStatus(ticket.status)}
               </span>
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(ticket.priority)}`}>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(ticket.priority, 'light')}`}>
                 {ticket.priority}
               </span>
             </div>

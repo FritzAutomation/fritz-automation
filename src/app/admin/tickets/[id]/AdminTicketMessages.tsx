@@ -5,31 +5,18 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Textarea } from '@/components/ui/Textarea'
 import { createClient } from '@/lib/supabase/client'
+import type { TicketMessageWithSender, Database } from '@/types/database'
 import { toast } from 'sonner'
-
-interface Message {
-  id: string
-  ticket_id: string
-  sender_id: string
-  content: string
-  is_internal: boolean
-  created_at: string
-  sender?: {
-    first_name: string | null
-    last_name: string | null
-    role: string
-  }
-}
 
 interface AdminTicketMessagesProps {
   ticketId: string
-  initialMessages: Message[]
+  initialMessages: TicketMessageWithSender[]
   adminId: string
 }
 
 export function AdminTicketMessages({ ticketId, initialMessages, adminId }: AdminTicketMessagesProps) {
   const router = useRouter()
-  const [messages, setMessages] = useState<Message[]>(initialMessages)
+  const [messages, setMessages] = useState<TicketMessageWithSender[]>(initialMessages)
   const [newMessage, setNewMessage] = useState('')
   const [isInternal, setIsInternal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -43,6 +30,8 @@ export function AdminTicketMessages({ ticketId, initialMessages, adminId }: Admi
 
     const supabase = createClient()
 
+    // Type assertion needed because Supabase's generated types don't fully support
+    // insert operations with RLS policies. Runtime types are validated by the database.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { data, error } = await (supabase as any)
       .from('ticket_messages')
@@ -64,7 +53,7 @@ export function AdminTicketMessages({ ticketId, initialMessages, adminId }: Admi
       return
     }
 
-    setMessages([...messages, data])
+    setMessages([...messages, data as unknown as TicketMessageWithSender])
     setNewMessage('')
     setIsLoading(false)
     toast.success(isInternal ? 'Internal note added!' : 'Reply sent!')

@@ -6,6 +6,22 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+// Helper types for common table rows
+export type Profile = Database['public']['Tables']['profiles']['Row']
+export type Ticket = Database['public']['Tables']['tickets']['Row']
+export type TicketMessage = Database['public']['Tables']['ticket_messages']['Row']
+export type ContactSubmission = Database['public']['Tables']['contact_submissions']['Row']
+export type FileRecord = Database['public']['Tables']['files']['Row']
+
+// Types for joined queries
+export type TicketWithClient = Ticket & {
+  client: Pick<Profile, 'id' | 'first_name' | 'last_name' | 'email' | 'company_name' | 'phone'> | null
+}
+
+export type TicketMessageWithSender = TicketMessage & {
+  sender: Pick<Profile, 'first_name' | 'last_name' | 'role'> | null
+}
+
 export interface Database {
   public: {
     Tables: {

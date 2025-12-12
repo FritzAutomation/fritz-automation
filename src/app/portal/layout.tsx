@@ -48,7 +48,7 @@ export default async function PortalLayout({
     <div className="min-h-screen bg-slate-50">
       <div className="flex">
         <PortalSidebar user={user} profile={profile} />
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 pt-16 lg:p-8 lg:pt-8">
           {children}
         </main>
       </div>

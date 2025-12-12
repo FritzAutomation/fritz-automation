@@ -47,7 +47,7 @@ export default async function AdminLayout({
     <div className="min-h-screen bg-slate-900">
       <div className="flex">
         <AdminSidebar user={user} profile={profile} />
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 pt-16 lg:p-8 lg:pt-8">
           {children}
         </main>
       </div>

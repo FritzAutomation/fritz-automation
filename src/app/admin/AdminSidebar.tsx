@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 import type { User } from '@supabase/supabase-js'
+import { useState, useEffect } from 'react'
 
 interface Profile {
   id: string
@@ -22,6 +23,33 @@ interface AdminSidebarProps {
 export function AdminSidebar({ user, profile }: AdminSidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Close sidebar on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [])
+
+  // Prevent body scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   const navItems = [
     {
@@ -53,8 +81,8 @@ export function AdminSidebar({ user, profile }: AdminSidebarProps) {
     router.refresh()
   }
 
-  return (
-    <aside className="w-64 bg-slate-800 border-r border-slate-700 min-h-screen">
+  const SidebarContent = () => (
+    <>
       {/* Logo */}
       <div className="p-6 border-b border-slate-700">
         <Link href="/admin" className="flex items-center gap-2">
@@ -86,8 +114,8 @@ export function AdminSidebar({ user, profile }: AdminSidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="p-4">
-        <ul className="space-y-1">
+      <nav className="p-4 flex-1" aria-label="Admin navigation">
+        <ul className="space-y-1" role="list">
           {navItems.map((item) => {
             const isActive = pathname === item.href ||
               (item.href !== '/admin' && pathname.startsWith(item.href))
@@ -115,7 +143,7 @@ export function AdminSidebar({ user, profile }: AdminSidebarProps) {
       </nav>
 
       {/* Footer links */}
-      <div className="absolute bottom-0 left-0 right-0 w-64 p-4 border-t border-slate-700 bg-slate-800 space-y-1">
+      <div className="p-4 border-t border-slate-700 bg-slate-800 space-y-1 mt-auto">
         <Link
           href="/portal"
           className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-colors w-full"
@@ -128,6 +156,7 @@ export function AdminSidebar({ user, profile }: AdminSidebarProps) {
         <button
           onClick={handleSignOut}
           className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-colors w-full"
+          aria-label="Sign out of admin panel"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -135,6 +164,55 @@ export function AdminSidebar({ user, profile }: AdminSidebarProps) {
           Sign Out
         </button>
       </div>
-    </aside>
+    </>
+  )
+
+  return (
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-40 p-2 rounded-lg bg-slate-800 text-white border border-slate-700 shadow-lg"
+        aria-label="Open navigation menu"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile sidebar */}
+      <aside
+        className={cn(
+          'lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-slate-800 border-r border-slate-700 flex flex-col transform transition-transform duration-300 ease-in-out',
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        )}
+      >
+        {/* Close button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white"
+          aria-label="Close navigation menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <SidebarContent />
+      </aside>
+
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex w-64 bg-slate-800 border-r border-slate-700 min-h-screen flex-col">
+        <SidebarContent />
+      </aside>
+    </>
   )
 }

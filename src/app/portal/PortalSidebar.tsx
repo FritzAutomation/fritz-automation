@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 import type { User } from '@supabase/supabase-js'
+import { useState, useEffect } from 'react'
 
 interface Profile {
   id: string
@@ -28,6 +29,33 @@ interface PortalSidebarProps {
 export function PortalSidebar({ user, profile }: PortalSidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Close sidebar on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [])
+
+  // Prevent body scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   const navItems = [
     {
@@ -59,8 +87,8 @@ export function PortalSidebar({ user, profile }: PortalSidebarProps) {
     router.refresh()
   }
 
-  return (
-    <aside className="w-64 bg-white border-r border-slate-200 min-h-screen">
+  const SidebarContent = () => (
+    <>
       {/* Logo */}
       <div className="p-6 border-b border-slate-200">
         <Link href="/" className="flex items-center gap-2">
@@ -89,8 +117,8 @@ export function PortalSidebar({ user, profile }: PortalSidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="p-4">
-        <ul className="space-y-1">
+      <nav className="p-4 flex-1" aria-label="Portal navigation">
+        <ul className="space-y-1" role="list">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
@@ -112,11 +140,27 @@ export function PortalSidebar({ user, profile }: PortalSidebarProps) {
         </ul>
       </nav>
 
+      {/* Admin link for admin/superadmin users */}
+      {profile?.role && ['admin', 'superadmin'].includes(profile.role) && (
+        <div className="px-4 pb-2">
+          <Link
+            href="/admin"
+            className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors w-full"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            </svg>
+            Admin Panel
+          </Link>
+        </div>
+      )}
+
       {/* Sign out */}
-      <div className="absolute bottom-0 left-0 right-0 w-64 p-4 border-t border-slate-200 bg-white">
+      <div className="p-4 border-t border-slate-200 bg-white mt-auto">
         <button
           onClick={handleSignOut}
           className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors w-full"
+          aria-label="Sign out of client portal"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -124,6 +168,55 @@ export function PortalSidebar({ user, profile }: PortalSidebarProps) {
           Sign Out
         </button>
       </div>
-    </aside>
+    </>
+  )
+
+  return (
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-40 p-2 rounded-lg bg-white text-slate-700 border border-slate-200 shadow-lg"
+        aria-label="Open navigation menu"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile sidebar */}
+      <aside
+        className={cn(
+          'lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transform transition-transform duration-300 ease-in-out',
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        )}
+      >
+        {/* Close button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700"
+          aria-label="Close navigation menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <SidebarContent />
+      </aside>
+
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex w-64 bg-white border-r border-slate-200 min-h-screen flex-col">
+        <SidebarContent />
+      </aside>
+    </>
   )
 }

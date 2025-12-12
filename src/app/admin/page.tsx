@@ -1,11 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
+import { getStatusColor, getPriorityColor, formatStatus } from '@/lib/utils'
+import type { TicketWithClient, ContactSubmission } from '@/types/database'
 import Link from 'next/link'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const sb = supabase as any
 
   let stats = {
     totalTickets: 0,
@@ -14,44 +13,28 @@ export default async function AdminDashboard() {
     newContacts: 0,
   }
 
-  let recentTickets: Array<{
-    id: string
-    ticket_number: string
-    subject: string
-    status: string
-    priority: string
-    created_at: string
-    client: { first_name: string | null; last_name: string | null; email: string | null } | null
-  }> = []
-
-  let recentContacts: Array<{
-    id: string
-    name: string
-    email: string
-    subject: string | null
-    status: string
-    created_at: string
-  }> = []
+  let recentTickets: TicketWithClient[] = []
+  let recentContacts: ContactSubmission[] = []
 
   try {
     // Get ticket counts
-    const { count: totalTickets } = await sb
+    const { count: totalTickets } = await supabase
       .from('tickets')
       .select('*', { count: 'exact', head: true })
 
-    const { count: openTickets } = await sb
+    const { count: openTickets } = await supabase
       .from('tickets')
       .select('*', { count: 'exact', head: true })
       .in('status', ['open', 'in_progress'])
 
     // Get user count
-    const { count: totalUsers } = await sb
+    const { count: totalUsers } = await supabase
       .from('profiles')
       .select('*', { count: 'exact', head: true })
       .eq('role', 'client')
 
     // Get new contact submissions
-    const { count: newContacts } = await sb
+    const { count: newContacts } = await supabase
       .from('contact_submissions')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'new')
@@ -63,20 +46,20 @@ export default async function AdminDashboard() {
       newContacts: newContacts || 0,
     }
 
-    // Get recent tickets
-    const { data: ticketsData } = await sb
+    // Get recent tickets with client info
+    const { data: ticketsData } = await supabase
       .from('tickets')
       .select(`
         *,
-        client:profiles!tickets_client_id_fkey(first_name, last_name, email)
+        client:profiles!tickets_client_id_fkey(id, first_name, last_name, email, company_name, phone)
       `)
       .order('created_at', { ascending: false })
       .limit(5)
 
-    recentTickets = ticketsData || []
+    recentTickets = (ticketsData || []) as unknown as TicketWithClient[]
 
     // Get recent contacts
-    const { data: contactsData } = await sb
+    const { data: contactsData } = await supabase
       .from('contact_submissions')
       .select('*')
       .order('created_at', { ascending: false })
@@ -93,30 +76,6 @@ export default async function AdminDashboard() {
     { label: 'Total Users', value: stats.totalUsers, href: '/admin/users', color: 'bg-green-500' },
     { label: 'New Contacts', value: stats.newContacts, href: '/admin/contacts?status=new', color: 'bg-purple-500' },
   ]
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'open': return 'bg-blue-500/20 text-blue-400'
-      case 'in_progress': return 'bg-yellow-500/20 text-yellow-400'
-      case 'waiting': return 'bg-purple-500/20 text-purple-400'
-      case 'resolved': return 'bg-green-500/20 text-green-400'
-      case 'closed': return 'bg-slate-500/20 text-slate-400'
-      case 'new': return 'bg-blue-500/20 text-blue-400'
-      case 'read': return 'bg-slate-500/20 text-slate-400'
-      case 'responded': return 'bg-green-500/20 text-green-400'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
-  }
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return 'bg-red-500/20 text-red-400'
-      case 'high': return 'bg-orange-500/20 text-orange-400'
-      case 'normal': return 'bg-slate-500/20 text-slate-400'
-      case 'low': return 'bg-slate-600/20 text-slate-500'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
-  }
 
   return (
     <div>
@@ -165,7 +124,7 @@ export default async function AdminDashboard() {
                     <span className="text-sm text-slate-400">{ticket.ticket_number}</span>
                     <div className="flex gap-2">
                       <span className={`px-2 py-0.5 rounded text-xs font-medium ${getStatusColor(ticket.status)}`}>
-                        {ticket.status.replace('_', ' ')}
+                        {formatStatus(ticket.status)}
                       </span>
                       <span className={`px-2 py-0.5 rounded text-xs font-medium ${getPriorityColor(ticket.priority)}`}>
                         {ticket.priority}

@@ -5,16 +5,37 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
-import { createClient } from '@/lib/supabase/client'
+import { createTicket } from './actions'
 import { toast } from 'sonner'
+
+interface FormErrors {
+  subject?: string
+  description?: string
+}
 
 export function NewTicketForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState<FormErrors>({})
+
+  function validateForm(subject: string, description: string): FormErrors {
+    const newErrors: FormErrors = {}
+
+    if (!subject || subject.trim().length < 5) {
+      newErrors.subject = 'Please enter a subject (at least 5 characters)'
+    } else if (subject.length > 200) {
+      newErrors.subject = 'Subject must be less than 200 characters'
+    }
+
+    if (!description || description.trim().length < 20) {
+      newErrors.description = 'Please provide more detail (at least 20 characters)'
+    }
+
+    return newErrors
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setIsLoading(true)
 
     const formData = new FormData(e.currentTarget)
     const subject = formData.get('subject') as string
@@ -22,34 +43,31 @@ export function NewTicketForm() {
     const priority = formData.get('priority') as string
     const description = formData.get('description') as string
 
-    const supabase = createClient()
+    // Client-side validation
+    const validationErrors = validateForm(subject, description)
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      toast.error('Please fix the errors in the form')
+      return
+    }
 
-    const { data: { user } } = await supabase.auth.getUser()
+    setErrors({})
+    setIsLoading(true)
 
-    if (!user) {
-      toast.error('You must be logged in to create a ticket')
+    const result = await createTicket({
+      subject,
+      category: category || null,
+      priority,
+      description,
+    })
+
+    if (!result.success) {
+      toast.error(result.error || 'Failed to create ticket')
       setIsLoading(false)
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { error } = await (supabase as any)
-      .from('tickets')
-      .insert({
-        client_id: user.id,
-        subject,
-        category: category || null,
-        priority,
-        description,
-      })
-
-    if (error) {
-      toast.error(error.message)
-      setIsLoading(false)
-      return
-    }
-
-    toast.success('Ticket created successfully!')
+    toast.success('Ticket created successfully! A confirmation email has been sent.')
     router.push('/portal/tickets')
     router.refresh()
   }
@@ -62,6 +80,9 @@ export function NewTicketForm() {
         label="Subject"
         placeholder="Brief description of your issue"
         required
+        error={errors.subject}
+        minLength={5}
+        maxLength={200}
       />
 
       <div className="grid grid-cols-2 gap-4">
@@ -108,6 +129,8 @@ export function NewTicketForm() {
         placeholder="Please provide as much detail as possible about your issue..."
         rows={6}
         required
+        error={errors.description}
+        minLength={20}
       />
 
       <div className="flex gap-4">

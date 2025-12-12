@@ -1,42 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
+import { getStatusColor, getPriorityColor, formatStatus } from '@/lib/utils'
+import type { TicketWithClient, TicketMessageWithSender } from '@/types/database'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { AdminTicketActions } from './AdminTicketActions'
 import { AdminTicketMessages } from './AdminTicketMessages'
-
-interface Ticket {
-  id: string
-  ticket_number: string
-  subject: string
-  description: string | null
-  status: string
-  priority: string
-  category: string | null
-  created_at: string
-  updated_at: string
-  client: {
-    id: string
-    first_name: string | null
-    last_name: string | null
-    email: string | null
-    company_name: string | null
-    phone: string | null
-  } | null
-}
-
-interface Message {
-  id: string
-  ticket_id: string
-  sender_id: string
-  content: string
-  is_internal: boolean
-  created_at: string
-  sender?: {
-    first_name: string | null
-    last_name: string | null
-    role: string
-  }
-}
 
 export default async function AdminTicketDetailPage({
   params,
@@ -52,14 +20,11 @@ export default async function AdminTicketDetailPage({
     return null
   }
 
-  let ticket: Ticket | null = null
-  let messages: Message[] = []
+  let ticket: TicketWithClient | null = null
+  let messages: TicketMessageWithSender[] = []
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const sb = supabase as any
-
-    const { data: ticketData } = await sb
+    const { data: ticketData } = await supabase
       .from('tickets')
       .select(`
         *,
@@ -68,10 +33,10 @@ export default async function AdminTicketDetailPage({
       .eq('id', id)
       .single()
 
-    ticket = ticketData
+    ticket = ticketData as unknown as TicketWithClient | null
 
     if (ticket) {
-      const { data: messagesData } = await sb
+      const { data: messagesData } = await supabase
         .from('ticket_messages')
         .select(`
           *,
@@ -80,7 +45,7 @@ export default async function AdminTicketDetailPage({
         .eq('ticket_id', id)
         .order('created_at', { ascending: true })
 
-      messages = messagesData || []
+      messages = (messagesData || []) as unknown as TicketMessageWithSender[]
     }
   } catch {
     // Database might not exist yet
@@ -88,27 +53,6 @@ export default async function AdminTicketDetailPage({
 
   if (!ticket) {
     notFound()
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'open': return 'bg-blue-500/20 text-blue-400'
-      case 'in_progress': return 'bg-yellow-500/20 text-yellow-400'
-      case 'waiting': return 'bg-purple-500/20 text-purple-400'
-      case 'resolved': return 'bg-green-500/20 text-green-400'
-      case 'closed': return 'bg-slate-500/20 text-slate-400'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
-  }
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return 'bg-red-500/20 text-red-400'
-      case 'high': return 'bg-orange-500/20 text-orange-400'
-      case 'normal': return 'bg-slate-500/20 text-slate-400'
-      case 'low': return 'bg-slate-600/20 text-slate-500'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
   }
 
   return (
@@ -134,7 +78,7 @@ export default async function AdminTicketDetailPage({
                 </div>
                 <div className="flex gap-2">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(ticket.status)}`}>
-                    {ticket.status.replace('_', ' ')}
+                    {formatStatus(ticket.status)}
                   </span>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(ticket.priority)}`}>
                     {ticket.priority}

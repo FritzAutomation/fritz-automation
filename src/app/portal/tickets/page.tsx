@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { getStatusColor, getPriorityColor, formatStatus } from '@/lib/utils'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 
@@ -36,27 +37,6 @@ export default async function TicketsPage() {
     tickets = data || []
   } catch {
     // Database might not exist yet
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'open': return 'bg-blue-100 text-blue-700'
-      case 'in_progress': return 'bg-yellow-100 text-yellow-700'
-      case 'waiting': return 'bg-purple-100 text-purple-700'
-      case 'resolved': return 'bg-green-100 text-green-700'
-      case 'closed': return 'bg-slate-100 text-slate-700'
-      default: return 'bg-slate-100 text-slate-700'
-    }
-  }
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return 'bg-red-100 text-red-700'
-      case 'high': return 'bg-orange-100 text-orange-700'
-      case 'normal': return 'bg-slate-100 text-slate-700'
-      case 'low': return 'bg-slate-50 text-slate-500'
-      default: return 'bg-slate-100 text-slate-700'
-    }
   }
 
   return (
@@ -102,12 +82,12 @@ export default async function TicketsPage() {
                     </Link>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}>
-                      {ticket.status.replace('_', ' ')}
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getStatusColor(ticket.status, 'light')}`}>
+                      {formatStatus(ticket.status)}
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}>
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority, 'light')}`}>
                       {ticket.priority}
                     </span>
                   </td>

@@ -21,7 +21,7 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link href="/" className="group hover:opacity-90 transition-opacity">
+            <Link href="/" className="group hover:opacity-90 transition-opacity" aria-label="Fritz Automation home">
               <Logo size="md" />
             </Link>
 

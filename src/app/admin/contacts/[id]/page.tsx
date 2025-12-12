@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { getStatusColor } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ContactStatusForm } from './ContactStatusForm'
@@ -42,16 +43,6 @@ export default async function AdminContactDetailPage({
 
   if (!contact) {
     notFound()
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'new': return 'bg-blue-500/20 text-blue-400'
-      case 'read': return 'bg-slate-500/20 text-slate-400'
-      case 'responded': return 'bg-green-500/20 text-green-400'
-      case 'archived': return 'bg-slate-600/20 text-slate-500'
-      default: return 'bg-slate-500/20 text-slate-400'
-    }
   }
 
   return (

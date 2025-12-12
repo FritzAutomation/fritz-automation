@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { sendContactNotification } from '@/lib/email'
 
 export async function submitContact(formData: FormData) {
   const supabase = await createClient()
@@ -8,6 +9,7 @@ export async function submitContact(formData: FormData) {
   const name = formData.get('name') as string
   const email = formData.get('email') as string
   const company = (formData.get('company') as string) || null
+  const phone = (formData.get('phone') as string) || null
   const subject = formData.get('subject') as string
   const message = formData.get('message') as string
 
@@ -29,6 +31,7 @@ export async function submitContact(formData: FormData) {
       name,
       email,
       company,
+      phone,
       subject,
       message,
       source: 'contact_form',
@@ -38,6 +41,16 @@ export async function submitContact(formData: FormData) {
     console.error('Contact submission error:', error)
     return { success: false, error: 'Failed to submit message. Please try again.' }
   }
+
+  // Send email notification to admin (non-blocking)
+  sendContactNotification({
+    name,
+    email,
+    company,
+    phone,
+    subject,
+    message,
+  }).catch((err) => console.error('Failed to send contact notification email:', err))
 
   return { success: true }
 }
