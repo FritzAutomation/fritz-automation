@@ -61,9 +61,9 @@ export function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between gap-3 sm:gap-4 min-h-[60px] active:bg-slate-50"
               >
-                <span className="font-semibold text-slate-900">{faq.question}</span>
+                <span className="font-semibold text-slate-900 text-sm sm:text-base">{faq.question}</span>
                 <svg
                   className={cn(
                     "w-5 h-5 text-primary flex-shrink-0 transition-transform duration-200",
@@ -82,7 +82,7 @@ export function FAQ() {
                   openIndex === index ? "max-h-96" : "max-h-0"
                 )}
               >
-                <p className="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p className="px-4 sm:px-6 pb-4 sm:pb-5 text-slate-600 leading-relaxed text-sm sm:text-base">
                   {faq.answer}
                 </p>
               </div>

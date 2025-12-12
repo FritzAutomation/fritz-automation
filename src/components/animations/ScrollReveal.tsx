@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface ScrollRevealProps {
   children: ReactNode
@@ -22,8 +23,15 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    // If user prefers reduced motion, show content immediately
+    if (prefersReducedMotion) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -50,9 +58,10 @@ export function ScrollReveal({
         observer.unobserve(ref.current)
       }
     }
-  }, [once])
+  }, [once, prefersReducedMotion])
 
   const getInitialTransform = () => {
+    if (prefersReducedMotion) return 'none'
     switch (direction) {
       case 'up':
         return 'translateY(30px)'
@@ -67,6 +76,11 @@ export function ScrollReveal({
       default:
         return 'translateY(30px)'
     }
+  }
+
+  // If reduced motion, render without transitions
+  if (prefersReducedMotion) {
+    return <div className={cn(className)}>{children}</div>
   }
 
   return (
@@ -100,8 +114,15 @@ export function StaggerContainer({
 }: StaggerContainerProps) {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    // If user prefers reduced motion, show content immediately
+    if (prefersReducedMotion) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -126,9 +147,10 @@ export function StaggerContainer({
         observer.unobserve(ref.current)
       }
     }
-  }, [])
+  }, [prefersReducedMotion])
 
   const getInitialTransform = () => {
+    if (prefersReducedMotion) return 'none'
     switch (direction) {
       case 'up':
         return 'translateY(20px)'
@@ -143,6 +165,11 @@ export function StaggerContainer({
       default:
         return 'translateY(20px)'
     }
+  }
+
+  // If reduced motion, render without transitions
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>
   }
 
   return (

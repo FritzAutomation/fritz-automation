@@ -151,3 +151,83 @@ export function PortalStatsCardsSkeleton() {
     </div>
   )
 }
+
+// Homepage section skeletons
+export function ServiceCardSkeleton() {
+  return (
+    <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+      <Skeleton className="w-14 h-14 rounded-xl mb-6 bg-slate-200" />
+      <Skeleton className="h-6 w-3/4 mb-3 bg-slate-200" />
+      <Skeleton className="h-4 w-full mb-2 bg-slate-200" />
+      <Skeleton className="h-4 w-5/6 mb-4 bg-slate-200" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-4/5 bg-slate-200" />
+        <Skeleton className="h-4 w-3/4 bg-slate-200" />
+        <Skeleton className="h-4 w-4/5 bg-slate-200" />
+      </div>
+    </div>
+  )
+}
+
+export function ServicesSkeleton() {
+  return (
+    <div className="grid md:grid-cols-3 gap-8">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <ServiceCardSkeleton key={i} />
+      ))}
+    </div>
+  )
+}
+
+export function IndustryCardSkeleton() {
+  return (
+    <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border border-slate-100">
+      <Skeleton className="w-12 h-12 rounded-xl mb-4 bg-slate-200" />
+      <Skeleton className="h-5 w-3/4 mb-2 bg-slate-200" />
+      <Skeleton className="h-4 w-full bg-slate-200" />
+    </div>
+  )
+}
+
+export function IndustriesSkeleton() {
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <IndustryCardSkeleton key={i} />
+      ))}
+    </div>
+  )
+}
+
+export function TestimonialCardSkeleton() {
+  return (
+    <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-100">
+      <div className="flex gap-1 mb-4">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Skeleton key={i} className="w-5 h-5 rounded bg-slate-200" />
+        ))}
+      </div>
+      <Skeleton className="h-4 w-full mb-2 bg-slate-200" />
+      <Skeleton className="h-4 w-full mb-2 bg-slate-200" />
+      <Skeleton className="h-4 w-3/4 mb-6 bg-slate-200" />
+      <Skeleton className="h-6 w-32 rounded-full mb-6 bg-slate-200" />
+      <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+        <Skeleton className="w-12 h-12 rounded-full bg-slate-200" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-24 bg-slate-200" />
+          <Skeleton className="h-3 w-20 bg-slate-200" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function TestimonialsSkeleton() {
+  return (
+    <div className="grid md:grid-cols-3 gap-8">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <TestimonialCardSkeleton key={i} />
+      ))}
+    </div>
+  )
+}

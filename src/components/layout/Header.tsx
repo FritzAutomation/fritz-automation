@@ -2,19 +2,15 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/ui/Logo'
+import { navLinks } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const navLinks = [
-    { href: '/services', label: 'Services' },
-    { href: '/case-studies', label: 'Case Studies' },
-    { href: '/industries', label: 'Industries' },
-    { href: '/about', label: 'About' },
-    { href: '/portal', label: 'Client Portal' },
-  ]
+  const pathname = usePathname()
 
   return (
     <>
@@ -28,16 +24,25 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="px-4 py-2 rounded-lg text-slate-700 hover:text-primary hover:bg-primary/5 transition-colors font-medium"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        'px-4 py-2 rounded-lg transition-colors font-medium',
+                        isActive
+                          ? 'text-primary bg-primary/10'
+                          : 'text-slate-700 hover:text-primary hover:bg-primary/5'
+                      )}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              })}
               <li className="ml-2">
                 <Link href="/contact">
                   <Button size="sm">Get a Quote</Button>
@@ -69,10 +74,10 @@ export function Header() {
       {mobileMenuOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 z-40 md:hidden animate-fade-in"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed top-0 right-0 bottom-0 w-80 bg-slate-900 z-50 md:hidden p-6">
+          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-900 z-50 md:hidden p-6 animate-slide-in-right shadow-2xl">
             <button
               onClick={() => setMobileMenuOpen(false)}
               className="absolute top-6 right-6 p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white"
@@ -84,17 +89,26 @@ export function Header() {
 
             <div className="mt-16">
               <ul className="space-y-2">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-3 rounded-xl text-white hover:bg-white/10 transition-colors font-medium"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={cn(
+                          'block px-4 py-3 rounded-xl transition-colors font-medium',
+                          isActive
+                            ? 'text-primary bg-white/20'
+                            : 'text-white hover:bg-white/10'
+                        )}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                })}
                 <li className="pt-4">
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                     <Button className="w-full">Get a Quote</Button>

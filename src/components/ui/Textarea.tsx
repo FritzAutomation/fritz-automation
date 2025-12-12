@@ -8,6 +8,8 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, error, id, ...props }, ref) => {
+    const errorId = error && id ? `${id}-error` : undefined
+
     return (
       <div className="w-full">
         {label && (
@@ -18,6 +20,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           ref={ref}
           id={id}
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={errorId}
           className={cn(
             'w-full px-4 py-3 border rounded-xl transition-all duration-200 resize-none',
             'focus:ring-2 focus:ring-primary focus:border-transparent focus:outline-none',
@@ -30,7 +34,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p className="mt-1.5 text-sm text-red-600">{error}</p>
+          <p id={errorId} className="mt-1.5 text-sm text-red-600" role="alert">
+            {error}
+          </p>
         )}
       </div>
     )

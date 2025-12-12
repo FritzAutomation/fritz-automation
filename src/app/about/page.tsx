@@ -84,7 +84,7 @@ export default function AboutPage() {
               About Us
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-              Manufacturing Experience,<br />
+              <span className="block">Manufacturing Experience,</span>
               <span className="text-red-400">Automation Expertise</span>
             </h1>
             <p className="text-xl text-slate-300">

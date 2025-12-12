@@ -11,6 +11,7 @@ import {
   AnimatedIndustries
 } from '@/components/home/AnimatedSections'
 import { createClient } from '@/lib/supabase/server'
+import { iconPaths } from '@/lib/constants'
 
 interface Service {
   id: string
@@ -53,15 +54,8 @@ export default async function HomePage() {
     // Database might not exist yet, use empty arrays
   }
 
-  const iconMap: Record<string, string> = {
-    cog: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
-    link: 'M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1',
-    code: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
-    factory: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
-    chart: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-    truck: 'M8 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-3m-1 0v4m0-4H9m0 0v4m0-4h6m-6 0H8m1 0v4m0-4h6',
-    settings: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
-  }
+  // Use centralized icon paths
+  const iconMap = iconPaths
 
   return (
     <div className="min-h-screen">
@@ -145,39 +139,42 @@ export default async function HomePage() {
               Modern tools for reliable, scalable automation
             </p>
           </div>
+        </div>
 
-          <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
-
-            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-              {[
-                { name: 'Python', color: 'bg-[#3776ab]' },
-                { name: 'React', color: 'bg-[#61dafb]' },
-                { name: 'Next.js', color: 'bg-slate-800' },
-                { name: 'TypeScript', color: 'bg-[#3178c6]' },
-                { name: 'PostgreSQL', color: 'bg-[#336791]' },
-                { name: 'Node.js', color: 'bg-[#339933]' },
-                { name: 'AWS', color: 'bg-[#ff9900]' },
-                { name: 'Supabase', color: 'bg-[#3ecf8e]' },
-                { name: 'REST APIs', color: 'bg-purple-600' },
-                { name: 'SQL', color: 'bg-orange-500' },
-                { name: 'Excel/VBA', color: 'bg-green-600' },
-                { name: 'Power BI', color: 'bg-yellow-500' },
-              ].map((tech) => (
-                <div
-                  key={tech.name}
-                  className="flex-shrink-0"
-                >
-                  <div className="flex items-center gap-3 px-5 py-3 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-slate-600 transition-all hover:bg-slate-800 cursor-default">
-                    <div className={`w-3 h-3 rounded-full ${tech.color}`} />
-                    <span className="text-slate-300 font-medium whitespace-nowrap">
-                      {tech.name}
-                    </span>
+        {/* Full-width marquee container with CSS mask for fade effect */}
+        <div className="marquee-container">
+          {/* Scrolling marquee - items duplicated for seamless loop */}
+          <div className="flex animate-marquee">
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-4 px-2">
+                {[
+                  { name: 'Python', color: 'bg-[#3776ab]' },
+                  { name: 'React', color: 'bg-[#61dafb]' },
+                  { name: 'Next.js', color: 'bg-slate-700' },
+                  { name: 'TypeScript', color: 'bg-[#3178c6]' },
+                  { name: 'PostgreSQL', color: 'bg-[#336791]' },
+                  { name: 'Node.js', color: 'bg-[#339933]' },
+                  { name: 'AWS', color: 'bg-[#ff9900]' },
+                  { name: 'Supabase', color: 'bg-[#3ecf8e]' },
+                  { name: 'REST APIs', color: 'bg-purple-600' },
+                  { name: 'SQL', color: 'bg-orange-500' },
+                  { name: 'Excel/VBA', color: 'bg-green-600' },
+                  { name: 'Power BI', color: 'bg-yellow-500' },
+                ].map((tech) => (
+                  <div
+                    key={`${setIndex}-${tech.name}`}
+                    className="flex-shrink-0"
+                  >
+                    <div className="flex items-center gap-3 px-5 py-3 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-slate-500 transition-all hover:bg-slate-700/50 cursor-default">
+                      <div className={`w-3 h-3 rounded-full ${tech.color}`} />
+                      <span className="text-slate-300 font-medium whitespace-nowrap">
+                        {tech.name}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
