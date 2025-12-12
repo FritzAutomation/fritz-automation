@@ -200,8 +200,118 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-semibold">
+              Client Success Stories
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="gradient-text">What Our Clients Say</span>
+            </h2>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+              Real results from businesses that transformed their operations with automation
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Fritz Automation reduced our monthly reporting time from 3 days to 15 minutes. The ROI was evident within the first month.",
+                author: "Sarah Mitchell",
+                role: "Operations Director",
+                company: "Midwest Manufacturing Co.",
+                metric: "95% time saved",
+                avatar: "SM"
+              },
+              {
+                quote: "Their system integration work connected our legacy ERP with modern tools seamlessly. We finally have real-time visibility across all departments.",
+                author: "James Chen",
+                role: "IT Manager",
+                company: "Pacific Logistics Group",
+                metric: "100% data sync",
+                avatar: "JC"
+              },
+              {
+                quote: "The custom dashboard they built processes over 50,000 transactions daily without breaking a sweat. Support has been exceptional.",
+                author: "Maria Rodriguez",
+                role: "Finance Director",
+                company: "Summit Financial Services",
+                metric: "50K+ daily transactions",
+                avatar: "MR"
+              }
+            ].map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300 flex flex-col"
+              >
+                {/* Rating Stars */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <blockquote className="text-slate-700 mb-6 flex-grow">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </blockquote>
+
+                {/* Metric Badge */}
+                <div className="inline-flex self-start mb-6 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
+                  {testimonial.metric}
+                </div>
+
+                {/* Author */}
+                <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold">
+                    {testimonial.avatar}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-slate-900">{testimonial.author}</div>
+                    <div className="text-sm text-slate-500">{testimonial.role}</div>
+                    <div className="text-sm text-slate-400">{testimonial.company}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Case Study CTA */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-slate-100 rounded-2xl p-6 sm:p-8">
+              <div className="flex -space-x-3">
+                {['SM', 'JC', 'MR', 'DK'].map((initials, i) => (
+                  <div
+                    key={i}
+                    className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-bold border-2 border-white"
+                  >
+                    {initials}
+                  </div>
+                ))}
+              </div>
+              <div className="text-center sm:text-left">
+                <p className="text-slate-900 font-semibold">Join 50+ businesses</p>
+                <p className="text-slate-500 text-sm">that have automated their operations</p>
+              </div>
+              <Link href="/contact" className="sm:ml-4">
+                <Button>
+                  Start Your Project
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Industries Section */}
-      <section id="industries" className="py-20 md:py-32 bg-white">
+      <section id="industries" className="py-20 md:py-32 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-semibold">
