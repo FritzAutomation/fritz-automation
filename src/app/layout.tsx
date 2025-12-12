@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description: 'Enterprise automation solutions built on 20+ years of manufacturing experience. We help businesses eliminate manual processes and scale efficiently.',
   keywords: ['automation', 'process automation', 'custom software', 'manufacturing', 'enterprise solutions'],
   authors: [{ name: 'Fritz Automation' }],
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: 'Fritz Automation | Enterprise Automation Solutions',
     description: 'We help businesses eliminate manual processes and scale efficiently.',
