@@ -9,12 +9,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, children, disabled, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+    const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95'
 
     const variants = {
-      primary: 'bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-lg hover:scale-105 focus:ring-primary',
-      secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200 focus:ring-slate-500',
-      outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
+      primary: 'bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] hover:-translate-y-0.5 focus:ring-primary',
+      secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200 hover:shadow-md hover:-translate-y-0.5 focus:ring-slate-500',
+      outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white hover:shadow-md hover:-translate-y-0.5 focus:ring-primary',
       ghost: 'text-slate-600 hover:text-primary hover:bg-slate-100 focus:ring-slate-500',
     }
 

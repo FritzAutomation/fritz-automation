@@ -10,6 +10,7 @@ export function Header() {
 
   const navLinks = [
     { href: '/services', label: 'Services' },
+    { href: '/case-studies', label: 'Case Studies' },
     { href: '/industries', label: 'Industries' },
     { href: '/about', label: 'About' },
     { href: '/portal', label: 'Client Portal' },
