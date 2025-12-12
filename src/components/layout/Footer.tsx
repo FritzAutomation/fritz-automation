@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { LogoDark } from '@/components/ui/Logo'
 
 export function Footer() {
   return (
@@ -8,9 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white font-bold">
-                FA
-              </div>
+              <LogoDark size={40} />
               <span className="text-xl font-bold">Fritz Automation</span>
             </Link>
             <p className="text-slate-400 max-w-md">
@@ -29,7 +28,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#industries" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/industries" className="text-slate-400 hover:text-white transition-colors">
                   Industries
                 </Link>
               </li>
