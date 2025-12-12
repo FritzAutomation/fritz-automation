@@ -205,7 +205,7 @@ export default async function AdminTicketDetailPage({
           </div>
 
           {/* Actions */}
-          <AdminTicketActions ticketId={ticket.id} currentStatus={ticket.status} currentPriority={ticket.priority} />
+          <AdminTicketActions ticketId={ticket.id} ticketNumber={ticket.ticket_number} currentStatus={ticket.status} currentPriority={ticket.priority} />
         </div>
       </div>
     </div>
