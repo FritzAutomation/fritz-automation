@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
+import { AnimatedCodeHero } from '@/components/AnimatedCodeHero'
 import { createClient } from '@/lib/supabase/server'
 
 interface Service {
@@ -118,6 +119,17 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Animated Code Demo */}
+      <section className="py-16 bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">See Automation in Action</h2>
+            <p className="text-slate-400">Watch how our scripts transform manual tasks into automated workflows</p>
+          </div>
+          <AnimatedCodeHero />
         </div>
       </section>
 
