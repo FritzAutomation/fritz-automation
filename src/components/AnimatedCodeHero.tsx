@@ -129,12 +129,12 @@ export function AnimatedCodeHero() {
   }, [currentSnippet])
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
-      <div className="grid md:grid-cols-2 gap-4">
+    <div className="w-full">
+      <div className="space-y-3">
         {/* Code Editor */}
-        <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-2xl border border-slate-700">
+        <div className="bg-[#0d1117] rounded-lg overflow-hidden shadow-2xl border border-slate-700/50">
           {/* Editor Header */}
-          <div className="bg-[#323233] px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+          <div className="bg-[#161b22] px-4 py-2 flex items-center gap-2 border-b border-slate-700/50">
             <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
               <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
@@ -144,11 +144,11 @@ export function AnimatedCodeHero() {
           </div>
 
           {/* Code Content */}
-          <div className="p-4 font-mono text-sm min-h-[280px]">
+          <div className="p-4 font-mono text-xs sm:text-sm min-h-[200px]">
             <pre className="text-slate-300 whitespace-pre-wrap">
               {displayedCode.split('\n').map((line, i) => (
-                <div key={i} className="leading-6">
-                  <span className="text-slate-600 select-none mr-4 w-4 inline-block text-right">{i + 1}</span>
+                <div key={i} className="leading-5">
+                  <span className="text-slate-600 select-none mr-3 w-4 inline-block text-right">{i + 1}</span>
                   <span dangerouslySetInnerHTML={{ __html: highlightSyntax(line) }} />
                 </div>
               ))}
@@ -160,9 +160,9 @@ export function AnimatedCodeHero() {
         </div>
 
         {/* Terminal */}
-        <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-2xl border border-slate-700">
+        <div className="bg-[#0d1117] rounded-lg overflow-hidden shadow-2xl border border-slate-700/50">
           {/* Terminal Header */}
-          <div className="bg-[#323233] px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+          <div className="bg-[#161b22] px-4 py-2 flex items-center gap-2 border-b border-slate-700/50">
             <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
               <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
@@ -172,7 +172,7 @@ export function AnimatedCodeHero() {
           </div>
 
           {/* Terminal Content */}
-          <div className="p-4 font-mono text-sm min-h-[280px]">
+          <div className="p-4 font-mono text-xs sm:text-sm min-h-[140px]">
             <pre className="text-green-400 whitespace-pre-wrap">
               {displayedOutput}
               {isTypingOutput && displayedOutput && (
@@ -184,13 +184,13 @@ export function AnimatedCodeHero() {
       </div>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center gap-2 mt-4">
         {codeSnippets.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSnippet(index)}
             className={`h-2 rounded-full transition-all ${
-              index === currentSnippet ? 'bg-red-500 w-8' : 'bg-slate-600 hover:bg-slate-500 w-2'
+              index === currentSnippet ? 'bg-red-500 w-6' : 'bg-slate-600 hover:bg-slate-500 w-2'
             }`}
             aria-label={`Go to snippet ${index + 1}`}
           />
