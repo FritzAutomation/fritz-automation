@@ -1,81 +1,38 @@
-# Fritz Automation - Root .gitignore
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
 
-# Claude Code
-.claude/
-
-# Playwright MCP (browser testing screenshots)
-.playwright-mcp/
-
-# ======================
-# Backend (Python/Django)
-# ======================
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
+# Build outputs
+.next/
+out/
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-backend/lib/
-backend/lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# Django
-*.log
-db.sqlite3
-db.sqlite3-journal
-media/
-staticfiles/
+# Testing
+coverage/
 
 # Environment
 .env
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# ======================
-# Frontend (Node/Next.js)
-# ======================
-
-# Dependencies
-node_modules/
-/.pnp
-.pnp.js
-
-# Testing
-/coverage
-
-# Next.js
-/.next/
-/out/
-
-# Production
-/build
-
-# Misc
-.DS_Store
-*.pem
-
-# Debug
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local env files
-*.local
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Vercel
 .vercel
@@ -84,52 +41,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# ======================
-# IDE and OS
-# ======================
+# Supabase
+.supabase/
 
-# VS Code
-.vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# Claude Code
+.claude/
 
-# JetBrains
-.idea/
-*.swp
-*.swo
-*~
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# ======================
-# Project Specific
-# ======================
-
-# Backup files
-*.bak
-*.backup
-*.old
-
-# Temporary files
-*.tmp
-*.temp
-
-# Logs
-logs/
-*.log
-
-# Archived Files
-.archive/
-./archive
-archive/
+# Playwright
+.playwright-mcp/
