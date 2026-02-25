@@ -33,6 +33,9 @@ export default async function AdminUserDetailPage({
   const { id } = await params
   const supabase = await createClient()
 
+  // Get the current authenticated user's ID
+  const { data: { user: currentUser } } = await supabase.auth.getUser()
+
   let user: Profile | null = null
   let tickets: Ticket[] = []
 
@@ -154,7 +157,12 @@ export default async function AdminUserDetailPage({
 
         {/* Actions Sidebar */}
         <div>
-          <UserRoleForm userId={user.id} currentRole={user.role} />
+          <UserRoleForm
+            userId={user.id}
+            currentRole={user.role}
+            userEmail={user.email || 'Unknown'}
+            isSelf={currentUser?.id === user.id}
+          />
         </div>
       </div>
     </div>
