@@ -1,16 +1,55 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/ui/Logo'
 import { navLinks } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
+// Text morph component - letters animate on hover with staggered wave effect
+function MorphText({ text, isActive }: { text: string; isActive: boolean }) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <span
+      className="inline-flex"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {text.split('').map((char, i) => (
+        <span
+          key={i}
+          className={cn(
+            'inline-block transition-all duration-300',
+            isActive
+              ? 'text-primary'
+              : isHovered
+                ? 'text-primary'
+                : 'text-slate-700'
+          )}
+          style={{
+            transitionDelay: isHovered ? `${i * 30}ms` : '0ms',
+            transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+
+  // Trigger staggered animation on mount
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <>
@@ -24,26 +63,47 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => {
+              {navLinks.map((link, index) => {
                 const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
                 return (
-                  <li key={link.href}>
+                  <li
+                    key={link.href}
+                    className={cn(
+                      'transform transition-all duration-500 ease-out',
+                      mounted
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 -translate-y-4'
+                    )}
+                    style={{
+                      transitionDelay: mounted ? `${index * 75}ms` : '0ms'
+                    }}
+                  >
                     <Link
                       href={link.href}
                       className={cn(
-                        'px-4 py-2 rounded-lg transition-colors font-medium',
+                        'px-4 py-2 rounded-lg transition-colors font-medium block',
                         isActive
-                          ? 'text-primary bg-primary/10'
-                          : 'text-slate-700 hover:text-primary hover:bg-primary/5'
+                          ? 'bg-primary/10'
+                          : 'hover:bg-primary/5'
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >
-                      {link.label}
+                      <MorphText text={link.label} isActive={isActive} />
                     </Link>
                   </li>
                 )
               })}
-              <li className="ml-2">
+              <li
+                className={cn(
+                  'ml-2 transform transition-all duration-500 ease-out',
+                  mounted
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 -translate-y-4'
+                )}
+                style={{
+                  transitionDelay: mounted ? `${navLinks.length * 75}ms` : '0ms'
+                }}
+              >
                 <Link href="/contact">
                   <Button size="sm">Get a Quote</Button>
                 </Link>

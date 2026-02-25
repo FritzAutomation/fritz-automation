@@ -171,6 +171,72 @@ export default async function IndustriesPage() {
       ],
       display_order: 6,
       is_active: true
+    },
+    {
+      id: '7',
+      title: 'Finance & Accounting',
+      slug: 'finance-accounting',
+      icon: 'chart',
+      description: 'Automate reconciliation, reporting, and compliance workflows.',
+      longDescription: 'Financial operations require accuracy, auditability, and speed. We build automation solutions that reduce manual data entry, ensure compliance, and accelerate month-end close processes.',
+      challenges: [
+        'Manual reconciliation processes consuming hours daily',
+        'Spreadsheet-based reporting prone to errors and inconsistencies',
+        'Compliance documentation scattered across multiple systems',
+        'Delayed month-end close due to manual workflows'
+      ],
+      solutions: [
+        'Automated reconciliation with exception flagging',
+        'Consolidated reporting from multiple data sources',
+        'Compliance automation with audit trail generation',
+        'Streamlined close processes with automated task workflows'
+      ],
+      display_order: 7,
+      is_active: true
+    },
+    {
+      id: '8',
+      title: 'Supply Chain & Logistics',
+      slug: 'supply-chain',
+      icon: 'truck',
+      description: 'End-to-end visibility and automation across your supply chain.',
+      longDescription: 'Modern supply chains demand real-time visibility and rapid response. We help organizations automate inventory management, order tracking, and supplier coordination to reduce costs and improve delivery performance.',
+      challenges: [
+        'Limited inventory visibility across warehouses and locations',
+        'Manual order tracking across multiple carriers and systems',
+        'Fragmented supplier management and communication',
+        'Inaccurate demand forecasting leading to stockouts or overstock'
+      ],
+      solutions: [
+        'Real-time inventory tracking across all locations',
+        'Automated order tracking with proactive status updates',
+        'Supplier portal integration for seamless collaboration',
+        'Predictive analytics for demand planning and optimization'
+      ],
+      display_order: 8,
+      is_active: true
+    },
+    {
+      id: '9',
+      title: 'Operations',
+      slug: 'operations',
+      icon: 'settings',
+      description: 'Automate cross-functional workflows and gain operational visibility.',
+      longDescription: 'Operations teams are the backbone of every organization, coordinating across departments and systems. We help operations leaders eliminate manual bottlenecks, connect disconnected systems, and gain real-time visibility into business performance.',
+      challenges: [
+        'Manual data entry across disconnected systems',
+        'Disconnected workflows between departments',
+        'Inconsistent processes leading to errors and rework',
+        'Limited visibility into real-time operational performance'
+      ],
+      solutions: [
+        'End-to-end workflow automation across departments',
+        'System integration connecting all business tools',
+        'Standardized processes with built-in quality checks',
+        'Real-time dashboards for operational KPIs'
+      ],
+      display_order: 9,
+      is_active: true
     }
   ]
 
