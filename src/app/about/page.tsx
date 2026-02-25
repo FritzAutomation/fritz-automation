@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'About Us | Fritz Automation',
+  title: 'About Us',
   description: 'Learn about Fritz Automation - 20+ years of manufacturing experience turned into enterprise automation solutions.',
 }
 

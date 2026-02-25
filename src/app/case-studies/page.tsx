@@ -5,7 +5,7 @@ import { iconPaths } from '@/lib/constants'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Case Studies | Fritz Automation',
+  title: 'Case Studies',
   description: 'See how Fritz Automation has helped businesses transform their operations with custom automation solutions.',
 }
 

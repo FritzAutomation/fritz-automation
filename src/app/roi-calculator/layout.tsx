@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'ROI Calculator | Fritz Automation',
+  title: 'ROI Calculator',
   description: 'Calculate your potential savings from automation.',
 }
 

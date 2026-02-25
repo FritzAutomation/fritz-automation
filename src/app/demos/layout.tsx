@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Live Demos | Fritz Automation',
+  title: 'Live Demos',
   description: 'Interactive demonstrations of automation capabilities.',
 }
 

@@ -3,7 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { siteConfig, contactInfo } from '@/lib/constants'
 
 export const metadata = {
-  title: 'Privacy Policy | Fritz Automation',
+  title: 'Privacy Policy',
   description: 'Privacy Policy for Fritz Automation - Learn how we collect, use, and protect your personal information.',
 }
 

@@ -13,8 +13,10 @@ const quickLinks = [
 ]
 
 const resourceLinks = [
-  { href: '/sitemap.xml', label: 'Sitemap' },
+  { href: '/demos', label: 'Live Demos' },
+  { href: '/roi-calculator', label: 'ROI Calculator' },
   { href: '/portal', label: 'Client Portal' },
+  { href: '/sitemap.xml', label: 'Sitemap' },
 ]
 
 export function Footer() {

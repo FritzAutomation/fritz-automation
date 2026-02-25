@@ -3,7 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { siteConfig, contactInfo } from '@/lib/constants'
 
 export const metadata = {
-  title: 'Terms of Service | Fritz Automation',
+  title: 'Terms of Service',
   description: 'Terms of Service for Fritz Automation - Read our terms and conditions for using our website and services.',
 }
 

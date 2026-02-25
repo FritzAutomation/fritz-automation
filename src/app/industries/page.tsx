@@ -16,7 +16,7 @@ interface Industry {
 }
 
 export const metadata = {
-  title: 'Industries We Serve | Fritz Automation',
+  title: 'Industries We Serve',
   description: 'Automation solutions for manufacturing, logistics, finance, healthcare, retail, and professional services industries.',
 }
 

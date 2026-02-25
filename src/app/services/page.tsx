@@ -19,7 +19,7 @@ interface Service {
 }
 
 export const metadata = {
-  title: 'Services | Fritz Automation',
+  title: 'Services',
   description: 'Custom automation solutions including process automation, system integration, custom software development, and data analytics.',
 }
 
