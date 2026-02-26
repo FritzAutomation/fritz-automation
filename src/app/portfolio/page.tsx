@@ -25,6 +25,38 @@ const projects = [
       'SEO-optimized',
     ],
   },
+  {
+    id: 'iowan-foodie',
+    title: 'Iowan Foodie',
+    category: 'Content Creator',
+    description: 'A food content creator portfolio and blog showcasing Iowa\'s culinary scene. Clean, image-forward design built for engagement and discoverability.',
+    url: 'https://www.iowanfoodie.com',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    highlights: [
+      'Image-forward layout',
+      'Mobile-responsive design',
+      'Fast page loads',
+      'SEO-optimized content',
+      'Social media integration',
+      'Content-first architecture',
+    ],
+  },
+  {
+    id: 'two-makers-co',
+    title: 'Two Makers Co',
+    category: 'E-Commerce',
+    description: 'An online store for handcrafted 3D-printed home decor and office products. Full shopping experience with cart, wishlist, and product filtering.',
+    url: 'https://www.twomakers.co',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
+    highlights: [
+      'Full e-commerce checkout',
+      'Product filtering by category',
+      'Shopping cart & wishlist',
+      'User authentication',
+      'Supabase image storage',
+      'Mobile-first design',
+    ],
+  },
 ]
 
 export default function PortfolioPage() {
