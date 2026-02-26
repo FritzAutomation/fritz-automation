@@ -36,6 +36,7 @@ export function OrganizationSchema() {
       'IT Consulting',
       'Process Automation',
       'Data Analytics',
+      'Website Development',
     ],
   }
 
@@ -73,6 +74,7 @@ export function LocalBusinessSchema() {
       'Process Automation',
       'System Integration',
       'Data Analytics',
+      'Website Development',
     ],
   }
 

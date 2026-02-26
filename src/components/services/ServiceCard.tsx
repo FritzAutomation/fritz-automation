@@ -3,6 +3,7 @@
 import { DataFlowAnimation } from '@/components/animations/DataFlowAnimation'
 import { DashboardAnimation } from '@/components/animations/DashboardAnimation'
 import { ExtractionAnimation } from '@/components/animations/ExtractionAnimation'
+import { WebsiteBuilderAnimation } from '@/components/animations/WebsiteBuilderAnimation'
 
 interface ServiceCardProps {
   service: {
@@ -34,6 +35,8 @@ export function ServiceCard({ service, index, iconPath }: ServiceCardProps) {
         return <ExtractionAnimation variant="scraping" />
       case 'email-document-automation':
         return <ExtractionAnimation variant="documents" />
+      case 'website-development':
+        return <WebsiteBuilderAnimation />
       default:
         return null
     }

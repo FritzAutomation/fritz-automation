@@ -16,6 +16,9 @@ export const iconPaths: Record<string, string> = {
   briefcase: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   settings: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
 
+  // Website / layout
+  layout: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 9h16M9 9v11',
+
   // Case study icons
   manufacturing: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
   logistics: 'M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0',
@@ -63,6 +66,7 @@ export const siteConfig = {
 export const navLinks = [
   { href: '/services', label: 'Services' },
   { href: '/case-studies', label: 'Case Studies' },
+  { href: '/portfolio', label: 'Portfolio' },
   { href: '/industries', label: 'Industries' },
   { href: '/about', label: 'About' },
   { href: '/demos', label: 'Live Demos' },
@@ -83,7 +87,8 @@ export const commandPalettePages = [
   // Pages
   { href: '/', label: 'Home', section: 'Pages', keywords: ['home', 'landing', 'main'] },
   { href: '/services', label: 'Services', section: 'Pages', keywords: ['automation', 'consulting', 'development'] },
-  { href: '/case-studies', label: 'Case Studies', section: 'Pages', keywords: ['portfolio', 'work', 'projects', 'results'] },
+  { href: '/case-studies', label: 'Case Studies', section: 'Pages', keywords: ['work', 'projects', 'results'] },
+  { href: '/portfolio', label: 'Portfolio', section: 'Pages', keywords: ['portfolio', 'websites', 'web development', 'showcase'] },
   { href: '/industries', label: 'Industries', section: 'Pages', keywords: ['manufacturing', 'logistics', 'finance', 'healthcare'] },
   { href: '/about', label: 'About', section: 'Pages', keywords: ['team', 'company', 'story', 'mission'] },
   // Resources

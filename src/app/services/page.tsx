@@ -20,7 +20,7 @@ interface Service {
 
 export const metadata = {
   title: 'Services',
-  description: 'Custom automation solutions including process automation, system integration, custom software development, and data analytics.',
+  description: 'Custom automation solutions including process automation, system integration, custom software development, data analytics, and website development.',
 }
 
 export default async function ServicesPage() {
@@ -149,6 +149,24 @@ export default async function ServicesPage() {
       ],
       technologies: ['Python', 'SMTP', 'PDF libraries', 'DocuSign API'],
       display_order: 6,
+      is_active: true
+    },
+    {
+      id: '7',
+      title: 'Website Development',
+      slug: 'website-development',
+      description: 'Professional websites that load fast, rank well, and convert visitors into customers. From marketing sites to full-stack web applications, we build it all.',
+      icon: 'layout',
+      features: [
+        'Custom design & development',
+        'Mobile-responsive layouts',
+        'SEO & performance optimization',
+        'CMS integration',
+        'E-commerce solutions',
+        'Hosting & domain setup'
+      ],
+      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
+      display_order: 7,
       is_active: true
     }
   ]
