@@ -6,6 +6,7 @@ import { CommandPalette } from '@/components/CommandPalette'
 import { ScrollProgress } from '@/components/ScrollProgress'
 import { CursorEffects } from '@/components/CursorEffects'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
+import { BootSplash } from '@/components/animations/BootSplash'
 import './globals.css'
 
 const inter = Inter({
@@ -70,6 +71,7 @@ export default function RootLayout({
         <WebSiteSchema />
       </head>
       <body className={inter.className}>
+        <BootSplash />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { ScrollReveal, StaggerContainer } from '@/components/animations/ScrollReveal'
 import { TextScramble } from '@/components/animations/TextScramble'
 import { CountUp } from '@/components/animations/CountUp'
+import { CardProcessingHover } from '@/components/animations/CardProcessingHover'
 
 interface Service {
   id: string
@@ -82,7 +83,7 @@ export function AnimatedServices({ services, iconMap }: AnimatedServicesProps) {
 
         <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={150}>
           {services?.map((service) => (
-            <div
+            <CardProcessingHover
               key={service.id}
               className="group bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
             >
@@ -103,7 +104,7 @@ export function AnimatedServices({ services, iconMap }: AnimatedServicesProps) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </CardProcessingHover>
           ))}
         </StaggerContainer>
 
@@ -167,7 +168,7 @@ export function AnimatedTestimonials() {
 
         <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={150}>
           {testimonials.map((testimonial, index) => (
-            <div
+            <CardProcessingHover
               key={index}
               className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300 flex flex-col"
             >
@@ -201,7 +202,7 @@ export function AnimatedTestimonials() {
                   <div className="text-sm text-slate-400">{testimonial.company}</div>
                 </div>
               </div>
-            </div>
+            </CardProcessingHover>
           ))}
         </StaggerContainer>
 
@@ -255,7 +256,7 @@ export function AnimatedIndustries({ industries, iconMap }: AnimatedIndustriesPr
 
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={100}>
           {industries?.map((industry) => (
-            <div
+            <CardProcessingHover
               key={industry.id}
               className="group bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border border-slate-100 hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
             >
@@ -266,7 +267,7 @@ export function AnimatedIndustries({ industries, iconMap }: AnimatedIndustriesPr
               </div>
               <h3 className="text-lg font-bold mb-2 text-slate-900 group-hover:text-primary transition-colors">{industry.title}</h3>
               <p className="text-sm text-slate-600">{industry.description}</p>
-            </div>
+            </CardProcessingHover>
           ))}
         </StaggerContainer>
 

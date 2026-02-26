@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { businessInfo } from '@/lib/constants'
 import Link from 'next/link'
+import { AnimatedTimeline } from '@/components/animations/AnimatedTimeline'
 
 export const metadata = {
   title: 'About Us',
@@ -144,26 +145,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl p-8 border border-slate-200">
-              <div className="space-y-6">
-                {milestones.map((milestone, index) => (
-                  <div key={milestone.year} className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-8 bg-emerald-500 text-white text-xs font-bold rounded flex items-center justify-center">
-                        {milestone.year}
-                      </div>
-                      {index < milestones.length - 1 && (
-                        <div className="w-0.5 h-full bg-slate-200 mx-auto mt-2" />
-                      )}
-                    </div>
-                    <div className="pb-6">
-                      <h3 className="font-bold text-slate-900">{milestone.title}</h3>
-                      <p className="text-sm text-slate-600">{milestone.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <AnimatedTimeline milestones={milestones} />
           </div>
         </div>
       </section>

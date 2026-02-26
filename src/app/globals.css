@@ -260,6 +260,133 @@ html {
   animation: cursor-ripple 0.6s ease-out forwards;
 }
 
+/* Card processing hover scan effect */
+@keyframes card-scan {
+  from {
+    left: -50%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.card-processing-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-processing-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.08), transparent);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card-processing-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid transparent;
+  pointer-events: none;
+  z-index: 1;
+  transition: border-color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .card-processing-hover:hover::after {
+    opacity: 1;
+    animation: card-scan 0.6s ease-in-out;
+  }
+  .card-processing-hover:hover::before {
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+}
+
+/* Timeline draw animation */
+@keyframes timeline-draw {
+  from {
+    stroke-dashoffset: var(--line-len);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.timeline-line-draw {
+  animation: timeline-draw 1.5s ease-out forwards;
+}
+
+/* Process widget step entrance */
+@keyframes process-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.process-step-enter {
+  animation: process-step-in 0.3s ease-out forwards;
+}
+
+@keyframes stat-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.stat-pop {
+  animation: stat-pop 0.4s ease-out forwards;
+}
+
+/* Boot splash cursor blink */
+@keyframes boot-cursor-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.boot-cursor {
+  animation: boot-cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes boot-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100vh);
+  }
+}
+
+.boot-exit {
+  animation: boot-exit 0.4s ease-in forwards;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -296,6 +423,36 @@ html {
   }
 
   .animate-cursor-ripple {
+    animation: none;
+  }
+
+  .card-processing-hover::after,
+  .card-processing-hover::before {
+    display: none;
+  }
+
+  .timeline-line-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .process-step-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .stat-pop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .boot-cursor {
+    animation: none;
+  }
+
+  .boot-exit {
     animation: none;
   }
 }
