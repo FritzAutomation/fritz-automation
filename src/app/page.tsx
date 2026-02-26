@@ -13,6 +13,7 @@ import {
 import { createClient } from '@/lib/supabase/server'
 import { iconPaths } from '@/lib/constants'
 import { PipelineHero } from '@/components/animations/PipelineHero'
+import { DataStream } from '@/components/animations/DataStream'
 import { TextScramble } from '@/components/animations/TextScramble'
 import { SectionConnector } from '@/components/animations/SectionConnector'
 
@@ -70,6 +71,7 @@ export default async function HomePage() {
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-3xl" />
+          <DataStream />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

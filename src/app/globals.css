@@ -225,6 +225,41 @@ html {
   animation: palette-backdrop-enter 0.15s ease-out;
 }
 
+/* Data stream animation */
+@keyframes data-stream {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-100vh - 100%));
+  }
+}
+
+.animate-data-stream {
+  animation: data-stream linear infinite;
+  will-change: transform;
+}
+
+/* Cursor click ripple */
+@keyframes cursor-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.animate-cursor-ripple {
+  animation: cursor-ripple 0.6s ease-out forwards;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -253,6 +288,14 @@ html {
   }
 
   .palette-backdrop-enter {
+    animation: none;
+  }
+
+  .animate-data-stream {
+    animation: none;
+  }
+
+  .animate-cursor-ripple {
     animation: none;
   }
 }

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { ScrollReveal, StaggerContainer } from '@/components/animations/ScrollReveal'
 import { TextScramble } from '@/components/animations/TextScramble'
+import { CountUp } from '@/components/animations/CountUp'
 
 interface Service {
   id: string
@@ -39,10 +40,10 @@ interface AnimatedIndustriesProps {
 
 export function AnimatedStats() {
   const stats = [
-    { value: '20+', label: 'Years in Manufacturing' },
-    { value: '10M+', label: 'Daily Records Processed' },
-    { value: '14', label: 'Years at Enterprise Scale' },
-    { value: '24hr', label: 'Average Response Time' },
+    { end: 20, suffix: '+', label: 'Years in Manufacturing' },
+    { end: 10000000, suffix: '+', label: 'Daily Records Processed' },
+    { end: 14, suffix: '', label: 'Years at Enterprise Scale' },
+    { end: 24, suffix: 'hr', label: 'Average Response Time' },
   ]
 
   return (
@@ -51,7 +52,9 @@ export function AnimatedStats() {
         <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={100}>
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-4xl font-bold text-primary mb-1">{stat.value}</div>
+              <div className="text-4xl font-bold text-primary mb-1">
+                <CountUp end={stat.end} suffix={stat.suffix} />
+              </div>
               <div className="text-sm text-slate-600">{stat.label}</div>
             </div>
           ))}

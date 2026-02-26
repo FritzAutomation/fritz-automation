@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { BackToTop } from '@/components/BackToTop'
 import { CommandPalette } from '@/components/CommandPalette'
+import { ScrollProgress } from '@/components/ScrollProgress'
+import { CursorEffects } from '@/components/CursorEffects'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
 import './globals.css'
 
@@ -71,12 +73,14 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
+        <ScrollProgress />
         <main id="main-content">
           {children}
         </main>
         <BackToTop />
         <CommandPalette />
         <Toaster position="top-right" richColors />
+        <CursorEffects />
       </body>
     </html>
   )
