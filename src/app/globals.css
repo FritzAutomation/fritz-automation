@@ -148,6 +148,83 @@ html {
   outline-offset: 2px;
 }
 
+/* Section connector dot travel animation */
+@keyframes connector-dot-travel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--connector-height));
+    opacity: 0.3;
+  }
+}
+
+.connector-dot-travel {
+  animation: connector-dot-travel 1.5s ease-in-out infinite;
+}
+
+/* Pipeline flow animation */
+@keyframes pipeline-flow {
+  0% {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(480px);
+    opacity: 0;
+  }
+}
+
+.pipeline-flow {
+  animation: pipeline-flow 3.6s linear infinite;
+}
+
+/* Pipeline stage glow */
+@keyframes stage-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px #10b981);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px #10b981);
+  }
+}
+
+/* Command palette enter animation */
+@keyframes palette-enter {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.palette-enter {
+  animation: palette-enter 0.15s ease-out;
+}
+
+@keyframes palette-backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.palette-backdrop-enter {
+  animation: palette-backdrop-enter 0.15s ease-out;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -160,6 +237,22 @@ html {
   }
 
   .animate-marquee {
+    animation: none;
+  }
+
+  .connector-dot-travel {
+    animation: none;
+  }
+
+  .pipeline-flow {
+    animation: none;
+  }
+
+  .palette-enter {
+    animation: none;
+  }
+
+  .palette-backdrop-enter {
     animation: none;
   }
 }

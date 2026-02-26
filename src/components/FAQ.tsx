@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { TextScramble } from '@/components/animations/TextScramble'
 
 interface FAQItem {
   question: string
@@ -46,7 +47,7 @@ export function FAQ() {
             Common Questions
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Frequently Asked Questions</span>
+            <span className="gradient-text"><TextScramble text="Frequently Asked Questions" as="span" /></span>
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
             Everything you need to know about working with Fritz Automation

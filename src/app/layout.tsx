@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { BackToTop } from '@/components/BackToTop'
+import { CommandPalette } from '@/components/CommandPalette'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
 import './globals.css'
 
@@ -74,6 +75,7 @@ export default function RootLayout({
           {children}
         </main>
         <BackToTop />
+        <CommandPalette />
         <Toaster position="top-right" richColors />
       </body>
     </html>

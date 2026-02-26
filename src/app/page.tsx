@@ -12,6 +12,9 @@ import {
 } from '@/components/home/AnimatedSections'
 import { createClient } from '@/lib/supabase/server'
 import { iconPaths } from '@/lib/constants'
+import { PipelineHero } from '@/components/animations/PipelineHero'
+import { TextScramble } from '@/components/animations/TextScramble'
+import { SectionConnector } from '@/components/animations/SectionConnector'
 
 interface Service {
   id: string
@@ -76,6 +79,7 @@ export default async function HomePage() {
               <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-semibold">
                 Enterprise Automation Solutions
               </div>
+              <PipelineHero />
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 <span className="block text-slate-400 text-xl md:text-2xl font-normal mb-2">Stop Wasting Hours on</span>
                 <span className="text-white">Manual Processes</span>
@@ -125,15 +129,21 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Connector: Hero → Stats */}
+      <SectionConnector />
+
       {/* Stats Section */}
       <AnimatedStats />
+
+      {/* Connector: Stats → Tech */}
+      <SectionConnector />
 
       {/* Tech Stack Section */}
       <section className="py-16 bg-slate-900 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Technologies We Use
+              <TextScramble text="Technologies We Use" as="span" />
             </h2>
             <p className="text-slate-400">
               Modern tools for reliable, scalable automation
@@ -179,14 +189,26 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Connector: Tech → Services */}
+      <SectionConnector />
+
       {/* Services Section */}
       <AnimatedServices services={services} iconMap={iconMap} />
+
+      {/* Connector: Services → Testimonials */}
+      <SectionConnector />
 
       {/* Testimonials Section */}
       <AnimatedTestimonials />
 
+      {/* Connector: Testimonials → Industries */}
+      <SectionConnector />
+
       {/* Industries Section */}
       <AnimatedIndustries industries={industries} iconMap={iconMap} />
+
+      {/* Connector: Industries → FAQ */}
+      <SectionConnector />
 
       {/* FAQ Section */}
       <FAQ />

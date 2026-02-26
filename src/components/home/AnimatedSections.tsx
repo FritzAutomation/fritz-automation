@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { ScrollReveal, StaggerContainer } from '@/components/animations/ScrollReveal'
+import { TextScramble } from '@/components/animations/TextScramble'
 
 interface Service {
   id: string
@@ -69,7 +70,7 @@ export function AnimatedServices({ services, iconMap }: AnimatedServicesProps) {
             What We Do
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Our Services</span>
+            <span className="gradient-text"><TextScramble text="Our Services" as="span" /></span>
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
             Custom automation solutions that transform how your business operates
@@ -154,7 +155,7 @@ export function AnimatedTestimonials() {
             Client Success Stories
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">What Our Clients Say</span>
+            <span className="gradient-text"><TextScramble text="What Our Clients Say" as="span" /></span>
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
             Real results from businesses that transformed their operations with automation
@@ -242,7 +243,7 @@ export function AnimatedIndustries({ industries, iconMap }: AnimatedIndustriesPr
             Who We Serve
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Industries We Serve</span>
+            <span className="gradient-text"><TextScramble text="Industries We Serve" as="span" /></span>
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
             Deep expertise across sectors that rely on efficient processes

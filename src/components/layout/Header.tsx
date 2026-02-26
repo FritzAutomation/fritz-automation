@@ -95,13 +95,33 @@ export function Header() {
               })}
               <li
                 className={cn(
-                  'ml-2 transform transition-all duration-500 ease-out',
+                  'ml-1 transform transition-all duration-500 ease-out',
                   mounted
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 -translate-y-4'
                 )}
                 style={{
                   transitionDelay: mounted ? `${navLinks.length * 75}ms` : '0ms'
+                }}
+              >
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
+                  className="px-3 py-2 rounded-lg text-slate-500 hover:text-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                  aria-label="Open command palette"
+                  title="Ctrl+K"
+                >
+                  &gt;_
+                </button>
+              </li>
+              <li
+                className={cn(
+                  'ml-1 transform transition-all duration-500 ease-out',
+                  mounted
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 -translate-y-4'
+                )}
+                style={{
+                  transitionDelay: mounted ? `${(navLinks.length + 1) * 75}ms` : '0ms'
                 }}
               >
                 <Link href="/contact">

@@ -78,6 +78,22 @@ export const companyStats = [
   { value: '99.9%', label: 'Uptime Reliability' },
 ]
 
+// Command palette pages
+export const commandPalettePages = [
+  // Pages
+  { href: '/', label: 'Home', section: 'Pages', keywords: ['home', 'landing', 'main'] },
+  { href: '/services', label: 'Services', section: 'Pages', keywords: ['automation', 'consulting', 'development'] },
+  { href: '/case-studies', label: 'Case Studies', section: 'Pages', keywords: ['portfolio', 'work', 'projects', 'results'] },
+  { href: '/industries', label: 'Industries', section: 'Pages', keywords: ['manufacturing', 'logistics', 'finance', 'healthcare'] },
+  { href: '/about', label: 'About', section: 'Pages', keywords: ['team', 'company', 'story', 'mission'] },
+  // Resources
+  { href: '/demos', label: 'Live Demos', section: 'Resources', keywords: ['demo', 'interactive', 'try'] },
+  { href: '/roi-calculator', label: 'ROI Calculator', section: 'Resources', keywords: ['calculator', 'savings', 'cost', 'return'] },
+  { href: '/contact', label: 'Get a Quote', section: 'Resources', keywords: ['contact', 'quote', 'consultation', 'pricing'] },
+  // Account
+  { href: '/portal', label: 'Client Portal', section: 'Account', keywords: ['login', 'dashboard', 'portal', 'account'] },
+]
+
 // Helper function to get icon path with fallback
 export function getIconPath(iconName: string | null, fallback = 'cog'): string {
   return iconPaths[iconName || fallback] || iconPaths[fallback]
