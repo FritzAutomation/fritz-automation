@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   creator: 'Fritz Automation',
   publisher: 'Fritz Automation',
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/icon.svg',
+    apple: '/icon.svg',
   },
   metadataBase: new URL('https://fritzautomation.dev'),
   alternates: {

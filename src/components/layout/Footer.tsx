@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LogoDark } from '@/components/ui/Logo'
+import { FritzLogo } from '@/components/FritzLogo'
 import { contactInfo, siteConfig, businessInfo } from '@/lib/constants'
 
 const currentYear = new Date().getFullYear()
@@ -26,9 +26,8 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4" aria-label="Fritz Automation home">
-              <LogoDark size={40} />
-              <span className="text-xl font-bold">{siteConfig.name}</span>
+            <Link href="/" className="mb-4 inline-block" aria-label="Fritz Automation home">
+              <FritzLogo width={160} variant="dark" />
             </Link>
             <p className="text-slate-400 text-sm mb-6">
               {siteConfig.description}

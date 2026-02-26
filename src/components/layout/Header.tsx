@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { Logo } from '@/components/ui/Logo'
+import { FritzLogo } from '@/components/FritzLogo'
 import { navLinks } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
@@ -58,7 +58,7 @@ export function Header() {
           <nav className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="group hover:opacity-90 transition-opacity" aria-label="Fritz Automation home">
-              <Logo size="md" />
+              <FritzLogo width={200} variant="light" />
             </Link>
 
             {/* Desktop Navigation */}
