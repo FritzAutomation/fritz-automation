@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { ServiceCard } from '@/components/services/ServiceCard'
 import { iconPaths } from '@/lib/constants'
 import { DataStream } from '@/components/animations/DataStream'
+import { MouseGrid } from '@/components/animations/MouseGrid'
 import Link from 'next/link'
 
 interface Service {
@@ -186,6 +187,7 @@ export default async function ServicesPage() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
+          <MouseGrid />
           <DataStream />
         </div>
 
@@ -267,6 +269,7 @@ export default async function ServicesPage() {
 
       {/* CTA Section */}
       <section className="relative overflow-hidden py-20 bg-gradient-to-r from-slate-800 to-slate-900">
+        <MouseGrid />
         <DataStream />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

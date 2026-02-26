@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { DataStream } from '@/components/animations/DataStream'
+import { MouseGrid } from '@/components/animations/MouseGrid'
 import Link from 'next/link'
 
 interface CalculatorInputs {
@@ -90,6 +91,7 @@ export default function ROICalculatorPage() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
+          <MouseGrid />
           <DataStream />
         </div>
 

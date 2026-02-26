@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { DataStream } from '@/components/animations/DataStream'
+import { MouseGrid } from '@/components/animations/MouseGrid'
 
 type Phase = 'idle' | 'input' | 'processing' | 'output' | 'complete'
 
@@ -121,6 +122,7 @@ export function ProcessWidget() {
 
   return (
     <section className="relative overflow-hidden py-20 md:py-32 bg-slate-900">
+      <MouseGrid />
       <DataStream />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
