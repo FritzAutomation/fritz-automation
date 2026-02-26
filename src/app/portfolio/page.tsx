@@ -57,6 +57,22 @@ const projects = [
       'Mobile-first design',
     ],
   },
+  {
+    id: 'aquila-group',
+    title: 'The Aquila Group',
+    category: 'B2B / Manufacturing',
+    description: 'Corporate site for a manufacturing technology provider established in 1996. Showcases their MES platform, machine monitoring tools, and 29+ years of industry expertise.',
+    url: 'https://aquila-homepage.vercel.app',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    highlights: [
+      'Structured data for SEO',
+      'Client testimonials & case studies',
+      'Product demo request flow',
+      'Trusted-by logo showcase',
+      'FAQ section',
+      'Mobile-responsive layout',
+    ],
+  },
 ]
 
 export default function PortfolioPage() {
