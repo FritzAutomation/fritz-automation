@@ -36,11 +36,27 @@ export const contactInfo = {
   },
 }
 
+// Business information
+export const businessInfo = {
+  legalName: 'Fritz Automation LLC',
+  founder: 'Joshua Fritzjunker',
+  founderTitle: 'Founder & Principal',
+  location: {
+    city: 'Burlington',
+    state: 'Iowa',
+    stateAbbr: 'IA',
+    country: 'US',
+  },
+  foundingDate: '2026',
+  stateOfIncorporation: 'Iowa',
+}
+
 // Site metadata
 export const siteConfig = {
   name: 'Fritz Automation',
+  legalName: 'Fritz Automation LLC',
   url: 'https://fritzautomation.dev',
-  description: 'Enterprise automation solutions built on 20+ years of manufacturing experience.',
+  description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
 }
 
 // Navigation links

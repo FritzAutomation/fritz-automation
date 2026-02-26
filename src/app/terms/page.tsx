@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { siteConfig, contactInfo } from '@/lib/constants'
+import { siteConfig, contactInfo, businessInfo } from '@/lib/constants'
 
 export const metadata = {
   title: 'Terms of Service',
@@ -8,7 +8,7 @@ export const metadata = {
 }
 
 export default function TermsOfServicePage() {
-  const lastUpdated = 'December 12, 2025'
+  const lastUpdated = 'February 25, 2026'
 
   return (
     <div className="min-h-screen">
@@ -147,7 +147,7 @@ export default function TermsOfServicePage() {
             <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">11. Governing Law</h2>
             <p className="text-slate-600 mb-4">
               These Terms of Service shall be governed by and construed in accordance with the laws of the
-              United States, without regard to its conflict of law provisions. Any disputes arising from these
+              State of {businessInfo.stateOfIncorporation}, without regard to its conflict of law provisions. Any disputes arising from these
               terms or our services shall be resolved through good-faith negotiation, and if necessary, binding
               arbitration.
             </p>
@@ -172,7 +172,8 @@ export default function TermsOfServicePage() {
               If you have any questions about these Terms of Service, please contact us at:
             </p>
             <div className="bg-slate-50 rounded-xl p-6 mt-4">
-              <p className="text-slate-900 font-semibold">{siteConfig.name}</p>
+              <p className="text-slate-900 font-semibold">{siteConfig.legalName}</p>
+              <p className="text-slate-600">{businessInfo.location.city}, {businessInfo.location.state}</p>
               <p className="text-slate-600">
                 Email: <a href={`mailto:${contactInfo.email}`} className="text-primary hover:underline">{contactInfo.email}</a>
               </p>

@@ -1,4 +1,4 @@
-import { siteConfig, contactInfo } from '@/lib/constants'
+import { siteConfig, contactInfo, businessInfo } from '@/lib/constants'
 
 // Organization schema for the business
 export function OrganizationSchema() {
@@ -6,22 +6,35 @@ export function OrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteConfig.name,
+    legalName: siteConfig.legalName,
     url: siteConfig.url,
     logo: `${siteConfig.url}/favicon.svg`,
     description: siteConfig.description,
     email: contactInfo.email,
     sameAs: [contactInfo.github.url, contactInfo.linkedin.url],
-    foundingDate: '2020',
+    foundingDate: businessInfo.foundingDate,
+    founder: {
+      '@type': 'Person',
+      name: businessInfo.founder,
+      jobTitle: businessInfo.founderTitle,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: businessInfo.location.city,
+      addressRegion: businessInfo.location.stateAbbr,
+      addressCountry: businessInfo.location.country,
+    },
     numberOfEmployees: {
       '@type': 'QuantitativeValue',
       value: '1-10',
     },
     areaServed: 'Worldwide',
     knowsAbout: [
-      'Business Automation',
+      'Automation Consulting',
+      'Software Development',
+      'Manufacturing Systems Integration',
+      'IT Consulting',
       'Process Automation',
-      'System Integration',
-      'Custom Software Development',
       'Data Analytics',
     ],
   }
@@ -40,18 +53,26 @@ export function LocalBusinessSchema() {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: siteConfig.name,
+    legalName: siteConfig.legalName,
     url: siteConfig.url,
     image: `${siteConfig.url}/favicon.svg`,
     description: siteConfig.description,
     email: contactInfo.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: businessInfo.location.city,
+      addressRegion: businessInfo.location.stateAbbr,
+      addressCountry: businessInfo.location.country,
+    },
     priceRange: '$$',
     serviceType: [
+      'Automation Consulting',
+      'Software Development',
+      'Manufacturing Systems Integration',
+      'IT Consulting',
       'Process Automation',
       'System Integration',
-      'Custom Software Development',
       'Data Analytics',
-      'Web Scraping',
-      'Document Automation',
     ],
   }
 

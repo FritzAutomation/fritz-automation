@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { siteConfig, contactInfo } from '@/lib/constants'
+import { siteConfig, contactInfo, businessInfo } from '@/lib/constants'
 
 export const metadata = {
   title: 'Privacy Policy',
@@ -8,7 +8,7 @@ export const metadata = {
 }
 
 export default function PrivacyPolicyPage() {
-  const lastUpdated = 'December 12, 2025'
+  const lastUpdated = 'February 25, 2026'
 
   return (
     <div className="min-h-screen">
@@ -157,7 +157,8 @@ export default function PrivacyPolicyPage() {
               If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
             </p>
             <div className="bg-slate-50 rounded-xl p-6 mt-4">
-              <p className="text-slate-900 font-semibold">{siteConfig.name}</p>
+              <p className="text-slate-900 font-semibold">{siteConfig.legalName}</p>
+              <p className="text-slate-600">{businessInfo.location.city}, {businessInfo.location.state}</p>
               <p className="text-slate-600">
                 Email: <a href={`mailto:${contactInfo.email}`} className="text-primary hover:underline">{contactInfo.email}</a>
               </p>

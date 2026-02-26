@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { LogoDark } from '@/components/ui/Logo'
-import { contactInfo, siteConfig } from '@/lib/constants'
+import { contactInfo, siteConfig, businessInfo } from '@/lib/constants'
 
 const currentYear = new Date().getFullYear()
 
@@ -100,7 +100,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
-          <p>&copy; {currentYear} {siteConfig.name}. All rights reserved.</p>
+          <p>&copy; {currentYear} {siteConfig.legalName}. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy

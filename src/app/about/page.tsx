@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
+import { businessInfo } from '@/lib/constants'
 import Link from 'next/link'
 
 export const metadata = {
@@ -88,7 +89,8 @@ export default function AboutPage() {
               <span className="text-red-400">Automation Expertise</span>
             </h1>
             <p className="text-xl text-slate-300">
-              We spent 20+ years in manufacturing before founding Fritz Automation.
+              Founded by {businessInfo.founder} in {businessInfo.location.city}, {businessInfo.location.state},
+              Fritz Automation is built on 20+ years of manufacturing experience.
               We understand your operational challenges because we&apos;ve lived them.
             </p>
           </div>

@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { businessInfo } from '@/lib/constants'
 import { ContactForm } from './ContactForm'
 
 export const metadata: Metadata = {
@@ -72,8 +73,23 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-semibold text-slate-900">LinkedIn</h3>
                       <a href="https://www.linkedin.com/in/joshua-fritzjunker-53383590/" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors">
-                        Joshua Fritzjunker
+                        {businessInfo.founder}
                       </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/10 rounded-xl">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-slate-900">Location</h3>
+                      <p className="text-slate-600">
+                        {businessInfo.location.city}, {businessInfo.location.state}
+                      </p>
                     </div>
                   </div>
                 </div>

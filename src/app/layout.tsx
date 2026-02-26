@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     default: 'Fritz Automation | Enterprise Automation Solutions',
     template: '%s | Fritz Automation',
   },
-  description: 'Enterprise automation solutions built on 20+ years of manufacturing experience. We help businesses eliminate manual processes and scale efficiently.',
-  keywords: ['automation', 'process automation', 'custom software', 'manufacturing', 'enterprise solutions', 'business automation', 'workflow automation', 'data integration'],
+  description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience. We help businesses eliminate manual processes and scale efficiently.',
+  keywords: ['automation consulting', 'software development', 'manufacturing systems integration', 'IT consulting', 'process automation', 'custom software', 'enterprise solutions', 'business automation', 'workflow automation', 'data integration'],
   authors: [{ name: 'Fritz Automation' }],
   creator: 'Fritz Automation',
   publisher: 'Fritz Automation',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Fritz Automation | Enterprise Automation Solutions',
-    description: 'We help businesses eliminate manual processes and scale efficiently.',
+    description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
     url: 'https://fritzautomation.dev',
     siteName: 'Fritz Automation',
     locale: 'en_US',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Fritz Automation | Enterprise Automation Solutions',
-    description: 'We help businesses eliminate manual processes and scale efficiently.',
+    description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
   },
   robots: {
     index: true,
