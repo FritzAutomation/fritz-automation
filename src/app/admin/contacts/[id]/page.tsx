@@ -64,7 +64,7 @@ export default async function AdminContactDetailPage({
               <div className="flex justify-between items-start">
                 <div>
                   <h1 className="text-2xl font-bold text-white">{contact.name}</h1>
-                  <a href={`mailto:${contact.email}`} className="text-red-400 hover:text-red-300">
+                  <a href={`mailto:${contact.email}`} className="text-emerald-400 hover:text-emerald-300">
                     {contact.email}
                   </a>
                 </div>
@@ -92,7 +92,7 @@ export default async function AdminContactDetailPage({
               <div>
                 <p className="text-slate-400">Phone</p>
                 {contact.phone ? (
-                  <a href={`tel:${contact.phone}`} className="font-medium text-red-400 hover:text-red-300">
+                  <a href={`tel:${contact.phone}`} className="font-medium text-emerald-400 hover:text-emerald-300">
                     {contact.phone}
                   </a>
                 ) : (
@@ -121,7 +121,7 @@ export default async function AdminContactDetailPage({
             <div className="space-y-2">
               <a
                 href={`mailto:${contact.email}?subject=Re: ${contact.subject || 'Your inquiry'}`}
-                className="flex items-center gap-2 w-full px-4 py-2.5 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors text-sm font-medium justify-center"
+                className="flex items-center gap-2 w-full px-4 py-2.5 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition-colors text-sm font-medium justify-center"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

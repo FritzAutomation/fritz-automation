@@ -55,7 +55,7 @@ export function FilterSelect({
       className={cn(
         'block px-3 py-2 rounded-lg text-sm transition-colors',
         isDark
-          ? 'bg-slate-700 border-slate-600 text-white focus:border-red-500 focus:ring-red-500/20'
+          ? 'bg-slate-700 border-slate-600 text-white focus:border-emerald-500 focus:ring-emerald-500/20'
           : 'bg-white border-slate-300 text-slate-900 focus:border-primary focus:ring-primary/20',
         'border focus:ring-2 focus:outline-none',
         isPending && 'opacity-50',

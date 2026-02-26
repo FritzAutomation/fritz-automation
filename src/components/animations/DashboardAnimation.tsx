@@ -80,7 +80,7 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
         <div className="bg-slate-950 rounded-lg overflow-hidden border border-slate-700">
           {/* App header */}
           <div className={`h-10 bg-slate-800 border-b border-slate-700 flex items-center px-3 gap-2 transition-all duration-500 ${buildPhase >= 0 ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="w-6 h-6 bg-red-500 rounded flex items-center justify-center">
+            <div className="w-6 h-6 bg-emerald-500 rounded flex items-center justify-center">
               <span className="text-white text-xs font-bold">F</span>
             </div>
             <span className="text-xs text-slate-300 font-medium">Fritz Dashboard</span>
@@ -98,7 +98,7 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
                   <div
                     key={i}
                     className={`w-8 h-8 rounded transition-all duration-300 ${
-                      i === 0 ? 'bg-red-500/20 border border-red-500/50' : 'bg-slate-700'
+                      i === 0 ? 'bg-emerald-500/20 border border-emerald-500/50' : 'bg-slate-700'
                     }`}
                   />
                 ))}
@@ -129,7 +129,7 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
                   {chartBars.map((height, i) => (
                     <div key={i} className="flex-1 flex flex-col justify-end">
                       <div
-                        className="bg-gradient-to-t from-red-500 to-red-400 rounded-t transition-all duration-500"
+                        className="bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-t transition-all duration-500"
                         style={{ height: `${height}%` }}
                       />
                     </div>
@@ -168,7 +168,7 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
         <div className="mt-3 flex items-center gap-2">
           <div className="flex-1 h-1 bg-slate-700 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-red-500 to-red-400 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-500"
               style={{ width: `${(buildPhase + 1) * 20}%` }}
             />
           </div>
@@ -220,7 +220,7 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
                 <button
                   key={period}
                   className={`text-[10px] px-2 py-0.5 rounded ${
-                    i === 2 ? 'bg-red-500/20 text-red-400' : 'text-slate-500 hover:text-slate-300'
+                    i === 2 ? 'bg-emerald-500/20 text-emerald-400' : 'text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   {period}
@@ -248,7 +248,7 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
               <path
                 d={`M0,60 L20,${60 - chartBars[0] * 0.6} L60,${60 - chartBars[1] * 0.6} L100,${60 - chartBars[2] * 0.6} L140,${60 - chartBars[3] * 0.6} L180,${60 - chartBars[4] * 0.6} L200,${60 - chartBars[5] * 0.6}`}
                 fill="none"
-                stroke="#ef4444"
+                stroke="#10b981"
                 strokeWidth="2"
                 className="transition-all duration-500"
               />
@@ -256,8 +256,8 @@ export function DashboardAnimation({ variant }: DashboardAnimationProps) {
               {/* Gradient definition */}
               <defs>
                 <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#ef4444" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>

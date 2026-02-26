@@ -40,8 +40,8 @@ export function DataFlowAnimation({ variant }: DataFlowAnimationProps) {
         <div className="grid grid-cols-2 gap-4 mb-6">
           {/* Manual Process */}
           <div className="bg-slate-800/50 rounded-lg p-4">
-            <div className="text-xs text-red-400 font-semibold mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+            <div className="text-xs text-emerald-400 font-semibold mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
               MANUAL PROCESS
             </div>
             <div className="space-y-2">
@@ -49,7 +49,7 @@ export function DataFlowAnimation({ variant }: DataFlowAnimationProps) {
                 <div
                   key={step}
                   className={`text-xs py-1.5 px-2 rounded transition-all duration-300 ${
-                    activeStep === i % 4 ? 'bg-red-500/20 text-red-300' : 'bg-slate-700/50 text-slate-500'
+                    activeStep === i % 4 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-700/50 text-slate-500'
                   }`}
                 >
                   {step}
@@ -57,7 +57,7 @@ export function DataFlowAnimation({ variant }: DataFlowAnimationProps) {
               ))}
             </div>
             <div className="mt-3 pt-3 border-t border-slate-700">
-              <div className="text-xs text-slate-500">Time: <span className="text-red-400 font-mono">4+ hours</span></div>
+              <div className="text-xs text-slate-500">Time: <span className="text-emerald-400 font-mono">4+ hours</span></div>
             </div>
           </div>
 
@@ -120,8 +120,8 @@ export function DataFlowAnimation({ variant }: DataFlowAnimationProps) {
       {/* System nodes */}
       <div className="relative h-64">
         {/* Central hub */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-red-500/20 border-2 border-red-500 rounded-xl flex items-center justify-center z-10">
-          <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-emerald-500/20 border-2 border-emerald-500 rounded-xl flex items-center justify-center z-10">
+          <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
           </svg>
         </div>

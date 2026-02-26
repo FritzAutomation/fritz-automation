@@ -81,12 +81,12 @@ export function AdminTicketMessages({ ticketId, initialMessages, adminId }: Admi
                   message.is_internal
                     ? 'bg-yellow-500/10 border border-yellow-500/30'
                     : isAdmin
-                    ? 'bg-red-500/10 border border-red-500/30'
+                    ? 'bg-emerald-500/10 border border-emerald-500/30'
                     : 'bg-slate-700'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <span className={`text-sm font-medium ${message.is_internal ? 'text-yellow-400' : isAdmin ? 'text-red-400' : 'text-slate-300'}`}>
+                  <span className={`text-sm font-medium ${message.is_internal ? 'text-yellow-400' : isAdmin ? 'text-emerald-400' : 'text-slate-300'}`}>
                     {senderName}
                   </span>
                   {message.is_internal && (
@@ -95,7 +95,7 @@ export function AdminTicketMessages({ ticketId, initialMessages, adminId }: Admi
                     </span>
                   )}
                   {isAdmin && !message.is_internal && (
-                    <span className="text-xs bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded">
+                    <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded">
                       Staff
                     </span>
                   )}
@@ -137,7 +137,7 @@ export function AdminTicketMessages({ ticketId, initialMessages, adminId }: Admi
               type="submit"
               isLoading={isLoading}
               disabled={!newMessage.trim()}
-              className={isInternal ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-red-500 hover:bg-red-600'}
+              className={isInternal ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-emerald-500 hover:bg-emerald-600'}
             >
               {isInternal ? 'Add Note' : 'Send Reply'}
             </Button>

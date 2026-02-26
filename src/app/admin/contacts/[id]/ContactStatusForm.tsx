@@ -58,7 +58,7 @@ export function ContactStatusForm({ contactId, currentStatus, currentNotes }: Co
             id="status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
           >
             <option value="new">New</option>
             <option value="read">Read</option>
@@ -84,7 +84,7 @@ export function ContactStatusForm({ contactId, currentStatus, currentNotes }: Co
         <Button
           onClick={handleUpdate}
           isLoading={isLoading}
-          className="w-full bg-red-500 hover:bg-red-600"
+          className="w-full bg-emerald-500 hover:bg-emerald-600"
         >
           Update Contact
         </Button>

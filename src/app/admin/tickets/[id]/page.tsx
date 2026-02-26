@@ -124,7 +124,7 @@ export default async function AdminTicketDetailPage({
                 </div>
                 <div>
                   <p className="text-sm text-slate-400">Email</p>
-                  <a href={`mailto:${ticket.client.email}`} className="text-red-400 hover:text-red-300">
+                  <a href={`mailto:${ticket.client.email}`} className="text-emerald-400 hover:text-emerald-300">
                     {ticket.client.email}
                   </a>
                 </div>
@@ -137,7 +137,7 @@ export default async function AdminTicketDetailPage({
                 {ticket.client.phone && (
                   <div>
                     <p className="text-sm text-slate-400">Phone</p>
-                    <a href={`tel:${ticket.client.phone}`} className="text-red-400 hover:text-red-300">
+                    <a href={`tel:${ticket.client.phone}`} className="text-emerald-400 hover:text-emerald-300">
                       {ticket.client.phone}
                     </a>
                   </div>

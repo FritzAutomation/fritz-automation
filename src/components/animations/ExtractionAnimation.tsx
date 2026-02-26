@@ -52,7 +52,7 @@ export function ExtractionAnimation({ variant }: ExtractionAnimationProps) {
             {/* Browser chrome */}
             <div className="bg-slate-100 px-2 py-1.5 flex items-center gap-1.5 border-b border-slate-200">
               <div className="flex gap-1">
-                <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
                 <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                 <div className="w-2 h-2 rounded-full bg-green-400"></div>
               </div>
@@ -161,7 +161,7 @@ export function ExtractionAnimation({ variant }: ExtractionAnimationProps) {
           <div className="text-[10px] text-slate-500 mb-2">Template</div>
           <div className="bg-white rounded-lg p-3 border border-slate-300 shadow-lg">
             <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-200">
-              <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center">
+              <div className="w-8 h-8 bg-emerald-500 rounded flex items-center justify-center">
                 <span className="text-white text-xs font-bold">F</span>
               </div>
               <div>
@@ -215,8 +215,8 @@ export function ExtractionAnimation({ variant }: ExtractionAnimationProps) {
                 }}
               >
                 <div className="flex items-center gap-1 mb-1">
-                  <div className="w-4 h-4 bg-red-500/20 rounded flex items-center justify-center">
-                    <span className="text-red-500 text-[8px] font-bold">F</span>
+                  <div className="w-4 h-4 bg-emerald-500/20 rounded flex items-center justify-center">
+                    <span className="text-emerald-500 text-[8px] font-bold">F</span>
                   </div>
                   <span className="text-[8px] font-medium text-slate-700">Invoice #{2847 - i}</span>
                 </div>

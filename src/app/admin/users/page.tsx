@@ -155,7 +155,7 @@ export default async function AdminUsersPage({ searchParams }: PageProps) {
                     <td className="px-6 py-4">
                       <Link
                         href={`/admin/users/${user.id}`}
-                        className="text-red-400 hover:text-red-300 text-sm font-medium"
+                        className="text-emerald-400 hover:text-emerald-300 text-sm font-medium"
                       >
                         View
                       </Link>

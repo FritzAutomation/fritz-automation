@@ -60,7 +60,7 @@ export function SortableHeader({
             className={cn(
               'w-3 h-3 -mb-1',
               isActive && currentOrder === 'asc'
-                ? isDark ? 'text-red-400' : 'text-primary'
+                ? isDark ? 'text-emerald-400' : 'text-primary'
                 : ''
             )}
             fill="currentColor"
@@ -72,7 +72,7 @@ export function SortableHeader({
             className={cn(
               'w-3 h-3 -mt-1',
               isActive && currentOrder === 'desc'
-                ? isDark ? 'text-red-400' : 'text-primary'
+                ? isDark ? 'text-emerald-400' : 'text-primary'
                 : ''
             )}
             fill="currentColor"

@@ -126,7 +126,7 @@ export default async function AdminContactsPage({ searchParams }: PageProps) {
                     <td className="px-6 py-4">
                       <Link href={`/admin/contacts/${contact.id}`}>
                         <div>
-                          <p className="text-white font-medium hover:text-red-400">{contact.name}</p>
+                          <p className="text-white font-medium hover:text-emerald-400">{contact.name}</p>
                           <p className="text-sm text-slate-400">{contact.email}</p>
                         </div>
                       </Link>

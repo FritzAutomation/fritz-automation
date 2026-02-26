@@ -75,18 +75,18 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500/10 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm font-semibold">
+            <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-semibold">
               About Us
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
               <span className="block">Manufacturing Experience,</span>
-              <span className="text-red-400">Automation Expertise</span>
+              <span className="text-emerald-400">Automation Expertise</span>
             </h1>
             <p className="text-xl text-slate-300">
               Founded by {businessInfo.founder} in {businessInfo.location.city}, {businessInfo.location.state},
@@ -103,7 +103,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-4xl font-bold text-red-500 mb-1">{stat.value}</div>
+                <div className="text-4xl font-bold text-emerald-500 mb-1">{stat.value}</div>
                 <div className="text-sm text-slate-600">{stat.label}</div>
               </div>
             ))}
@@ -116,7 +116,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 rounded-full text-red-500 text-sm font-semibold">
+              <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 rounded-full text-emerald-500 text-sm font-semibold">
                 Our Story
               </div>
               <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 {milestones.map((milestone, index) => (
                   <div key={milestone.year} className="flex gap-4">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-8 bg-red-500 text-white text-xs font-bold rounded flex items-center justify-center">
+                      <div className="w-16 h-8 bg-emerald-500 text-white text-xs font-bold rounded flex items-center justify-center">
                         {milestone.year}
                       </div>
                       {index < milestones.length - 1 && (
@@ -172,7 +172,7 @@ export default function AboutPage() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 rounded-full text-red-500 text-sm font-semibold">
+            <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 rounded-full text-emerald-500 text-sm font-semibold">
               What We Stand For
             </div>
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Our Values</h2>
@@ -184,8 +184,8 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {values.map((value) => (
               <div key={value.title} className="bg-white rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-shadow">
-                <div className="w-14 h-14 bg-red-500/10 rounded-xl flex items-center justify-center mb-6">
-                  <svg className="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={value.icon} />
                   </svg>
                 </div>
@@ -246,12 +246,12 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-red-500 to-red-600">
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Let&apos;s Talk About Your Challenges
           </h2>
-          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Schedule a free consultation to discuss how automation can transform your operations.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

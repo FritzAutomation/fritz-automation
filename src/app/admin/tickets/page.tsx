@@ -147,7 +147,7 @@ export default async function AdminTicketsPage({ searchParams }: PageProps) {
                 {tickets.map((ticket) => (
                   <tr key={ticket.id} className="hover:bg-slate-700/50 transition-colors">
                     <td className="px-6 py-4">
-                      <Link href={`/admin/tickets/${ticket.id}`} className="text-red-400 font-medium hover:text-red-300">
+                      <Link href={`/admin/tickets/${ticket.id}`} className="text-emerald-400 font-medium hover:text-emerald-300">
                         {ticket.ticket_number}
                       </Link>
                     </td>

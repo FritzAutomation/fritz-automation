@@ -153,7 +153,7 @@ export function AnimatedCodeHero() {
                 </div>
               ))}
               {isTypingCode && displayedCode && (
-                <span className="inline-block w-2 h-4 bg-red-500 animate-pulse ml-0.5"></span>
+                <span className="inline-block w-2 h-4 bg-emerald-500 animate-pulse ml-0.5"></span>
               )}
             </pre>
           </div>
@@ -190,7 +190,7 @@ export function AnimatedCodeHero() {
             key={index}
             onClick={() => setCurrentSnippet(index)}
             className={`h-2 rounded-full transition-all ${
-              index === currentSnippet ? 'bg-red-500 w-6' : 'bg-slate-600 hover:bg-slate-500 w-2'
+              index === currentSnippet ? 'bg-emerald-500 w-6' : 'bg-slate-600 hover:bg-slate-500 w-2'
             }`}
             aria-label={`Go to snippet ${index + 1}`}
           />

@@ -90,7 +90,7 @@ export function AdminTicketActions({ ticketId, ticketNumber, currentStatus, curr
               id="status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
+              className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
             >
               <option value="open">Open</option>
               <option value="in_progress">In Progress</option>
@@ -108,7 +108,7 @@ export function AdminTicketActions({ ticketId, ticketNumber, currentStatus, curr
               id="priority"
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
+              className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
             >
               <option value="low">Low</option>
               <option value="normal">Normal</option>
@@ -120,7 +120,7 @@ export function AdminTicketActions({ ticketId, ticketNumber, currentStatus, curr
           <Button
             onClick={handleUpdate}
             isLoading={isLoading}
-            className="w-full bg-red-500 hover:bg-red-600"
+            className="w-full bg-emerald-500 hover:bg-emerald-600"
           >
             Update Ticket
           </Button>

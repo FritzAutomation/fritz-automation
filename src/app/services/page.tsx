@@ -165,12 +165,12 @@ export default async function ServicesPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500/10 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm font-semibold">
+          <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-semibold">
             What We Do
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
@@ -203,7 +203,7 @@ export default async function ServicesPage() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 rounded-full text-red-500 text-sm font-semibold">
+            <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 rounded-full text-emerald-500 text-sm font-semibold">
               How We Work
             </div>
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Our Process</h2>
@@ -236,7 +236,7 @@ export default async function ServicesPage() {
               }
             ].map((item) => (
               <div key={item.step} className="relative">
-                <div className="text-6xl font-bold text-red-500/10 mb-4">{item.step}</div>
+                <div className="text-6xl font-bold text-emerald-500/10 mb-4">{item.step}</div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
                 <p className="text-slate-600">{item.description}</p>
               </div>
@@ -246,12 +246,12 @@ export default async function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-red-500 to-red-600">
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Automate Your Business?
           </h2>
-          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Let&apos;s discuss your challenges and explore how automation can save you time and money.
           </p>
           <Link href="/contact">

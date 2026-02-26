@@ -262,7 +262,7 @@ export function WorkflowBuilderDemo() {
                 y1={getNodeCenter(connectingFrom).y}
                 x2={getNodeCenter(connectingFrom).x + 50}
                 y2={getNodeCenter(connectingFrom).y}
-                stroke="#ef4444"
+                stroke="#10b981"
                 strokeWidth={2}
                 strokeDasharray="5,5"
                 className="animate-pulse"
@@ -285,7 +285,7 @@ export function WorkflowBuilderDemo() {
                 } ${
                   isActive ? 'scale-110 shadow-lg shadow-green-500/50 ring-2 ring-green-400' :
                   isSelected ? 'ring-2 ring-white' :
-                  isConnecting ? 'ring-2 ring-red-400' : ''
+                  isConnecting ? 'ring-2 ring-emerald-400' : ''
                 }`}
                 style={{ left: node.x, top: node.y }}
                 onClick={(e) => handleNodeClick(node.id, e)}
@@ -309,7 +309,7 @@ export function WorkflowBuilderDemo() {
                       e.stopPropagation()
                       handleDeleteNode(node.id)
                     }}
-                    className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs hover:bg-red-600 transition-colors"
+                    className="absolute -top-2 -right-2 w-5 h-5 bg-emerald-500 text-white rounded-full text-xs hover:bg-emerald-600 transition-colors"
                   >
                     ×
                   </button>

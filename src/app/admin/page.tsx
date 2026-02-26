@@ -108,7 +108,7 @@ export default async function AdminDashboard() {
         <div className="bg-slate-800 rounded-xl border border-slate-700">
           <div className="p-4 border-b border-slate-700 flex justify-between items-center">
             <h2 className="text-lg font-semibold text-white">Recent Tickets</h2>
-            <Link href="/admin/tickets" className="text-sm text-red-400 hover:text-red-300">
+            <Link href="/admin/tickets" className="text-sm text-emerald-400 hover:text-emerald-300">
               View all &rarr;
             </Link>
           </div>
@@ -147,7 +147,7 @@ export default async function AdminDashboard() {
         <div className="bg-slate-800 rounded-xl border border-slate-700">
           <div className="p-4 border-b border-slate-700 flex justify-between items-center">
             <h2 className="text-lg font-semibold text-white">Recent Contact Submissions</h2>
-            <Link href="/admin/contacts" className="text-sm text-red-400 hover:text-red-300">
+            <Link href="/admin/contacts" className="text-sm text-emerald-400 hover:text-emerald-300">
               View all &rarr;
             </Link>
           </div>

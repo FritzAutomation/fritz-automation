@@ -76,7 +76,7 @@ export function UserRoleForm({ userId, currentRole, userEmail, isSelf }: UserRol
               id="role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
+              className="w-full px-4 py-2.5 rounded-lg border border-slate-600 bg-slate-700 text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
             >
               <option value="client">Client</option>
               <option value="admin">Admin</option>
@@ -91,7 +91,7 @@ export function UserRoleForm({ userId, currentRole, userEmail, isSelf }: UserRol
             onClick={handleUpdate}
             isLoading={isLoading}
             disabled={role === currentRole}
-            className="w-full bg-red-500 hover:bg-red-600"
+            className="w-full bg-emerald-500 hover:bg-emerald-600"
           >
             Update Role
           </Button>

@@ -24,7 +24,7 @@ export function Logo({ variant = 'full', className = '', size = 'md' }: LogoProp
       xmlns="http://www.w3.org/2000/svg"
       className="flex-shrink-0"
     >
-      <rect x="4" y="4" width="56" height="56" rx="12" fill="#ef4444" />
+      <rect x="4" y="4" width="56" height="56" rx="12" fill="#10b981" />
       <path d="M22 24L14 32L22 40" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M42 24L50 32L42 40" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M36 18L28 46" stroke="white" strokeWidth="3" strokeLinecap="round" />
@@ -42,7 +42,7 @@ export function Logo({ variant = 'full', className = '', size = 'md' }: LogoProp
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <LogoIcon />
-      <span className={`${textSize} font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent`}>
+      <span className={`${textSize} font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 bg-clip-text text-transparent`}>
         Fritz Automation
       </span>
     </div>
@@ -60,7 +60,7 @@ export function LogoDark({ className = '', size = 40 }: { className?: string; si
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <rect x="4" y="4" width="56" height="56" rx="12" fill="#ef4444" />
+      <rect x="4" y="4" width="56" height="56" rx="12" fill="#10b981" />
       <path d="M22 24L14 32L22 40" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M42 24L50 32L42 40" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M36 18L28 46" stroke="white" strokeWidth="3" strokeLinecap="round" />

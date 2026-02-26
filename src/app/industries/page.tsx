@@ -259,12 +259,12 @@ export default async function IndustriesPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500/10 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm font-semibold">
+          <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-semibold">
             Who We Serve
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
@@ -285,10 +285,10 @@ export default async function IndustriesPage() {
               <a
                 key={industry.id}
                 href={`#${industry.slug}`}
-                className="group bg-slate-50 hover:bg-red-50 rounded-xl p-4 text-center transition-all hover:shadow-lg border border-transparent hover:border-red-200"
+                className="group bg-slate-50 hover:bg-emerald-50 rounded-xl p-4 text-center transition-all hover:shadow-lg border border-transparent hover:border-emerald-200"
               >
-                <div className="w-12 h-12 bg-white group-hover:bg-red-100 rounded-xl flex items-center justify-center mx-auto mb-3 transition-colors shadow-sm">
-                  <svg className="w-6 h-6 text-slate-600 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-white group-hover:bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-3 transition-colors shadow-sm">
+                  <svg className="w-6 h-6 text-slate-600 group-hover:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={iconMap[industry.icon || 'settings']} />
                   </svg>
                 </div>
@@ -312,8 +312,8 @@ export default async function IndustriesPage() {
                 <div className={`grid md:grid-cols-2 gap-12 items-start ${index % 2 === 1 ? '' : ''}`}>
                   <div className={index % 2 === 1 ? 'md:order-2' : ''}>
                     <div className="sticky top-24">
-                      <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6">
-                        <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg className="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={iconMap[industry.icon || 'settings']} />
                         </svg>
                       </div>
@@ -335,8 +335,8 @@ export default async function IndustriesPage() {
                     {/* Challenges */}
                     <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                          <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                          <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                           </svg>
                         </div>
@@ -345,8 +345,8 @@ export default async function IndustriesPage() {
                       <ul className="space-y-3">
                         {industry.challenges.map((challenge, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <span className="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+                            <span className="w-6 h-6 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <span className="w-2 h-2 bg-emerald-400 rounded-full"></span>
                             </span>
                             <span className="text-slate-600">{challenge}</span>
                           </li>
@@ -384,12 +384,12 @@ export default async function IndustriesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-red-500 to-red-600">
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Don&apos;t See Your Industry?
           </h2>
-          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Our automation principles apply across industries. If you have manual processes
             that need streamlining, we can help.
           </p>

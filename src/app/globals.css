@@ -144,7 +144,7 @@ html {
 
 /* Improved focus visible styles */
 :focus-visible {
-  outline: 2px solid #dc2626;
+  outline: 2px solid #00d97e;
   outline-offset: 2px;
 }
 
