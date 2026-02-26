@@ -387,6 +387,22 @@ html {
   animation: boot-exit 0.4s ease-in forwards;
 }
 
+/* Dropdown enter animation */
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-enter {
+  animation: dropdown-enter 0.15s ease-out;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -453,6 +469,10 @@ html {
   }
 
   .boot-exit {
+    animation: none;
+  }
+
+  .dropdown-enter {
     animation: none;
   }
 }

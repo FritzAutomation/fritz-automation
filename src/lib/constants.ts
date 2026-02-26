@@ -62,15 +62,39 @@ export const siteConfig = {
   description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
 }
 
-// Navigation links
-export const navLinks = [
-  { href: '/services', label: 'Services' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/industries', label: 'Industries' },
+// Navigation types
+export type NavLink = { href: string; label: string }
+export type NavGroup = { label: string; children: NavLink[] }
+export type NavItem = NavLink | NavGroup
+
+export function isNavGroup(item: NavItem): item is NavGroup {
+  return 'children' in item
+}
+
+// Navigation links (grouped for dropdown menus)
+export const navLinks: NavItem[] = [
+  {
+    label: 'Solutions',
+    children: [
+      { href: '/services', label: 'Services' },
+      { href: '/industries', label: 'Industries' },
+    ],
+  },
+  {
+    label: 'Our Work',
+    children: [
+      { href: '/case-studies', label: 'Case Studies' },
+      { href: '/portfolio', label: 'Portfolio' },
+    ],
+  },
+  {
+    label: 'Resources',
+    children: [
+      { href: '/demos', label: 'Live Demos' },
+      { href: '/roi-calculator', label: 'ROI Calculator' },
+    ],
+  },
   { href: '/about', label: 'About' },
-  { href: '/demos', label: 'Live Demos' },
-  { href: '/roi-calculator', label: 'ROI Calculator' },
   { href: '/portal', label: 'Client Portal' },
 ]
 

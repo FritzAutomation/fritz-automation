@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { FritzLogo } from '@/components/FritzLogo'
-import { navLinks } from '@/lib/constants'
+import { navLinks, isNavGroup } from '@/lib/constants'
+import type { NavGroup, NavLink as NavLinkType } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
 // Text morph component - letters animate on hover with staggered wave effect
@@ -41,15 +42,152 @@ function MorphText({ text, isActive }: { text: string; isActive: boolean }) {
   )
 }
 
+// Chevron icon for dropdowns
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg
+      className={cn('w-4 h-4 transition-transform duration-200', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  )
+}
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set())
   const pathname = usePathname()
+  const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const navRef = useRef<HTMLUListElement>(null)
 
   // Trigger staggered animation on mount
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setOpenDropdown(null)
+    setMobileMenuOpen(false)
+  }, [pathname])
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  // Cleanup timeouts
+  useEffect(() => {
+    return () => {
+      if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current)
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    }
+  }, [])
+
+  const handleMouseEnter = useCallback((label: string) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current)
+      closeTimeoutRef.current = null
+    }
+    openTimeoutRef.current = setTimeout(() => {
+      setOpenDropdown(label)
+    }, 75)
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current)
+      openTimeoutRef.current = null
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 150)
+  }, [])
+
+  // Keyboard navigation for dropdowns
+  const handleDropdownKeyDown = useCallback((e: React.KeyboardEvent, group: NavGroup) => {
+    switch (e.key) {
+      case 'Enter':
+      case ' ':
+        e.preventDefault()
+        setOpenDropdown(prev => prev === group.label ? null : group.label)
+        break
+      case 'Escape':
+        e.preventDefault()
+        setOpenDropdown(null)
+        // Return focus to the trigger button
+        ;(e.currentTarget as HTMLElement).focus()
+        break
+      case 'ArrowDown':
+        e.preventDefault()
+        if (openDropdown !== group.label) {
+          setOpenDropdown(group.label)
+        }
+        // Focus the first menu item
+        requestAnimationFrame(() => {
+          const panel = (e.currentTarget as HTMLElement).closest('li')?.querySelector('[role="menu"]')
+          const firstItem = panel?.querySelector('a') as HTMLElement | null
+          firstItem?.focus()
+        })
+        break
+    }
+  }, [openDropdown])
+
+  const handleMenuItemKeyDown = useCallback((e: React.KeyboardEvent) => {
+    const menuItems = Array.from(
+      (e.currentTarget as HTMLElement).closest('[role="menu"]')?.querySelectorAll('a') || []
+    ) as HTMLElement[]
+    const currentIndex = menuItems.indexOf(e.currentTarget as HTMLElement)
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault()
+        menuItems[(currentIndex + 1) % menuItems.length]?.focus()
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        menuItems[(currentIndex - 1 + menuItems.length) % menuItems.length]?.focus()
+        break
+      case 'Escape':
+        e.preventDefault()
+        setOpenDropdown(null)
+        // Return focus to the parent trigger button
+        ;(e.currentTarget as HTMLElement).closest('li')?.querySelector('button')?.focus()
+        break
+    }
+  }, [])
+
+  // Check if any child of a group is the active page
+  function isGroupActive(group: NavGroup): boolean {
+    return group.children.some(
+      child => pathname === child.href || pathname.startsWith(child.href + '/')
+    )
+  }
+
+  // Toggle mobile accordion group
+  function toggleMobileGroup(label: string) {
+    setExpandedGroups(prev => {
+      const next = new Set(prev)
+      if (next.has(label)) {
+        next.delete(label)
+      } else {
+        next.add(label)
+      }
+      return next
+    })
+  }
 
   return (
     <>
@@ -62,12 +200,85 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <ul className="hidden md:flex items-center gap-1">
-              {navLinks.map((link, index) => {
-                const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+            <ul ref={navRef} className="hidden md:flex items-center gap-1">
+              {navLinks.map((item, index) => {
+                if (isNavGroup(item)) {
+                  const groupActive = isGroupActive(item)
+                  return (
+                    <li
+                      key={item.label}
+                      className={cn(
+                        'relative transform transition-all duration-500 ease-out',
+                        mounted
+                          ? 'opacity-100 translate-y-0'
+                          : 'opacity-0 -translate-y-4'
+                      )}
+                      style={{
+                        transitionDelay: mounted ? `${index * 75}ms` : '0ms'
+                      }}
+                      onMouseEnter={() => handleMouseEnter(item.label)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <button
+                        className={cn(
+                          'flex items-center gap-1 px-4 py-2 rounded-lg transition-colors font-medium',
+                          groupActive
+                            ? 'bg-primary/10 text-primary'
+                            : openDropdown === item.label
+                              ? 'bg-primary/5 text-primary'
+                              : 'text-slate-700 hover:bg-primary/5 hover:text-primary'
+                        )}
+                        onClick={() => setOpenDropdown(prev => prev === item.label ? null : item.label)}
+                        onKeyDown={(e) => handleDropdownKeyDown(e, item)}
+                        aria-expanded={openDropdown === item.label}
+                        aria-haspopup="true"
+                      >
+                        {item.label}
+                        <ChevronDown
+                          className={cn(
+                            openDropdown === item.label && 'rotate-180'
+                          )}
+                        />
+                      </button>
+
+                      {/* Dropdown panel */}
+                      {openDropdown === item.label && (
+                        <div
+                          role="menu"
+                          className="absolute top-full left-0 mt-1 min-w-[180px] bg-white rounded-xl shadow-lg border border-slate-200/50 py-2 dropdown-enter"
+                        >
+                          {item.children.map((child) => {
+                            const childActive = pathname === child.href || pathname.startsWith(child.href + '/')
+                            return (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                role="menuitem"
+                                tabIndex={0}
+                                onKeyDown={handleMenuItemKeyDown}
+                                className={cn(
+                                  'block px-4 py-2.5 text-sm font-medium transition-colors',
+                                  childActive
+                                    ? 'text-primary bg-primary/10'
+                                    : 'text-slate-700 hover:bg-primary/5 hover:text-primary'
+                                )}
+                                aria-current={childActive ? 'page' : undefined}
+                              >
+                                {child.label}
+                              </Link>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </li>
+                  )
+                }
+
+                // Standalone link
+                const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
                 return (
                   <li
-                    key={link.href}
+                    key={item.href}
                     className={cn(
                       'transform transition-all duration-500 ease-out',
                       mounted
@@ -79,7 +290,7 @@ export function Header() {
                     }}
                   >
                     <Link
-                      href={link.href}
+                      href={item.href}
                       className={cn(
                         'px-4 py-2 rounded-lg transition-colors font-medium block',
                         isActive
@@ -88,7 +299,7 @@ export function Header() {
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >
-                      <MorphText text={link.label} isActive={isActive} />
+                      <MorphText text={item.label} isActive={isActive} />
                     </Link>
                   </li>
                 )
@@ -169,12 +380,64 @@ export function Header() {
 
             <div className="mt-16">
               <ul className="space-y-2">
-                {navLinks.map((link) => {
-                  const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+                {navLinks.map((item) => {
+                  if (isNavGroup(item)) {
+                    const groupActive = isGroupActive(item)
+                    const isExpanded = expandedGroups.has(item.label)
+                    return (
+                      <li key={item.label}>
+                        <button
+                          onClick={() => toggleMobileGroup(item.label)}
+                          className={cn(
+                            'flex items-center justify-between w-full px-4 py-3 rounded-xl transition-colors font-medium',
+                            groupActive
+                              ? 'text-primary bg-white/20'
+                              : 'text-white hover:bg-white/10'
+                          )}
+                          aria-expanded={isExpanded}
+                        >
+                          {item.label}
+                          <ChevronDown
+                            className={cn(
+                              'text-white/60',
+                              isExpanded && 'rotate-180'
+                            )}
+                          />
+                        </button>
+                        {isExpanded && (
+                          <ul className="ml-4 mt-1 space-y-1">
+                            {item.children.map((child) => {
+                              const childActive = pathname === child.href || pathname.startsWith(child.href + '/')
+                              return (
+                                <li key={child.href}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className={cn(
+                                      'block px-4 py-2.5 rounded-xl transition-colors font-medium text-sm',
+                                      childActive
+                                        ? 'text-primary bg-white/20'
+                                        : 'text-white/80 hover:bg-white/10'
+                                    )}
+                                    aria-current={childActive ? 'page' : undefined}
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        )}
+                      </li>
+                    )
+                  }
+
+                  // Standalone mobile link
+                  const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
                   return (
-                    <li key={link.href}>
+                    <li key={item.href}>
                       <Link
-                        href={link.href}
+                        href={item.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className={cn(
                           'block px-4 py-3 rounded-xl transition-colors font-medium',
@@ -184,7 +447,7 @@ export function Header() {
                         )}
                         aria-current={isActive ? 'page' : undefined}
                       >
-                        {link.label}
+                        {item.label}
                       </Link>
                     </li>
                   )
