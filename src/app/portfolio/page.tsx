@@ -11,23 +11,6 @@ export const metadata = {
 
 const projects = [
   {
-    id: 'fritz-automation',
-    title: 'Fritz Automation',
-    category: 'Business Website',
-    description: 'Our own marketing site and client portal — built to showcase what we deliver. Server-rendered, animated, and scoring 95+ on Lighthouse across all categories.',
-    url: 'https://fritzautomation.dev',
-    image: '/portfolio/fritz-automation.png',
-    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
-    highlights: [
-      '95+ Lighthouse score',
-      'Server-side rendering',
-      'Animated service demos',
-      'Client portal with auth',
-      'ROI calculator tool',
-      'SEO-optimized',
-    ],
-  },
-  {
     id: 'iowan-foodie',
     title: 'Iowan Foodie',
     category: 'Content Creator',
