@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata = {
@@ -15,6 +16,7 @@ const projects = [
     category: 'Business Website',
     description: 'Our own marketing site and client portal — built to showcase what we deliver. Server-rendered, animated, and scoring 95+ on Lighthouse across all categories.',
     url: 'https://fritzautomation.dev',
+    image: '/portfolio/fritz-automation.png',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
     highlights: [
       '95+ Lighthouse score',
@@ -31,6 +33,7 @@ const projects = [
     category: 'Content Creator',
     description: 'A food content creator portfolio and blog showcasing Iowa\'s culinary scene. Clean, image-forward design built for engagement and discoverability.',
     url: 'https://www.iowanfoodie.com',
+    image: '/portfolio/iowan-foodie.png',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     highlights: [
       'Image-forward layout',
@@ -47,6 +50,7 @@ const projects = [
     category: 'E-Commerce',
     description: 'An online store for handcrafted 3D-printed home decor and office products. Full shopping experience with cart, wishlist, and product filtering.',
     url: 'https://www.twomakers.co',
+    image: '/portfolio/two-makers-co.png',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
     highlights: [
       'Full e-commerce checkout',
@@ -63,6 +67,7 @@ const projects = [
     category: 'B2B / Manufacturing',
     description: 'Corporate site for a manufacturing technology provider established in 1996. Showcases their MES platform, machine monitoring tools, and 29+ years of industry expertise.',
     url: 'https://aquila-homepage.vercel.app',
+    image: '/portfolio/aquila-group.png',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     highlights: [
       'Structured data for SEO',
@@ -104,26 +109,33 @@ export default function PortfolioPage() {
       {/* Projects Grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project) => (
               <div
                 key={project.id}
                 className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col"
               >
-                {/* Card header */}
-                <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6">
-                  <span className="inline-block mb-3 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-semibold">
+                {/* Screenshot preview */}
+                <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden border-b border-slate-200">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} website screenshot`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <span className="absolute top-3 left-3 px-3 py-1 bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-full text-emerald-400 text-xs font-semibold">
                     {project.category}
                   </span>
-                  <h2 className="text-xl font-bold text-white mb-2">{project.title}</h2>
-                  <p className="text-sm text-slate-400">{project.description}</p>
                 </div>
 
                 {/* Card body */}
                 <div className="p-6 flex-1 flex flex-col">
+                  <h2 className="text-xl font-bold text-slate-900 mb-2">{project.title}</h2>
+                  <p className="text-sm text-slate-600 mb-5">{project.description}</p>
+
                   {/* Tech stack */}
                   <div className="mb-5">
-                    <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2">Tech Stack</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
@@ -138,8 +150,7 @@ export default function PortfolioPage() {
 
                   {/* Highlights */}
                   <div className="mb-6 flex-1">
-                    <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2">Highlights</h3>
-                    <ul className="grid grid-cols-1 gap-1.5">
+                    <ul className="grid grid-cols-2 gap-1.5">
                       {project.highlights.map((highlight) => (
                         <li key={highlight} className="flex items-center gap-2 text-sm text-slate-600">
                           <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
