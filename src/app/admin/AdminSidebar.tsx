@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { FritzLogo } from '@/components/FritzLogo'
 import { cn } from '@/lib/utils'
 import type { User } from '@supabase/supabase-js'
 import { useState, useEffect } from 'react'
@@ -85,14 +86,8 @@ export function AdminSidebar({ user, profile }: AdminSidebarProps) {
     <>
       {/* Logo */}
       <div className="p-6 border-b border-slate-700">
-        <Link href="/admin" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center text-white font-bold">
-            FA
-          </div>
-          <div>
-            <span className="text-lg font-bold text-white">Fritz Admin</span>
-            <span className="block text-xs text-slate-400">Management Portal</span>
-          </div>
+        <Link href="/admin">
+          <FritzLogo width={160} variant="dark" />
         </Link>
       </div>
 

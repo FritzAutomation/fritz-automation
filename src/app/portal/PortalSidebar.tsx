@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { FritzLogo } from '@/components/FritzLogo'
 import { cn } from '@/lib/utils'
 import type { User } from '@supabase/supabase-js'
 import { useState, useEffect } from 'react'
@@ -91,11 +92,8 @@ export function PortalSidebar({ user, profile }: PortalSidebarProps) {
     <>
       {/* Logo */}
       <div className="p-6 border-b border-slate-200">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white font-bold">
-            FA
-          </div>
-          <span className="text-lg font-bold gradient-text">Fritz Automation</span>
+        <Link href="/">
+          <FritzLogo width={160} variant="light" />
         </Link>
       </div>
 

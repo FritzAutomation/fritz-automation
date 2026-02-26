@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { ForgotPasswordForm } from './ForgotPasswordForm'
-import { Logo } from '@/components/ui/Logo'
+import { FritzLogo } from '@/components/FritzLogo'
 
 export const metadata: Metadata = {
   title: 'Forgot Password',
@@ -15,8 +15,8 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2" aria-label="Fritz Automation home">
-            <Logo size="lg" />
+          <Link href="/" aria-label="Fritz Automation home">
+            <FritzLogo width={220} variant="light" />
           </Link>
         </div>
 
