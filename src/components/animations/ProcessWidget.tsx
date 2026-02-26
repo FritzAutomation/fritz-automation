@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { DataStream } from '@/components/animations/DataStream'
 
 type Phase = 'idle' | 'input' | 'processing' | 'output' | 'complete'
 
@@ -119,8 +120,9 @@ export function ProcessWidget() {
   }
 
   return (
-    <section className="py-20 md:py-32 bg-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden py-20 md:py-32 bg-slate-900">
+      <DataStream />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-semibold">
             See It in Action

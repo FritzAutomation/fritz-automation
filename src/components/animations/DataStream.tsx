@@ -3,8 +3,8 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
-const COLUMN_COUNT = 12
-const CHARS_PER_COLUMN = 20
+const COLUMN_COUNT = 20
+const CHARS_PER_COLUMN = 35
 
 function generateChars(count: number): string[] {
   const charset = '0123456789ABCDEF>|{}[];:./\\+=*&^%$#@!'

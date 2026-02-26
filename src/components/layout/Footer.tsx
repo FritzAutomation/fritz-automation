@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { FritzLogo } from '@/components/FritzLogo'
 import { contactInfo, siteConfig, businessInfo } from '@/lib/constants'
+import { DataStream } from '@/components/animations/DataStream'
 
 const currentYear = new Date().getFullYear()
 
@@ -22,8 +23,9 @@ const resourceLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 text-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative overflow-hidden bg-slate-900 text-white py-16">
+      <DataStream />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {/* Brand */}
           <div>

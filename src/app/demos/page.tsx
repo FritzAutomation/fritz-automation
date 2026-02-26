@@ -8,6 +8,7 @@ import { DemoTabs } from '@/components/demos/DemoTabs'
 import { BeforeAfterDemo } from '@/components/demos/BeforeAfterDemo'
 import { DataPipelineDemo } from '@/components/demos/DataPipelineDemo'
 import { ErrorDetectionDemo } from '@/components/demos/ErrorDetectionDemo'
+import { DataStream } from '@/components/animations/DataStream'
 import { ReportGeneratorDemo } from '@/components/demos/ReportGeneratorDemo'
 import { WorkflowBuilderDemo } from '@/components/demos/WorkflowBuilderDemo'
 import { DashboardBuilderDemo } from '@/components/demos/DashboardBuilderDemo'
@@ -78,6 +79,7 @@ export default function DemosPage() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
+          <DataStream />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
