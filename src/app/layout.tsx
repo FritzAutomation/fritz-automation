@@ -17,25 +17,23 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Fritz Automation | Enterprise Automation Solutions',
+    default: 'Fritz Automation — Custom software for small businesses',
     template: '%s | Fritz Automation',
   },
-  description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience. We help businesses eliminate manual processes and scale efficiently.',
-  keywords: ['automation consulting', 'software development', 'manufacturing systems integration', 'IT consulting', 'process automation', 'custom software', 'enterprise solutions', 'business automation', 'workflow automation', 'data integration'],
-  authors: [{ name: 'Fritz Automation' }],
-  creator: 'Fritz Automation',
-  publisher: 'Fritz Automation',
+  description: 'A small software studio by Joshua Fritzjunker in Burlington, Iowa. I build websites and custom web tools for small businesses.',
+  keywords: ['small business software', 'custom web development', 'web apps', 'internal tools', 'automation', 'Iowa web developer', 'Next.js developer'],
+  authors: [{ name: 'Joshua Fritzjunker' }],
+  creator: 'Joshua Fritzjunker',
+  publisher: 'Fritz Automation LLC',
   icons: {
     icon: '/icon.svg',
     apple: '/icon.svg',
   },
   metadataBase: new URL('https://fritzautomation.dev'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'Fritz Automation | Enterprise Automation Solutions',
-    description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
+    title: 'Fritz Automation — Custom software for small businesses',
+    description: 'A small software studio by Joshua Fritzjunker. I build websites and custom web tools for small businesses.',
     url: 'https://fritzautomation.dev',
     siteName: 'Fritz Automation',
     locale: 'en_US',
@@ -43,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fritz Automation | Enterprise Automation Solutions',
-    description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
+    title: 'Fritz Automation — Custom software for small businesses',
+    description: 'A small software studio by Joshua Fritzjunker.',
   },
   robots: {
     index: true,
