@@ -1,292 +1,184 @@
-import { createClient } from '@/lib/supabase/server'
+'use client'
+
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { Button } from '@/components/ui/Button'
-import { ServiceCard } from '@/components/services/ServiceCard'
-import { iconPaths } from '@/lib/constants'
-import { DataStream } from '@/components/animations/DataStream'
+import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { MouseGrid } from '@/components/animations/MouseGrid'
+import { DataStream } from '@/components/animations/DataStream'
+import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-interface Service {
-  id: string
-  title: string
-  slug: string
-  description: string | null
-  icon: string | null
-  features: string[]
-  technologies: string[]
-  display_order: number
-  is_active: boolean
-}
+const tabs = [
+  { id: 'websites', file: 'websites.tsx', label: 'Websites & online stores' },
+  { id: 'automation', file: 'automation.py', label: 'Internal tools & automation' },
+] as const
 
-export const metadata = {
-  title: 'Services',
-  description: 'Custom automation solutions including process automation, system integration, custom software development, data analytics, and website development.',
-}
+type TabId = typeof tabs[number]['id']
 
-export default async function ServicesPage() {
-  const supabase = await createClient()
+export default function ServicesPage() {
+  const [tab, setTab] = useState<TabId>('websites')
 
-  let services: Service[] = []
-
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data } = await (supabase as any)
-      .from('services')
-      .select('*')
-      .eq('is_active', true)
-      .order('display_order')
-
-    services = data || []
-  } catch {
-    // Database might not exist yet
-  }
-
-  // Fallback services if database is empty
-  const defaultServices: Service[] = [
-    {
-      id: '1',
-      title: 'Process Automation',
-      slug: 'process-automation',
-      description: 'Eliminate repetitive manual tasks with intelligent automation. We build custom scripts and workflows that handle data entry, file processing, report generation, and more.',
-      icon: 'cog',
-      features: [
-        'Excel & spreadsheet automation',
-        'Data entry and validation',
-        'Automated report generation',
-        'File processing and organization',
-        'Scheduled task execution',
-        'Error handling and logging'
-      ],
-      technologies: ['Python', 'VBA', 'Power Automate', 'Selenium'],
-      display_order: 1,
-      is_active: true
-    },
-    {
-      id: '2',
-      title: 'System Integration',
-      slug: 'system-integration',
-      description: 'Connect your disparate systems and eliminate data silos. We build bridges between your ERP, CRM, accounting software, and custom applications.',
-      icon: 'link',
-      features: [
-        'API development and integration',
-        'Database synchronization',
-        'Real-time data pipelines',
-        'Legacy system modernization',
-        'Cloud service integration',
-        'Webhook and event handling'
-      ],
-      technologies: ['REST APIs', 'GraphQL', 'SQL', 'AWS', 'Azure'],
-      display_order: 2,
-      is_active: true
-    },
-    {
-      id: '3',
-      title: 'Custom Software Development',
-      slug: 'custom-software',
-      description: 'When off-the-shelf solutions fall short, we build custom applications tailored to your exact business requirements and workflows.',
-      icon: 'code',
-      features: [
-        'Web application development',
-        'Internal business tools',
-        'Customer portals',
-        'Inventory management systems',
-        'Workflow management apps',
-        'Mobile-responsive design'
-      ],
-      technologies: ['React', 'Next.js', 'Python', 'Node.js', 'PostgreSQL'],
-      display_order: 3,
-      is_active: true
-    },
-    {
-      id: '4',
-      title: 'Data Analytics & Reporting',
-      slug: 'data-analytics',
-      description: 'Transform raw data into actionable insights. We build dashboards, automated reports, and analytics pipelines that help you make better decisions.',
-      icon: 'chart',
-      features: [
-        'Custom dashboard development',
-        'Automated reporting systems',
-        'Data visualization',
-        'KPI tracking and alerts',
-        'Historical trend analysis',
-        'Predictive analytics'
-      ],
-      technologies: ['Python', 'SQL', 'Power BI', 'Tableau', 'Pandas'],
-      display_order: 4,
-      is_active: true
-    },
-    {
-      id: '5',
-      title: 'Web Scraping & Data Collection',
-      slug: 'web-scraping',
-      description: 'Automatically gather data from websites, competitors, and online sources. We build reliable scrapers that handle pagination, authentication, and rate limiting.',
-      icon: 'globe',
-      features: [
-        'Competitor price monitoring',
-        'Market research automation',
-        'Lead generation',
-        'Content aggregation',
-        'Inventory tracking',
-        'News and social monitoring'
-      ],
-      technologies: ['Python', 'BeautifulSoup', 'Scrapy', 'Puppeteer'],
-      display_order: 5,
-      is_active: true
-    },
-    {
-      id: '6',
-      title: 'Email & Document Automation',
-      slug: 'email-document-automation',
-      description: 'Automate your communication workflows. From bulk email campaigns to document generation and PDF processing, we handle it all.',
-      icon: 'mail',
-      features: [
-        'Automated email campaigns',
-        'Document generation (PDF, Word, Excel)',
-        'Invoice and quote automation',
-        'Email parsing and routing',
-        'Template-based document creation',
-        'Digital signature integration'
-      ],
-      technologies: ['Python', 'SMTP', 'PDF libraries', 'DocuSign API'],
-      display_order: 6,
-      is_active: true
-    },
-    {
-      id: '7',
-      title: 'Website Development',
-      slug: 'website-development',
-      description: 'Professional websites that load fast, rank well, and convert visitors into customers. From marketing sites to full-stack web applications, we build it all.',
-      icon: 'layout',
-      features: [
-        'Custom design & development',
-        'Mobile-responsive layouts',
-        'SEO & performance optimization',
-        'CMS integration',
-        'E-commerce solutions',
-        'Hosting & domain setup'
-      ],
-      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
-      display_order: 7,
-      is_active: true
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '')
+    if (hash === 'websites' || hash === 'automation') {
+      setTab(hash)
     }
-  ]
+  }, [])
 
-  const displayServices = services.length > 0 ? services : defaultServices
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash === 'websites' || hash === 'automation') {
+        setTab(hash)
+      }
+    }
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
-  // Use centralized icon paths
-  const iconMap = iconPaths
+  const handleTabClick = (id: TabId) => {
+    setTab(id)
+    if (typeof window !== 'undefined') {
+      history.replaceState(null, '', `#${id}`)
+    }
+  }
 
   return (
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
           <MouseGrid />
           <DataStream />
         </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-semibold">
-            What We Do
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-            Our Services
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Custom automation solutions designed to eliminate manual work, reduce errors,
-            and help your business scale efficiently.
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <PathCrumbs trail={[{ label: 'services' }]} />
+          <h1 className="mt-4 text-4xl md:text-5xl font-bold text-white">Services</h1>
+          <p className="mt-3 text-slate-300 max-w-2xl">
+            Two kinds of projects, same goal: software that gets out of your way so your business runs better.
           </p>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
-            {displayServices.map((service, index) => (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                index={index}
-                iconPath={iconMap[service.icon || 'cog']}
-              />
+      <section className="bg-slate-950 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex border-b border-slate-800 mb-10 overflow-x-auto">
+            {tabs.map(t => (
+              <button
+                key={t.id}
+                onClick={() => handleTabClick(t.id)}
+                className={`px-4 py-2 font-mono text-sm border-b-2 transition-colors whitespace-nowrap ${
+                  tab === t.id
+                    ? 'border-emerald-400 text-emerald-300 bg-slate-900/60'
+                    : 'border-transparent text-slate-500 hover:text-slate-300'
+                }`}
+              >
+                {t.file}
+              </button>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Process Section */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 rounded-full text-emerald-500 text-sm font-semibold">
-              How We Work
-            </div>
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Our Process</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              A straightforward approach to understanding your needs and delivering solutions that work.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                step: '01',
-                title: 'Discovery',
-                description: 'We start by understanding your current processes, pain points, and goals through detailed conversations.'
-              },
-              {
-                step: '02',
-                title: 'Solution Design',
-                description: 'We design a custom solution architecture that addresses your specific needs and integrates with existing systems.'
-              },
-              {
-                step: '03',
-                title: 'Development',
-                description: 'Our team builds your solution with regular check-ins and demos to ensure we\'re on the right track.'
-              },
-              {
-                step: '04',
-                title: 'Deployment & Support',
-                description: 'We deploy your solution, train your team, and provide ongoing support to ensure long-term success.'
-              }
-            ].map((item) => (
-              <div key={item.step} className="relative">
-                <div className="text-6xl font-bold text-emerald-500/10 mb-4">{item.step}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-slate-600">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative overflow-hidden py-20 bg-gradient-to-r from-slate-800 to-slate-900">
-        <MouseGrid />
-        <DataStream />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Automate Your Business?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Let&apos;s discuss your challenges and explore how automation can save you time and money.
-          </p>
-          <Link href="/contact">
-            <Button variant="secondary" size="lg">
-              Get a Free Consultation
-            </Button>
-          </Link>
+          {tab === 'websites' && <WebsitesPanel />}
+          {tab === 'automation' && <AutomationPanel />}
         </div>
       </section>
 
       <Footer />
+    </div>
+  )
+}
+
+function WebsitesPanel() {
+  return (
+    <div className="max-w-3xl">
+      <h2 className="text-2xl md:text-3xl font-bold text-white">Websites &amp; online stores</h2>
+      <p className="mt-3 text-slate-300 leading-relaxed">
+        Your customers can find you, trust you, and buy from you. I build fast, mobile-first sites with real design care — not a template someone slapped a logo on.
+      </p>
+
+      <h3 className="mt-8 font-mono text-xs text-slate-500 uppercase tracking-wide">What&apos;s included</h3>
+      <ul className="mt-3 space-y-1.5 text-slate-300">
+        <li>· Design and build from scratch, tailored to your brand</li>
+        <li>· Mobile-first and fully responsive</li>
+        <li>· SEO-ready structure and metadata</li>
+        <li>· Fast page loads — measured, not assumed</li>
+        <li>· Content management you can actually edit</li>
+        <li>· Deployed on modern infrastructure (Vercel, fast CDN)</li>
+        <li>· You own the code and the domain — no lock-in</li>
+      </ul>
+
+      <h3 className="mt-8 font-mono text-xs text-slate-500 uppercase tracking-wide">Typical projects</h3>
+      <ul className="mt-3 space-y-1.5 text-slate-300">
+        <li>· Marketing site for a small business or professional service</li>
+        <li>· Portfolio or content-creator site with a blog</li>
+        <li>· Online store with cart, checkout, and product management</li>
+        <li>· Landing page + booking flow for a service business</li>
+      </ul>
+
+      <h3 className="mt-8 font-mono text-xs text-slate-500 uppercase tracking-wide">Timeline &amp; pricing</h3>
+      <p className="mt-3 text-slate-300">
+        Most projects land between <span className="text-emerald-300 font-semibold">$3,500 and $15,000</span>, typically 2–6 weeks from kickoff to launch.
+      </p>
+      <p className="mt-2 text-sm text-slate-500">
+        Smaller end covers focused marketing sites; higher end covers full online stores or multi-section sites with custom design.
+      </p>
+
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link href="/contact"><Button>Start a project</Button></Link>
+        <Link href="/work"><Button variant="outline">See examples</Button></Link>
+      </div>
+    </div>
+  )
+}
+
+function AutomationPanel() {
+  return (
+    <div className="max-w-3xl">
+      <h2 className="text-2xl md:text-3xl font-bold text-white">Internal tools &amp; automation</h2>
+      <p className="mt-3 text-slate-300 leading-relaxed">
+        Your team stops wasting hours on manual work. I build the internal apps and scripts that replace spreadsheet hell with something that actually fits how your business runs.
+      </p>
+
+      <h3 className="mt-8 font-mono text-xs text-slate-500 uppercase tracking-wide">What&apos;s included</h3>
+      <ul className="mt-3 space-y-1.5 text-slate-300">
+        <li>· Custom web apps for your team (dashboards, admin tools, client portals)</li>
+        <li>· Integrations between systems that don&apos;t talk to each other</li>
+        <li>· Automation scripts that replace repetitive manual work</li>
+        <li>· Data pipelines that clean, move, or transform information reliably</li>
+        <li>· Role-based authentication and permissions</li>
+        <li>· Deployed somewhere you control, with clear documentation</li>
+      </ul>
+
+      <h3 className="mt-8 font-mono text-xs text-slate-500 uppercase tracking-wide">Typical projects</h3>
+      <ul className="mt-3 space-y-1.5 text-slate-300">
+        <li>· Internal dashboard that pulls data from 3 different places into one screen</li>
+        <li>· Admin tool replacing a shared spreadsheet or legacy Access database</li>
+        <li>· Automated report that used to take a team member hours every week</li>
+        <li>· Client portal where customers upload files, track status, or pay invoices</li>
+        <li>· Script that moves data between tools on a schedule</li>
+      </ul>
+
+      <h3 className="mt-8 font-mono text-xs text-slate-500 uppercase tracking-wide">Timeline &amp; pricing</h3>
+      <p className="mt-3 text-slate-300">
+        Most projects land between <span className="text-emerald-300 font-semibold">$6,000 and $40,000</span>, typically 4–12 weeks depending on scope.
+      </p>
+      <p className="mt-2 text-sm text-slate-500">
+        Smaller end covers focused single-purpose tools; higher end covers multi-user web apps with integrations and custom workflows.
+      </p>
+
+      <div className="mt-6 p-4 rounded-lg border border-slate-800 bg-slate-900/60 font-mono text-sm text-slate-400">
+        <span className="text-emerald-400">$</span> <span className="text-slate-200">fritz --show-past-work</span><br />
+        <span className="text-slate-500">→ Most of the internal tools I&apos;ve built have been for past employers, so I can&apos;t link them publicly. Happy to walk you through specifics on a call — what they did, how they were built, and what I&apos;d do for your situation.</span>
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link href="/contact"><Button>Start a project</Button></Link>
+        <Link href="/demos"><Button variant="outline">See demos</Button></Link>
+      </div>
     </div>
   )
 }

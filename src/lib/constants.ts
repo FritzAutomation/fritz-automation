@@ -59,7 +59,7 @@ export const siteConfig = {
   name: 'Fritz Automation',
   legalName: 'Fritz Automation LLC',
   url: 'https://fritzautomation.dev',
-  description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
+  description: 'A small software studio by Joshua Fritzjunker. I build websites and custom web tools for small businesses.',
 }
 
 // Navigation types
@@ -71,56 +71,23 @@ export function isNavGroup(item: NavItem): item is NavGroup {
   return 'children' in item
 }
 
-// Navigation links (grouped for dropdown menus)
+// Navigation links
 export const navLinks: NavItem[] = [
-  {
-    label: 'Solutions',
-    children: [
-      { href: '/services', label: 'Services' },
-      { href: '/industries', label: 'Industries' },
-    ],
-  },
-  {
-    label: 'Our Work',
-    children: [
-      { href: '/case-studies', label: 'Case Studies' },
-      { href: '/portfolio', label: 'Portfolio' },
-    ],
-  },
-  {
-    label: 'Resources',
-    children: [
-      { href: '/demos', label: 'Live Demos' },
-      { href: '/roi-calculator', label: 'ROI Calculator' },
-    ],
-  },
+  { href: '/work', label: 'Work' },
+  { href: '/services', label: 'Services' },
   { href: '/about', label: 'About' },
-  { href: '/portal', label: 'Client Portal' },
-]
-
-// Stats shown on homepage and about page
-export const companyStats = [
-  { value: '20+', label: 'Years Experience' },
-  { value: '10M+', label: 'Daily Records Processed' },
-  { value: '14', label: 'Years Enterprise Scale' },
-  { value: '99.9%', label: 'Uptime Reliability' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 // Command palette pages
 export const commandPalettePages = [
-  // Pages
   { href: '/', label: 'Home', section: 'Pages', keywords: ['home', 'landing', 'main'] },
-  { href: '/services', label: 'Services', section: 'Pages', keywords: ['automation', 'consulting', 'development'] },
-  { href: '/case-studies', label: 'Case Studies', section: 'Pages', keywords: ['work', 'projects', 'results'] },
-  { href: '/portfolio', label: 'Portfolio', section: 'Pages', keywords: ['portfolio', 'websites', 'web development', 'showcase'] },
-  { href: '/industries', label: 'Industries', section: 'Pages', keywords: ['manufacturing', 'logistics', 'finance', 'healthcare'] },
-  { href: '/about', label: 'About', section: 'Pages', keywords: ['team', 'company', 'story', 'mission'] },
-  // Resources
-  { href: '/demos', label: 'Live Demos', section: 'Resources', keywords: ['demo', 'interactive', 'try'] },
-  { href: '/roi-calculator', label: 'ROI Calculator', section: 'Resources', keywords: ['calculator', 'savings', 'cost', 'return'] },
-  { href: '/contact', label: 'Get a Quote', section: 'Resources', keywords: ['contact', 'quote', 'consultation', 'pricing'] },
-  // Account
-  { href: '/portal', label: 'Client Portal', section: 'Account', keywords: ['login', 'dashboard', 'portal', 'account'] },
+  { href: '/work', label: 'Work', section: 'Pages', keywords: ['work', 'portfolio', 'projects', 'websites'] },
+  { href: '/services', label: 'Services', section: 'Pages', keywords: ['services', 'websites', 'automation', 'internal tools'] },
+  { href: '/demos', label: 'Demos', section: 'Pages', keywords: ['demos', 'examples', 'interactive'] },
+  { href: '/about', label: 'About', section: 'Pages', keywords: ['about', 'josh', 'founder', 'story'] },
+  { href: '/contact', label: 'Contact', section: 'Pages', keywords: ['contact', 'hire', 'email', 'project'] },
+  { href: '/portal', label: 'Client Portal', section: 'Account', keywords: ['login', 'portal', 'account', 'client'] },
 ]
 
 // Helper function to get icon path with fallback

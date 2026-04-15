@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { BackToTop } from '@/components/BackToTop'
 import { CommandPalette } from '@/components/CommandPalette'
@@ -7,35 +7,41 @@ import { ScrollProgress } from '@/components/ScrollProgress'
 import { CursorEffects } from '@/components/CursorEffects'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
 import { BootSplash } from '@/components/animations/BootSplash'
+import { StatusBar } from '@/components/layout/StatusBar'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
+  variable: '--font-inter',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Fritz Automation | Enterprise Automation Solutions',
+    default: 'Fritz Automation — Custom software for small businesses',
     template: '%s | Fritz Automation',
   },
-  description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience. We help businesses eliminate manual processes and scale efficiently.',
-  keywords: ['automation consulting', 'software development', 'manufacturing systems integration', 'IT consulting', 'process automation', 'custom software', 'enterprise solutions', 'business automation', 'workflow automation', 'data integration'],
-  authors: [{ name: 'Fritz Automation' }],
-  creator: 'Fritz Automation',
-  publisher: 'Fritz Automation',
+  description: 'A small software studio by Joshua Fritzjunker in Burlington, Iowa. I build websites and custom web tools for small businesses.',
+  keywords: ['small business software', 'custom web development', 'web apps', 'internal tools', 'automation', 'Iowa web developer', 'Next.js developer'],
+  authors: [{ name: 'Joshua Fritzjunker' }],
+  creator: 'Joshua Fritzjunker',
+  publisher: 'Fritz Automation LLC',
   icons: {
     icon: '/icon.svg',
     apple: '/icon.svg',
   },
   metadataBase: new URL('https://fritzautomation.dev'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'Fritz Automation | Enterprise Automation Solutions',
-    description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
+    title: 'Fritz Automation — Custom software for small businesses',
+    description: 'A small software studio by Joshua Fritzjunker. I build websites and custom web tools for small businesses.',
     url: 'https://fritzautomation.dev',
     siteName: 'Fritz Automation',
     locale: 'en_US',
@@ -43,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fritz Automation | Enterprise Automation Solutions',
-    description: 'Automation consulting, software development, and manufacturing systems integration built on 20+ years of experience.',
+    title: 'Fritz Automation — Custom software for small businesses',
+    description: 'A small software studio by Joshua Fritzjunker.',
   },
   robots: {
     index: true,
@@ -65,23 +71,24 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <OrganizationSchema />
         <WebSiteSchema />
       </head>
-      <body className={inter.className}>
+      <body className="font-sans">
         <BootSplash />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
         <ScrollProgress />
-        <main id="main-content">
+        <main id="main-content" className="pb-6">
           {children}
         </main>
         <BackToTop />
         <CommandPalette />
         <Toaster position="top-right" richColors />
+        <StatusBar />
         <CursorEffects />
       </body>
     </html>

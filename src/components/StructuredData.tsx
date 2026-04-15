@@ -30,13 +30,11 @@ export function OrganizationSchema() {
     },
     areaServed: 'Worldwide',
     knowsAbout: [
-      'Automation Consulting',
-      'Software Development',
-      'Manufacturing Systems Integration',
-      'IT Consulting',
+      'Web Development',
+      'Custom Software Development',
+      'Internal Business Tools',
       'Process Automation',
-      'Data Analytics',
-      'Website Development',
+      'Small Business Software',
     ],
   }
 
@@ -67,14 +65,11 @@ export function LocalBusinessSchema() {
     },
     priceRange: '$$',
     serviceType: [
-      'Automation Consulting',
-      'Software Development',
-      'Manufacturing Systems Integration',
-      'IT Consulting',
-      'Process Automation',
-      'System Integration',
-      'Data Analytics',
       'Website Development',
+      'E-commerce Development',
+      'Custom Web Application Development',
+      'Internal Business Tools',
+      'Process Automation',
     ],
   }
 
