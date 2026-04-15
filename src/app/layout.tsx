@@ -7,6 +7,7 @@ import { ScrollProgress } from '@/components/ScrollProgress'
 import { CursorEffects } from '@/components/CursorEffects'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
 import { BootSplash } from '@/components/animations/BootSplash'
+import { StatusBar } from '@/components/layout/StatusBar'
 import './globals.css'
 
 const inter = Inter({
@@ -81,12 +82,13 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ScrollProgress />
-        <main id="main-content">
+        <main id="main-content" className="pb-6">
           {children}
         </main>
         <BackToTop />
         <CommandPalette />
         <Toaster position="top-right" richColors />
+        <StatusBar />
         <CursorEffects />
       </body>
     </html>
