@@ -7,8 +7,8 @@ import { DataStream } from '@/components/animations/DataStream'
 import { ContactForm } from './ContactForm'
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Contact Fritz Automation for custom automation solutions. We respond within 24 hours.',
+  title: 'Contact',
+  description: 'Start a project with Fritz Automation. I read every inquiry personally and reply within a day.',
 }
 
 export default function ContactPage() {

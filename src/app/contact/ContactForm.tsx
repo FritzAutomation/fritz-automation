@@ -65,7 +65,7 @@ export function ContactForm() {
       const result = await submitContact(formData)
 
       if (result.success) {
-        toast.success("Message sent successfully! We'll get back to you soon.")
+        toast.success("Message sent! I'll reply within a day.")
         // Reset form
         const form = document.getElementById('contact-form') as HTMLFormElement
         form?.reset()
