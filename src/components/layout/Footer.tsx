@@ -7,18 +7,14 @@ import { MouseGrid } from '@/components/animations/MouseGrid'
 const currentYear = new Date().getFullYear()
 
 const quickLinks = [
+  { href: '/work', label: 'Work' },
   { href: '/services', label: 'Services' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/industries', label: 'Industries' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
 
 const resourceLinks = [
-  { href: '/demos', label: 'Live Demos' },
-  { href: '/roi-calculator', label: 'ROI Calculator' },
-  { href: '/portal', label: 'Client Portal' },
+  { href: '/demos', label: 'Demos' },
   { href: '/sitemap.xml', label: 'Sitemap' },
 ]
 
@@ -111,6 +107,9 @@ export function Footer() {
             </Link>
             <Link href="/terms" className="hover:text-white transition-colors">
               Terms of Service
+            </Link>
+            <Link href="/portal" className="hover:text-white transition-colors">
+              Client Portal
             </Link>
           </div>
         </div>
