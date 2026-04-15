@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { BackToTop } from '@/components/BackToTop'
 import { CommandPalette } from '@/components/CommandPalette'
@@ -13,6 +13,13 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
+  variable: '--font-inter',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
@@ -63,12 +70,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <OrganizationSchema />
         <WebSiteSchema />
       </head>
-      <body className={inter.className}>
+      <body className="font-sans">
         <BootSplash />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
