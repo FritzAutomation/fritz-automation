@@ -42,6 +42,13 @@ export function StatusBar() {
       </div>
       <div className="flex items-center gap-4">
         <span className="text-slate-500">fritz-automation</span>
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('toggle-shortcut-overlay'))}
+          className="text-slate-600 hover:text-slate-400 transition-colors"
+          aria-label="Show keyboard shortcuts"
+        >
+          ? shortcuts
+        </button>
         <span>{time || '--:--'}</span>
       </div>
     </div>
