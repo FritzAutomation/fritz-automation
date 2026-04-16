@@ -6,6 +6,15 @@ import { sendContactNotification } from '@/lib/email'
 export async function submitContact(formData: FormData) {
   const supabase = await createClient()
 
+  // Honeypot — a hidden field real users never see. If it has a value, the
+  // submission is from a bot. We silently pretend success so the bot doesn't
+  // retry with a different strategy.
+  const honeypot = (formData.get('website_url') as string) || ''
+  if (honeypot.trim() !== '') {
+    console.warn('Contact form honeypot tripped; ignoring submission')
+    return { success: true }
+  }
+
   const name = formData.get('name') as string
   const email = formData.get('email') as string
   const company = (formData.get('company') as string) || null

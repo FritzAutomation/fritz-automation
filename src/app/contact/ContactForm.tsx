@@ -101,6 +101,19 @@ export function ContactForm() {
 
         {/* Form */}
         <form id="contact-form" action={handleSubmit} className="p-6 space-y-5 font-mono text-sm">
+          {/* Honeypot — hidden from humans, bots tend to fill it anyway.
+              Server rejects submissions with a value here. Do not remove. */}
+          <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+            <label htmlFor="website_url">Website (leave empty)</label>
+            <input
+              id="website_url"
+              name="website_url"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           {/* name */}
           <div>
             <label htmlFor="name" className="block text-emerald-400 mb-1.5">
