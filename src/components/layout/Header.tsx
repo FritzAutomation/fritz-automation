@@ -42,7 +42,7 @@ export function Header() {
               <FritzLogo width={140} variant="dark" />
             </Link>
 
-            <div className="hidden md:flex items-center justify-center flex-1 h-full overflow-x-auto">
+            <div className="hidden md:flex items-center flex-1 h-full overflow-x-auto">
               {tabs.map((tab, index) => {
                 const active = isTabActive(pathname, tab.href)
                 return (
