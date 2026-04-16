@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { getStatusColor, getPriorityColor, formatStatus } from '@/lib/utils'
-import type { TicketWithClient } from '@/types/database'
+import type { TicketWithClientAndProject } from '@/types/database'
 import Link from 'next/link'
 import { Pagination } from '@/components/ui/Pagination'
 import { SearchInput } from '@/components/ui/SearchInput'
@@ -45,7 +45,7 @@ export default async function AdminTicketsPage({ searchParams }: PageProps) {
   const sortOrder = params.order || 'desc'
   const supabase = await createClient()
 
-  let tickets: TicketWithClient[] = []
+  let tickets: TicketWithClientAndProject[] = []
   let totalCount = 0
 
   try {
@@ -60,7 +60,8 @@ export default async function AdminTicketsPage({ searchParams }: PageProps) {
       .from('tickets')
       .select(`
         *,
-        client:profiles!tickets_client_id_fkey(id, first_name, last_name, email, company_name, phone)
+        client:profiles!tickets_client_id_fkey(id, first_name, last_name, email, company_name, phone),
+        project:projects!tickets_project_id_fkey(id, title, status)
       `)
 
     // Apply filters
@@ -92,7 +93,7 @@ export default async function AdminTicketsPage({ searchParams }: PageProps) {
       .order(sortColumn, { ascending: sortOrder === 'asc' })
       .range(from, to)
 
-    tickets = (data || []) as unknown as TicketWithClient[]
+    tickets = (data || []) as unknown as TicketWithClientAndProject[]
   } catch {
     // Database might not exist yet
   }
@@ -136,6 +137,7 @@ export default async function AdminTicketsPage({ searchParams }: PageProps) {
               <thead className="bg-slate-700/50 border-b border-slate-700">
                 <tr>
                   <SortableHeader column="ticket_number" label="Ticket" theme="dark" />
+                  <th className="text-left px-6 py-3 text-xs font-semibold text-slate-300 uppercase tracking-wider">Project</th>
                   <th className="text-left px-6 py-3 text-xs font-semibold text-slate-300 uppercase tracking-wider">Client</th>
                   <SortableHeader column="subject" label="Subject" theme="dark" />
                   <SortableHeader column="status" label="Status" theme="dark" />
@@ -150,6 +152,18 @@ export default async function AdminTicketsPage({ searchParams }: PageProps) {
                       <Link href={`/admin/tickets/${ticket.id}`} className="text-emerald-400 font-medium hover:text-emerald-300">
                         {ticket.ticket_number}
                       </Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      {ticket.project ? (
+                        <Link
+                          href={`/admin/projects/${ticket.project.id}`}
+                          className="text-sm text-slate-200 hover:text-emerald-400"
+                        >
+                          {ticket.project.title}
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-slate-500">—</span>
+                      )}
                     </td>
                     <td className="px-6 py-4">
                       <div>
