@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { FritzLogo } from '@/components/FritzLogo'
 import { cn } from '@/lib/utils'
+import { track } from '@vercel/analytics'
 
 const tabs = [
   { href: '/', label: '~/home' },
@@ -78,7 +79,10 @@ export function Header() {
               >
                 &gt;_
               </button>
-              <Link href="/contact">
+              <Link
+                href="/contact"
+                onClick={() => track('start_project_clicked', { source: 'header_nav' })}
+              >
                 <Button size="sm">Start a project</Button>
               </Link>
             </div>
@@ -135,7 +139,13 @@ export function Header() {
                 )
               })}
               <div className="pt-4">
-                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <Link
+                  href="/contact"
+                  onClick={() => {
+                    track('start_project_clicked', { source: 'header_mobile_menu' })
+                    setMobileMenuOpen(false)
+                  }}
+                >
                   <Button className="w-full">Start a project</Button>
                 </Link>
               </div>
