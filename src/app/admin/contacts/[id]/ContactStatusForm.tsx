@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Textarea } from '@/components/ui/Textarea'
 import { createClient } from '@/lib/supabase/client'
+import { deleteContact } from '../actions'
 import { toast } from 'sonner'
 
 interface ContactStatusFormProps {
@@ -18,6 +19,21 @@ export function ContactStatusForm({ contactId, currentStatus, currentNotes }: Co
   const [status, setStatus] = useState(currentStatus)
   const [notes, setNotes] = useState(currentNotes || '')
   const [isLoading, setIsLoading] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  async function handleDelete() {
+    if (!confirm('Delete this submission? This cannot be undone.')) return
+    setIsDeleting(true)
+    const result = await deleteContact(contactId)
+    setIsDeleting(false)
+
+    if (result.success) {
+      toast.success('Submission deleted')
+      router.push('/admin/contacts')
+    } else {
+      toast.error(result.error || 'Failed to delete')
+    }
+  }
 
   async function handleUpdate() {
     setIsLoading(true)
@@ -88,6 +104,17 @@ export function ContactStatusForm({ contactId, currentStatus, currentNotes }: Co
         >
           Update Contact
         </Button>
+
+        <div className="pt-4 border-t border-slate-700">
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={isDeleting}
+            className="w-full px-4 py-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-sm font-medium transition-colors disabled:opacity-50"
+          >
+            {isDeleting ? 'Deleting…' : 'Delete submission'}
+          </button>
+        </div>
       </div>
     </div>
   )
