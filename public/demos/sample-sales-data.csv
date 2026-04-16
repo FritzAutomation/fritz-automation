@@ -1,0 +1,31 @@
+Date,Product,Category,Region,Units,Revenue
+2026-01-05,Widget A,Hardware,Midwest,120,4800
+2026-01-08,Service Plan,Services,Northeast,45,6750
+2026-01-12,Widget B,Hardware,Southeast,85,5100
+2026-01-15,Gadget Pro,Electronics,Midwest,30,8700
+2026-01-19,Widget A,Hardware,West,200,8000
+2026-01-22,Consulting,Services,Northeast,12,9600
+2026-01-26,Gadget Lite,Electronics,Southeast,65,3250
+2026-02-02,Widget B,Hardware,Midwest,150,9000
+2026-02-06,Service Plan,Services,West,38,5700
+2026-02-10,Widget A,Hardware,Northeast,90,3600
+2026-02-14,Gadget Pro,Electronics,Midwest,55,15950
+2026-02-18,Consulting,Services,Southeast,8,6400
+2026-02-22,Widget B,Hardware,West,110,6600
+2026-02-25,Gadget Lite,Electronics,Northeast,72,3600
+2026-03-01,Widget A,Hardware,Midwest,180,7200
+2026-03-05,Service Plan,Services,Southeast,50,7500
+2026-03-08,Gadget Pro,Electronics,West,40,11600
+2026-03-12,Consulting,Services,Midwest,15,12000
+2026-03-15,Widget B,Hardware,Northeast,95,5700
+2026-03-19,Widget A,Hardware,Southeast,140,5600
+2026-03-22,Gadget Lite,Electronics,Midwest,88,4400
+2026-03-26,Service Plan,Services,West,42,6300
+2026-03-29,Gadget Pro,Electronics,Northeast,35,10150
+2026-04-02,Widget A,Hardware,Midwest,160,6400
+2026-04-05,Widget B,Hardware,Southeast,105,6300
+2026-04-08,Consulting,Services,West,10,8000
+2026-04-12,Gadget Lite,Electronics,Midwest,60,3000
+2026-04-15,Widget A,Hardware,Northeast,175,7000
+2026-04-18,Service Plan,Services,Midwest,55,8250
+2026-04-22,Gadget Pro,Electronics,Southeast,48,13920

@@ -3,12 +3,30 @@ import { Footer } from '@/components/layout/Footer'
 import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { MouseGrid } from '@/components/animations/MouseGrid'
 import { DataStream } from '@/components/animations/DataStream'
+import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
 
 export const metadata = {
   title: 'Demos',
-  description: 'Small example projects showing internal-tool and automation capabilities.',
+  description: 'Small working apps that show what I build on the internal-tools side.',
 }
+
+const demos = [
+  {
+    href: '/demos/csv-dashboard',
+    file: 'csv-dashboard.app',
+    title: 'CSV Dashboard',
+    tagline: 'Spreadsheet chaos → clean dashboard',
+    description: 'Upload a CSV and get instant charts, filters, and summary stats. All in the browser.',
+  },
+  {
+    href: '/demos/client-portal',
+    file: 'client-portal.app',
+    title: 'Client Portal',
+    tagline: 'Email chaos → organized client portal',
+    description: 'Two views of one tool: clients track their project status, you manage it from admin.',
+  },
+]
 
 export default function DemosPage() {
   return (
@@ -25,40 +43,35 @@ export default function DemosPage() {
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <PathCrumbs trail={[{ label: 'demos' }]} />
           <h1 className="mt-4 text-4xl md:text-5xl font-bold text-white">Demos</h1>
-          <p className="mt-3 text-slate-300 max-w-2xl">
-            Small, self-contained example projects showing what I can build on the internal-tools &amp; automation side.
+          <p className="mt-3 text-lg text-slate-300 max-w-2xl">
+            Small working apps that show what I build on the internal-tools side. Play with them — everything runs in your browser.
           </p>
         </div>
       </section>
 
-      <section className="bg-slate-950 py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
-            <div className="bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-              <span className="font-mono text-xs text-slate-500 ml-2">~/demos</span>
-            </div>
-            <div className="p-6 font-mono text-sm text-slate-400 leading-relaxed">
-              <div className="text-emerald-400">$ ls -la ~/demos</div>
-              <div className="mt-2">total 0</div>
-              <div>drwxr-xr-x  josh  staff     .</div>
-              <div>drwxr-xr-x  josh  staff     ..</div>
-              <div className="mt-5 text-slate-500">
-                // Working on a few of these. Will live here when they ship.
-              </div>
-              <div className="text-slate-500 mt-2">
-                // In the meantime,&nbsp;
-                <Link href="/contact" className="text-emerald-400 hover:text-emerald-300 underline">
-                  tell me about your project
+      <ScrollReveal>
+        <section className="bg-slate-950 py-16">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-5">
+              {demos.map(demo => (
+                <Link
+                  key={demo.href}
+                  href={demo.href}
+                  className="group relative rounded-xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/40 transition-colors p-6 block"
+                >
+                  <div className="flex items-center gap-2 font-mono text-xs text-slate-500 mb-3">
+                    <span className="px-1.5 py-0.5 bg-slate-800 rounded">{demo.file}</span>
+                  </div>
+                  <h2 className="text-xl font-semibold text-white">{demo.title}</h2>
+                  <p className="mt-1 text-sm text-emerald-400 font-mono">{demo.tagline}</p>
+                  <p className="mt-3 text-slate-400 text-sm">{demo.description}</p>
+                  <div className="mt-4 text-emerald-400 font-mono text-sm group-hover:text-emerald-300">open →</div>
                 </Link>
-                &nbsp;and I&apos;ll walk you through what I&apos;ve built before.
-              </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       <Footer />
     </div>
