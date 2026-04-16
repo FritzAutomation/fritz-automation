@@ -7,8 +7,9 @@ const NAV_KEYS: Record<string, string> = {
   '1': '/',
   '2': '/work',
   '3': '/services',
-  '4': '/about',
-  '5': '/contact',
+  '4': '/demos',
+  '5': '/about',
+  '6': '/contact',
 }
 
 function isInputFocused(): boolean {

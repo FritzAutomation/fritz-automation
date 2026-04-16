@@ -7,8 +7,9 @@ const shortcuts = [
   { key: '1', desc: 'Home' },
   { key: '2', desc: 'Work' },
   { key: '3', desc: 'Services' },
-  { key: '4', desc: 'About' },
-  { key: '5', desc: 'Contact' },
+  { key: '4', desc: 'Demos' },
+  { key: '5', desc: 'About' },
+  { key: '6', desc: 'Contact' },
   { key: '?', desc: 'This overlay' },
   { key: 'Esc', desc: 'Close overlays' },
 ]
