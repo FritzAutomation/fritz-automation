@@ -11,6 +11,7 @@ import { StatusBar } from '@/components/layout/StatusBar'
 import { KeyboardShortcuts } from '@/components/KeyboardShortcuts'
 import { ShortcutOverlay } from '@/components/ShortcutOverlay'
 import { ContextMenu } from '@/components/ContextMenu'
+import { Minimap } from '@/components/Minimap'
 import './globals.css'
 
 const inter = Inter({
@@ -95,6 +96,7 @@ export default function RootLayout({
         <KeyboardShortcuts />
         <ShortcutOverlay />
         <ContextMenu />
+        <Minimap />
         <CursorEffects />
       </body>
     </html>
