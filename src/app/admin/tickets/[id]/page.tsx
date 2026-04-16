@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { getStatusColor, getPriorityColor, formatStatus } from '@/lib/utils'
-import type { TicketWithClient, TicketMessageWithSender } from '@/types/database'
+import type { TicketWithClientAndProject, TicketMessageWithSender } from '@/types/database'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { AdminTicketActions } from './AdminTicketActions'
@@ -20,20 +20,22 @@ export default async function AdminTicketDetailPage({
     return null
   }
 
-  let ticket: TicketWithClient | null = null
+  let ticket: TicketWithClientAndProject | null = null
   let messages: TicketMessageWithSender[] = []
 
   try {
-    const { data: ticketData } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: ticketData } = await (supabase as any)
       .from('tickets')
       .select(`
         *,
-        client:profiles!tickets_client_id_fkey(id, first_name, last_name, email, company_name, phone)
+        client:profiles!tickets_client_id_fkey(id, first_name, last_name, email, company_name, phone),
+        project:projects!tickets_project_id_fkey(id, title, status)
       `)
       .eq('id', id)
       .single()
 
-    ticket = ticketData as unknown as TicketWithClient | null
+    ticket = ticketData as unknown as TicketWithClientAndProject | null
 
     if (ticket) {
       const { data: messagesData } = await supabase
@@ -147,6 +149,22 @@ export default async function AdminTicketDetailPage({
               <p className="text-slate-400">No client information available</p>
             )}
           </div>
+
+          {/* Project */}
+          {ticket.project && (
+            <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
+              <h2 className="text-lg font-semibold text-white mb-4">Project</h2>
+              <div>
+                <p className="text-xs text-slate-400 uppercase tracking-wide">Project</p>
+                <Link
+                  href={`/admin/projects/${ticket.project.id}`}
+                  className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                >
+                  {ticket.project.title}
+                </Link>
+              </div>
+            </div>
+          )}
 
           {/* Actions */}
           <AdminTicketActions ticketId={ticket.id} ticketNumber={ticket.ticket_number} currentStatus={ticket.status} currentPriority={ticket.priority} />
