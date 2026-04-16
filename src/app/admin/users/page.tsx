@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Pagination } from '@/components/ui/Pagination'
 import { SearchInput } from '@/components/ui/SearchInput'
 import { FilterSelect } from '@/components/ui/FilterSelect'
+import { InviteClientDialog } from './InviteClientDialog'
 
 interface Profile {
   id: string
@@ -89,6 +90,7 @@ export default async function AdminUsersPage({ searchParams }: PageProps) {
           <h1 className="text-3xl font-bold text-white">Users</h1>
           <p className="text-slate-400 mt-1">Manage all registered users</p>
         </div>
+        <InviteClientDialog />
       </div>
 
       {/* Search and Filters */}
