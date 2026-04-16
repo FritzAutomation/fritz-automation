@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { submitContact } from './actions'
 import { contactInfo } from '@/lib/constants'
 import { toast } from 'sonner'
+import { track } from '@vercel/analytics'
 
 interface FormErrors {
   name?: string
@@ -65,6 +66,8 @@ export function ContactForm() {
       const result = await submitContact(formData)
 
       if (result.success) {
+        const subject = (formData.get('subject') as string) || ''
+        track('contact_form_submitted', { subject_length: subject.trim().length })
         toast.success("Message sent! I'll reply within a day.")
         // Reset form
         const form = document.getElementById('contact-form') as HTMLFormElement
