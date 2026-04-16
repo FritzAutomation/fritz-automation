@@ -11,9 +11,9 @@ const BOOT_LINES = [
   { text: 'ready.', color: 'text-white' },
 ]
 
-const LINE_DELAY = 150
-const POST_READY_PAUSE = 300
-const FADE_DURATION = 200
+const LINE_DELAY = 350
+const POST_READY_PAUSE = 500
+const FADE_DURATION = 400
 
 export function BootSplash() {
   const prefersReducedMotion = useReducedMotion()
