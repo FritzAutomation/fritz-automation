@@ -4,6 +4,7 @@ import { MouseGrid } from '@/components/animations/MouseGrid'
 import { DataStream } from '@/components/animations/DataStream'
 import { TypingHero } from '@/components/home/TypingHero'
 import { Button } from '@/components/ui/Button'
+import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -39,6 +40,7 @@ export default function HomePage() {
       </section>
 
       {/* What I build */}
+      <ScrollReveal>
       <section className="bg-slate-950 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="font-mono text-xs text-slate-500 mb-2">// what i build</div>
@@ -84,8 +86,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Selected work */}
+      <ScrollReveal>
       <section className="bg-slate-900 py-20 border-t border-slate-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8 flex-wrap gap-3">
@@ -140,8 +144,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Whoami */}
+      <ScrollReveal>
       <section className="bg-slate-950 py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="font-mono text-xs text-slate-500 mb-2">// whoami</div>
@@ -154,8 +160,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* How it works */}
+      <ScrollReveal>
       <section className="bg-slate-900 py-20 border-t border-slate-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="font-mono text-xs text-slate-500 mb-2">// how it works</div>
@@ -184,8 +192,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Final CTA */}
+      <ScrollReveal>
       <section className="bg-slate-950 py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white">Have a project in mind?</h2>
@@ -197,6 +207,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       <Footer />
     </div>
