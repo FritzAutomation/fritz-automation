@@ -8,6 +8,8 @@ import { CursorEffects } from '@/components/CursorEffects'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
 import { BootSplash } from '@/components/animations/BootSplash'
 import { StatusBar } from '@/components/layout/StatusBar'
+import { KeyboardShortcuts } from '@/components/KeyboardShortcuts'
+import { ShortcutOverlay } from '@/components/ShortcutOverlay'
 import './globals.css'
 
 const inter = Inter({
@@ -89,6 +91,8 @@ export default function RootLayout({
         <CommandPalette />
         <Toaster position="top-right" richColors />
         <StatusBar />
+        <KeyboardShortcuts />
+        <ShortcutOverlay />
         <CursorEffects />
       </body>
     </html>
