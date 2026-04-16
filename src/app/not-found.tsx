@@ -8,12 +8,12 @@ export default function NotFound() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow flex items-center justify-center bg-gradient-to-b from-slate-50 to-white">
+      <main className="flex-grow flex items-center justify-center bg-slate-950">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
           {/* 404 Illustration */}
           <div className="mb-8">
             <div className="relative inline-block">
-              <span className="text-[150px] md:text-[200px] font-bold text-slate-100 select-none">
+              <span className="text-[150px] md:text-[200px] font-bold text-slate-800 select-none">
                 404
               </span>
               <div className="absolute inset-0 flex items-center justify-center">
@@ -36,7 +36,7 @@ export default function NotFound() {
           </div>
 
           {/* Content */}
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4">
             Page Not Found
           </h1>
           <p className="text-lg text-slate-600 mb-8 max-w-md mx-auto">
@@ -72,7 +72,7 @@ export default function NotFound() {
           </div>
 
           {/* Helpful Links */}
-          <div className="mt-12 pt-8 border-t border-slate-200">
+          <div className="mt-12 pt-8 border-t border-slate-800">
             <p className="text-sm text-slate-500 mb-4">Or try one of these pages:</p>
             <div className="flex flex-wrap justify-center gap-4">
               {[

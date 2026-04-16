@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
       </section>
 
       {/* Content */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-slate-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-slate max-w-none">
             <p className="text-lg text-slate-600 mb-8">
@@ -44,9 +44,9 @@ export default function PrivacyPolicyPage() {
               use, disclose, and safeguard your information when you visit our website or use our services.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Information We Collect</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Information We Collect</h2>
 
-            <h3 className="text-xl font-semibold text-slate-900 mt-8 mb-3">Personal Information</h3>
+            <h3 className="text-xl font-semibold text-slate-100 mt-8 mb-3">Personal Information</h3>
             <p className="text-slate-600 mb-4">
               We may collect personal information that you voluntarily provide to us when you:
             </p>
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
               information you choose to provide.
             </p>
 
-            <h3 className="text-xl font-semibold text-slate-900 mt-8 mb-3">Automatically Collected Information</h3>
+            <h3 className="text-xl font-semibold text-slate-100 mt-8 mb-3">Automatically Collected Information</h3>
             <p className="text-slate-600 mb-4">
               When you visit our website, we may automatically collect certain information about your device and
               browsing activity, including:
@@ -74,7 +74,7 @@ export default function PrivacyPolicyPage() {
               <li>Referring website addresses</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">How We Use Your Information</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">How We Use Your Information</h2>
             <p className="text-slate-600 mb-4">
               We use the information we collect to:
             </p>
@@ -87,7 +87,7 @@ export default function PrivacyPolicyPage() {
               <li>Comply with legal obligations</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Information Sharing</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Information Sharing</h2>
             <p className="text-slate-600 mb-4">
               We do not sell, trade, or rent your personal information to third parties. We may share your
               information only in the following circumstances:
@@ -101,7 +101,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Data Security</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Data Security</h2>
             <p className="text-slate-600 mb-4">
               We implement appropriate technical and organizational security measures to protect your personal
               information against unauthorized access, alteration, disclosure, or destruction. However, no method
@@ -109,7 +109,7 @@ export default function PrivacyPolicyPage() {
               absolute security.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Cookies and Tracking Technologies</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Cookies and Tracking Technologies</h2>
             <p className="text-slate-600 mb-4">
               Our website may use cookies and similar tracking technologies to enhance your experience. Cookies
               are small files stored on your device that help us remember your preferences and understand how
@@ -120,14 +120,14 @@ export default function PrivacyPolicyPage() {
               some functionality of our website.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Third-Party Links</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Third-Party Links</h2>
             <p className="text-slate-600 mb-4">
               Our website may contain links to third-party websites. We are not responsible for the privacy
               practices or content of these external sites. We encourage you to review the privacy policies
               of any third-party sites you visit.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Your Rights</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Your Rights</h2>
             <p className="text-slate-600 mb-4">
               Depending on your location, you may have certain rights regarding your personal information, including:
             </p>
@@ -142,26 +142,26 @@ export default function PrivacyPolicyPage() {
               To exercise any of these rights, please contact us using the information provided below.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Children&apos;s Privacy</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Children&apos;s Privacy</h2>
             <p className="text-slate-600 mb-4">
               Our services are not directed to individuals under the age of 18. We do not knowingly collect
               personal information from children. If you believe we have collected information from a child,
               please contact us immediately.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Changes to This Policy</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Changes to This Policy</h2>
             <p className="text-slate-600 mb-4">
               We may update this Privacy Policy from time to time. We will notify you of any changes by posting
               the new Privacy Policy on this page and updating the &quot;Last updated&quot; date. We encourage you to
               review this Privacy Policy periodically.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-bold text-slate-100 mt-12 mb-4">Contact Us</h2>
             <p className="text-slate-600 mb-4">
               If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
             </p>
-            <div className="bg-slate-50 rounded-xl p-6 mt-4">
-              <p className="text-slate-900 font-semibold">{siteConfig.legalName}</p>
+            <div className="bg-slate-800/50 rounded-xl p-6 mt-4 border border-slate-700">
+              <p className="text-slate-100 font-semibold">{siteConfig.legalName}</p>
               <p className="text-slate-600">{businessInfo.location.city}, {businessInfo.location.state}</p>
               <p className="text-slate-600">
                 Email: <a href={`mailto:${contactInfo.email}`} className="text-primary hover:underline">{contactInfo.email}</a>

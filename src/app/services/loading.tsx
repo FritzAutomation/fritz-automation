@@ -4,16 +4,17 @@ export default function ServicesLoading() {
   return (
     <div className="min-h-screen">
       {/* Header skeleton */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Skeleton className="h-8 w-40 bg-slate-200" />
-            <div className="hidden md:flex items-center gap-4">
-              <Skeleton className="h-4 w-20 bg-slate-200" />
-              <Skeleton className="h-4 w-20 bg-slate-200" />
-              <Skeleton className="h-4 w-20 bg-slate-200" />
-              <Skeleton className="h-10 w-28 rounded-xl bg-slate-200" />
+      <div className="sticky top-0 z-50 bg-slate-950 border-b border-slate-800">
+        <div className="max-w-[100vw] mx-auto">
+          <div className="flex items-center h-12 px-4 gap-4">
+            <Skeleton className="h-5 w-36 bg-slate-800" />
+            <div className="hidden md:flex items-center gap-6 flex-1">
+              <Skeleton className="h-4 w-16 bg-slate-800" />
+              <Skeleton className="h-4 w-16 bg-slate-800" />
+              <Skeleton className="h-4 w-16 bg-slate-800" />
+              <Skeleton className="h-4 w-16 bg-slate-800" />
             </div>
+            <Skeleton className="h-8 w-28 rounded-lg bg-slate-800 ml-auto" />
           </div>
         </div>
       </div>
@@ -28,7 +29,7 @@ export default function ServicesLoading() {
       </div>
 
       {/* Services skeleton */}
-      <div className="py-20 bg-white">
+      <div className="py-20 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ServicesSkeleton />
         </div>
