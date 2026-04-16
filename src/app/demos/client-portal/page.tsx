@@ -6,8 +6,7 @@ import { DataStream } from '@/components/animations/DataStream'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { DemoTerminalBlock } from '@/components/demos/DemoTerminalBlock'
 import { ClientPortal } from '@/components/demos/ClientPortal'
-import { Button } from '@/components/ui/Button'
-import Link from 'next/link'
+import { TrackedStartProjectButton } from '@/components/TrackedStartProjectButton'
 
 export const metadata = {
   title: 'Client Portal Demo',
@@ -101,7 +100,7 @@ export default function ClientPortalPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white">Need a client portal?</h2>
           <p className="mt-3 text-slate-400">I build custom portals connected to your real workflow.</p>
           <div className="mt-6">
-            <Link href="/contact"><Button size="lg">Start a project</Button></Link>
+            <TrackedStartProjectButton source="client_portal_cta" />
           </div>
         </div>
       </section>
