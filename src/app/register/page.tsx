@@ -1,43 +1,24 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
-import { RegisterForm } from './RegisterForm'
-import { FritzLogo } from '@/components/FritzLogo'
+import { Button } from '@/components/ui/Button'
 
-export const metadata: Metadata = {
-  title: 'Register',
-  description: 'Create an account to access the Fritz Automation client portal.',
+export const metadata = {
+  title: 'Invite only',
+  description: 'Fritz Automation client portal is invite-only.',
 }
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" aria-label="Fritz Automation home">
-            <FritzLogo width={220} variant="light" />
-          </Link>
-        </div>
-
-        {/* Register Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
-          <h1 className="text-2xl font-bold text-center mb-2 text-slate-900">Create Account</h1>
-          <p className="text-slate-600 text-center mb-8">Sign up to access your client portal</p>
-
-          <RegisterForm />
-
-          <div className="mt-6 text-center text-sm">
-            <span className="text-slate-600">Already have an account? </span>
-            <Link href="/login" className="text-primary font-semibold hover:underline">
-              Sign In
-            </Link>
-          </div>
-        </div>
-
-        {/* Back to home */}
-        <div className="text-center mt-6">
-          <Link href="/" className="text-slate-600 hover:text-primary transition-colors text-sm">
-            ← Back to Home
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+      <div className="max-w-md w-full bg-white rounded-xl border border-slate-200 shadow-sm p-8 text-center">
+        <h1 className="text-2xl font-bold text-slate-900 mb-3">Portal access is invite-only</h1>
+        <p className="text-slate-600 mb-6">
+          The Fritz Automation client portal is for clients I&apos;ve kicked off a project with.
+          If that&apos;s you and you&apos;re looking for your account, contact me and I&apos;ll get you set up.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link href="/contact"><Button>Contact me</Button></Link>
+          <Link href="/login">
+            <Button variant="outline">I already have an account</Button>
           </Link>
         </div>
       </div>

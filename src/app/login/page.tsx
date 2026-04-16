@@ -29,12 +29,6 @@ export default function LoginPage() {
             <LoginForm />
           </Suspense>
 
-          <div className="mt-6 text-center text-sm">
-            <span className="text-slate-600">Don't have an account? </span>
-            <Link href="/register" className="text-primary font-semibold hover:underline">
-              Request Access
-            </Link>
-          </div>
         </div>
 
         {/* Back to home */}
