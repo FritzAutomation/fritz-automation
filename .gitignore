@@ -43,6 +43,7 @@ next-env.d.ts
 
 # Supabase
 .supabase/
+supabase/.temp/
 
 # Claude Code
 .claude/
