@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MouseGrid } from '@/components/animations/MouseGrid'
@@ -7,6 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
 import Image from 'next/image'
+import { track } from '@vercel/analytics'
 
 export default function HomePage() {
   return (
@@ -33,7 +36,7 @@ export default function HomePage() {
             Websites that sell. Internal tools that save hours. Built by one developer in Iowa.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact"><Button size="lg">Start a project</Button></Link>
+            <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_hero' })}><Button size="lg">Start a project</Button></Link>
             <Link href="/work"><Button size="lg" variant="outline">See my work</Button></Link>
           </div>
         </div>
@@ -203,7 +206,7 @@ export default function HomePage() {
             Tell me about it. I reply to every inquiry personally, usually within a day.
           </p>
           <div className="mt-8">
-            <Link href="/contact"><Button size="lg">Start a project</Button></Link>
+            <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_final_cta' })}><Button size="lg">Start a project</Button></Link>
           </div>
         </div>
       </section>

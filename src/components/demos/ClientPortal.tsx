@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
+import { track } from '@vercel/analytics'
 import { sampleProjects, type Project } from './SampleData'
 
 const STATUS_LABELS: Record<Project['status'], string> = {
@@ -24,6 +25,7 @@ export function ClientPortal() {
   const [view, setView] = useState<'client' | 'admin'>('client')
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [newNote, setNewNote] = useState('')
+  const adminViewTracked = useRef(false)
 
   const selected = projects.find(p => p.id === selectedId) ?? null
 
@@ -65,6 +67,7 @@ export function ClientPortal() {
         : [],
     }
     setProjects(prev => [newProject, ...prev])
+    track('demo_interaction', { action: 'request_submitted' })
     form.reset()
     setSelectedId(newProject.id)
   }, [])
@@ -84,7 +87,13 @@ export function ClientPortal() {
           client-view.tsx
         </button>
         <button
-          onClick={() => setView('admin')}
+          onClick={() => {
+            if (!adminViewTracked.current) {
+              track('demo_interaction', { action: 'view_switched_admin' })
+              adminViewTracked.current = true
+            }
+            setView('admin')
+          }}
           className={`px-4 py-2 font-mono text-sm border-b-2 transition-colors ${
             view === 'admin'
               ? 'border-emerald-400 text-emerald-300 bg-slate-900/60'

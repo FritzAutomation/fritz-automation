@@ -6,8 +6,7 @@ import { DataStream } from '@/components/animations/DataStream'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { DemoTerminalBlock } from '@/components/demos/DemoTerminalBlock'
 import { CsvDashboard } from '@/components/demos/CsvDashboard'
-import { Button } from '@/components/ui/Button'
-import Link from 'next/link'
+import { TrackedStartProjectButton } from '@/components/TrackedStartProjectButton'
 
 export const metadata = {
   title: 'CSV Dashboard Demo',
@@ -106,7 +105,7 @@ export default function CsvDashboardPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white">Need something like this?</h2>
           <p className="mt-3 text-slate-400">I build custom dashboards connected to your real data.</p>
           <div className="mt-6">
-            <Link href="/contact"><Button size="lg">Start a project</Button></Link>
+            <TrackedStartProjectButton source="csv_dashboard_cta" />
           </div>
         </div>
       </section>

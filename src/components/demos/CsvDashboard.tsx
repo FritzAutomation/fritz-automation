@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import Papa from 'papaparse'
+import { track } from '@vercel/analytics'
 import {
   BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -37,7 +38,7 @@ export function CsvDashboard() {
   const [sortCol, setSortCol] = useState<string | null>(null)
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
 
-  const parseCSV = useCallback((csvText: string) => {
+  const parseCSV = useCallback((csvText: string, source: 'sample' | 'file' = 'file') => {
     const result = Papa.parse<Record<string, string>>(csvText.trim(), {
       header: true,
       skipEmptyLines: true,
@@ -46,6 +47,9 @@ export function CsvDashboard() {
       setData({ headers: result.meta.fields, rows: result.data })
       setFilters({})
       setSortCol(null)
+      if (source === 'file') {
+        track('demo_interaction', { action: 'file_uploaded' })
+      }
     }
   }, [])
 
@@ -186,7 +190,10 @@ export function CsvDashboard() {
             <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
           </label>
           <button
-            onClick={() => parseCSV(sampleCsvString)}
+            onClick={() => {
+              track('demo_interaction', { action: 'sample_data_loaded' })
+              parseCSV(sampleCsvString, 'sample')
+            }}
             className="px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg font-mono text-sm transition-colors border border-emerald-500/30"
           >
             Use sample data

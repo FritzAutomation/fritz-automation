@@ -12,6 +12,7 @@ import { KeyboardShortcuts } from '@/components/KeyboardShortcuts'
 import { ShortcutOverlay } from '@/components/ShortcutOverlay'
 import { ContextMenu } from '@/components/ContextMenu'
 import { Minimap } from '@/components/Minimap'
+import { AnalyticsWrapper } from '@/components/AnalyticsWrapper'
 import './globals.css'
 
 const inter = Inter({
@@ -98,6 +99,7 @@ export default function RootLayout({
         <ContextMenu />
         <Minimap />
         <CursorEffects />
+        <AnalyticsWrapper />
       </body>
     </html>
   )
