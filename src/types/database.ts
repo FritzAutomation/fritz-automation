@@ -22,6 +22,22 @@ export type TicketMessageWithSender = TicketMessage & {
   sender: Pick<Profile, 'first_name' | 'last_name' | 'role'> | null
 }
 
+export type Project = Database['public']['Tables']['projects']['Row']
+export type ProjectInsert = Database['public']['Tables']['projects']['Insert']
+export type ProjectUpdatePatch = Database['public']['Tables']['projects']['Update']
+export type ProjectStatus = Project['status']
+
+export type ProjectUpdateRow = Database['public']['Tables']['project_updates']['Row']
+export type ProjectUpdateInsert = Database['public']['Tables']['project_updates']['Insert']
+
+export type ProjectWithClient = Project & {
+  client: Pick<Profile, 'id' | 'first_name' | 'last_name' | 'email' | 'company_name'> | null
+}
+
+export type ProjectUpdateWithAuthor = ProjectUpdateRow & {
+  author: Pick<Profile, 'id' | 'first_name' | 'last_name' | 'role'> | null
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -285,6 +301,67 @@ export interface Database {
           sender_id?: string
           content?: string
           is_internal?: boolean
+          created_at?: string
+        }
+      }
+      projects: {
+        Row: {
+          id: string
+          client_id: string
+          title: string
+          description: string | null
+          status: 'proposed' | 'approved' | 'in_progress' | 'in_review' | 'on_hold' | 'completed'
+          start_date: string | null
+          target_date: string | null
+          wave_url: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          client_id: string
+          title: string
+          description?: string | null
+          status?: 'proposed' | 'approved' | 'in_progress' | 'in_review' | 'on_hold' | 'completed'
+          start_date?: string | null
+          target_date?: string | null
+          wave_url?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          client_id?: string
+          title?: string
+          description?: string | null
+          status?: 'proposed' | 'approved' | 'in_progress' | 'in_review' | 'on_hold' | 'completed'
+          start_date?: string | null
+          target_date?: string | null
+          wave_url?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      project_updates: {
+        Row: {
+          id: string
+          project_id: string
+          author_id: string
+          message: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          project_id: string
+          author_id: string
+          message: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          project_id?: string
+          author_id?: string
+          message?: string
           created_at?: string
         }
       }
