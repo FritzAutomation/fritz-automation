@@ -4,6 +4,7 @@ import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { MouseGrid } from '@/components/animations/MouseGrid'
 import { DataStream } from '@/components/animations/DataStream'
 import { Button } from '@/components/ui/Button'
+import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
 
 export const metadata = {
@@ -92,6 +93,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <ScrollReveal>
       <section className="bg-slate-950 py-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
@@ -113,6 +115,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       <Footer />
     </div>

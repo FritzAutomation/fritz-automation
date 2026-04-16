@@ -3,76 +3,47 @@
 import { useState, useEffect, useRef } from 'react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
-type BootPhase = 'checking' | 'booting' | 'ready' | 'exiting' | 'done'
-
 const BOOT_LINES = [
-  '> Initializing Fritz Automation...',
-  '> Loading modules...',
-  '> Connecting services...',
-  '> System ready.',
+  { text: '[fritz-automation v1.0.0]', color: 'text-slate-300' },
+  { text: 'loading modules...........', suffix: ' OK', color: 'text-slate-500' },
+  { text: 'establishing connection...', suffix: ' OK', color: 'text-slate-500' },
+  { text: 'initializing ui...........', suffix: ' OK', color: 'text-slate-500' },
+  { text: 'ready.', color: 'text-white' },
 ]
 
-const LINE_DELAY = 400 // ms between lines
-const EXIT_DELAY = 600 // ms after last line before exit
-const EXIT_DURATION = 400 // ms for exit animation
+const LINE_DELAY = 350
+const POST_READY_PAUSE = 500
+const FADE_DURATION = 400
 
 export function BootSplash() {
   const prefersReducedMotion = useReducedMotion()
-  const [phase, setPhase] = useState<BootPhase>('checking')
   const [visibleLines, setVisibleLines] = useState(0)
+  const [fading, setFading] = useState(false)
+  const [done, setDone] = useState(false)
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
   useEffect(() => {
-    // Skip entirely if reduced motion
     if (prefersReducedMotion) {
-      setPhase('done')
+      setDone(true)
       return
     }
 
-    // Check session storage
-    try {
-      if (sessionStorage.getItem('fritz-booted')) {
-        setPhase('done')
-        return
-      }
-    } catch {
-      // sessionStorage blocked, skip splash
-      setPhase('done')
-      return
-    }
-
-    // Lock body scroll
     document.body.style.overflow = 'hidden'
 
-    // Start boot sequence
-    setPhase('booting')
-
     BOOT_LINES.forEach((_, i) => {
-      const t = setTimeout(() => {
-        setVisibleLines(i + 1)
-        if (i === BOOT_LINES.length - 1) {
-          setPhase('ready')
-        }
-      }, i * LINE_DELAY)
+      const t = setTimeout(() => setVisibleLines(i + 1), (i + 1) * LINE_DELAY)
       timersRef.current.push(t)
     })
 
-    // Exit after last line + delay
-    const exitTimer = setTimeout(() => {
-      setPhase('exiting')
-    }, BOOT_LINES.length * LINE_DELAY + EXIT_DELAY)
-    timersRef.current.push(exitTimer)
+    const fadeTimer = setTimeout(() => {
+      setFading(true)
+    }, BOOT_LINES.length * LINE_DELAY + POST_READY_PAUSE)
+    timersRef.current.push(fadeTimer)
 
-    // Remove from DOM after exit animation
     const doneTimer = setTimeout(() => {
-      setPhase('done')
+      setDone(true)
       document.body.style.overflow = ''
-      try {
-        sessionStorage.setItem('fritz-booted', '1')
-      } catch {
-        // ignore
-      }
-    }, BOOT_LINES.length * LINE_DELAY + EXIT_DELAY + EXIT_DURATION)
+    }, BOOT_LINES.length * LINE_DELAY + POST_READY_PAUSE + FADE_DURATION)
     timersRef.current.push(doneTimer)
 
     return () => {
@@ -81,27 +52,24 @@ export function BootSplash() {
     }
   }, [prefersReducedMotion])
 
-  if (phase === 'done') return null
+  if (done) return null
 
   return (
     <div
-      className={`fixed inset-0 z-[100] bg-slate-900 flex items-center justify-center ${
-        phase === 'exiting' ? 'boot-exit' : ''
-      }`}
+      className="fixed inset-0 z-[60] bg-slate-950 flex items-center justify-center transition-opacity"
+      style={{
+        opacity: fading ? 0 : 1,
+        transitionDuration: `${FADE_DURATION}ms`,
+      }}
       aria-hidden="true"
     >
-      <div className="font-mono text-sm sm:text-base text-emerald-400 space-y-2 px-6 max-w-lg w-full">
+      <div className="font-mono text-sm sm:text-base space-y-1.5 px-6 max-w-lg w-full">
         {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span>{line}</span>
-            {i === visibleLines - 1 && phase !== 'ready' && phase !== 'exiting' && (
-              <span className="boot-cursor inline-block w-2 h-4 bg-emerald-400 ml-1" />
-            )}
+          <div key={i} className={line.color}>
+            {line.text}
+            {line.suffix && <span className="text-emerald-400">{line.suffix}</span>}
           </div>
         ))}
-        {phase === 'ready' && (
-          <span className="boot-cursor inline-block w-2 h-4 bg-emerald-400 ml-1" />
-        )}
       </div>
     </div>
   )

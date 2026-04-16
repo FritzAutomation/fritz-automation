@@ -6,6 +6,7 @@ import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { MouseGrid } from '@/components/animations/MouseGrid'
 import { DataStream } from '@/components/animations/DataStream'
 import { Button } from '@/components/ui/Button'
+import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -64,6 +65,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <ScrollReveal>
       <section className="bg-slate-950 py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex border-b border-slate-800 mb-10 overflow-x-auto">
@@ -86,6 +88,7 @@ export default function ServicesPage() {
           {tab === 'automation' && <AutomationPanel />}
         </div>
       </section>
+      </ScrollReveal>
 
       <Footer />
     </div>
