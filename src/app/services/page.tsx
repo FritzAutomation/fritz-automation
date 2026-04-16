@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { track } from '@vercel/analytics'
 
 const tabs = [
   { id: 'websites', file: 'websites.tsx', label: 'Websites & online stores' },
@@ -131,7 +132,7 @@ function WebsitesPanel() {
       </p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/contact"><Button>Start a project</Button></Link>
+        <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'services_websites' })}><Button>Start a project</Button></Link>
         <Link href="/work"><Button variant="outline">See examples</Button></Link>
       </div>
     </div>
@@ -179,7 +180,7 @@ function AutomationPanel() {
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/contact"><Button>Start a project</Button></Link>
+        <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'services_automation' })}><Button>Start a project</Button></Link>
         <Link href="/demos"><Button variant="outline">See demos</Button></Link>
       </div>
     </div>
