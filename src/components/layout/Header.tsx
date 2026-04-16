@@ -5,34 +5,19 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { FritzLogo } from '@/components/FritzLogo'
-import { navLinks } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
-function MorphText({ text, isActive }: { text: string; isActive: boolean }) {
-  const [isHovered, setIsHovered] = useState(false)
-  return (
-    <span
-      className="inline-flex"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {text.split('').map((char, i) => (
-        <span
-          key={i}
-          className={cn(
-            'inline-block transition-all duration-300',
-            isActive ? 'text-primary' : isHovered ? 'text-primary' : 'text-slate-700'
-          )}
-          style={{
-            transitionDelay: isHovered ? `${i * 30}ms` : '0ms',
-            transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
-          }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      ))}
-    </span>
-  )
+const tabs = [
+  { href: '/', label: '~/home' },
+  { href: '/work', label: '~/work' },
+  { href: '/services', label: '~/services' },
+  { href: '/about', label: '~/about' },
+  { href: '/contact', label: '~/contact' },
+]
+
+function isTabActive(pathname: string, href: string): boolean {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(href + '/')
 }
 
 export function Header() {
@@ -45,121 +30,114 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex justify-between items-center h-16">
-            <Link href="/" className="group hover:opacity-90 transition-opacity" aria-label="Fritz Automation home">
-              <FritzLogo width={200} variant="light" />
+      <header className="sticky top-0 z-50 bg-slate-950 border-b border-slate-800">
+        <div className="max-w-[100vw] mx-auto">
+          <nav className="flex items-center h-12">
+            <Link
+              href="/"
+              className="shrink-0 px-4 hover:opacity-80 transition-opacity"
+              aria-label="Fritz Automation home"
+            >
+              <FritzLogo width={140} variant="dark" />
             </Link>
 
-            <ul className="hidden md:flex items-center gap-1">
-              {navLinks.map((item, index) => {
-                if (!('href' in item)) return null
-                const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+            <div className="hidden md:flex items-center flex-1 h-full overflow-x-auto">
+              {tabs.map((tab, index) => {
+                const active = isTabActive(pathname, tab.href)
                 return (
-                  <li
-                    key={item.href}
+                  <Link
+                    key={tab.href}
+                    href={tab.href}
                     className={cn(
+                      'relative h-full px-4 flex items-center font-mono text-sm transition-colors shrink-0',
                       'transform transition-all duration-500 ease-out',
-                      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2',
+                      active
+                        ? 'text-emerald-300 bg-slate-800/60'
+                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-900/60'
                     )}
-                    style={{ transitionDelay: mounted ? `${index * 75}ms` : '0ms' }}
+                    style={{ transitionDelay: mounted ? `${index * 60}ms` : '0ms' }}
+                    aria-current={active ? 'page' : undefined}
                   >
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        'px-4 py-2 rounded-lg transition-colors font-medium block',
-                        isActive ? 'bg-primary/10' : 'hover:bg-primary/5'
-                      )}
-                      aria-current={isActive ? 'page' : undefined}
-                    >
-                      <MorphText text={item.label} isActive={isActive} />
-                    </Link>
-                  </li>
+                    {tab.label}
+                    {active && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-400" />
+                    )}
+                  </Link>
                 )
               })}
-              <li
-                className={cn(
-                  'ml-1 transform transition-all duration-500 ease-out',
-                  mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                )}
-                style={{ transitionDelay: mounted ? `${navLinks.length * 75}ms` : '0ms' }}
-              >
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
-                  className="px-3 py-2 rounded-lg text-slate-500 hover:text-primary hover:bg-primary/5 transition-colors font-mono text-sm"
-                  aria-label="Open command palette"
-                  title="Ctrl+K"
-                >
-                  &gt;_
-                </button>
-              </li>
-              <li
-                className={cn(
-                  'ml-1 transform transition-all duration-500 ease-out',
-                  mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                )}
-                style={{ transitionDelay: mounted ? `${(navLinks.length + 1) * 75}ms` : '0ms' }}
-              >
-                <Link href="/contact">
-                  <Button size="sm">Start a project</Button>
-                </Link>
-              </li>
-            </ul>
+            </div>
 
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
-              aria-label="Toggle mobile menu"
-            >
-              {mobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-              ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-              )}
-            </button>
+            <div className="hidden md:flex items-center gap-2 px-3 shrink-0">
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
+                className="px-2 py-1 rounded text-slate-500 hover:text-emerald-400 hover:bg-slate-800/60 transition-colors font-mono text-sm"
+                aria-label="Open command palette"
+                title="Ctrl+K"
+              >
+                &gt;_
+              </button>
+              <Link href="/contact">
+                <Button size="sm">Start a project</Button>
+              </Link>
+            </div>
+
+            <div className="md:hidden ml-auto px-4">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg text-slate-400 hover:bg-slate-800 transition-colors"
+                aria-label="Toggle mobile menu"
+              >
+                {mobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+                )}
+              </button>
+            </div>
           </nav>
         </div>
       </header>
 
       {mobileMenuOpen && (
         <>
-          <div className="fixed inset-0 bg-black/50 z-40 md:hidden animate-fade-in" onClick={() => setMobileMenuOpen(false)} />
-          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-900 z-50 md:hidden p-6 animate-slide-in-right shadow-2xl">
+          <div
+            className="fixed inset-0 bg-black/60 z-40 md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-950 z-50 md:hidden p-6 shadow-2xl border-l border-slate-800">
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+              className="absolute top-6 right-6 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400"
               aria-label="Close menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <div className="mt-16">
-              <ul className="space-y-2">
-                {navLinks.map((item) => {
-                  if (!('href' in item)) return null
-                  const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className={cn(
-                          'block px-4 py-3 rounded-xl transition-colors font-medium',
-                          isActive ? 'text-primary bg-white/20' : 'text-white hover:bg-white/10'
-                        )}
-                        aria-current={isActive ? 'page' : undefined}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  )
-                })}
-                <li className="pt-4">
-                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full">Start a project</Button>
+            <div className="mt-16 space-y-2">
+              {tabs.map(tab => {
+                const active = isTabActive(pathname, tab.href)
+                return (
+                  <Link
+                    key={tab.href}
+                    href={tab.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      'block px-4 py-3 rounded-lg font-mono text-sm transition-colors',
+                      active
+                        ? 'text-emerald-300 bg-emerald-500/10'
+                        : 'text-slate-400 hover:bg-slate-800'
+                    )}
+                    aria-current={active ? 'page' : undefined}
+                  >
+                    {tab.label}
                   </Link>
-                </li>
-              </ul>
+                )
+              })}
+              <div className="pt-4">
+                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full">Start a project</Button>
+                </Link>
+              </div>
             </div>
           </div>
         </>
