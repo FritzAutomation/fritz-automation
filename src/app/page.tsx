@@ -3,18 +3,111 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
+import { ScrollReveal } from '@/components/ScrollReveal'
 import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 import { StatusAnchor } from '@/components/v3/StatusAnchor'
 import { PhotoCard } from '@/components/v3/PhotoCard'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 import { track } from '@vercel/analytics'
 
+/**
+ * Eyebrow that types in left-to-right when scrolled into view.
+ * SSR-safe: renders fully visible by default. Only animates if the element
+ * is below the initial fold AND prefers-reduced-motion is off.
+ */
 function Eyebrow({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [state, setState] = useState<'static' | 'hidden' | 'typing'>('static')
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight - 60) return // already visible — leave alone
+    setState('hidden')
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setState('typing')
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-2.5 flex items-center gap-2">
       <span className="block w-6 h-px bg-[var(--accent)] opacity-60" aria-hidden />
-      <span className="text-[var(--accent)]">{children}</span>
+      <span
+        ref={ref}
+        className="text-[var(--accent)] whitespace-nowrap overflow-hidden align-bottom"
+        style={{
+          display: 'inline-block',
+          maxWidth: state === 'hidden' ? '0' : '40ch',
+          transition: state === 'typing' ? 'max-width 0.7s steps(36, end)' : 'none',
+        }}
+      >
+        {children}
+      </span>
+    </div>
+  )
+}
+
+const HERO_PROMPT = 'josh@fritz-automation:~$ cat intro.md'
+
+/**
+ * Renders the hero command prompt. SSR shows the full text (good for SEO + JS-off);
+ * on mount it clears + types the text out at ~18ms/char, then the rest of the hero
+ * cascades in via CSS keyframes with delays.
+ */
+function HeroCmdPrompt() {
+  const [text, setText] = useState(HERO_PROMPT) // SSR + first paint = full text
+  const [phase, setPhase] = useState<'static' | 'typing' | 'done'>('static')
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    setText('')
+    setPhase('typing')
+    let i = 0
+    const tick = () => {
+      if (i > HERO_PROMPT.length) {
+        setPhase('done')
+        return
+      }
+      setText(HERO_PROMPT.slice(0, i))
+      i++
+      window.setTimeout(tick, 18)
+    }
+    const start = window.setTimeout(tick, 80)
+    return () => window.clearTimeout(start)
+  }, [])
+
+  // Highlight `josh` (accent), `@` (dim), `fritz-automation` (blue), `:~$` (dim), rest (ink)
+  const m = text.match(/^(josh)?(@)?(fritz-automation)?(:~\$)?( ?)(.*)$/) || []
+  const [, j = '', at = '', host = '', path = '', sp = '', cmd = ''] = m
+
+  return (
+    <div className="font-mono text-xs sm:text-sm text-[var(--ink-soft)] mb-5 min-h-[20px]">
+      {j && <span className="text-[var(--accent)]">{j}</span>}
+      {at && <span className="text-[var(--ink-dim)]">{at}</span>}
+      {host && <span className="text-[var(--blue)]">{host}</span>}
+      {path && <span className="text-[var(--ink-dim)]">{path}</span>}
+      {sp}
+      {cmd && <span className="text-[var(--ink)]">{cmd}</span>}
+      <span
+        className="inline-block w-2 h-3.5 ml-1 align-[-2px] bg-[var(--accent)]"
+        style={{
+          animation: 'v3-blink 0.9s steps(2) infinite',
+          opacity: phase === 'done' ? undefined : 1,
+        }}
+        aria-hidden
+      />
     </div>
   )
 }
@@ -29,21 +122,23 @@ export default function HomePage() {
         <GitGraphBackdrop height={600} />
         <div className="relative z-[2] max-w-[1200px] mx-auto w-full px-6 sm:px-8 pt-20 pb-16 md:pt-24 md:pb-20 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-start flex-1">
           <div>
-            <div className="font-mono text-xs sm:text-sm text-[var(--ink-soft)] mb-5">
-              <span className="text-[var(--accent)]">josh</span>
-              <span className="text-[var(--ink-dim)]">@</span>
-              <span className="text-[var(--blue)]">fritz-automation</span>
-              <span className="text-[var(--ink-dim)]">:~$</span>{' '}
-              <span className="text-[var(--ink)]">cat intro.md</span>
-              <span className="inline-block w-2 h-3.5 bg-[var(--accent)] ml-1 align-[-2px]" style={{ animation: 'v3-blink 0.9s steps(2) infinite' }} />
-            </div>
-            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-[-0.028em] text-[var(--heading)] max-w-[14ch]">
+            <HeroCmdPrompt />
+            <h1
+              className="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-[-0.028em] text-[var(--heading)] max-w-[14ch]"
+              style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.7s both' }}
+            >
               Custom software<br />for <span className="text-[var(--accent)]">small businesses.</span>
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-[var(--ink)] max-w-[50ch] leading-relaxed">
+            <p
+              className="mt-6 text-lg md:text-xl text-[var(--ink)] max-w-[50ch] leading-relaxed"
+              style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.88s both' }}
+            >
               <span className="text-[var(--heading)] font-semibold">I&apos;m Josh.</span> I build websites that sell, and internal tools that save your team hours. Built by one developer, in <span className="text-[var(--accent)]">Burlington, Iowa</span>.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div
+              className="mt-8 flex flex-wrap gap-3"
+              style={{ animation: 'v3-fade-in 0.5s ease 1.06s both' }}
+            >
               <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_hero' })}>
                 <Button size="lg">Start a project</Button>
               </Link>
@@ -52,7 +147,9 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <StatusAnchor />
+          <div style={{ animation: 'v3-rise-long 0.7s cubic-bezier(0.2,0.8,0.2,1) 1.15s both' }}>
+            <StatusAnchor />
+          </div>
         </div>
       </section>
 
@@ -75,6 +172,7 @@ export default function HomePage() {
       </div>
 
       {/* What I build */}
+      <ScrollReveal>
       <section className="bg-[var(--bg)] py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// what i build</Eyebrow>
@@ -132,8 +230,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Selected work */}
+      <ScrollReveal>
       <section className="bg-[var(--surface-overlay)] py-20 border-t border-[var(--line)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8 flex-wrap gap-3">
@@ -194,8 +294,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Whoami */}
+      <ScrollReveal>
       <section className="bg-[var(--bg)] py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// whoami</Eyebrow>
@@ -211,8 +313,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* How it works — runbook */}
+      <ScrollReveal>
       <section className="bg-[var(--surface-overlay)] py-20 border-t border-[var(--line)]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// how it works</Eyebrow>
@@ -262,8 +366,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Final CTA */}
+      <ScrollReveal>
       <section className="bg-[var(--bg)] text-center" style={{ padding: '90px 24px 110px' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">
@@ -288,6 +394,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       <Footer />
 

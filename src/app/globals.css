@@ -100,6 +100,8 @@ html[data-theme="paper"] .v3-git-dot { opacity: 0.8; }
 /* === v3 keyframes === */
 @keyframes v3-pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.85);} }
 @keyframes v3-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes v3-rise-long { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes v3-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes v3-fade-in-row { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 @keyframes v3-dot-pulse { 0% { transform: scale(2); opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); } 100% { transform: scale(1); opacity: 0.55; filter: none; } }
 @keyframes v3-blink { 50% { opacity: 0; } }
