@@ -25,9 +25,13 @@ function nowTs() {
  * Fixed bottom-right "build log" strip that emits compile-output lines
  * as the visitor scrolls and clicks. Visible on desktop only. On mobile,
  * MobileTicker handles the same idea in a single rotating line.
+ *
+ * Hides itself when the footer (or any [data-buildlog-hide] element)
+ * scrolls into view, so it doesn't overlap footer links / CTAs.
  */
 export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
   const [rows, setRows] = useState<Entry[]>([{ ts: nowTs(), level: 'ready', text: `serving /${pageName}`, kind: 'e' }])
+  const [hidden, setHidden] = useState(false)
   const idxRef = useRef(0)
   const lastScrollRef = useRef(0)
 
@@ -55,14 +59,43 @@ export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     document.addEventListener('click', onClick, true)
+
+    // Hide when the footer (or any opt-out element) enters view.
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
+    )
+    let observer: IntersectionObserver | null = null
+    if (targets.length) {
+      observer = new IntersectionObserver(
+        entries => {
+          // hidden if ANY watched element is intersecting
+          const anyVisible = entries.some(e => e.isIntersecting)
+          // re-check the rest by reading their current state via getBoundingClientRect
+          // (entries only contains the ones whose intersection just changed)
+          if (anyVisible) {
+            setHidden(true)
+            return
+          }
+          const stillIntersecting = targets.some(t => {
+            const r = t.getBoundingClientRect()
+            return r.top < window.innerHeight && r.bottom > 0
+          })
+          setHidden(stillIntersecting)
+        },
+        { threshold: 0, rootMargin: '0px 0px -40px 0px' }
+      )
+      targets.forEach(t => observer!.observe(t))
+    }
+
     return () => {
       window.removeEventListener('scroll', onScroll)
       document.removeEventListener('click', onClick, true)
+      observer?.disconnect()
     }
   }, [])
 
   return (
-    <div className="v3-buildlog" aria-hidden="true">
+    <div className={`v3-buildlog ${hidden ? 'is-hidden' : ''}`} aria-hidden="true">
       {rows.map((r, i) => (
         <div className="row" key={`${r.ts}-${i}`}>
           <span className="t">[{r.ts}]</span>
@@ -83,6 +116,13 @@ export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
           mask-image: linear-gradient(to top, black 65%, transparent 100%);
           display: flex;
           flex-direction: column;
+          opacity: 1;
+          transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .v3-buildlog.is-hidden {
+          opacity: 0;
+          transform: translateY(8px);
+          pointer-events: none;
         }
         .row {
           font-family: var(--font-mono), monospace;
@@ -102,9 +142,12 @@ export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
   )
 }
 
-/** Mobile-only single-line ticker that rotates through events every 5s. */
+/** Mobile-only single-line ticker that rotates through events every 5s.
+ *  Hides when the footer enters view (same pattern as BuildLog). */
 export function MobileTicker() {
   const [event, setEvent] = useState({ e: 'ready', text: 'serving home' })
+  const [hidden, setHidden] = useState(false)
+
   useEffect(() => {
     const events = [
       { e: 'GET',     text: '/work · 22ms' },
@@ -119,11 +162,33 @@ export function MobileTicker() {
       setEvent(events[i % events.length])
       i++
     }, 5000)
-    return () => window.clearInterval(interval)
+
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
+    )
+    let observer: IntersectionObserver | null = null
+    if (targets.length) {
+      observer = new IntersectionObserver(
+        () => {
+          const stillIntersecting = targets.some(t => {
+            const r = t.getBoundingClientRect()
+            return r.top < window.innerHeight && r.bottom > 0
+          })
+          setHidden(stillIntersecting)
+        },
+        { threshold: 0, rootMargin: '0px 0px -40px 0px' }
+      )
+      targets.forEach(t => observer!.observe(t))
+    }
+
+    return () => {
+      window.clearInterval(interval)
+      observer?.disconnect()
+    }
   }, [])
 
   return (
-    <div className="v3-mobile-ticker" aria-hidden="true">
+    <div className={`v3-mobile-ticker ${hidden ? 'is-hidden' : ''}`} aria-hidden="true">
       <span className="e">{event.e}</span> {event.text}
       <style jsx>{`
         .v3-mobile-ticker {
@@ -147,6 +212,12 @@ export function MobileTicker() {
             text-overflow: ellipsis;
             z-index: 30;
             pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+          }
+          .v3-mobile-ticker.is-hidden {
+            opacity: 0;
+            transform: translateY(8px);
           }
         }
         .e { color: var(--accent); }
