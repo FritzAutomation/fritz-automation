@@ -13,6 +13,7 @@ import { ContextMenu } from '@/components/ContextMenu'
 import { AnalyticsWrapper } from '@/components/AnalyticsWrapper'
 import { ThemeProvider } from '@/components/v3/ThemeProvider'
 import { BuildLog, MobileTicker } from '@/components/v3/BuildLog'
+import { PaletteHint } from '@/components/v3/PaletteHint'
 import './globals.css'
 
 const inter = Inter({
@@ -106,6 +107,7 @@ export default function RootLayout({
         <CursorEffects />
         <BuildLog />
         <MobileTicker />
+        <PaletteHint />
         <AnalyticsWrapper />
       </body>
     </html>

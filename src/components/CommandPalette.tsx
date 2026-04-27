@@ -43,12 +43,20 @@ export function CommandPalette() {
     [close, router]
   )
 
-  // Keyboard shortcut: Cmd+K / Ctrl+K
+  // Keyboard shortcut: Cmd+K / Ctrl+K / `/`
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault()
         setOpen((prev) => !prev)
+        return
+      }
+      if (e.key === '/') {
+        const t = e.target as HTMLElement | null
+        const tag = t?.tagName
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || t?.isContentEditable) return
+        e.preventDefault()
+        setOpen(true)
       }
     }
     window.addEventListener('keydown', onKeyDown)

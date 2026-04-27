@@ -7,6 +7,7 @@ import { ScrollReveal } from '@/components/ScrollReveal'
 import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 import { StatusAnchor } from '@/components/v3/StatusAnchor'
 import { PhotoCard } from '@/components/v3/PhotoCard'
+import { TimeOfDayGreeting } from '@/components/v3/TimeOfDayGreeting'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -122,6 +123,7 @@ export default function HomePage() {
         <GitGraphBackdrop height={600} />
         <div className="relative z-[2] max-w-[1200px] mx-auto w-full px-6 sm:px-8 pt-20 pb-16 md:pt-24 md:pb-20 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-start flex-1">
           <div>
+            <TimeOfDayGreeting />
             <HeroCmdPrompt />
             <h1
               className="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-[-0.028em] text-[var(--heading)] max-w-[14ch]"

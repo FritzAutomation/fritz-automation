@@ -25,6 +25,7 @@ function isTabActive(pathname: string, href: string): boolean {
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [easter, setEaster] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => { setMounted(true) }, [])
@@ -37,10 +38,21 @@ export function Header() {
           <nav className="flex items-center h-12">
             <Link
               href="/"
-              className="shrink-0 px-4 hover:opacity-80 transition-opacity"
+              className="shrink-0 px-4 hover:opacity-80 transition-opacity relative"
               aria-label="Fritz Automation home"
+              onMouseEnter={() => setEaster(true)}
+              onMouseLeave={() => setEaster(false)}
             >
               <FritzLogo width={140} variant="dark" />
+              <span
+                aria-hidden
+                className={cn(
+                  'pointer-events-none absolute left-4 top-full mt-2 px-2.5 py-1 rounded-md border border-[var(--line)] bg-[var(--bg-card)] font-mono text-[12px] text-[var(--accent)] whitespace-nowrap transition-all duration-200 hidden md:block',
+                  easter ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'
+                )}
+              >
+                // hi.
+              </span>
             </Link>
 
             <div className="hidden md:flex items-center flex-1 h-full overflow-x-auto">
@@ -73,11 +85,12 @@ export function Header() {
             <div className="hidden md:flex items-center gap-2 px-3 shrink-0">
               <button
                 onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
-                className="px-2 py-1 rounded text-[var(--ink-dim)] hover:text-[var(--accent)] hover:bg-[var(--surface)] transition-colors font-mono text-sm"
+                className="px-2 py-1 rounded text-[var(--ink-dim)] hover:text-[var(--accent)] hover:bg-[var(--surface)] transition-colors font-mono text-sm flex items-center gap-1.5"
                 aria-label="Open command palette"
-                title="Ctrl+K"
+                title="Press / or Ctrl+K"
               >
-                &gt;_
+                <span>&gt;_</span>
+                <kbd className="hidden lg:inline-block px-1.5 py-0.5 rounded border border-[var(--line)] border-b-2 bg-[var(--surface)] text-[10px] leading-none text-[var(--accent)]">/</kbd>
               </button>
               <Link
                 href="/contact"
