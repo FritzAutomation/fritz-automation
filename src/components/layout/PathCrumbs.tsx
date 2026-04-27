@@ -15,17 +15,17 @@ export function PathCrumbs({ trail }: { trail?: { label: string; href?: string }
     }))
 
   return (
-    <div className="font-mono text-xs text-slate-500 flex items-center gap-1 flex-wrap">
-      <Link href="/" className="hover:text-emerald-400 transition-colors">~</Link>
+    <div className="font-mono text-xs text-[var(--ink-dim)] flex items-center gap-1 flex-wrap">
+      <Link href="/" className="hover:text-[var(--accent)] transition-colors">~</Link>
       {segments.map((seg, i) => (
         <span key={i} className="flex items-center gap-1">
-          <span className="text-slate-600">/</span>
+          <span className="text-[var(--ink-dim)]">/</span>
           {seg.href && i < segments.length - 1 ? (
-            <Link href={seg.href} className="hover:text-emerald-400 transition-colors">
+            <Link href={seg.href} className="hover:text-[var(--accent)] transition-colors">
               {seg.label}
             </Link>
           ) : (
-            <span className="text-slate-300">{seg.label}</span>
+            <span className="text-[var(--ink)]">{seg.label}</span>
           )}
         </span>
       ))}

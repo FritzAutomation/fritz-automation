@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import { FritzLogo } from '@/components/FritzLogo'
 import { contactInfo, siteConfig, businessInfo } from '@/lib/constants'
-import { DataStream } from '@/components/animations/DataStream'
-import { MouseGrid } from '@/components/animations/MouseGrid'
 
 const currentYear = new Date().getFullYear()
 
@@ -20,9 +18,7 @@ const resourceLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-slate-900 text-white py-16">
-      <MouseGrid />
-      <DataStream />
+    <footer className="relative overflow-hidden bg-[var(--bg-soft)] border-t border-[var(--line)] text-[var(--heading)] py-16">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {/* Brand */}
@@ -30,7 +26,7 @@ export function Footer() {
             <Link href="/" className="mb-4 inline-block" aria-label="Fritz Automation home">
               <FritzLogo width={160} variant="dark" />
             </Link>
-            <p className="text-slate-400 text-sm mb-6">
+            <p className="text-[var(--ink-soft)] text-sm mb-6">
               {siteConfig.description}
             </p>
 
@@ -40,7 +36,7 @@ export function Footer() {
                 href={contactInfo.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-[var(--bg-card)] hover:bg-[var(--line-soft)] rounded-lg flex items-center justify-center transition-colors"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -51,7 +47,7 @@ export function Footer() {
                 href={contactInfo.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-[var(--bg-card)] hover:bg-[var(--line-soft)] rounded-lg flex items-center justify-center transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -60,7 +56,7 @@ export function Footer() {
               </a>
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-[var(--bg-card)] hover:bg-[var(--line-soft)] rounded-lg flex items-center justify-center transition-colors"
                 aria-label="Email"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -76,7 +72,7 @@ export function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-slate-400 hover:text-white transition-colors text-sm">
+                  <Link href={link.href} className="text-[var(--ink-soft)] hover:text-[var(--heading)] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -90,7 +86,7 @@ export function Footer() {
             <ul className="space-y-2">
               {resourceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-slate-400 hover:text-white transition-colors text-sm">
+                  <Link href={link.href} className="text-[var(--ink-soft)] hover:text-[var(--heading)] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -99,16 +95,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+        <div className="border-t border-[var(--line)] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[var(--ink-dim)] text-sm">
           <p>&copy; {currentYear} {siteConfig.legalName}. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">
+            <Link href="/privacy" className="hover:text-[var(--heading)] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-white transition-colors">
+            <Link href="/terms" className="hover:text-[var(--heading)] transition-colors">
               Terms of Service
             </Link>
-            <Link href="/portal" className="hover:text-white transition-colors">
+            <Link href="/portal" className="hover:text-[var(--heading)] transition-colors">
               Client Portal
             </Link>
           </div>

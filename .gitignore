@@ -50,3 +50,6 @@ supabase/.temp/
 
 # Playwright
 .playwright-mcp/
+
+# Design scratch (v3 demo prototypes — kept out of source control)
+_review/

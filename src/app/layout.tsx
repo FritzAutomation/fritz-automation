@@ -6,13 +6,13 @@ import { CommandPalette } from '@/components/CommandPalette'
 import { ScrollProgress } from '@/components/ScrollProgress'
 import { CursorEffects } from '@/components/CursorEffects'
 import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData'
-import { BootSplash } from '@/components/animations/BootSplash'
 import { StatusBar } from '@/components/layout/StatusBar'
 import { KeyboardShortcuts } from '@/components/KeyboardShortcuts'
 import { ShortcutOverlay } from '@/components/ShortcutOverlay'
 import { ContextMenu } from '@/components/ContextMenu'
-import { Minimap } from '@/components/Minimap'
 import { AnalyticsWrapper } from '@/components/AnalyticsWrapper'
+import { ThemeProvider } from '@/components/v3/ThemeProvider'
+import { BuildLog, MobileTicker } from '@/components/v3/BuildLog'
 import './globals.css'
 
 const inter = Inter({
@@ -76,13 +76,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <OrganizationSchema />
         <WebSiteSchema />
+        {/* Set theme synchronously before paint to avoid flash-of-wrong-theme. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('fa.theme');if(t==='dark'||t==='dim'||t==='paper'){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','dark');}}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`,
+          }}
+        />
       </head>
       <body className="font-sans">
-        <BootSplash />
+        <ThemeProvider />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
@@ -97,8 +103,9 @@ export default function RootLayout({
         <KeyboardShortcuts />
         <ShortcutOverlay />
         <ContextMenu />
-        <Minimap />
         <CursorEffects />
+        <BuildLog />
+        <MobileTicker />
         <AnalyticsWrapper />
       </body>
     </html>

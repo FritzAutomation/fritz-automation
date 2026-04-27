@@ -37,16 +37,16 @@ export function ShortcutOverlay() {
     <>
       <div className="fixed inset-0 z-[55] bg-black/60" onClick={close} />
       <div className="fixed inset-0 z-[55] flex items-center justify-center pointer-events-none">
-        <div className="pointer-events-auto bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-6 max-w-sm w-full mx-4">
+        <div className="pointer-events-auto bg-[var(--bg-soft)] border border-[var(--line)] rounded-xl shadow-2xl p-6 max-w-sm w-full mx-4">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-mono text-sm text-slate-300">Keyboard shortcuts</h2>
-            <button onClick={close} className="text-slate-500 hover:text-slate-300 text-sm font-mono">esc</button>
+            <h2 className="font-mono text-sm text-[var(--ink)]">Keyboard shortcuts</h2>
+            <button onClick={close} className="text-[var(--ink-dim)] hover:text-[var(--ink)] text-sm font-mono">esc</button>
           </div>
           <div className="space-y-2">
             {shortcuts.map(s => (
               <div key={s.key} className="flex items-center justify-between">
-                <span className="text-sm text-slate-400">{s.desc}</span>
-                <kbd className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-xs font-mono text-emerald-400">{s.key}</kbd>
+                <span className="text-sm text-[var(--ink-soft)]">{s.desc}</span>
+                <kbd className="px-2 py-0.5 rounded bg-[var(--bg-card)] border border-[var(--line-soft)] text-xs font-mono text-[var(--accent)]">{s.key}</kbd>
               </div>
             ))}
           </div>

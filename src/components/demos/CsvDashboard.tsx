@@ -175,17 +175,17 @@ export function CsvDashboard() {
   if (!data) {
     return (
       <div
-        className="border-2 border-dashed border-slate-700 rounded-lg p-12 text-center"
+        className="border-2 border-dashed border-[var(--line-soft)] rounded-lg p-12 text-center"
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
-        <div className="font-mono text-slate-500 mb-4">
+        <div className="font-mono text-[var(--ink-dim)] mb-4">
           <div className="text-2xl mb-2">↑</div>
           Drop a CSV file here
         </div>
-        <div className="text-slate-600 text-sm mb-4">or</div>
+        <div className="text-[var(--ink-dim)] text-sm mb-4">or</div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <label className="cursor-pointer px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-mono text-sm transition-colors">
+          <label className="cursor-pointer px-4 py-2 bg-[var(--bg-card)] hover:bg-[var(--line-soft)] text-[var(--ink)] rounded-lg font-mono text-sm transition-colors">
             Browse files
             <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
           </label>
@@ -194,7 +194,7 @@ export function CsvDashboard() {
               track('demo_interaction', { action: 'sample_data_loaded' })
               parseCSV(sampleCsvString, 'sample')
             }}
-            className="px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg font-mono text-sm transition-colors border border-emerald-500/30"
+            className="px-4 py-2 bg-[var(--accent-glow)] hover:bg-emerald-500/30 text-[var(--accent)] rounded-lg font-mono text-sm transition-colors border border-[var(--accent)]"
           >
             Use sample data
           </button>
@@ -207,15 +207,15 @@ export function CsvDashboard() {
     <div className="space-y-6">
       {/* Stats cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="bg-slate-800/60 rounded-lg p-4 border border-slate-700/50">
-          <div className="font-mono text-xs text-slate-500 uppercase tracking-wide">Rows</div>
-          <div className="text-2xl font-bold text-white mt-1">{formatNumber(filteredRows.length)}</div>
+        <div className="bg-[var(--surface)] rounded-lg p-4 border border-[var(--line-soft)]/50">
+          <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide">Rows</div>
+          <div className="text-2xl font-bold text-[var(--heading)] mt-1">{formatNumber(filteredRows.length)}</div>
         </div>
         {stats.slice(0, 3).map(s => (
-          <div key={s.col} className="bg-slate-800/60 rounded-lg p-4 border border-slate-700/50">
-            <div className="font-mono text-xs text-slate-500 uppercase tracking-wide">{s.col} (total)</div>
-            <div className="text-2xl font-bold text-white mt-1">{formatNumber(s.sum)}</div>
-            <div className="text-xs text-slate-500 mt-1">avg: {formatNumber(s.avg)}</div>
+          <div key={s.col} className="bg-[var(--surface)] rounded-lg p-4 border border-[var(--line-soft)]/50">
+            <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide">{s.col} (total)</div>
+            <div className="text-2xl font-bold text-[var(--heading)] mt-1">{formatNumber(s.sum)}</div>
+            <div className="text-xs text-[var(--ink-dim)] mt-1">avg: {formatNumber(s.avg)}</div>
           </div>
         ))}
       </div>
@@ -223,8 +223,8 @@ export function CsvDashboard() {
       {/* Charts */}
       <div className="grid md:grid-cols-2 gap-4">
         {chartData.bar && (
-          <div className="bg-slate-800/40 rounded-lg p-4 border border-slate-700/50">
-            <div className="font-mono text-xs text-slate-500 mb-3">{chartData.bar.label} by category</div>
+          <div className="bg-[var(--bg-card)]/40 rounded-lg p-4 border border-[var(--line-soft)]/50">
+            <div className="font-mono text-xs text-[var(--ink-dim)] mb-3">{chartData.bar.label} by category</div>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={chartData.bar.data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
@@ -240,8 +240,8 @@ export function CsvDashboard() {
           </div>
         )}
         {chartData.line && (
-          <div className="bg-slate-800/40 rounded-lg p-4 border border-slate-700/50">
-            <div className="font-mono text-xs text-slate-500 mb-3">{chartData.line.label} over time</div>
+          <div className="bg-[var(--bg-card)]/40 rounded-lg p-4 border border-[var(--line-soft)]/50">
+            <div className="font-mono text-xs text-[var(--ink-dim)] mb-3">{chartData.line.label} over time</div>
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={chartData.line.data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
@@ -259,16 +259,16 @@ export function CsvDashboard() {
       </div>
 
       {/* Data table */}
-      <div className="rounded-lg border border-slate-700/50 overflow-hidden">
+      <div className="rounded-lg border border-[var(--line-soft)]/50 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-800/80">
+              <tr className="bg-[var(--bg-card)]/80">
                 {data.headers.map(h => (
                   <th key={h} className="text-left px-3 py-2">
                     <button
                       onClick={() => handleSort(h)}
-                      className="font-mono text-xs text-slate-400 hover:text-emerald-400 transition-colors uppercase tracking-wide flex items-center gap-1"
+                      className="font-mono text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors uppercase tracking-wide flex items-center gap-1"
                     >
                       {h}
                       {sortCol === h && <span>{sortDir === 'asc' ? '↑' : '↓'}</span>}
@@ -278,7 +278,7 @@ export function CsvDashboard() {
                       placeholder="filter..."
                       value={filters[h] || ''}
                       onChange={(e) => setFilters(prev => ({ ...prev, [h]: e.target.value }))}
-                      className="mt-1 w-full bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs text-slate-300 placeholder-slate-600 focus:border-emerald-500 outline-none"
+                      className="mt-1 w-full bg-[var(--bg-soft)] border border-[var(--line-soft)] rounded px-2 py-0.5 text-xs text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none"
                     />
                   </th>
                 ))}
@@ -286,9 +286,9 @@ export function CsvDashboard() {
             </thead>
             <tbody>
               {filteredRows.slice(0, 50).map((row, i) => (
-                <tr key={i} className="border-t border-slate-800 hover:bg-slate-800/40 transition-colors">
+                <tr key={i} className="border-t border-[var(--line)] hover:bg-[var(--bg-card)]/40 transition-colors">
                   {data.headers.map(h => (
-                    <td key={h} className="px-3 py-1.5 text-slate-300 font-mono text-xs">{row[h]}</td>
+                    <td key={h} className="px-3 py-1.5 text-[var(--ink)] font-mono text-xs">{row[h]}</td>
                   ))}
                 </tr>
               ))}
@@ -296,7 +296,7 @@ export function CsvDashboard() {
           </table>
         </div>
         {filteredRows.length > 50 && (
-          <div className="px-3 py-2 text-xs text-slate-500 font-mono bg-slate-800/40 border-t border-slate-800">
+          <div className="px-3 py-2 text-xs text-[var(--ink-dim)] font-mono bg-[var(--bg-card)]/40 border-t border-[var(--line)]">
             Showing 50 of {filteredRows.length} rows
           </div>
         )}
@@ -306,13 +306,13 @@ export function CsvDashboard() {
       <div className="flex flex-wrap gap-3">
         <button
           onClick={downloadReport}
-          className="px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg font-mono text-sm transition-colors border border-emerald-500/30"
+          className="px-4 py-2 bg-[var(--accent-glow)] hover:bg-emerald-500/30 text-[var(--accent)] rounded-lg font-mono text-sm transition-colors border border-[var(--accent)]"
         >
           $ download report.csv
         </button>
         <button
           onClick={() => { setData(null); setFilters({}); setSortCol(null) }}
-          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-lg font-mono text-sm transition-colors"
+          className="px-4 py-2 bg-[var(--bg-card)] hover:bg-[var(--line-soft)] text-[var(--ink-soft)] rounded-lg font-mono text-sm transition-colors"
         >
           $ load new file
         </button>
