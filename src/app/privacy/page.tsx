@@ -1,8 +1,7 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { siteConfig, contactInfo, businessInfo } from '@/lib/constants'
-import { DataStream } from '@/components/animations/DataStream'
-import { MouseGrid } from '@/components/animations/MouseGrid'
+import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 
 export const metadata = {
   title: 'Privacy Policy',
@@ -17,19 +16,13 @@ export default function PrivacyPolicyPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 md:py-20">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
-          <MouseGrid />
-          <DataStream />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Privacy Policy
+      <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] py-16 md:py-20">
+        <GitGraphBackdrop height={400} />
+        <div className="relative z-[2] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-[-0.025em] text-[var(--heading)] mb-4">
+            Privacy Policy.
           </h1>
-          <p className="text-slate-400">
+          <p className="text-[var(--ink-soft)]">
             Last updated: {lastUpdated}
           </p>
         </div>

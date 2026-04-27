@@ -12,11 +12,13 @@ export function PhotoCard({ compact = false }: { compact?: boolean }) {
       <div className="head"><span className="b">$</span> cat ~/josh.png</div>
       <div className="img">
         <Image
-          src="/portfolio/josh.png"
+          src="/portfolio/josh.webp"
           alt="Josh Fritzjunker, Fritz Automation"
-          width={400}
-          height={500}
+          width={800}
+          height={1000}
           className="object-cover w-full h-full"
+          sizes="(max-width: 700px) 280px, 300px"
+          priority={false}
         />
         <div className="stamp">burlington · iowa</div>
       </div>
