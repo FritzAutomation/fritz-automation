@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const STORAGE_KEY = 'fa.palette-hint-seen'
 
@@ -13,6 +14,7 @@ export function PaletteHint() {
   const [show, setShow] = useState(false)
   const [hidden, setHidden] = useState(false)
   const dismissedRef = useRef(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     try { if (sessionStorage.getItem(STORAGE_KEY)) return } catch {}
@@ -38,32 +40,39 @@ export function PaletteHint() {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
 
-    // Hide when footer enters view, like BuildLog
-    const targets = Array.from(
-      document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
-    )
-    let observer: IntersectionObserver | null = null
-    if (targets.length) {
-      observer = new IntersectionObserver(
-        () => {
-          const stillIntersecting = targets.some(t => {
-            const r = t.getBoundingClientRect()
-            return r.top < window.innerHeight && r.bottom > 0
-          })
-          setHidden(stillIntersecting)
-        },
-        { threshold: 0, rootMargin: '0px 0px -40px 0px' }
-      )
-      targets.forEach(t => observer!.observe(t))
-    }
-
     return () => {
       window.removeEventListener('scroll', onScroll)
       if (appearTimer) window.clearTimeout(appearTimer)
       if (hideTimer) window.clearTimeout(hideTimer)
-      observer?.disconnect()
     }
   }, [])
+
+  useEffect(() => {
+    setHidden(false)
+    let observer: IntersectionObserver | null = null
+    const setup = window.setTimeout(() => {
+      const targets = Array.from(
+        document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
+      )
+      if (!targets.length) return
+      const intersecting = new Set<Element>()
+      observer = new IntersectionObserver(
+        entries => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) intersecting.add(entry.target)
+            else intersecting.delete(entry.target)
+          }
+          setHidden(intersecting.size > 0)
+        },
+        { threshold: 0 }
+      )
+      targets.forEach(t => observer!.observe(t))
+    }, 60)
+    return () => {
+      window.clearTimeout(setup)
+      observer?.disconnect()
+    }
+  }, [pathname])
 
   if (!show) return null
 

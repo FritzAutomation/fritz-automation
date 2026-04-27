@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 type Entry = { ts: string; level: string; text: string; kind?: 'e' | 'b' }
 
@@ -34,7 +35,9 @@ export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
   const [hidden, setHidden] = useState(false)
   const idxRef = useRef(0)
   const lastScrollRef = useRef(0)
+  const pathname = usePathname()
 
+  // Scroll + click event handlers — set up once
   useEffect(() => {
     function onScroll() {
       const y = window.scrollY
@@ -59,40 +62,39 @@ export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     document.addEventListener('click', onClick, true)
-
-    // Hide when the footer (or any opt-out element) enters view.
-    const targets = Array.from(
-      document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
-    )
-    let observer: IntersectionObserver | null = null
-    if (targets.length) {
-      observer = new IntersectionObserver(
-        entries => {
-          // hidden if ANY watched element is intersecting
-          const anyVisible = entries.some(e => e.isIntersecting)
-          // re-check the rest by reading their current state via getBoundingClientRect
-          // (entries only contains the ones whose intersection just changed)
-          if (anyVisible) {
-            setHidden(true)
-            return
-          }
-          const stillIntersecting = targets.some(t => {
-            const r = t.getBoundingClientRect()
-            return r.top < window.innerHeight && r.bottom > 0
-          })
-          setHidden(stillIntersecting)
-        },
-        { threshold: 0, rootMargin: '0px 0px -40px 0px' }
-      )
-      targets.forEach(t => observer!.observe(t))
-    }
-
     return () => {
       window.removeEventListener('scroll', onScroll)
       document.removeEventListener('click', onClick, true)
-      observer?.disconnect()
     }
   }, [])
+
+  // Footer-aware hiding — re-bind on route change so we observe the new page's footer
+  useEffect(() => {
+    setHidden(false)
+    let observer: IntersectionObserver | null = null
+    const setup = window.setTimeout(() => {
+      const targets = Array.from(
+        document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
+      )
+      if (!targets.length) return
+      const intersecting = new Set<Element>()
+      observer = new IntersectionObserver(
+        entries => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) intersecting.add(entry.target)
+            else intersecting.delete(entry.target)
+          }
+          setHidden(intersecting.size > 0)
+        },
+        { threshold: 0 }
+      )
+      targets.forEach(t => observer!.observe(t))
+    }, 60)
+    return () => {
+      window.clearTimeout(setup)
+      observer?.disconnect()
+    }
+  }, [pathname])
 
   return (
     <div className={`v3-buildlog ${hidden ? 'is-hidden' : ''}`} aria-hidden="true">
@@ -147,6 +149,7 @@ export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
 export function MobileTicker() {
   const [event, setEvent] = useState({ e: 'ready', text: 'serving home' })
   const [hidden, setHidden] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const events = [
@@ -162,30 +165,35 @@ export function MobileTicker() {
       setEvent(events[i % events.length])
       i++
     }, 5000)
+    return () => window.clearInterval(interval)
+  }, [])
 
-    const targets = Array.from(
-      document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
-    )
+  useEffect(() => {
+    setHidden(false)
     let observer: IntersectionObserver | null = null
-    if (targets.length) {
+    const setup = window.setTimeout(() => {
+      const targets = Array.from(
+        document.querySelectorAll<HTMLElement>('footer, [data-buildlog-hide]')
+      )
+      if (!targets.length) return
+      const intersecting = new Set<Element>()
       observer = new IntersectionObserver(
-        () => {
-          const stillIntersecting = targets.some(t => {
-            const r = t.getBoundingClientRect()
-            return r.top < window.innerHeight && r.bottom > 0
-          })
-          setHidden(stillIntersecting)
+        entries => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) intersecting.add(entry.target)
+            else intersecting.delete(entry.target)
+          }
+          setHidden(intersecting.size > 0)
         },
-        { threshold: 0, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0 }
       )
       targets.forEach(t => observer!.observe(t))
-    }
-
+    }, 60)
     return () => {
-      window.clearInterval(interval)
+      window.clearTimeout(setup)
       observer?.disconnect()
     }
-  }, [])
+  }, [pathname])
 
   return (
     <div className={`v3-mobile-ticker ${hidden ? 'is-hidden' : ''}`} aria-hidden="true">
