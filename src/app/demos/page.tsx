@@ -44,22 +44,22 @@ export default function DemosPage() {
       </section>
 
       <ScrollReveal>
-        <section className="bg-slate-950 py-16">
+        <section className="bg-[var(--bg)] py-16">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-5">
               {demos.map(demo => (
                 <Link
                   key={demo.href}
                   href={demo.href}
-                  className="group relative rounded-xl border border-slate-800 bg-slate-900/60 hover:border-emerald-500/40 transition-colors p-6 block"
+                  className="group relative rounded-xl border border-[var(--line)] bg-[var(--surface)] hover:border-[var(--accent)] transition-colors p-6 block"
                 >
-                  <div className="flex items-center gap-2 font-mono text-xs text-slate-500 mb-3">
-                    <span className="px-1.5 py-0.5 bg-slate-800 rounded">{demo.file}</span>
+                  <div className="flex items-center gap-2 font-mono text-xs text-[var(--ink-dim)] mb-3">
+                    <span className="px-1.5 py-0.5 bg-[var(--bg-card)] rounded">{demo.file}</span>
                   </div>
-                  <h2 className="text-xl font-semibold text-white">{demo.title}</h2>
-                  <p className="mt-1 text-sm text-emerald-400 font-mono">{demo.tagline}</p>
-                  <p className="mt-3 text-slate-400 text-sm">{demo.description}</p>
-                  <div className="mt-4 text-emerald-400 font-mono text-sm group-hover:text-emerald-300">open →</div>
+                  <h2 className="text-xl font-semibold text-[var(--heading)]">{demo.title}</h2>
+                  <p className="mt-1 text-sm text-[var(--accent)] font-mono">{demo.tagline}</p>
+                  <p className="mt-3 text-[var(--ink-soft)] text-sm">{demo.description}</p>
+                  <div className="mt-4 text-[var(--accent)] font-mono text-sm group-hover:text-[var(--accent-bright)]">open →</div>
                 </Link>
               ))}
             </div>

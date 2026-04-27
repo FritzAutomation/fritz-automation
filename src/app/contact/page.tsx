@@ -26,7 +26,7 @@ export default function ContactPage() {
       </section>
 
       {/* Form section */}
-      <section className="bg-slate-950 py-12">
+      <section className="bg-[var(--bg)] py-12">
         <ContactForm />
       </section>
 

@@ -14,7 +14,7 @@ interface FormErrors {
 }
 
 const inputClass =
-  'w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-100 placeholder-slate-600 font-mono text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-colors'
+  'w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-slate-100 placeholder-slate-600 font-mono text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-colors'
 
 const errorClass = 'mt-1 text-xs text-red-400 font-mono'
 
@@ -84,19 +84,19 @@ export function ContactForm() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p className="text-slate-400 mb-8 leading-relaxed">
+      <p className="text-[var(--ink-soft)] mb-8 leading-relaxed">
         I read every inquiry personally and reply within a day (usually sooner). The more you tell
         me, the more useful my first reply will be.
       </p>
 
       {/* IDE window chrome */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+      <div className="rounded-xl border border-[var(--line)] bg-[var(--surface)] overflow-hidden">
         {/* Title bar */}
-        <div className="bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-          <span className="font-mono text-xs text-slate-500 ml-2">~/new-project.yaml</span>
+        <div className="bg-[var(--bg-soft)] border-b border-[var(--line)] px-4 py-2 flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[var(--traffic-r)]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[var(--traffic-y)]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[var(--traffic-g)]" />
+          <span className="font-mono text-xs text-[var(--ink-dim)] ml-2">~/new-project.yaml</span>
         </div>
 
         {/* Form */}
@@ -116,7 +116,7 @@ export function ContactForm() {
 
           {/* name */}
           <div>
-            <label htmlFor="name" className="block text-emerald-400 mb-1.5">
+            <label htmlFor="name" className="block text-[var(--accent)] mb-1.5">
               name:
             </label>
             <input
@@ -134,7 +134,7 @@ export function ContactForm() {
 
           {/* email */}
           <div>
-            <label htmlFor="email" className="block text-emerald-400 mb-1.5">
+            <label htmlFor="email" className="block text-[var(--accent)] mb-1.5">
               email:
             </label>
             <input
@@ -151,8 +151,8 @@ export function ContactForm() {
 
           {/* company (optional) */}
           <div>
-            <label htmlFor="company" className="block text-emerald-400 mb-1.5">
-              <span className="text-slate-500"># optional</span>
+            <label htmlFor="company" className="block text-[var(--accent)] mb-1.5">
+              <span className="text-[var(--ink-dim)]"># optional</span>
               <br />
               company:
             </label>
@@ -168,7 +168,7 @@ export function ContactForm() {
 
           {/* subject */}
           <div>
-            <label htmlFor="subject" className="block text-emerald-400 mb-1.5">
+            <label htmlFor="subject" className="block text-[var(--accent)] mb-1.5">
               subject:
             </label>
             <input
@@ -185,7 +185,7 @@ export function ContactForm() {
 
           {/* message */}
           <div>
-            <label htmlFor="message" className="block text-emerald-400 mb-1.5">
+            <label htmlFor="message" className="block text-[var(--accent)] mb-1.5">
               message:
             </label>
             <textarea
@@ -212,13 +212,13 @@ export function ContactForm() {
       </div>
 
       {/* Alternate contact */}
-      <div className="mt-8 font-mono text-sm text-slate-500">
+      <div className="mt-8 font-mono text-sm text-[var(--ink-dim)]">
         <div>// prefer email?</div>
         <div>
           →{' '}
           <a
             href={`mailto:${contactInfo.email}`}
-            className="text-emerald-400 hover:text-emerald-300 transition-colors"
+            className="text-[var(--accent)] hover:text-[var(--accent-bright)] transition-colors"
           >
             {contactInfo.email}
           </a>

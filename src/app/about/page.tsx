@@ -46,7 +46,7 @@ const lines: Line[] = [
 function LineRow({ n, children }: { n: number; children: React.ReactNode }) {
   return (
     <div className="flex gap-4">
-      <span className="font-mono text-xs text-slate-600 select-none w-8 text-right pt-1 shrink-0">{n}</span>
+      <span className="font-mono text-xs text-[var(--ink-dim)] select-none w-8 text-right pt-1 shrink-0">{n}</span>
       <div className="flex-1 leading-relaxed">{children}</div>
     </div>
   )
@@ -57,21 +57,21 @@ function renderLine(line: Line) {
     case 'blank':
       return <span>&nbsp;</span>
     case 'comment':
-      return <span className="font-mono text-emerald-400">{line.text}</span>
+      return <span className="font-mono text-[var(--accent)]">{line.text}</span>
     case 'heading':
-      return <span className="font-mono text-slate-500">{line.text}</span>
+      return <span className="font-mono text-[var(--ink-dim)]">{line.text}</span>
     case 'prose':
-      return <span className="text-slate-300">{line.text}</span>
+      return <span className="text-[var(--ink)]">{line.text}</span>
     case 'const-open':
       return (
-        <span className="font-mono text-emerald-300">
+        <span className="font-mono text-[var(--accent-bright)]">
           const {line.name} = [
         </span>
       )
     case 'const-item':
-      return <span className="pl-6 text-slate-300 font-mono text-sm">&quot;{line.text}&quot;,</span>
+      return <span className="pl-6 text-[var(--ink)] font-mono text-sm">&quot;{line.text}&quot;,</span>
     case 'const-close':
-      return <span className="font-mono text-emerald-300">]</span>
+      return <span className="font-mono text-[var(--accent-bright)]">]</span>
   }
 }
 
@@ -90,14 +90,14 @@ export default function AboutPage() {
       </section>
 
       <ScrollReveal>
-      <section className="bg-slate-950 py-12">
+      <section className="bg-[var(--bg)] py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-[280px_1fr] gap-8 items-start">
             <PhotoCard />
-            <div className="text-slate-300 leading-relaxed">
-              <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Hi, I&apos;m Josh.</h2>
+            <div className="text-[var(--ink)] leading-relaxed">
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-tight">Hi, I&apos;m Josh.</h2>
               <p className="mt-4 text-lg">I build software in Burlington, Iowa — and I run Fritz Automation as a one-person shop because I think the best client work happens when the person you hire is the person doing the work.</p>
-              <p className="mt-4">I&apos;ve been writing code for <span className="text-white font-semibold">15 years</span> — self-taught since high school, a software development degree, and a decade-plus of shipping real tools inside real companies. Most of what I built lived behind the scenes: dashboards, integrations, automation scripts, and internal apps that replaced spreadsheet-and-email workflows someone&apos;s team had been running for years.</p>
+              <p className="mt-4">I&apos;ve been writing code for <span className="text-[var(--heading)] font-semibold">15 years</span> — self-taught since high school, a software development degree, and a decade-plus of shipping real tools inside real companies. Most of what I built lived behind the scenes: dashboards, integrations, automation scripts, and internal apps that replaced spreadsheet-and-email workflows someone&apos;s team had been running for years.</p>
               <p className="mt-4">Fritz Automation is how I do that work independently now — for businesses that need it, on their terms, with their code in their hands when we&apos;re done.</p>
             </div>
           </div>
@@ -106,14 +106,14 @@ export default function AboutPage() {
       </ScrollReveal>
 
       <ScrollReveal>
-      <section className="bg-slate-950 py-12">
+      <section className="bg-[var(--bg)] py-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
-            <div className="bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-              <span className="font-mono text-xs text-slate-500 ml-2">~/about.md</span>
+          <div className="rounded-xl border border-[var(--line)] bg-[var(--surface)] overflow-hidden">
+            <div className="bg-[var(--bg-soft)] border-b border-[var(--line)] px-4 py-2 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--traffic-r)]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--traffic-y)]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--traffic-g)]" />
+              <span className="font-mono text-xs text-[var(--ink-dim)] ml-2">~/about.md</span>
             </div>
             <div className="p-6 space-y-1">
               {lines.map((line, i) => (

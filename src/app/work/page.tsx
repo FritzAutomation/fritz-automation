@@ -65,13 +65,13 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-12">
+      <section className="bg-[var(--bg)] py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-[220px_1fr] gap-0 rounded-xl border border-slate-800 overflow-hidden bg-slate-900">
-            <aside className="bg-slate-950/60 border-b md:border-b-0 md:border-r border-slate-800 p-3">
-              <div className="font-mono text-xs text-slate-500 px-2 py-1 uppercase tracking-wide">Explorer</div>
-              <div className="font-mono text-xs text-slate-400 px-2 py-1 mt-1 flex items-center gap-1">
-                <span className="text-slate-600">▾</span>
+          <div className="grid md:grid-cols-[220px_1fr] gap-0 rounded-xl border border-[var(--line)] overflow-hidden bg-[var(--bg-soft)]">
+            <aside className="bg-[var(--bg)]/60 border-b md:border-b-0 md:border-r border-[var(--line)] p-3">
+              <div className="font-mono text-xs text-[var(--ink-dim)] px-2 py-1 uppercase tracking-wide">Explorer</div>
+              <div className="font-mono text-xs text-[var(--ink-soft)] px-2 py-1 mt-1 flex items-center gap-1">
+                <span className="text-[var(--ink-dim)]">▾</span>
                 work/
               </div>
               <ul className="mt-1 space-y-0.5 pl-3">
@@ -81,11 +81,11 @@ export default function WorkPage() {
                       onClick={() => setActiveId(p.id)}
                       className={`w-full text-left font-mono text-sm px-2 py-1 rounded flex items-center gap-2 transition-colors ${
                         activeId === p.id
-                          ? 'bg-emerald-500/15 text-emerald-300'
-                          : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                          ? 'bg-[var(--accent-glow)] text-[var(--accent-bright)]'
+                          : 'text-[var(--ink-soft)] hover:bg-[var(--surface)] hover:text-[var(--ink)]'
                       }`}
                     >
-                      <span className="text-slate-600">└─</span>
+                      <span className="text-[var(--ink-dim)]">└─</span>
                       {p.file}
                     </button>
                   </li>
@@ -94,17 +94,17 @@ export default function WorkPage() {
             </aside>
 
             <div className="p-6 md:p-8">
-              <div className="flex items-center gap-3 text-xs font-mono text-slate-500 mb-4 flex-wrap">
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <div className="flex items-center gap-3 text-xs font-mono text-[var(--ink-dim)] mb-4 flex-wrap">
+                <span className="px-2 py-0.5 rounded-full bg-[var(--accent-glow)] text-[var(--accent)] border border-[var(--accent)]">
                   {active.category}
                 </span>
                 <span>~/work/{active.file}</span>
               </div>
 
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">{active.title}</h2>
-              <p className="text-slate-300 leading-relaxed mb-6">{active.description}</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] mb-3">{active.title}</h2>
+              <p className="text-[var(--ink)] leading-relaxed mb-6">{active.description}</p>
 
-              <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-slate-800 bg-slate-950 mb-6">
+              <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-[var(--line)] bg-[var(--bg)] mb-6">
                 <Image
                   src={active.image}
                   alt={`${active.title} website screenshot`}
@@ -116,29 +116,29 @@ export default function WorkPage() {
 
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <div className="font-mono text-xs text-slate-500 uppercase tracking-wide mb-2">Stack</div>
+                  <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide mb-2">Stack</div>
                   <div className="flex flex-wrap gap-1.5">
                     {active.technologies.map(tech => (
-                      <span key={tech} className="px-2 py-0.5 rounded text-xs font-mono bg-slate-800 text-slate-300 border border-slate-700">
+                      <span key={tech} className="px-2 py-0.5 rounded text-xs font-mono bg-[var(--bg-card)] text-[var(--ink)] border border-[var(--line-soft)]">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <div className="font-mono text-xs text-slate-500 uppercase tracking-wide mb-2">Highlights</div>
-                  <ul className="text-sm text-slate-300 space-y-1">
+                  <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide mb-2">Highlights</div>
+                  <ul className="text-sm text-[var(--ink)] space-y-1">
                     {active.highlights.map(h => <li key={h}>· {h}</li>)}
                   </ul>
                 </div>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-slate-800">
+              <div className="mt-6 pt-6 border-t border-[var(--line)]">
                 <Link
                   href={active.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-sm text-emerald-400 hover:text-emerald-300"
+                  className="inline-flex items-center gap-2 font-mono text-sm text-[var(--accent)] hover:text-[var(--accent-bright)]"
                 >
                   $ open {active.url} →
                 </Link>
