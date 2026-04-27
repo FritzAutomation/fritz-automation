@@ -1,8 +1,7 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { PathCrumbs } from '@/components/layout/PathCrumbs'
-import { MouseGrid } from '@/components/animations/MouseGrid'
-import { DataStream } from '@/components/animations/DataStream'
+import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { DemoTerminalBlock } from '@/components/demos/DemoTerminalBlock'
 import { ClientPortal } from '@/components/demos/ClientPortal'
@@ -18,21 +17,16 @@ export default function ClientPortalPage() {
     <div className="min-h-screen">
       <Header />
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
-          <MouseGrid />
-          <DataStream />
-        </div>
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] py-16">
+        <GitGraphBackdrop height={400} />
+        <div className="relative z-[2] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <PathCrumbs trail={[
             { label: 'demos', href: '/demos' },
             { label: 'client-portal' },
           ]} />
-          <h1 className="mt-4 text-4xl md:text-5xl font-bold text-white">Client Portal</h1>
-          <p className="mt-3 text-lg text-slate-300 max-w-2xl">
-            Two views of the same tool. Clients see their project status; you manage everything from the admin side.
+          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold text-[var(--heading)] tracking-[-0.025em]">Client Portal.</h1>
+          <p className="mt-3 text-lg text-[var(--ink)] max-w-2xl">
+            Two views of one tool. <span className="text-[var(--heading)] font-semibold">Clients</span> see their project status; <span className="text-[var(--heading)] font-semibold">you</span> manage everything from the admin side.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {['React', 'TypeScript', 'Tailwind CSS', 'State management'].map(t => (

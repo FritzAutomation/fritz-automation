@@ -1,8 +1,8 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { PathCrumbs } from '@/components/layout/PathCrumbs'
-import { MouseGrid } from '@/components/animations/MouseGrid'
-import { DataStream } from '@/components/animations/DataStream'
+import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
+import { PhotoCard } from '@/components/v3/PhotoCard'
 import { Button } from '@/components/ui/Button'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import Link from 'next/link'
@@ -80,18 +80,30 @@ export default function AboutPage() {
     <div className="min-h-screen">
       <Header />
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
-          <MouseGrid />
-          <DataStream />
-        </div>
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] py-16">
+        <GitGraphBackdrop height={400} />
+        <div className="relative z-[2] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <PathCrumbs trail={[{ label: 'about' }]} />
-          <h1 className="mt-4 text-4xl md:text-5xl font-bold text-white">About</h1>
+          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold text-[var(--heading)] tracking-[-0.025em]">About.</h1>
+          <p className="mt-3 text-lg text-[var(--ink)] max-w-2xl">A small software studio in Burlington, Iowa — run by one person who actually answers the phone.</p>
         </div>
       </section>
+
+      <ScrollReveal>
+      <section className="bg-slate-950 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid sm:grid-cols-[280px_1fr] gap-8 items-start">
+            <PhotoCard />
+            <div className="text-slate-300 leading-relaxed">
+              <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Hi, I&apos;m Josh.</h2>
+              <p className="mt-4 text-lg">I build software in Burlington, Iowa — and I run Fritz Automation as a one-person shop because I think the best client work happens when the person you hire is the person doing the work.</p>
+              <p className="mt-4">I&apos;ve been writing code for <span className="text-white font-semibold">15 years</span> — self-taught since high school, a software development degree, and a decade-plus of shipping real tools inside real companies. Most of what I built lived behind the scenes: dashboards, integrations, automation scripts, and internal apps that replaced spreadsheet-and-email workflows someone&apos;s team had been running for years.</p>
+              <p className="mt-4">Fritz Automation is how I do that work independently now — for businesses that need it, on their terms, with their code in their hands when we&apos;re done.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      </ScrollReveal>
 
       <ScrollReveal>
       <section className="bg-slate-950 py-12">
