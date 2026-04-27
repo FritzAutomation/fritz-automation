@@ -1,17 +1,12 @@
 interface FritzLogoProps {
   width?: number
   className?: string
-  variant?: 'light' | 'dark'  // light = white navbar, dark = dark footer
+  /** @deprecated Logo now flips with the active theme. Prop kept for back-compat. */
+  variant?: 'light' | 'dark'
 }
 
-export function FritzLogo({ width = 220, className = '', variant = 'light' }: FritzLogoProps) {
+export function FritzLogo({ width = 220, className = '' }: FritzLogoProps) {
   const height = Math.round(width * (48 / 260))
-  const fritzColor     = variant === 'dark' ? '#00d97e' : '#1e293b'
-  const autoColor      = variant === 'dark' ? '#f8fafc' : '#64748b'
-  // On dark backgrounds the terminal window (#1a1a2e) blends into footer (#0f172a).
-  // A slate-600 stroke lifts it just enough without inverting the whole icon.
-  const termStroke     = variant === 'dark' ? '#334155' : 'none'
-  const termStrokeW    = variant === 'dark' ? '1' : '0'
 
   return (
     <svg
@@ -19,48 +14,58 @@ export function FritzLogo({ width = 220, className = '', variant = 'light' }: Fr
       viewBox="0 0 260 48"
       width={width}
       height={height}
-      className={className}
+      className={`fritz-logo ${className}`}
       aria-label="Fritz Automation"
     >
-      {/* Terminal window background */}
-      <rect x="0" y="4" width="44" height="40" rx="5" fill="#1a1a2e"
-            stroke={termStroke} strokeWidth={termStrokeW} />
+      <defs>
+        <style>{`
+          .fritz-logo .term-bg     { fill: var(--bg-card); stroke: var(--line); stroke-width: 1; }
+          .fritz-logo .term-bar    { fill: var(--surface-strong); }
+          .fritz-logo .dot-r       { fill: var(--traffic-r); }
+          .fritz-logo .dot-y       { fill: var(--traffic-y); }
+          .fritz-logo .dot-g       { fill: var(--traffic-g); }
+          .fritz-logo .prompt      { fill: var(--accent); }
+          .fritz-logo .name-fritz  { fill: var(--heading); }
+          .fritz-logo .name-auto   { fill: var(--accent); }
+        `}</style>
+      </defs>
+      {/* Terminal window */}
+      <rect className="term-bg" x="0" y="4" width="44" height="40" rx="5" />
       {/* Title bar */}
-      <rect x="0" y="4" width="44" height="13" rx="5" fill="#16213e"
-            stroke={termStroke} strokeWidth={termStrokeW} />
-      <rect x="0" y="12" width="44" height="5" fill="#16213e" />
+      <rect className="term-bar" x="0" y="4" width="44" height="13" rx="5" />
+      <rect className="term-bar" x="0" y="12" width="44" height="5" />
       {/* Traffic light dots */}
-      <circle cx="8"  cy="10.5" r="2.2" fill="#ff5f57" />
-      <circle cx="15" cy="10.5" r="2.2" fill="#febc2e" />
-      <circle cx="22" cy="10.5" r="2.2" fill="#28c840" />
+      <circle className="dot-r" cx="8"  cy="10.5" r="2.2" />
+      <circle className="dot-y" cx="15" cy="10.5" r="2.2" />
+      <circle className="dot-g" cx="22" cy="10.5" r="2.2" />
       {/* >_ prompt */}
       <text
+        className="prompt"
         x="6" y="35"
         fontFamily="'JetBrains Mono', 'Courier New', monospace"
         fontSize="13"
         fontWeight="700"
-        fill="#00d97e"
       >
         {'>_'}
       </text>
-      {/* "Fritz" — dark on light navbar, green on dark footer */}
+      {/* "Fritz" — heading color (white on dark, ink on paper) */}
       <text
+        className="name-fritz"
         x="56" y="33"
         fontFamily="'Inter', 'Segoe UI', sans-serif"
         fontSize="22"
         fontWeight="700"
-        fill={fritzColor}
         letterSpacing="-0.5"
       >
         Fritz
       </text>
-      {/* "Automation" — slate-500 on light, white on dark */}
+      {/* "Automation" — accent color (emerald / amber / oxblood) */}
       <text
+        className="name-auto"
         x="104" y="33"
         fontFamily="'Inter', 'Segoe UI', sans-serif"
         fontSize="22"
         fontWeight="400"
-        fill={autoColor}
         letterSpacing="-0.3"
       >
         Automation

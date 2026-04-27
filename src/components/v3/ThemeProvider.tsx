@@ -30,10 +30,10 @@ export function cycleTheme(): V3Theme {
 }
 
 /**
- * Mounted in layout.tsx. Reads stored theme on first render and writes
- * it to <html data-theme=...>. Inline-script could replace this for SSR
- * flash avoidance, but for now the dark default + first-paint flash is
- * acceptable.
+ * Belt-and-suspenders: the inline <script> in layout.tsx <head> sets
+ * data-theme synchronously before paint. React hydration may strip the
+ * attribute (since the JSX <html> doesn't declare it), so this client
+ * effect re-applies it after mount.
  */
 export function ThemeProvider() {
   useEffect(() => {

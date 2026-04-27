@@ -1,51 +1,16 @@
-'use client'
+import type { ReactNode } from 'react'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
-
+/**
+ * Previously a fade-in-on-scroll wrapper. Removed because the SSR-to-hydration
+ * transition caused a visible flash (content rendered, then briefly hidden, then
+ * fading back in). Kept as a pass-through so existing call sites still compile.
+ */
 export function ScrollReveal({
   children,
-  className = '',
+  className,
 }: {
   children: ReactNode
   className?: string
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setVisible(true)
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(16px)',
-        transition: 'opacity 700ms ease-out, transform 700ms ease-out',
-      }}
-    >
-      {children}
-    </div>
-  )
+  return <div className={className}>{children}</div>
 }

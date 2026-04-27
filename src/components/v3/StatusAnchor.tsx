@@ -40,6 +40,16 @@ export function StatusAnchor() {
   const recognizedRef = useRef(false)
 
   useEffect(() => {
+    // Fetch real activity feed (falls back to existing mock state on error)
+    let cancelled = false
+    fetch('/api/activity', { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (cancelled || !data?.events?.length) return
+        setActivity(data.events.slice(0, 5))
+      })
+      .catch(() => { /* keep mock state */ })
+
     // Returning-visitor recognition (read once, then bump)
     try {
       const raw = localStorage.getItem(VISIT_KEY)
@@ -74,7 +84,10 @@ export function StatusAnchor() {
     }
     scheduleFresh()
 
-    return () => window.clearInterval(tickInterval)
+    return () => {
+      cancelled = true
+      window.clearInterval(tickInterval)
+    }
   }, [])
 
   return (

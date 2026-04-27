@@ -17,6 +17,7 @@ export function PhotoCard({ compact = false }: { compact?: boolean }) {
           width={800}
           height={1000}
           className="object-cover w-full h-full"
+          style={{ objectPosition: 'center 18%' }}
           sizes="(max-width: 700px) 280px, 300px"
           priority={false}
         />
