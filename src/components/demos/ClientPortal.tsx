@@ -15,7 +15,7 @@ const STATUS_COLORS: Record<Project['status'], string> = {
   'submitted': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   'in-progress': 'bg-amber-500/20 text-amber-400 border-amber-500/30',
   'under-review': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-  'completed': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  'completed': 'bg-[var(--accent-glow)] text-[var(--accent)] border-[var(--accent)]',
 }
 
 const STATUSES: Project['status'][] = ['submitted', 'in-progress', 'under-review', 'completed']
@@ -75,13 +75,13 @@ export function ClientPortal() {
   return (
     <div>
       {/* Tab bar */}
-      <div className="flex border-b border-slate-800 mb-6">
+      <div className="flex border-b border-[var(--line)] mb-6">
         <button
           onClick={() => setView('client')}
           className={`px-4 py-2 font-mono text-sm border-b-2 transition-colors ${
             view === 'client'
-              ? 'border-emerald-400 text-emerald-300 bg-slate-900/60'
-              : 'border-transparent text-slate-500 hover:text-slate-300'
+              ? 'border-[var(--accent)] text-[var(--accent-bright)] bg-[var(--surface)]'
+              : 'border-transparent text-[var(--ink-dim)] hover:text-[var(--ink)]'
           }`}
         >
           client-view.tsx
@@ -96,8 +96,8 @@ export function ClientPortal() {
           }}
           className={`px-4 py-2 font-mono text-sm border-b-2 transition-colors ${
             view === 'admin'
-              ? 'border-emerald-400 text-emerald-300 bg-slate-900/60'
-              : 'border-transparent text-slate-500 hover:text-slate-300'
+              ? 'border-[var(--accent)] text-[var(--accent-bright)] bg-[var(--surface)]'
+              : 'border-transparent text-[var(--ink-dim)] hover:text-[var(--ink)]'
           }`}
         >
           admin-view.tsx
@@ -113,12 +113,12 @@ export function ClientPortal() {
               onClick={() => setSelectedId(p.id)}
               className={`w-full text-left p-3 rounded-lg border transition-colors ${
                 selectedId === p.id
-                  ? 'border-emerald-500/40 bg-emerald-500/5'
-                  : 'border-slate-800 bg-slate-900/40 hover:bg-slate-800/40'
+                  ? 'border-[var(--accent)] bg-emerald-500/5'
+                  : 'border-[var(--line)] bg-[var(--surface-overlay)] hover:bg-[var(--bg-card)]/40'
               }`}
             >
-              <div className="text-sm text-slate-200 font-medium">{p.title}</div>
-              <div className="text-xs text-slate-500 mt-1">{p.client}</div>
+              <div className="text-sm text-[var(--ink)] font-medium">{p.title}</div>
+              <div className="text-xs text-[var(--ink-dim)] mt-1">{p.client}</div>
               <span className={`inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-mono border ${STATUS_COLORS[p.status]}`}>
                 {STATUS_LABELS[p.status]}
               </span>
@@ -127,23 +127,23 @@ export function ClientPortal() {
 
           {/* Submit new (client view only) */}
           {view === 'client' && (
-            <form onSubmit={handleSubmitRequest} className="mt-4 p-3 rounded-lg border border-dashed border-slate-700 space-y-2">
-              <div className="font-mono text-xs text-slate-500">+ new request</div>
+            <form onSubmit={handleSubmitRequest} className="mt-4 p-3 rounded-lg border border-dashed border-[var(--line-soft)] space-y-2">
+              <div className="font-mono text-xs text-[var(--ink-dim)]">+ new request</div>
               <input
                 name="title"
                 placeholder="Project title"
                 required
-                className="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-slate-200 placeholder-slate-600 focus:border-emerald-500 outline-none"
+                className="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1.5 text-sm text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none"
               />
               <textarea
                 name="message"
                 placeholder="Tell me about your project..."
                 rows={2}
-                className="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-slate-200 placeholder-slate-600 focus:border-emerald-500 outline-none resize-none"
+                className="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1.5 text-sm text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none resize-none"
               />
               <button
                 type="submit"
-                className="w-full py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded font-mono text-xs transition-colors border border-emerald-500/30"
+                className="w-full py-1.5 bg-[var(--accent-glow)] hover:bg-emerald-500/30 text-[var(--accent)] rounded font-mono text-xs transition-colors border border-[var(--accent)]"
               >
                 $ submit
               </button>
@@ -153,10 +153,10 @@ export function ClientPortal() {
 
         {/* Detail panel */}
         {selected ? (
-          <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-5 space-y-5">
+          <div className="rounded-lg border border-[var(--line)] bg-[var(--surface-overlay)] p-5 space-y-5">
             <div>
-              <h3 className="text-lg font-bold text-white">{selected.title}</h3>
-              <div className="text-sm text-slate-500 mt-1">Client: {selected.client}</div>
+              <h3 className="text-lg font-bold text-[var(--heading)]">{selected.title}</h3>
+              <div className="text-sm text-[var(--ink-dim)] mt-1">Client: {selected.client}</div>
               <div className="mt-2 flex items-center gap-2">
                 <span className={`px-2 py-0.5 rounded-full text-xs font-mono border ${STATUS_COLORS[selected.status]}`}>
                   {STATUS_LABELS[selected.status]}
@@ -165,7 +165,7 @@ export function ClientPortal() {
                   <select
                     value={selected.status}
                     onChange={(e) => updateStatus(selected.id, e.target.value as Project['status'])}
-                    className="bg-slate-950 border border-slate-700 rounded px-2 py-0.5 text-xs font-mono text-slate-300 focus:border-emerald-500 outline-none"
+                    className="bg-[var(--bg)] border border-[var(--line-soft)] rounded px-2 py-0.5 text-xs font-mono text-[var(--ink)] focus:border-[var(--accent)] outline-none"
                   >
                     {STATUSES.map(s => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
                   </select>
@@ -175,12 +175,12 @@ export function ClientPortal() {
 
             {/* Timeline */}
             <div>
-              <div className="font-mono text-xs text-slate-500 uppercase tracking-wide mb-2">Timeline</div>
-              <div className="space-y-2 border-l-2 border-slate-800 pl-4">
+              <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide mb-2">Timeline</div>
+              <div className="space-y-2 border-l-2 border-[var(--line)] pl-4">
                 {selected.timeline.map((entry, i) => (
                   <div key={i}>
-                    <div className="font-mono text-xs text-slate-600">{entry.date}</div>
-                    <div className="text-sm text-slate-300">{entry.note}</div>
+                    <div className="font-mono text-xs text-[var(--ink-dim)]">{entry.date}</div>
+                    <div className="text-sm text-[var(--ink)]">{entry.note}</div>
                   </div>
                 ))}
               </div>
@@ -190,12 +190,12 @@ export function ClientPortal() {
                     value={newNote}
                     onChange={(e) => setNewNote(e.target.value)}
                     placeholder="Add a note..."
-                    className="flex-1 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-sm text-slate-200 placeholder-slate-600 focus:border-emerald-500 outline-none"
+                    className="flex-1 bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1 text-sm text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none"
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addNote(selected.id) } }}
                   />
                   <button
                     onClick={() => addNote(selected.id)}
-                    className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded font-mono text-xs transition-colors"
+                    className="px-3 py-1 bg-[var(--bg-card)] hover:bg-[var(--line-soft)] text-[var(--ink)] rounded font-mono text-xs transition-colors"
                   >
                     + add
                   </button>
@@ -206,12 +206,12 @@ export function ClientPortal() {
             {/* Files */}
             {selected.files.length > 0 && (
               <div>
-                <div className="font-mono text-xs text-slate-500 uppercase tracking-wide mb-2">Files</div>
+                <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide mb-2">Files</div>
                 <div className="space-y-1">
                   {selected.files.map((f, i) => (
-                    <div key={i} className="flex items-center justify-between py-1 px-2 rounded bg-slate-800/40 text-sm">
-                      <span className="text-slate-300 font-mono text-xs">{f.name}</span>
-                      <span className="text-slate-600 text-xs">{f.size}</span>
+                    <div key={i} className="flex items-center justify-between py-1 px-2 rounded bg-[var(--bg-card)]/40 text-sm">
+                      <span className="text-[var(--ink)] font-mono text-xs">{f.name}</span>
+                      <span className="text-[var(--ink-dim)] text-xs">{f.size}</span>
                     </div>
                   ))}
                 </div>
@@ -221,15 +221,15 @@ export function ClientPortal() {
             {/* Messages */}
             {selected.messages.length > 0 && (
               <div>
-                <div className="font-mono text-xs text-slate-500 uppercase tracking-wide mb-2">Messages</div>
+                <div className="font-mono text-xs text-[var(--ink-dim)] uppercase tracking-wide mb-2">Messages</div>
                 <div className="space-y-2">
                   {selected.messages.map((m, i) => (
-                    <div key={i} className="p-2 rounded bg-slate-800/40">
+                    <div key={i} className="p-2 rounded bg-[var(--bg-card)]/40">
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="font-mono text-emerald-400">{m.from}</span>
-                        <span className="text-slate-600">{m.date}</span>
+                        <span className="font-mono text-[var(--accent)]">{m.from}</span>
+                        <span className="text-[var(--ink-dim)]">{m.date}</span>
                       </div>
-                      <div className="text-sm text-slate-300 mt-1">{m.text}</div>
+                      <div className="text-sm text-[var(--ink)] mt-1">{m.text}</div>
                     </div>
                   ))}
                 </div>
@@ -237,8 +237,8 @@ export function ClientPortal() {
             )}
           </div>
         ) : (
-          <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-8 flex items-center justify-center">
-            <div className="text-slate-600 font-mono text-sm">Select a project to view details</div>
+          <div className="rounded-lg border border-[var(--line)] bg-[var(--surface-overlay)] p-8 flex items-center justify-center">
+            <div className="text-[var(--ink-dim)] font-mono text-sm">Select a project to view details</div>
           </div>
         )}
       </div>

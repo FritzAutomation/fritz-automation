@@ -32,7 +32,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-slate-950 border-b border-slate-800">
+      <header className="sticky top-0 z-50 bg-[var(--bg)] border-b border-[var(--line)]">
         <div className="max-w-[100vw] mx-auto">
           <nav className="flex items-center h-12">
             <Link
@@ -55,15 +55,15 @@ export function Header() {
                       'transform transition-all duration-500 ease-out',
                       mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2',
                       active
-                        ? 'text-emerald-300 bg-slate-800/60'
-                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-900/60'
+                        ? 'text-[var(--accent-bright)] bg-[var(--surface)]'
+                        : 'text-[var(--ink-dim)] hover:text-[var(--ink)] hover:bg-[var(--surface)]'
                     )}
                     style={{ transitionDelay: mounted ? `${index * 60}ms` : '0ms' }}
                     aria-current={active ? 'page' : undefined}
                   >
                     {tab.label}
                     {active && (
-                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-400" />
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent)]" />
                     )}
                   </Link>
                 )
@@ -73,7 +73,7 @@ export function Header() {
             <div className="hidden md:flex items-center gap-2 px-3 shrink-0">
               <button
                 onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
-                className="px-2 py-1 rounded text-slate-500 hover:text-emerald-400 hover:bg-slate-800/60 transition-colors font-mono text-sm"
+                className="px-2 py-1 rounded text-[var(--ink-dim)] hover:text-[var(--accent)] hover:bg-[var(--surface)] transition-colors font-mono text-sm"
                 aria-label="Open command palette"
                 title="Ctrl+K"
               >
@@ -90,7 +90,7 @@ export function Header() {
             <div className="md:hidden ml-auto px-4">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg text-slate-400 hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-lg text-[var(--ink-soft)] hover:bg-[var(--bg-card)] transition-colors"
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
@@ -110,10 +110,10 @@ export function Header() {
             className="fixed inset-0 bg-black/60 z-40 md:hidden"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-950 z-50 md:hidden p-6 shadow-2xl border-l border-slate-800">
+          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-[var(--bg)] z-50 md:hidden p-6 shadow-2xl border-l border-[var(--line)]">
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400"
+              className="absolute top-6 right-6 p-2 rounded-lg bg-[var(--bg-card)] hover:bg-[var(--line-soft)] text-[var(--ink-soft)]"
               aria-label="Close menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -129,8 +129,8 @@ export function Header() {
                     className={cn(
                       'block px-4 py-3 rounded-lg font-mono text-sm transition-colors',
                       active
-                        ? 'text-emerald-300 bg-emerald-500/10'
-                        : 'text-slate-400 hover:bg-slate-800'
+                        ? 'text-[var(--accent-bright)] bg-[var(--accent-glow)]'
+                        : 'text-[var(--ink-soft)] hover:bg-[var(--bg-card)]'
                     )}
                     aria-current={active ? 'page' : undefined}
                   >

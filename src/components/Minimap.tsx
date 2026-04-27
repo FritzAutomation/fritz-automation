@@ -84,11 +84,11 @@ export function Minimap() {
       onMouseLeave={() => setHovered(false)}
       aria-hidden="true"
     >
-      <div className="relative h-full bg-slate-900/40 rounded-l">
+      <div className="relative h-full bg-[var(--surface-overlay)] rounded-l">
         {sections.map((sec, i) => (
           <button
             key={i}
-            className="absolute left-1 right-1 bg-slate-700/60 rounded-sm hover:bg-slate-600/60 transition-colors cursor-pointer"
+            className="absolute left-1 right-1 bg-[var(--line-soft)]/60 rounded-sm hover:bg-slate-600/60 transition-colors cursor-pointer"
             style={{
               top: `${sec.top * 100}%`,
               height: `${Math.max(sec.height * 100, 0.5)}%`,
@@ -98,7 +98,7 @@ export function Minimap() {
         ))}
 
         <div
-          className="absolute left-0 right-0 bg-emerald-400/15 border border-emerald-400/30 rounded-sm pointer-events-none"
+          className="absolute left-0 right-0 bg-[var(--accent)]/15 border border-[var(--accent)]/30 rounded-sm pointer-events-none"
           style={{
             top: `${viewportRatio.top * 100}%`,
             height: `${viewportRatio.height * 100}%`,

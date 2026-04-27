@@ -31,22 +31,22 @@ export function StatusBar() {
 
   return (
     <div
-      className="fixed bottom-0 inset-x-0 z-40 h-6 bg-slate-950 border-t border-slate-800 text-[11px] font-mono text-slate-400 flex items-center justify-between px-3 select-none"
+      className="fixed bottom-0 inset-x-0 z-40 h-6 bg-[var(--bg)] border-t border-[var(--line)] text-[11px] font-mono text-[var(--ink-soft)] flex items-center justify-between px-3 select-none"
       aria-hidden="true"
     >
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
           online
         </span>
-        <span className="text-slate-500">{pathAsFsPath(pathname)}</span>
+        <span className="text-[var(--ink-dim)]">{pathAsFsPath(pathname)}</span>
       </div>
       <div className="flex items-center gap-4">
         <ThemeToggle />
-        <span className="text-slate-500">fritz-automation</span>
+        <span className="text-[var(--ink-dim)]">fritz-automation</span>
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('toggle-shortcut-overlay'))}
-          className="text-slate-600 hover:text-slate-400 transition-colors"
+          className="text-[var(--ink-dim)] hover:text-[var(--ink-soft)] transition-colors"
           aria-label="Show keyboard shortcuts"
         >
           ? shortcuts

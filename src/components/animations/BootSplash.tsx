@@ -4,11 +4,11 @@ import { useState, useEffect, useRef } from 'react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const BOOT_LINES = [
-  { text: '[fritz-automation v1.0.0]', color: 'text-slate-300' },
-  { text: 'loading modules...........', suffix: ' OK', color: 'text-slate-500' },
-  { text: 'establishing connection...', suffix: ' OK', color: 'text-slate-500' },
-  { text: 'initializing ui...........', suffix: ' OK', color: 'text-slate-500' },
-  { text: 'ready.', color: 'text-white' },
+  { text: '[fritz-automation v1.0.0]', color: 'text-[var(--ink)]' },
+  { text: 'loading modules...........', suffix: ' OK', color: 'text-[var(--ink-dim)]' },
+  { text: 'establishing connection...', suffix: ' OK', color: 'text-[var(--ink-dim)]' },
+  { text: 'initializing ui...........', suffix: ' OK', color: 'text-[var(--ink-dim)]' },
+  { text: 'ready.', color: 'text-[var(--heading)]' },
 ]
 
 const LINE_DELAY = 350
@@ -56,7 +56,7 @@ export function BootSplash() {
 
   return (
     <div
-      className="fixed inset-0 z-[60] bg-slate-950 flex items-center justify-center transition-opacity"
+      className="fixed inset-0 z-[60] bg-[var(--bg)] flex items-center justify-center transition-opacity"
       style={{
         opacity: fading ? 0 : 1,
         transitionDuration: `${FADE_DURATION}ms`,
@@ -67,7 +67,7 @@ export function BootSplash() {
         {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
           <div key={i} className={line.color}>
             {line.text}
-            {line.suffix && <span className="text-emerald-400">{line.suffix}</span>}
+            {line.suffix && <span className="text-[var(--accent)]">{line.suffix}</span>}
           </div>
         ))}
       </div>

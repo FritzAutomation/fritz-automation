@@ -77,26 +77,26 @@ export function ContextMenu() {
   return (
     <div
       ref={menuRef}
-      className="fixed z-[55] bg-slate-900 border border-slate-800 rounded-lg shadow-2xl py-1.5 w-[220px] font-mono text-sm"
+      className="fixed z-[55] bg-[var(--bg-soft)] border border-[var(--line)] rounded-lg shadow-2xl py-1.5 w-[220px] font-mono text-sm"
       style={{ left: pos.x, top: pos.y }}
     >
       <button
         onClick={() => setShowNav(prev => !prev)}
-        className="w-full text-left px-3 py-1.5 text-slate-400 hover:bg-emerald-500/10 hover:text-emerald-300 transition-colors flex items-center justify-between"
+        className="w-full text-left px-3 py-1.5 text-[var(--ink-soft)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors flex items-center justify-between"
       >
         Navigate to
-        <span className="text-slate-600">{showNav ? '▾' : '▸'}</span>
+        <span className="text-[var(--ink-dim)]">{showNav ? '▾' : '▸'}</span>
       </button>
       {showNav && (
-        <div className="border-t border-b border-slate-800 py-1">
+        <div className="border-t border-b border-[var(--line)] py-1">
           {navItems.map(item => (
             <button
               key={item.href}
               onClick={() => { router.push(item.href); close() }}
               className={`w-full text-left pl-6 pr-3 py-1 transition-colors ${
                 pathname === item.href
-                  ? 'text-emerald-400'
-                  : 'text-slate-500 hover:bg-emerald-500/10 hover:text-emerald-300'
+                  ? 'text-[var(--accent)]'
+                  : 'text-[var(--ink-dim)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)]'
               }`}
             >
               {item.label}
@@ -107,35 +107,35 @@ export function ContextMenu() {
 
       <button
         onClick={() => { window.dispatchEvent(new CustomEvent('open-command-palette')); close() }}
-        className="w-full text-left px-3 py-1.5 text-slate-400 hover:bg-emerald-500/10 hover:text-emerald-300 transition-colors flex items-center justify-between"
+        className="w-full text-left px-3 py-1.5 text-[var(--ink-soft)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors flex items-center justify-between"
       >
         Command palette
-        <span className="text-slate-600 text-xs">Ctrl+K</span>
+        <span className="text-[var(--ink-dim)] text-xs">Ctrl+K</span>
       </button>
 
       <button
         onClick={handleCopyUrl}
-        className="w-full text-left px-3 py-1.5 text-slate-400 hover:bg-emerald-500/10 hover:text-emerald-300 transition-colors"
+        className="w-full text-left px-3 py-1.5 text-[var(--ink-soft)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors"
       >
         {copied ? 'Copied!' : 'Copy page URL'}
       </button>
 
       <button
         onClick={() => { window.dispatchEvent(new CustomEvent('toggle-shortcut-overlay')); close() }}
-        className="w-full text-left px-3 py-1.5 text-slate-400 hover:bg-emerald-500/10 hover:text-emerald-300 transition-colors flex items-center justify-between"
+        className="w-full text-left px-3 py-1.5 text-[var(--ink-soft)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors flex items-center justify-between"
       >
         Keyboard shortcuts
-        <span className="text-slate-600 text-xs">?</span>
+        <span className="text-[var(--ink-dim)] text-xs">?</span>
       </button>
 
-      <div className="border-t border-slate-800 my-1" />
+      <div className="border-t border-[var(--line)] my-1" />
 
       <a
         href="https://github.com/FritzAutomation/fritz-automation"
         target="_blank"
         rel="noopener noreferrer"
         onClick={close}
-        className="block px-3 py-1.5 text-slate-400 hover:bg-emerald-500/10 hover:text-emerald-300 transition-colors"
+        className="block px-3 py-1.5 text-[var(--ink-soft)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors"
       >
         View source on GitHub
       </a>

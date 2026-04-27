@@ -118,14 +118,14 @@ export function CommandPalette() {
 
       {/* Panel */}
       <div
-        className="relative w-full max-w-lg mx-4 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl palette-enter overflow-hidden"
+        className="relative w-full max-w-lg mx-4 bg-[var(--bg-soft)] border border-[var(--line-soft)] rounded-xl shadow-2xl palette-enter overflow-hidden"
         role="dialog"
         aria-label="Command palette"
       >
         {/* Search input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-700">
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--line-soft)]">
           <svg
-            className="w-5 h-5 text-slate-500 flex-shrink-0"
+            className="w-5 h-5 text-[var(--ink-dim)] flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -143,10 +143,10 @@ export function CommandPalette() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type a command or search..."
-            className="flex-1 bg-transparent text-slate-200 placeholder-slate-500 outline-none font-mono text-sm"
+            className="flex-1 bg-transparent text-[var(--ink)] placeholder-slate-500 outline-none font-mono text-sm"
             aria-label="Search commands"
           />
-          <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-xs text-slate-500 bg-slate-800 border border-slate-700 rounded font-mono">
+          <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-xs text-[var(--ink-dim)] bg-[var(--bg-card)] border border-[var(--line-soft)] rounded font-mono">
             Esc
           </kbd>
         </div>
@@ -154,13 +154,13 @@ export function CommandPalette() {
         {/* Results */}
         <div className="max-h-80 overflow-y-auto py-2">
           {flatFiltered.length === 0 ? (
-            <div className="px-4 py-8 text-center text-slate-500 text-sm font-mono">
+            <div className="px-4 py-8 text-center text-[var(--ink-dim)] text-sm font-mono">
               No results found
             </div>
           ) : (
             Object.entries(grouped).map(([section, pages]) => (
               <div key={section}>
-                <div className="px-4 py-1.5 text-xs font-semibold text-slate-500 uppercase tracking-wider font-mono">
+                <div className="px-4 py-1.5 text-xs font-semibold text-[var(--ink-dim)] uppercase tracking-wider font-mono">
                   {section}
                 </div>
                 {pages.map((page) => {
@@ -173,8 +173,8 @@ export function CommandPalette() {
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
                         isSelected
-                          ? 'bg-emerald-500/10 text-emerald-400'
-                          : 'text-slate-300 hover:bg-slate-800'
+                          ? 'bg-[var(--accent-glow)] text-[var(--accent)]'
+                          : 'text-[var(--ink)] hover:bg-[var(--bg-card)]'
                       }`}
                     >
                       <svg
@@ -200,21 +200,21 @@ export function CommandPalette() {
         </div>
 
         {/* Footer hint */}
-        <div className="flex items-center gap-4 px-4 py-2.5 border-t border-slate-700 text-xs text-slate-500 font-mono">
+        <div className="flex items-center gap-4 px-4 py-2.5 border-t border-[var(--line-soft)] text-xs text-[var(--ink-dim)] font-mono">
           <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded">
+            <kbd className="px-1.5 py-0.5 bg-[var(--bg-card)] border border-[var(--line-soft)] rounded">
               &uarr;&darr;
             </kbd>
             navigate
           </span>
           <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded">
+            <kbd className="px-1.5 py-0.5 bg-[var(--bg-card)] border border-[var(--line-soft)] rounded">
               &crarr;
             </kbd>
             open
           </span>
           <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded">
+            <kbd className="px-1.5 py-0.5 bg-[var(--bg-card)] border border-[var(--line-soft)] rounded">
               esc
             </kbd>
             close

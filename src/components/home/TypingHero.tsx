@@ -18,7 +18,7 @@ export function TypingHero({ text, speed = 55 }: { text: string; speed?: number 
   return (
     <span className="font-mono">
       {shown}
-      <span className="inline-block w-[0.5em] h-[0.9em] align-[-0.1em] bg-emerald-400 animate-pulse ml-1" />
+      <span className="inline-block w-[0.5em] h-[0.9em] align-[-0.1em] bg-[var(--accent)] animate-pulse ml-1" />
     </span>
   )
 }
