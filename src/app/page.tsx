@@ -2,11 +2,11 @@
 
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { MouseGrid } from '@/components/animations/MouseGrid'
-import { DataStream } from '@/components/animations/DataStream'
-import { TypingHero } from '@/components/home/TypingHero'
 import { Button } from '@/components/ui/Button'
 import { ScrollReveal } from '@/components/ScrollReveal'
+import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
+import { StatusAnchor } from '@/components/v3/StatusAnchor'
+import { PhotoCard } from '@/components/v3/PhotoCard'
 import Link from 'next/link'
 import Image from 'next/image'
 import { track } from '@vercel/analytics'
@@ -16,29 +16,35 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-28">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-          <MouseGrid />
-          <DataStream />
-        </div>
-
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-block mb-6 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-mono">
-            fritz-automation ~ idle
+      {/* v3 Hero — split layout with live status anchor */}
+      <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)]">
+        <GitGraphBackdrop height={600} />
+        <div className="relative z-[2] max-w-[1200px] mx-auto px-6 sm:px-8 py-16 md:py-20 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-start">
+          <div>
+            <div className="font-mono text-xs sm:text-sm text-[var(--ink-soft)] mb-5">
+              <span className="text-[var(--accent)]">josh</span>
+              <span className="text-[var(--ink-dim)]">@</span>
+              <span className="text-[var(--blue)]">fritz-automation</span>
+              <span className="text-[var(--ink-dim)]">:~$</span>{' '}
+              <span className="text-[var(--ink)]">cat intro.md</span>
+              <span className="inline-block w-2 h-3.5 bg-[var(--accent)] ml-1 align-[-2px]" style={{ animation: 'v3-blink 0.9s steps(2) infinite' }} />
+            </div>
+            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-[-0.028em] text-[var(--heading)] max-w-[14ch]">
+              Custom software<br />for <span className="text-[var(--accent)]">small businesses.</span>
+            </h1>
+            <p className="mt-6 text-lg md:text-xl text-[var(--ink)] max-w-[50ch] leading-relaxed">
+              <span className="text-[var(--heading)] font-semibold">I&apos;m Josh.</span> I build websites that sell, and internal tools that save your team hours. Built by one developer, in <span className="text-[var(--accent)]">Burlington, Iowa</span>.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_hero' })}>
+                <Button size="lg">Start a project</Button>
+              </Link>
+              <Link href="/work">
+                <Button size="lg" variant="outline">See my work</Button>
+              </Link>
+            </div>
           </div>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            <TypingHero text="Hi, I'm Josh. I build custom software for small businesses." />
-          </h1>
-          <p className="mt-8 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
-            Websites that sell. Internal tools that save hours. Built by one developer in Iowa.
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_hero' })}><Button size="lg">Start a project</Button></Link>
-            <Link href="/work"><Button size="lg" variant="outline">See my work</Button></Link>
-          </div>
+          <StatusAnchor />
         </div>
       </section>
 
@@ -152,12 +158,17 @@ export default function HomePage() {
       {/* Whoami */}
       <ScrollReveal>
       <section className="bg-slate-950 py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="font-mono text-xs text-slate-500 mb-2">// whoami</div>
           <h2 className="text-3xl md:text-4xl font-bold text-white">Hi, I&apos;m Josh</h2>
-          <p className="mt-5 text-lg text-slate-300 leading-relaxed">
-            I&apos;ve been writing code for 15 years — self-taught since high school, a software development degree, and a decade-plus of shipping real tools inside real companies. Fritz Automation is how I do that work independently now. I answer every email myself, and your project gets built by the same person you talked to on the call.
-          </p>
+          <div className="mt-6 grid sm:grid-cols-[260px_1fr] gap-8 items-start">
+            <div>
+              <PhotoCard compact />
+            </div>
+            <p className="text-lg text-slate-300 leading-relaxed">
+              I&apos;ve been writing code for <span className="text-white font-semibold">15 years</span> — self-taught since high school, a software development degree, and a decade-plus of shipping real tools inside real companies. Fritz Automation is how I do that work independently now. <span className="text-white font-semibold">I answer every email myself</span>, and your project gets built by the same person you talked to on the call.
+            </p>
+          </div>
           <div className="mt-6">
             <Link href="/about" className="font-mono text-sm text-emerald-400 hover:text-emerald-300">about me →</Link>
           </div>
