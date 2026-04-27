@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { ThemeToggle } from '@/components/v3/ThemeToggle'
 
 function pathAsFsPath(pathname: string): string {
   if (pathname === '/') return '~'
@@ -41,6 +42,7 @@ export function StatusBar() {
         <span className="text-slate-500">{pathAsFsPath(pathname)}</span>
       </div>
       <div className="flex items-center gap-4">
+        <ThemeToggle />
         <span className="text-slate-500">fritz-automation</span>
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('toggle-shortcut-overlay'))}

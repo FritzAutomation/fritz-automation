@@ -9,6 +9,113 @@
   }
 }
 
+/* === v3 theme tokens (dark / dim / paper) === */
+:root, html[data-theme="dark"] {
+  --bg: #020617;
+  --bg-soft: #0f172a;
+  --bg-card: #0b1424;
+  --line: #1e293b;
+  --line-soft: #243046;
+  --ink: #cbd5e1;
+  --ink-soft: #94a3b8;
+  --ink-dim: #64748b;
+  --accent: #34d399;
+  --accent-bright: #6ee7b7;
+  --accent-deep: #10b981;
+  --accent-glow: rgba(52,211,153,0.18);
+  --amber: #fbbf24;
+  --blue: #93c5fd;
+  --btn-fg: #00120a;
+  --surface: rgba(15,23,42,0.55);
+  --surface-strong: rgba(2,6,23,0.55);
+  --surface-overlay: rgba(15,23,42,0.40);
+  --hero-bg-from: #0a1426;
+  --hero-bg-to: var(--bg);
+  --grid-line: rgba(255,255,255,0.04);
+  --shadow-strong: 0 8px 24px rgba(0,0,0,0.4);
+  --heading: #ffffff;
+  --traffic-r: #ff5f57;
+  --traffic-y: #febc2e;
+  --traffic-g: #28c840;
+}
+html[data-theme="dim"] {
+  --bg: #100e0b;
+  --bg-soft: #1a1612;
+  --bg-card: #1f1a14;
+  --line: #2d2620;
+  --line-soft: #3a3128;
+  --ink: #e6dccb;
+  --ink-soft: #b3a892;
+  --ink-dim: #908674;
+  --accent: #e8b547;
+  --accent-bright: #fbd980;
+  --accent-deep: #c79836;
+  --accent-glow: rgba(232,181,71,0.18);
+  --amber: #fbbf24;
+  --blue: #b8a888;
+  --btn-fg: #1a1208;
+  --surface: rgba(31,26,20,0.55);
+  --surface-strong: rgba(16,14,11,0.55);
+  --surface-overlay: rgba(26,22,18,0.4);
+  --hero-bg-from: #1a1410;
+  --hero-bg-to: var(--bg);
+  --grid-line: rgba(232,181,71,0.05);
+  --shadow-strong: 0 8px 24px rgba(0,0,0,0.5);
+  --heading: #fff8e6;
+}
+html[data-theme="paper"] {
+  --bg: #f6f2ea;
+  --bg-soft: #ece5d4;
+  --bg-card: #ffffff;
+  --line: #cdc4ad;
+  --line-soft: #b0a48a;
+  --ink: #1b1b1b;
+  --ink-soft: #3d342a;
+  --ink-dim: #6b6050;
+  --accent: #7a1f1f;
+  --accent-bright: #a23434;
+  --accent-deep: #5a1414;
+  --accent-glow: rgba(122,31,31,0.10);
+  --amber: #9c5e10;
+  --blue: #2c3e60;
+  --btn-fg: #fffefb;
+  --surface: rgba(255,255,255,0.7);
+  --surface-strong: rgba(236,229,212,0.85);
+  --surface-overlay: rgba(236,229,212,0.55);
+  --hero-bg-from: #efe8da;
+  --hero-bg-to: var(--bg);
+  --grid-line: rgba(122,31,31,0.06);
+  --shadow-strong: 0 8px 24px rgba(122,31,31,0.12);
+  --heading: #1b1b1b;
+  --traffic-r: #c44;
+  --traffic-y: #d96;
+  --traffic-g: #595;
+}
+html[data-theme="paper"] body { background: var(--bg); color: var(--ink); }
+html[data-theme="paper"] .v3-h1 .accent,
+html[data-theme="paper"] .v3-headline .accent { font-style: italic; }
+html[data-theme="paper"] .v3-git-line { stroke-width: 1.2; }
+html[data-theme="paper"] .v3-git-dot { opacity: 0.8; }
+
+/* === v3 keyframes === */
+@keyframes v3-pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.85);} }
+@keyframes v3-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes v3-fade-in-row { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes v3-dot-pulse { 0% { transform: scale(2); opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); } 100% { transform: scale(1); opacity: 0.55; filter: none; } }
+@keyframes v3-blink { 50% { opacity: 0; } }
+
+/* === v3 reusable utility classes === */
+.v3-mono { font-family: var(--font-mono), ui-monospace, monospace; }
+.v3-pulse-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: v3-pulse 1.6s ease-in-out infinite; }
+
+/* === v3 hero gradient === */
+.v3-hero-bg { background: linear-gradient(180deg, var(--hero-bg-from) 0%, var(--hero-bg-to) 80%); }
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  .v3-pulse-dot, .v3-git-dot.fresh, [class*="v3-"] { animation: none !important; }
+}
+
 @layer base {
   body {
     @apply bg-white text-slate-900 antialiased;

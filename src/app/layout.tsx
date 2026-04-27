@@ -13,6 +13,8 @@ import { ShortcutOverlay } from '@/components/ShortcutOverlay'
 import { ContextMenu } from '@/components/ContextMenu'
 import { Minimap } from '@/components/Minimap'
 import { AnalyticsWrapper } from '@/components/AnalyticsWrapper'
+import { ThemeProvider } from '@/components/v3/ThemeProvider'
+import { BuildLog, MobileTicker } from '@/components/v3/BuildLog'
 import './globals.css'
 
 const inter = Inter({
@@ -82,6 +84,7 @@ export default function RootLayout({
         <WebSiteSchema />
       </head>
       <body className="font-sans">
+        <ThemeProvider />
         <BootSplash />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
@@ -99,6 +102,8 @@ export default function RootLayout({
         <ContextMenu />
         <Minimap />
         <CursorEffects />
+        <BuildLog />
+        <MobileTicker />
         <AnalyticsWrapper />
       </body>
     </html>
