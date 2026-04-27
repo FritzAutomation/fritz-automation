@@ -25,9 +25,9 @@ export default function HomePage() {
       <Header />
 
       {/* v3 Hero — split layout with live status anchor */}
-      <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)]">
+      <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] min-h-screen flex flex-col">
         <GitGraphBackdrop height={600} />
-        <div className="relative z-[2] max-w-[1200px] mx-auto px-6 sm:px-8 py-16 md:py-20 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-start">
+        <div className="relative z-[2] max-w-[1200px] mx-auto w-full px-6 sm:px-8 pt-20 pb-16 md:pt-24 md:pb-20 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-start flex-1">
           <div>
             <div className="font-mono text-xs sm:text-sm text-[var(--ink-soft)] mb-5">
               <span className="text-[var(--accent)]">josh</span>
@@ -58,8 +58,11 @@ export default function HomePage() {
 
       {/* Below-hero meta strip */}
       <div className="border-b border-[var(--line)] bg-[var(--surface-overlay)]">
-        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 py-3.5 flex gap-x-7 gap-y-2 items-center flex-wrap font-mono text-[11.5px] text-[var(--ink-dim)]">
-          <span className="text-[var(--accent)] border border-[var(--accent)]/25 px-2.5 py-0.5 rounded-full bg-[var(--accent-glow)] flex items-center gap-1.5">
+        <div className="max-w-[1200px] mx-auto px-7 py-3.5 flex gap-x-7 gap-y-2 items-center flex-wrap font-mono text-[11.5px] text-[var(--ink-dim)]">
+          <span
+            className="text-[var(--accent)] px-2.5 py-0.5 rounded-full bg-[var(--accent-glow)] flex items-center gap-1.5"
+            style={{ border: '1px solid color-mix(in srgb, var(--accent) 25%, transparent)' }}
+          >
             <span className="v3-pulse-dot" />online
           </span>
           <span>15 yrs writing code</span>
@@ -80,19 +83,23 @@ export default function HomePage() {
             Both aimed at the same thing: software that gets out of your way so your business runs better.
           </p>
 
-          <div className="mt-9 grid md:grid-cols-2 gap-4">
-            <Link href="/services#websites" className="card-v2 group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 p-7 block overflow-hidden">
+          <div className="mt-9 grid md:grid-cols-2 gap-[18px]">
+            <Link
+              href="/services#websites"
+              className="card-v2 group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 px-7 py-[26px] overflow-hidden grid"
+              style={{ gridTemplateRows: 'auto auto auto 1fr auto' }}
+            >
               <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-1.5">
                 → <span className="text-[var(--accent)]">websites.tsx</span>
               </div>
-              <h3 className="font-sans font-bold text-[22px] text-[var(--heading)] tracking-[-0.012em]">Websites &amp; online stores</h3>
-              <p className="mt-2.5 text-[15.5px] text-[var(--ink)] leading-snug">Your customers can find you, trust you, and buy from you.</p>
-              <ul className="mt-4 space-y-1.5 text-sm text-[var(--ink-soft)]">
-                <li className="pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Marketing sites &amp; portfolios</li>
-                <li className="pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Online stores &amp; custom carts</li>
-                <li className="pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Fast, mobile-first, SEO-ready</li>
+              <h3 className="font-sans font-bold text-[24px] text-[var(--heading)] tracking-[-0.012em]">Websites &amp; online stores</h3>
+              <p className="mt-2.5 text-[15.5px] text-[var(--ink)] leading-[1.5]">Your customers can find you, trust you, and buy from you.</p>
+              <ul className="mt-[18px] space-y-1 text-sm text-[var(--ink-soft)]">
+                <li className="pl-[18px] py-1 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Marketing sites &amp; portfolios</li>
+                <li className="pl-[18px] py-1 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Online stores &amp; custom carts</li>
+                <li className="pl-[18px] py-1 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Fast, mobile-first, SEO-ready</li>
               </ul>
-              <div className="mt-5 pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between">
+              <div className="mt-[22px] pt-[14px] border-t border-dashed border-[var(--line)] flex items-baseline justify-between">
                 <span className="font-mono text-[13px] text-[var(--accent)]">open →</span>
                 <span className="font-mono text-[11.5px] text-[var(--ink-dim)]">
                   <span className="text-[var(--ink)]">$3.5k — $15k</span> · 2–6 wks
@@ -100,18 +107,22 @@ export default function HomePage() {
               </div>
             </Link>
 
-            <Link href="/services#automation" className="card-v2 group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 p-7 block overflow-hidden">
+            <Link
+              href="/services#automation"
+              className="card-v2 group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 px-7 py-[26px] overflow-hidden grid"
+              style={{ gridTemplateRows: 'auto auto auto 1fr auto' }}
+            >
               <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-1.5">
                 → <span className="text-[var(--accent)]">automation.py</span>
               </div>
-              <h3 className="font-sans font-bold text-[22px] text-[var(--heading)] tracking-[-0.012em]">Internal tools &amp; automation</h3>
-              <p className="mt-2.5 text-[15.5px] text-[var(--ink)] leading-snug">Your team stops wasting hours on manual work.</p>
-              <ul className="mt-4 space-y-1.5 text-sm text-[var(--ink-soft)]">
-                <li className="pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Internal dashboards &amp; admin tools</li>
-                <li className="pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Process automation &amp; data pipelines</li>
-                <li className="pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Scripts that replace spreadsheet workflows</li>
+              <h3 className="font-sans font-bold text-[24px] text-[var(--heading)] tracking-[-0.012em]">Internal tools &amp; automation</h3>
+              <p className="mt-2.5 text-[15.5px] text-[var(--ink)] leading-[1.5]">Your team stops wasting hours on manual work.</p>
+              <ul className="mt-[18px] space-y-1 text-sm text-[var(--ink-soft)]">
+                <li className="pl-[18px] py-1 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Internal dashboards &amp; admin tools</li>
+                <li className="pl-[18px] py-1 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Process automation &amp; data pipelines</li>
+                <li className="pl-[18px] py-1 relative before:content-['▸'] before:absolute before:left-0 before:text-[var(--accent)] before:text-[11px]">Scripts that replace spreadsheet workflows</li>
               </ul>
-              <div className="mt-5 pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between">
+              <div className="mt-[22px] pt-[14px] border-t border-dashed border-[var(--line)] flex items-baseline justify-between">
                 <span className="font-mono text-[13px] text-[var(--accent)]">open →</span>
                 <span className="font-mono text-[11.5px] text-[var(--ink-dim)]">
                   <span className="text-[var(--ink)]">$6k — $40k</span> · 4–12 wks
@@ -189,8 +200,8 @@ export default function HomePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// whoami</Eyebrow>
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--heading)] tracking-[-0.02em]">Hi, I&apos;m Josh.</h2>
-          <div className="mt-8 grid sm:grid-cols-[280px_1fr] gap-8 items-start">
-            <PhotoCard />
+          <div className="mt-8 grid sm:grid-cols-[280px_1fr] gap-9 items-start">
+            <PhotoCard compact />
             <p className="text-[17px] text-[var(--ink)] leading-[1.65]">
               I&apos;ve been writing code for <span className="text-[var(--heading)] font-semibold">15 years</span> — self-taught since high school, a software development degree, and a decade-plus of shipping real tools inside real companies. Fritz Automation is how I do that work independently now. <span className="text-[var(--heading)] font-semibold">I answer every email myself</span>, and your project gets built by the same person you talked to on the call.
             </p>
@@ -223,7 +234,14 @@ export default function HomePage() {
                 <div key={s.num} className="grid grid-cols-[88px_1fr] gap-4 sm:gap-5 px-7 py-3.5 items-start relative">
                   {/* connector pipe */}
                   {i < arr.length - 1 && (
-                    <span className="absolute left-[116px] top-7 bottom-[-14px] w-px bg-gradient-to-b from-[var(--accent)]/50 to-[var(--accent)]/5" aria-hidden />
+                    <span
+                      className="absolute left-[116px] top-7 bottom-[-14px] w-px"
+                      style={{
+                        background:
+                          'linear-gradient(to bottom, color-mix(in srgb, var(--accent) 50%, transparent), color-mix(in srgb, var(--accent) 5%, transparent))',
+                      }}
+                      aria-hidden
+                    />
                   )}
                   <span className="font-mono text-[13px] text-[var(--accent)] flex items-baseline gap-2 pt-0.5">
                     <span className={`inline-grid place-items-center w-[18px] h-[18px] rounded-full border border-[var(--accent)] text-[10px] flex-shrink-0 ${s.current ? 'bg-[var(--accent)] text-[var(--btn-fg)]' : 'text-[var(--accent)]'}`}>
@@ -246,12 +264,17 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-[var(--bg)] py-24 text-center">
+      <section className="bg-[var(--bg)] text-center" style={{ padding: '90px 24px 110px' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">
             <Eyebrow>// ready when you are</Eyebrow>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--heading)] tracking-[-0.022em]">Have a project in mind?</h2>
+          <h2
+            className="font-bold text-[var(--heading)] tracking-[-0.022em]"
+            style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}
+          >
+            Have a project in mind?
+          </h2>
           <p className="mt-3.5 text-[var(--ink-soft)]">
             Tell me about it. I reply to every inquiry personally, usually within a day.
           </p>
