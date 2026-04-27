@@ -118,7 +118,10 @@ html[data-theme="paper"] .v3-git-dot { opacity: 0.8; }
 
 @layer base {
   body {
-    @apply bg-white text-slate-900 antialiased;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
