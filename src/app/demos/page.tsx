@@ -44,7 +44,7 @@ export default function DemosPage() {
             <span className="block w-6 h-px bg-[var(--accent)] opacity-60" aria-hidden />
             <span className="text-[var(--accent)]">// available demos</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Three interactive demos.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Four interactive demos.</h2>
           <p className="mt-3 max-w-[60ch] text-[15px] text-[var(--ink-soft)] leading-relaxed">
             Each one solves a real problem I&apos;ve solved for past clients — simplified down to something you can actually click on.
           </p>
@@ -150,6 +150,57 @@ export default function DemosPage() {
                 <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
                   <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
                   <span className="font-mono text-[11px] text-[var(--ink-dim)]">4-step flow</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Quote Builder card */}
+            <Link
+              href="/demos/quotes"
+              className="demo-card group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col"
+            >
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-[var(--surface)] to-[var(--bg-card)] grid place-items-center overflow-hidden">
+                <span
+                  className="absolute top-3 left-3 z-[1] font-mono text-[10.5px] tracking-[0.05em] px-2 py-[3px] text-[var(--accent)] rounded inline-flex items-center gap-1.5 backdrop-blur"
+                  style={{ background: 'var(--accent-glow)', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)' }}
+                >
+                  <span className="v3-pulse-dot" style={{ width: 5, height: 5 }} />interactive
+                </span>
+                {/* Mini document art */}
+                <div className="w-[68%] max-w-[210px] aspect-[3/4] rounded-md border border-[var(--line)] bg-[var(--bg-card)] p-3 flex flex-col gap-1.5 shadow-[0_8px_20px_rgba(0,0,0,0.18)]">
+                  <div className="h-2 w-1/2 rounded bg-[var(--accent)]" />
+                  <div className="h-1.5 w-1/3 rounded bg-[var(--line)]" />
+                  <div className="mt-1.5 space-y-1">
+                    {[80, 65, 75, 50].map((w, i) => (
+                      <div key={i} className="flex items-center gap-1.5">
+                        <span className="h-1.5 rounded bg-[var(--ink-dim)] opacity-60" style={{ width: `${w}%` }} />
+                        <span className="h-1.5 w-5 rounded bg-[var(--accent)] opacity-70 ml-auto" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-auto flex items-center justify-between border-t border-dashed border-[var(--line)] pt-1.5">
+                    <span className="h-1.5 w-8 rounded bg-[var(--line)]" />
+                    <span className="h-2 w-12 rounded bg-[var(--accent)]" />
+                  </div>
+                </div>
+              </div>
+              <div className="p-[22px] flex-1 flex flex-col">
+                <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-1.5">
+                  → <span className="text-[var(--accent)]">quotes.app</span>
+                </div>
+                <h3 className="font-sans font-bold text-[24px] text-[var(--heading)] tracking-[-0.012em]">Quote Builder</h3>
+                <p className="mt-1.5 font-mono text-[13px] text-[var(--accent)]">word docs → live document</p>
+                <p className="mt-3 text-[15.5px] text-[var(--ink)] leading-[1.5]">
+                  Type on the left, watch the quote update on the right. Math always adds up, layout never breaks.
+                </p>
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
+                  {['react', 'typescript', 'forms', 'live preview'].map(s => (
+                    <span key={s} className="px-[9px] py-0.5 rounded-full font-mono text-[11px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
+                  ))}
+                </div>
+                <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
+                  <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
+                  <span className="font-mono text-[11px] text-[var(--ink-dim)]">live preview</span>
                 </div>
               </div>
             </Link>
