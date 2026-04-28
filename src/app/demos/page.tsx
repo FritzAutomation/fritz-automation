@@ -44,7 +44,7 @@ export default function DemosPage() {
             <span className="block w-6 h-px bg-[var(--accent)] opacity-60" aria-hidden />
             <span className="text-[var(--accent)]">// available demos</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Four interactive demos.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Five interactive demos.</h2>
           <p className="mt-3 max-w-[60ch] text-[15px] text-[var(--ink-soft)] leading-relaxed">
             Each one solves a real problem I&apos;ve solved for past clients — simplified down to something you can actually click on.
           </p>
@@ -201,6 +201,58 @@ export default function DemosPage() {
                 <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
                   <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
                   <span className="font-mono text-[11px] text-[var(--ink-dim)]">live preview</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Order Queue card */}
+            <Link
+              href="/demos/orders"
+              className="demo-card group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col"
+            >
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-[var(--surface)] to-[var(--bg-card)] grid place-items-center overflow-hidden">
+                <span
+                  className="absolute top-3 left-3 z-[1] font-mono text-[10.5px] tracking-[0.05em] px-2 py-[3px] text-[var(--accent)] rounded inline-flex items-center gap-1.5 backdrop-blur"
+                  style={{ background: 'var(--accent-glow)', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)' }}
+                >
+                  <span className="v3-pulse-dot" style={{ width: 5, height: 5 }} />interactive
+                </span>
+                {/* Mini kanban art — 4 columns with a moving accent card */}
+                <div className="grid grid-cols-4 gap-1.5 w-[80%] max-w-[260px] h-[78%]">
+                  {[0, 1, 2, 3].map(col => (
+                    <div key={col} className="rounded border border-[var(--line)] bg-[var(--bg-card)] p-1 flex flex-col gap-1">
+                      <div className="h-1 w-full rounded-sm bg-[var(--ink-dim)] opacity-40" />
+                      {[0, 1].map(i => {
+                        const isAccent = col === 1 && i === 0
+                        return (
+                          <div
+                            key={i}
+                            className="h-2.5 rounded-[3px]"
+                            style={{ background: isAccent ? 'var(--accent)' : 'color-mix(in srgb, var(--ink-dim) 28%, transparent)' }}
+                          />
+                        )
+                      })}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="p-[22px] flex-1 flex flex-col">
+                <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-1.5">
+                  → <span className="text-[var(--accent)]">orders.app</span>
+                </div>
+                <h3 className="font-sans font-bold text-[24px] text-[var(--heading)] tracking-[-0.012em]">Order Queue</h3>
+                <p className="mt-1.5 font-mono text-[13px] text-[var(--accent)]">sticky notes → drag-and-drop board</p>
+                <p className="mt-3 text-[15.5px] text-[var(--ink)] leading-[1.5]">
+                  A kanban for shop floors and counters. Drag cards across the day; daily revenue rolls up automatically.
+                </p>
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
+                  {['react', 'typescript', 'drag and drop', 'optimistic ui'].map(s => (
+                    <span key={s} className="px-[9px] py-0.5 rounded-full font-mono text-[11px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
+                  ))}
+                </div>
+                <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
+                  <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
+                  <span className="font-mono text-[11px] text-[var(--ink-dim)]">drag-and-drop</span>
                 </div>
               </div>
             </Link>

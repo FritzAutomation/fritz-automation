@@ -4,22 +4,22 @@ import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
-import { QuoteBuilder } from '@/components/demos/QuoteBuilder'
+import { OrderQueue } from '@/components/demos/OrderQueue'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Quote Builder Demo',
-  description: 'Build a clean, branded quote in your browser. Live document preview, computed totals, and a one-click send.',
+  title: 'Order Queue Demo',
+  description: 'A drag-and-drop kanban for shop floors and counters. New → making → ready → picked up. Daily revenue rolls up automatically.',
 }
 
 const productionSteps = [
-  { num: '01 / brand',     name: 'Looks like your business',         desc: 'Your logo, your colors, your fonts. Quotes feel like part of your studio, not a Gmail draft.' },
-  { num: '02 / accept',    name: 'A clickable accept link',          desc: 'Clients accept and sign in their browser. Acceptance writes a timestamp + IP back to you for the record.' },
-  { num: '03 / convert',   name: 'Quote → invoice in one click',     desc: 'Accepted quotes turn into Stripe invoices automatically. Deposit terms carry over. No double entry.' },
-  { num: '04 / templates', name: 'Reuse what works',                 desc: 'Save common scopes as templates — discovery, build, retainer — and start the next quote in 30 seconds.' },
+  { num: '01 / intake',   name: 'Orders flow in automatically',     desc: 'Square, Toast, Shopify, Squarespace forms — wherever the order is placed, it lands in the queue with no double entry.' },
+  { num: '02 / display',  name: 'A kitchen-display version',        desc: 'Same data, bigger fonts, no chrome. Mounts on a shop-floor TV so the team always knows what\'s next without checking a phone.' },
+  { num: '03 / notify',   name: 'Customer pings on "ready"',        desc: 'When a card moves to ready, the customer gets an SMS or email. Cuts curbside back-and-forth and "is mine done yet" messages.' },
+  { num: '04 / report',   name: 'End-of-day in one tab',            desc: 'Daily revenue, average prep time, top-selling items, repeat customers — exported to your books or just pinned to the wall.' },
 ]
 
-export default function QuotesPage() {
+export default function OrdersPage() {
   return (
     <div className="min-h-screen">
       <Header />
@@ -27,24 +27,24 @@ export default function QuotesPage() {
       <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] py-16">
         <GitGraphBackdrop height={400} />
         <div className="relative z-[2] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PathCrumbs trail={[{ label: 'demos', href: '/demos' }, { label: 'quotes' }]} />
+          <PathCrumbs trail={[{ label: 'demos', href: '/demos' }, { label: 'orders' }]} />
           <h1
             className="mt-4 text-4xl md:text-5xl font-extrabold text-[var(--heading)] tracking-[-0.025em]"
             style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.1s both' }}
           >
-            Quote Builder.
+            Order Queue.
           </h1>
           <p
             className="mt-3 text-lg text-[var(--ink)] max-w-2xl"
             style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.28s both' }}
           >
-            <span className="text-[var(--heading)] font-semibold">Type on the left, document updates on the right.</span> Add line items, apply discounts and tax, send a clean PDF — without opening Word.
+            <span className="text-[var(--heading)] font-semibold">A kanban for shop floors and counters.</span> Drag a card across the day — new, making, ready, picked up — and watch the daily total roll up.
           </p>
           <div
             className="mt-[18px] flex flex-wrap gap-1.5"
             style={{ animation: 'v3-fade-in 0.5s ease 0.46s both' }}
           >
-            {['react', 'typescript', 'forms', 'live preview', 'runs locally'].map(s => (
+            {['react', 'typescript', 'drag and drop', 'optimistic ui'].map(s => (
               <span key={s} className="px-2.5 py-[3px] rounded-full font-mono text-[11.5px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
             ))}
           </div>
@@ -56,20 +56,20 @@ export default function QuotesPage() {
       <section className="bg-[var(--bg)] py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// the problem</Eyebrow>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">When the quote is a Word doc.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">When the receipt printer is the system.</h2>
           <p className="mt-3 max-w-[60ch] text-[var(--ink-soft)] text-[16px] leading-relaxed">
-            Every new project is a copy of last week&apos;s quote, with the math redone by hand and a logo that&apos;s slightly off-color.
+            Most small kitchens and counters track orders on paper, sticky notes, or a Slack thread. It works — until it doesn&apos;t.
           </p>
 
           <div className="mt-8">
             <WindowChrome label="~/the-problem.sh" />
             <div className="rounded-b-xl border border-[var(--line)] bg-[var(--bg-card)] px-[26px] py-[22px]">
               <div className="font-mono text-[13.5px]">
-                <span className="text-[var(--accent)]">$</span> <span className="text-[var(--heading)]">duplicate quote-template-FINAL-v3.docx</span>
+                <span className="text-[var(--accent)]">$</span> <span className="text-[var(--heading)]">tail -f order-paper-trail</span>
               </div>
-              <Conseq>The subtotal in the body and the subtotal in the footer don&apos;t match. You don&apos;t notice until the client does.</Conseq>
-              <Conseq>The PDF you send has last client&apos;s name in the header.</Conseq>
-              <Conseq>You can&apos;t tell whether the client has actually opened it, let alone accepted.</Conseq>
+              <Conseq>The receipt got bumped off the rail. Order forgotten for 20 minutes.</Conseq>
+              <Conseq>You don&apos;t know what today&apos;s revenue is until tomorrow.</Conseq>
+              <Conseq>New hire can&apos;t tell which orders are next without three questions.</Conseq>
             </div>
           </div>
         </div>
@@ -81,15 +81,15 @@ export default function QuotesPage() {
       <section className="bg-[var(--surface-overlay)] py-14 border-t border-[var(--line)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// the solution — try it</Eyebrow>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">A live document, no Word required.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">A board your whole shift can read at a glance.</h2>
           <p className="mt-3 max-w-[60ch] text-[var(--ink-soft)] text-[16px] leading-relaxed">
-            Edit on the left, watch the quote rebuild on the right. Math always adds up, layout never breaks.
+            Drag a card or tap <span className="font-mono text-[var(--accent)]">→ next</span>. Cards age while they&apos;re open; ones that sit too long in <span className="font-mono text-[var(--accent)]">ready</span> turn accent-colored so nobody&apos;s coffee gets cold.
           </p>
 
           <div className="mt-8 rounded-xl border border-[var(--line)] bg-[var(--bg-card)] overflow-hidden">
-            <WindowChrome label="~/quotes.app" live />
+            <WindowChrome label="~/orders.app" live />
             <div className="p-5">
-              <QuoteBuilder />
+              <OrderQueue />
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function QuotesPage() {
             <div className="px-4 py-2.5 border border-[var(--line)] border-b-0 rounded-t-xl bg-[var(--surface-strong)] flex items-center gap-3 font-mono text-xs text-[var(--ink-dim)]">
               <span>►</span>
               <span className="text-[var(--ink-soft)]">~/in-production.md</span>
-              <span className="ml-auto text-[var(--accent)]">avg setup: 2–4 weeks</span>
+              <span className="ml-auto text-[var(--accent)]">avg setup: 3–6 weeks</span>
             </div>
             <div className="border border-[var(--line)] rounded-b-xl bg-[var(--bg-card)] py-4">
               {productionSteps.map((s, i, arr) => (
@@ -139,7 +139,7 @@ export default function QuotesPage() {
               style={{ background: 'var(--surface-overlay)' }}
             >
               <span className="text-[var(--accent)]">→</span> This demo runs entirely in your browser.{' '}
-              <span className="text-[var(--heading)] font-medium">Nothing is uploaded, nothing is sent.</span>
+              <span className="text-[var(--heading)] font-medium">No orders are stored, nothing is sent.</span>
             </div>
           </div>
         </div>
@@ -156,10 +156,10 @@ export default function QuotesPage() {
           <h2 className="font-bold text-[var(--heading)] tracking-[-0.022em]" style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}>
             Need something like this?
           </h2>
-          <p className="mt-3.5 text-[var(--ink-soft)]">I build branded quoting and proposal tools that ladder into your invoicing, CRM, and accept-online flow.</p>
+          <p className="mt-3.5 text-[var(--ink-soft)]">I build order-queue and shop-floor tools wired to your point-of-sale and online orders.</p>
           <div className="mt-7 flex justify-center gap-3 flex-wrap">
             <Link href="/contact"><Button size="lg">Start a project</Button></Link>
-            <Link href="/demos/orders"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
+            <Link href="/demos/client-portal"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
           </div>
         </div>
       </section>
