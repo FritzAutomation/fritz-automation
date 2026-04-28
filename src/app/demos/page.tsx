@@ -44,12 +44,12 @@ export default function DemosPage() {
             <span className="block w-6 h-px bg-[var(--accent)] opacity-60" aria-hidden />
             <span className="text-[var(--accent)]">// available demos</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Two interactive demos.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Three interactive demos.</h2>
           <p className="mt-3 max-w-[60ch] text-[15px] text-[var(--ink-soft)] leading-relaxed">
             Each one solves a real problem I&apos;ve solved for past clients — simplified down to something you can actually click on.
           </p>
 
-          <div className="mt-9 grid md:grid-cols-2 gap-[22px]">
+          <div className="mt-9 grid md:grid-cols-2 lg:grid-cols-3 gap-[22px]">
             {/* CSV Dashboard card */}
             <Link
               href="/demos/csv-dashboard"
@@ -93,6 +93,63 @@ export default function DemosPage() {
                 <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
                   <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
                   <span className="font-mono text-[11px] text-[var(--ink-dim)]">runs locally</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Booking card */}
+            <Link
+              href="/demos/booking"
+              className="demo-card group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col"
+            >
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-[var(--surface)] to-[var(--bg-card)] grid place-items-center overflow-hidden">
+                <span
+                  className="absolute top-3 left-3 z-[1] font-mono text-[10.5px] tracking-[0.05em] px-2 py-[3px] text-[var(--accent)] rounded inline-flex items-center gap-1.5 backdrop-blur"
+                  style={{ background: 'var(--accent-glow)', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)' }}
+                >
+                  <span className="v3-pulse-dot" style={{ width: 5, height: 5 }} />interactive
+                </span>
+                {/* Mini calendar art */}
+                <div className="grid grid-cols-7 gap-[3px] p-2">
+                  {Array.from({ length: 35 }).map((_, i) => {
+                    const isHeader = i < 7
+                    const isAccent = i === 17
+                    const isMuted = [0, 6, 7, 13, 14, 20, 21, 27, 28].includes(i)
+                    return (
+                      <span
+                        key={i}
+                        className="block w-3 h-3 rounded-[2px]"
+                        style={{
+                          background: isAccent
+                            ? 'var(--accent)'
+                            : isHeader
+                              ? 'color-mix(in srgb, var(--accent) 35%, transparent)'
+                              : isMuted
+                                ? 'var(--surface)'
+                                : 'color-mix(in srgb, var(--accent) 12%, transparent)',
+                        }}
+                      />
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="p-[22px] flex-1 flex flex-col">
+                <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-1.5">
+                  → <span className="text-[var(--accent)]">booking.app</span>
+                </div>
+                <h3 className="font-sans font-bold text-[24px] text-[var(--heading)] tracking-[-0.012em]">Booking Widget</h3>
+                <p className="mt-1.5 font-mono text-[13px] text-[var(--accent)]">email tag → self-serve booking</p>
+                <p className="mt-3 text-[15.5px] text-[var(--ink)] leading-[1.5]">
+                  Pick a service, pick a date, pick a time, leave a deposit. Four steps, no email back-and-forth.
+                </p>
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
+                  {['react', 'typescript', 'date math', 'forms'].map(s => (
+                    <span key={s} className="px-[9px] py-0.5 rounded-full font-mono text-[11px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
+                  ))}
+                </div>
+                <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
+                  <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
+                  <span className="font-mono text-[11px] text-[var(--ink-dim)]">4-step flow</span>
                 </div>
               </div>
             </Link>

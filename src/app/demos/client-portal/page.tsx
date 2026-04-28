@@ -159,7 +159,7 @@ export default function ClientPortalPage() {
           <p className="mt-3.5 text-[var(--ink-soft)]">I build custom portals connected to your real workflow.</p>
           <div className="mt-7 flex justify-center gap-3 flex-wrap">
             <Link href="/contact"><Button size="lg">Start a project</Button></Link>
-            <Link href="/demos/csv-dashboard"><Button size="lg" variant="outline">← Try the other demo</Button></Link>
+            <Link href="/demos/csv-dashboard"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
           </div>
         </div>
       </section>

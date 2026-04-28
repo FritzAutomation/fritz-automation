@@ -4,22 +4,22 @@ import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
-import { CsvDashboard } from '@/components/demos/CsvDashboard'
+import { BookingWidget } from '@/components/demos/BookingWidget'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'CSV Dashboard Demo',
-  description: 'Upload a CSV and get an instant dashboard with charts, filters, and stats.',
+  title: 'Booking Widget Demo',
+  description: 'A working booking widget — pick a service, pick a date, pick a time, take a deposit. The kind of tool I build for service businesses.',
 }
 
 const productionSteps = [
-  { num: '01 / connect',  name: 'Live data, not uploads',          desc: 'Connects to your POS, ERP, Stripe, Shopify, or spreadsheet — updated automatically. No more nightly export emails.' },
-  { num: '02 / authorize', name: 'Role-based access',              desc: 'Your sales lead sees pipeline, your finance lead sees revenue, your franchisees see only their stores. One tool, many viewpoints.' },
-  { num: '03 / schedule', name: 'Reports that send themselves',    desc: '"Email me Monday-morning revenue for the last 7 days." Set it once, never think about it again.' },
-  { num: '04 / alert',    name: 'Notifications when it matters',   desc: 'Inventory below threshold, churn spike, daily revenue drop — sent to Slack, email, or SMS.' },
+  { num: '01 / sync',     name: 'Connected to your real calendar',   desc: 'Reads availability from Google Calendar, Outlook, or Apple. Customers can only book slots when you\'re actually free.' },
+  { num: '02 / collect',  name: 'Real deposits, real receipts',      desc: 'Stripe or Square in the back. Deposits are held against the appointment, applied to the final invoice, or refunded automatically on cancellation.' },
+  { num: '03 / remind',   name: 'No-shows drop',                     desc: 'Reminder emails 24 hours out, SMS reminders 2 hours out. One-click reschedule link in every email so calls don\'t happen at midnight.' },
+  { num: '04 / followup', name: 'After the appointment',             desc: 'Auto-trigger a thank-you email, a review request, or a follow-up booking link. Fits inside whatever workflow you already run.' },
 ]
 
-export default function CsvDashboardPage() {
+export default function BookingPage() {
   return (
     <div className="min-h-screen">
       <Header />
@@ -27,24 +27,24 @@ export default function CsvDashboardPage() {
       <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] py-16">
         <GitGraphBackdrop height={400} />
         <div className="relative z-[2] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PathCrumbs trail={[{ label: 'demos', href: '/demos' }, { label: 'csv-dashboard' }]} />
+          <PathCrumbs trail={[{ label: 'demos', href: '/demos' }, { label: 'booking' }]} />
           <h1
             className="mt-4 text-4xl md:text-5xl font-extrabold text-[var(--heading)] tracking-[-0.025em]"
             style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.1s both' }}
           >
-            CSV Dashboard.
+            Booking Widget.
           </h1>
           <p
             className="mt-3 text-lg text-[var(--ink)] max-w-2xl"
             style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.28s both' }}
           >
-            Upload a spreadsheet and get an instant dashboard. <span className="text-[var(--heading)] font-semibold">Charts, filters, summary stats</span> — all in your browser.
+            A self-serve booking flow that <span className="text-[var(--heading)] font-semibold">picks the slot, takes the deposit, and sends the confirmation</span> — without a single back-and-forth email.
           </p>
           <div
             className="mt-[18px] flex flex-wrap gap-1.5"
             style={{ animation: 'v3-fade-in 0.5s ease 0.46s both' }}
           >
-            {['react', 'typescript', 'recharts', 'csv parsing', 'runs locally'].map(s => (
+            {['react', 'typescript', 'date math', 'forms', 'runs locally'].map(s => (
               <span key={s} className="px-2.5 py-[3px] rounded-full font-mono text-[11.5px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
             ))}
           </div>
@@ -56,20 +56,20 @@ export default function CsvDashboardPage() {
       <section className="bg-[var(--bg)] py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// the problem</Eyebrow>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">When the spreadsheet won.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">When the inbox is the calendar.</h2>
           <p className="mt-3 max-w-[60ch] text-[var(--ink-soft)] text-[16px] leading-relaxed">
-            Most small businesses don&apos;t need a fancy BI tool. They need to stop digging through tabs.
+            For most service businesses, booking starts as a polite back-and-forth and ends with a missed follow-up.
           </p>
 
           <div className="mt-8">
             <WindowChrome label="~/the-problem.sh" />
             <div className="rounded-b-xl border border-[var(--line)] bg-[var(--bg-card)] px-[26px] py-[22px]">
               <div className="font-mono text-[13.5px]">
-                <span className="text-[var(--accent)]">$</span> <span className="text-[var(--heading)]">open sales-data-Q1.xlsx</span>
+                <span className="text-[var(--accent)]">$</span> <span className="text-[var(--heading)]">grep -c &quot;does Tuesday work?&quot; inbox</span>
               </div>
-              <Conseq>14 tabs. 6 people editing. 3 versions on the shared drive.</Conseq>
-              <Conseq>Your Monday starts with 45 minutes of copy-paste to get one number.</Conseq>
-              <Conseq>By the time the email goes out, the data is already stale.</Conseq>
+              <Conseq>14 emails to schedule one appointment.</Conseq>
+              <Conseq>Two double-bookings a month, three no-shows, zero deposits collected.</Conseq>
+              <Conseq>You&apos;re answering &quot;what time slots do you have?&quot; at 9pm on a Sunday.</Conseq>
             </div>
           </div>
         </div>
@@ -81,15 +81,15 @@ export default function CsvDashboardPage() {
       <section className="bg-[var(--surface-overlay)] py-14 border-t border-[var(--line)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// the solution — try it</Eyebrow>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">A live dashboard, no install.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">A booking flow your customers actually finish.</h2>
           <p className="mt-3 max-w-[60ch] text-[var(--ink-soft)] text-[16px] leading-relaxed">
-            Upload your own CSV (it stays in your browser, nothing is sent), or use the sample data to see it in action.
+            Pick a service, pick a date, pick a time, leave a deposit. Four steps, no email tag.
           </p>
 
           <div className="mt-8 rounded-xl border border-[var(--line)] bg-[var(--bg-card)] overflow-hidden">
-            <WindowChrome label="~/csv-dashboard.app" live />
+            <WindowChrome label="~/booking.app" live />
             <div className="p-5">
-              <CsvDashboard />
+              <BookingWidget />
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function CsvDashboardPage() {
             <div className="px-4 py-2.5 border border-[var(--line)] border-b-0 rounded-t-xl bg-[var(--surface-strong)] flex items-center gap-3 font-mono text-xs text-[var(--ink-dim)]">
               <span>►</span>
               <span className="text-[var(--ink-soft)]">~/in-production.md</span>
-              <span className="ml-auto text-[var(--accent)]">avg setup: 4–8 weeks</span>
+              <span className="ml-auto text-[var(--accent)]">avg setup: 3–5 weeks</span>
             </div>
             <div className="border border-[var(--line)] rounded-b-xl bg-[var(--bg-card)] py-4">
               {productionSteps.map((s, i, arr) => (
@@ -139,7 +139,7 @@ export default function CsvDashboardPage() {
               style={{ background: 'var(--surface-overlay)' }}
             >
               <span className="text-[var(--accent)]">→</span> This demo runs entirely in your browser.{' '}
-              <span className="text-[var(--heading)] font-medium">Nothing is uploaded or stored.</span>
+              <span className="text-[var(--heading)] font-medium">No card is charged, nothing is sent.</span>
             </div>
           </div>
         </div>
@@ -156,10 +156,10 @@ export default function CsvDashboardPage() {
           <h2 className="font-bold text-[var(--heading)] tracking-[-0.022em]" style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}>
             Need something like this?
           </h2>
-          <p className="mt-3.5 text-[var(--ink-soft)]">I build custom dashboards connected to your real data.</p>
+          <p className="mt-3.5 text-[var(--ink-soft)]">I build booking and scheduling tools wired to your real calendar and payment processor.</p>
           <div className="mt-7 flex justify-center gap-3 flex-wrap">
             <Link href="/contact"><Button size="lg">Start a project</Button></Link>
-            <Link href="/demos/booking"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
+            <Link href="/demos/csv-dashboard"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
           </div>
         </div>
       </section>
