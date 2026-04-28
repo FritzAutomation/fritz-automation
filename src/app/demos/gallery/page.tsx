@@ -4,22 +4,22 @@ import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
-import { OrderQueue } from '@/components/demos/OrderQueue'
+import { PhotoGallery } from '@/components/demos/PhotoGallery'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Order Queue Demo',
-  description: 'A drag-and-drop kanban for shop floors and counters. New → making → ready → picked up. Daily revenue rolls up automatically.',
+  title: 'Photo Proof Gallery Demo',
+  description: 'A self-serve gallery where clients pick their favorite shots, leave comments, and send selections — without WeTransfer or a thread of email replies.',
 }
 
 const productionSteps = [
-  { num: '01 / intake',   name: 'Orders flow in automatically',     desc: 'Square, Toast, Shopify, Squarespace forms — wherever the order is placed, it lands in the queue with no double entry.' },
-  { num: '02 / display',  name: 'A kitchen-display version',        desc: 'Same data, bigger fonts, no chrome. Mounts on a shop-floor TV so the team always knows what\'s next without checking a phone.' },
-  { num: '03 / notify',   name: 'Customer pings on "ready"',        desc: 'When a card moves to ready, the customer gets an SMS or email. Cuts curbside back-and-forth and "is mine done yet" messages.' },
-  { num: '04 / report',   name: 'End-of-day in one tab',            desc: 'Daily revenue, average prep time, top-selling items, repeat customers — exported to your books or just pinned to the wall.' },
+  { num: '01 / brand',     name: 'Lives on your domain',          desc: 'gallery.your-studio.com, your logo and colors. Clients open it from your email — no Pixieset, no Pic-Time watermark.' },
+  { num: '02 / deliver',   name: 'Lightroom or Capture One sync', desc: 'Smart-collection in your editor pushes proofs to the gallery. When you mark a shot final, it disappears from the proof set.' },
+  { num: '03 / collect',   name: 'Comments structured for editing', desc: 'Comments come back tagged per photo, bundled into a single email or Slack message. No more "the third one in the email — wait, which third one?"' },
+  { num: '04 / handoff',   name: 'Final delivery from the same place',  desc: 'When approved photos are retouched, push them to the same gallery as a download set. One link from start to finish.' },
 ]
 
-export default function OrdersPage() {
+export default function GalleryPage() {
   return (
     <div className="min-h-screen">
       <Header />
@@ -27,24 +27,24 @@ export default function OrdersPage() {
       <section className="v3-hero-bg relative overflow-hidden border-b border-[var(--line)] py-16">
         <GitGraphBackdrop height={400} />
         <div className="relative z-[2] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PathCrumbs trail={[{ label: 'demos', href: '/demos' }, { label: 'orders' }]} />
+          <PathCrumbs trail={[{ label: 'demos', href: '/demos' }, { label: 'gallery' }]} />
           <h1
             className="mt-4 text-4xl md:text-5xl font-extrabold text-[var(--heading)] tracking-[-0.025em]"
             style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.1s both' }}
           >
-            Order Queue.
+            Proof Gallery.
           </h1>
           <p
             className="mt-3 text-lg text-[var(--ink)] max-w-2xl"
             style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.28s both' }}
           >
-            <span className="text-[var(--heading)] font-semibold">A kanban for shop floors and counters.</span> Drag a card across the day — new, making, ready, picked up — and watch the daily total roll up.
+            A self-serve gallery where clients <span className="text-[var(--heading)] font-semibold">pick the keepers, leave a note, and send their selections</span> — without a WeTransfer thread.
           </p>
           <div
             className="mt-[18px] flex flex-wrap gap-1.5"
             style={{ animation: 'v3-fade-in 0.5s ease 0.46s both' }}
           >
-            {['react', 'typescript', 'drag and drop', 'optimistic ui'].map(s => (
+            {['react', 'typescript', 'lightbox', 'keyboard nav', 'runs locally'].map(s => (
               <span key={s} className="px-2.5 py-[3px] rounded-full font-mono text-[11.5px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
             ))}
           </div>
@@ -56,20 +56,20 @@ export default function OrdersPage() {
       <section className="bg-[var(--bg)] py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// the problem</Eyebrow>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">When the receipt printer is the system.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">When the proof set lives in someone&apos;s inbox.</h2>
           <p className="mt-3 max-w-[60ch] text-[var(--ink-soft)] text-[16px] leading-relaxed">
-            Most small kitchens and counters track orders on paper, sticky notes, or a Slack thread. It works — until it doesn&apos;t.
+            For most photographers, designers, and agencies, client review is still a thread of forwarded files and screenshots-of-screenshots.
           </p>
 
           <div className="mt-8">
             <WindowChrome label="~/the-problem.sh" />
             <div className="rounded-b-xl border border-[var(--line)] bg-[var(--bg-card)] px-[26px] py-[22px]">
               <div className="font-mono text-[13.5px]">
-                <span className="text-[var(--accent)]">$</span> <span className="text-[var(--heading)]">tail -f order-paper-trail</span>
+                <span className="text-[var(--accent)]">$</span> <span className="text-[var(--heading)]">find inbox -name &quot;Re: Re: Re: proofs&quot; | wc -l</span>
               </div>
-              <Conseq>The receipt got bumped off the rail. Order forgotten for 20 minutes.</Conseq>
-              <Conseq>You don&apos;t know what today&apos;s revenue is until tomorrow.</Conseq>
-              <Conseq>New hire can&apos;t tell which orders are next without three questions.</Conseq>
+              <Conseq>14 messages, 3 attachments per message, half of them downloaded twice.</Conseq>
+              <Conseq>&quot;The third one&quot; is somebody&apos;s third — but whose third, and in which email?</Conseq>
+              <Conseq>You retouch a photo the client meant to reject. Re-shoot or eat the time.</Conseq>
             </div>
           </div>
         </div>
@@ -81,15 +81,15 @@ export default function OrdersPage() {
       <section className="bg-[var(--surface-overlay)] py-14 border-t border-[var(--line)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Eyebrow>// the solution — try it</Eyebrow>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">A board your whole shift can read at a glance.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">A gallery clients actually want to use.</h2>
           <p className="mt-3 max-w-[60ch] text-[var(--ink-soft)] text-[16px] leading-relaxed">
-            Drag a card or tap <span className="font-mono text-[var(--accent)]">→ next</span>. Cards age while they&apos;re open; ones that sit too long in <span className="font-mono text-[var(--accent)]">ready</span> turn accent-colored so nobody&apos;s coffee gets cold.
+            Tap a photo to open the lightbox. Approve, reject, or leave a comment. Keyboard shortcuts speed it up; counts and the &quot;send approved set&quot; button stay in view at the top.
           </p>
 
           <div className="mt-8 rounded-xl border border-[var(--line)] bg-[var(--bg-card)] overflow-hidden">
-            <WindowChrome label="~/orders.app" live />
+            <WindowChrome label="~/gallery.app" live />
             <div className="p-5">
-              <OrderQueue />
+              <PhotoGallery />
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function OrdersPage() {
             <div className="px-4 py-2.5 border border-[var(--line)] border-b-0 rounded-t-xl bg-[var(--surface-strong)] flex items-center gap-3 font-mono text-xs text-[var(--ink-dim)]">
               <span>►</span>
               <span className="text-[var(--ink-soft)]">~/in-production.md</span>
-              <span className="ml-auto text-[var(--accent)]">avg setup: 3–6 weeks</span>
+              <span className="ml-auto text-[var(--accent)]">avg setup: 3–5 weeks</span>
             </div>
             <div className="border border-[var(--line)] rounded-b-xl bg-[var(--bg-card)] py-4">
               {productionSteps.map((s, i, arr) => (
@@ -138,8 +138,8 @@ export default function OrdersPage() {
               className="mt-6 px-[18px] py-3.5 rounded-lg border border-dashed border-[var(--line)] font-mono text-[12px] text-[var(--ink-soft)] leading-[1.6]"
               style={{ background: 'var(--surface-overlay)' }}
             >
-              <span className="text-[var(--accent)]">→</span> This demo runs entirely in your browser.{' '}
-              <span className="text-[var(--heading)] font-medium">No orders are stored, nothing is sent.</span>
+              <span className="text-[var(--accent)]">→</span> Demo photos are placeholders from picsum.photos — real galleries display the photographer&apos;s own files.{' '}
+              <span className="text-[var(--heading)] font-medium">Nothing is uploaded, nothing is sent.</span>
             </div>
           </div>
         </div>
@@ -156,10 +156,10 @@ export default function OrdersPage() {
           <h2 className="font-bold text-[var(--heading)] tracking-[-0.022em]" style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}>
             Need something like this?
           </h2>
-          <p className="mt-3.5 text-[var(--ink-soft)]">I build order-queue and shop-floor tools wired to your point-of-sale and online orders.</p>
+          <p className="mt-3.5 text-[var(--ink-soft)]">I build branded proofing and delivery galleries for photographers, designers, and agencies.</p>
           <div className="mt-7 flex justify-center gap-3 flex-wrap">
             <Link href="/contact"><Button size="lg">Start a project</Button></Link>
-            <Link href="/demos/gallery"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
+            <Link href="/demos/client-portal"><Button size="lg" variant="outline">Try the next demo →</Button></Link>
           </div>
         </div>
       </section>

@@ -44,7 +44,7 @@ export default function DemosPage() {
             <span className="block w-6 h-px bg-[var(--accent)] opacity-60" aria-hidden />
             <span className="text-[var(--accent)]">// available demos</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Five interactive demos.</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--heading)] tracking-[-0.02em]">Six interactive demos.</h2>
           <p className="mt-3 max-w-[60ch] text-[15px] text-[var(--ink-soft)] leading-relaxed">
             Each one solves a real problem I&apos;ve solved for past clients — simplified down to something you can actually click on.
           </p>
@@ -253,6 +253,64 @@ export default function DemosPage() {
                 <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
                   <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
                   <span className="font-mono text-[11px] text-[var(--ink-dim)]">drag-and-drop</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Photo Proof Gallery card */}
+            <Link
+              href="/demos/gallery"
+              className="demo-card group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col"
+            >
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-[var(--surface)] to-[var(--bg-card)] grid place-items-center overflow-hidden">
+                <span
+                  className="absolute top-3 left-3 z-[1] font-mono text-[10.5px] tracking-[0.05em] px-2 py-[3px] text-[var(--accent)] rounded inline-flex items-center gap-1.5 backdrop-blur"
+                  style={{ background: 'var(--accent-glow)', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)' }}
+                >
+                  <span className="v3-pulse-dot" style={{ width: 5, height: 5 }} />interactive
+                </span>
+                {/* Mini gallery art — 3×2 photo grid with status badges */}
+                <div className="grid grid-cols-3 gap-1.5 w-[80%] max-w-[260px]">
+                  {[0, 1, 2, 3, 4, 5].map(i => {
+                    const status = i === 0 || i === 3 ? 'approved' : i === 4 ? 'rejected' : 'pending'
+                    return (
+                      <div
+                        key={i}
+                        className="aspect-[4/5] rounded-sm relative overflow-hidden"
+                        style={{
+                          background: status === 'rejected'
+                            ? 'color-mix(in srgb, var(--ink-dim) 25%, transparent)'
+                            : `linear-gradient(135deg, color-mix(in srgb, var(--accent) ${20 + i * 5}%, transparent), color-mix(in srgb, var(--ink-dim) ${30 - i * 3}%, transparent))`,
+                        }}
+                      >
+                        {status === 'approved' && (
+                          <span className="absolute top-0.5 left-0.5 w-2 h-2 rounded-full bg-[var(--accent)]" />
+                        )}
+                        {status === 'rejected' && (
+                          <span className="absolute top-0.5 left-0.5 w-2 h-2 rounded-full bg-[var(--ink-dim)]" />
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="p-[22px] flex-1 flex flex-col">
+                <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-1.5">
+                  → <span className="text-[var(--accent)]">gallery.app</span>
+                </div>
+                <h3 className="font-sans font-bold text-[24px] text-[var(--heading)] tracking-[-0.012em]">Proof Gallery</h3>
+                <p className="mt-1.5 font-mono text-[13px] text-[var(--accent)]">email threads → self-serve gallery</p>
+                <p className="mt-3 text-[15.5px] text-[var(--ink)] leading-[1.5]">
+                  Clients pick keepers and leave comments per photo. Approve, reject, send selections — without WeTransfer.
+                </p>
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
+                  {['react', 'typescript', 'lightbox', 'keyboard nav'].map(s => (
+                    <span key={s} className="px-[9px] py-0.5 rounded-full font-mono text-[11px] text-[var(--ink-soft)] border border-[var(--line)] bg-[var(--surface)]">{s}</span>
+                  ))}
+                </div>
+                <div className="mt-[22px] pt-3.5 border-t border-dashed border-[var(--line)] flex items-baseline justify-between mt-auto">
+                  <span className="font-mono text-[13px] text-[var(--accent)]">try it →</span>
+                  <span className="font-mono text-[11px] text-[var(--ink-dim)]">12 proofs</span>
                 </div>
               </div>
             </Link>
