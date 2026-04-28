@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Demos',
-  description: 'Small working apps that show how I build internal tools — a CSV dashboard and a client portal you can actually click on.',
+  title: 'About',
+  description: '15 years writing code, now building custom software solo from Burlington, Iowa. Here is the long version.',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

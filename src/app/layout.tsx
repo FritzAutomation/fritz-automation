@@ -14,6 +14,7 @@ import { AnalyticsWrapper } from '@/components/AnalyticsWrapper'
 import { ThemeProvider } from '@/components/v3/ThemeProvider'
 import { BuildLog, MobileTicker } from '@/components/v3/BuildLog'
 import { PaletteHint } from '@/components/v3/PaletteHint'
+import { ReturningVisitorToast } from '@/components/v3/ReturningVisitorToast'
 import './globals.css'
 
 const inter = Inter({
@@ -108,6 +109,7 @@ export default function RootLayout({
         <BuildLog />
         <MobileTicker />
         <PaletteHint />
+        <ReturningVisitorToast />
         <AnalyticsWrapper />
       </body>
     </html>

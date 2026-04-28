@@ -69,7 +69,7 @@ export function PhotoCard({ compact = false }: { compact?: boolean }) {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, var(--surface-strong), transparent 30%);
+          background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 30%);
           pointer-events: none;
         }
         .stamp {

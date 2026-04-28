@@ -146,9 +146,34 @@ export default function DemosPage() {
             </Link>
           </div>
 
+          {/* Secondary: shell demo (smaller, easter-egg style) */}
+          <Link
+            href="/shell"
+            className="demo-card-shell mt-7 group relative rounded-xl border border-[var(--line)] bg-[var(--bg-card)] hover:-translate-y-0.5 hover:border-[var(--accent)] transition-all duration-200 overflow-hidden grid grid-cols-[auto_1fr_auto] items-center gap-4 px-[22px] py-[18px]"
+          >
+            <div
+              className="w-9 h-9 rounded-lg grid place-items-center font-mono text-[15px] text-[var(--accent)]"
+              style={{
+                background: 'var(--accent-glow)',
+                border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)',
+              }}
+              aria-hidden
+            >&gt;_</div>
+            <div>
+              <div className="font-mono text-[11px] text-[var(--ink-dim)] tracking-[0.06em] mb-0.5">
+                → <span className="text-[var(--accent)]">/shell</span>
+              </div>
+              <div className="font-sans font-semibold text-[15.5px] text-[var(--heading)]">Browse the source.</div>
+              <div className="text-[13.5px] text-[var(--ink-soft)]">
+                A fake terminal you can navigate. Try <span className="font-mono text-[var(--accent)]">tree</span>, <span className="font-mono text-[var(--accent)]">cd projects</span>, <span className="font-mono text-[var(--accent)]">cat README.md</span>.
+              </div>
+            </div>
+            <span className="font-mono text-[12px] text-[var(--ink-dim)] group-hover:text-[var(--accent)] transition-colors hidden sm:inline">open →</span>
+          </Link>
+
           {/* Note */}
           <div
-            className="mt-9 px-[22px] py-[18px] rounded-xl border border-dashed border-[var(--line)] grid grid-cols-[36px_1fr] gap-4 items-start"
+            className="mt-7 px-[22px] py-[18px] rounded-xl border border-dashed border-[var(--line)] grid grid-cols-[36px_1fr] gap-4 items-start"
             style={{ background: 'var(--surface-overlay)' }}
           >
             <div
