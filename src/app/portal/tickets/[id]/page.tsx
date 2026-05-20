@@ -14,6 +14,7 @@ interface Ticket {
   category: string | null
   created_at: string
   updated_at: string
+  project: { id: string; title: string; status: string } | null
 }
 
 interface Message {
@@ -53,10 +54,10 @@ export default async function TicketDetailPage({
 
     const { data: ticketData } = await sb
       .from('tickets')
-      .select('*')
+      .select('*, project:projects!tickets_project_id_fkey(id, title, status)')
       .eq('id', id)
       .eq('client_id', user.id)
-      .single()
+      .maybeSingle()
 
     ticket = ticketData
 
@@ -109,6 +110,20 @@ export default async function TicketDetailPage({
             </div>
           </div>
         </div>
+
+        {ticket.project && (
+          <div className="px-6 py-3 border-b border-slate-200">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <span>Project:</span>
+              <Link
+                href={`/portal/projects/${ticket.project.id}`}
+                className="text-primary font-medium hover:underline"
+              >
+                {ticket.project.title}
+              </Link>
+            </div>
+          </div>
+        )}
 
         <div className="p-6 border-b border-slate-200">
           <h2 className="text-sm font-semibold text-slate-600 mb-2">Description</h2>

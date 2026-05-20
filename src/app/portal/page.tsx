@@ -2,7 +2,13 @@ import { createClient } from '@/lib/supabase/server'
 import { ProjectCard } from '@/components/portal/ProjectCard'
 import type { Project, Profile } from '@/types/database'
 
-export default async function PortalDashboard() {
+export default async function PortalDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>
+}) {
+  const params = await searchParams
+  const showNoProjectsError = params.error === 'no-projects'
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -49,6 +55,12 @@ export default async function PortalDashboard() {
             : 'No active projects yet. I\u2019ll post here when we kick off.'}
         </p>
       </div>
+
+      {showNoProjectsError && (
+        <div className="mb-6 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          You don&apos;t have any projects yet, so there&apos;s nothing to scope a ticket to. I&apos;ll reach out when we kick off.
+        </div>
+      )}
 
       {projects.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2">

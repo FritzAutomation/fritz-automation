@@ -14,13 +14,32 @@ export function ResetPasswordForm() {
   const [isValidSession, setIsValidSession] = useState<boolean | null>(null)
 
   useEffect(() => {
-    // Check if we have a valid session from the reset link
-    const checkSession = async () => {
-      const supabase = createClient()
-      const { data: { session } } = await supabase.auth.getSession()
-      setIsValidSession(!!session)
+    const supabase = createClient()
+
+    // Check for an existing session first (fast path for password resets
+    // where the user is already authenticated).
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) setIsValidSession(true)
+    })
+
+    // Listen for auth state changes — this catches invite/magic-link
+    // flows where the Supabase client needs time to process the tokens
+    // in the URL hash fragment before a session exists.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (session) setIsValidSession(true)
+      }
+    )
+
+    // If neither path produces a session after 4 seconds, mark as invalid.
+    const timeout = setTimeout(() => {
+      setIsValidSession((prev) => (prev === null ? false : prev))
+    }, 4000)
+
+    return () => {
+      subscription.unsubscribe()
+      clearTimeout(timeout)
     }
-    checkSession()
   }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

@@ -38,6 +38,17 @@ export type ProjectUpdateWithAuthor = ProjectUpdateRow & {
   author: Pick<Profile, 'id' | 'first_name' | 'last_name' | 'role'> | null
 }
 
+// Ticket joined with parent project (for portal list views)
+export type TicketWithProject = Ticket & {
+  project: Pick<Project, 'id' | 'title' | 'status'> | null
+}
+
+// Ticket with both client and project (for admin views)
+export type TicketWithClientAndProject = Ticket & {
+  client: Pick<Profile, 'id' | 'first_name' | 'last_name' | 'email' | 'company_name' | 'phone'> | null
+  project: Pick<Project, 'id' | 'title' | 'status'> | null
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -239,6 +250,7 @@ export interface Database {
           id: string
           ticket_number: string
           client_id: string
+          project_id: string
           subject: string
           description: string | null
           status: 'open' | 'in_progress' | 'waiting' | 'resolved' | 'closed'
@@ -253,6 +265,7 @@ export interface Database {
           id?: string
           ticket_number?: string
           client_id: string
+          project_id: string
           subject: string
           description?: string | null
           status?: 'open' | 'in_progress' | 'waiting' | 'resolved' | 'closed'
@@ -267,6 +280,7 @@ export interface Database {
           id?: string
           ticket_number?: string
           client_id?: string
+          project_id?: string
           subject?: string
           description?: string | null
           status?: 'open' | 'in_progress' | 'waiting' | 'resolved' | 'closed'

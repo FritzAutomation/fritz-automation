@@ -43,6 +43,23 @@ export default async function ProjectDetailPage({
 
   const updates = (updatesResult.data || []) as ProjectUpdateWithAuthor[]
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ticketsResult = await (sb as any)
+    .from('tickets')
+    .select('id, ticket_number, subject, status, priority, created_at')
+    .eq('project_id', id)
+    .eq('client_id', user.id)
+    .order('created_at', { ascending: false })
+
+  const projectTickets = (ticketsResult.data || []) as Array<{
+    id: string
+    ticket_number: string
+    subject: string
+    status: 'open' | 'in_progress' | 'waiting' | 'resolved' | 'closed'
+    priority: 'low' | 'normal' | 'high' | 'urgent'
+    created_at: string
+  }>
+
   const start = formatDate(project.start_date)
   const target = formatDate(project.target_date)
 
@@ -68,6 +85,51 @@ export default async function ProjectDetailPage({
         <section>
           <h2 className="text-lg font-semibold text-slate-900 mb-4">Updates</h2>
           <UpdatesFeed updates={updates} />
+
+          <div className="mt-10">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-slate-900">Tickets</h2>
+              <Link
+                href={`/portal/tickets/new?project=${project.id}`}
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                + New ticket
+              </Link>
+            </div>
+
+            {projectTickets.length === 0 ? (
+              <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                <p className="text-sm text-slate-500">
+                  No tickets yet. Open one when you need help on this project.
+                </p>
+              </div>
+            ) : (
+              <ul className="space-y-2">
+                {projectTickets.map(t => (
+                  <li key={t.id}>
+                    <Link
+                      href={`/portal/tickets/${t.id}`}
+                      className="block rounded-lg border border-slate-200 bg-white p-3 hover:border-primary/30 transition-colors"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 text-xs text-slate-500">
+                            <span>{t.ticket_number}</span>
+                            <span>·</span>
+                            <span>{new Date(t.created_at).toLocaleDateString()}</span>
+                          </div>
+                          <div className="text-sm text-slate-900 mt-0.5 truncate">{t.subject}</div>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                          {t.status.replace('_', ' ')}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </section>
 
         <aside className="space-y-6">

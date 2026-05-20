@@ -46,12 +46,11 @@ export async function inviteClient(input: {
     auth: { autoRefreshToken: false, persistSession: false },
   })
 
-  // Where Supabase should send the user after they click the invite email.
-  // Must match (or be covered by) the Redirect URLs allow-list in Supabase
-  // Auth → URL Configuration. The reset-password route already handles the
-  // "set your password for the first time" UX cleanly.
+  // Supabase uses PKCE flow: the invite link redirects to /auth/callback
+  // with a ?code= parameter. The callback route exchanges the code for a
+  // session (setting cookies), then redirects to the ?next= destination.
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fritzautomation.dev'
-  const redirectTo = `${siteUrl}/reset-password`
+  const redirectTo = `${siteUrl}/auth/callback?next=/reset-password`
 
   const { error } = await adminClient.auth.admin.inviteUserByEmail(email, {
     data: {
