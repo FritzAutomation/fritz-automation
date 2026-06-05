@@ -195,9 +195,9 @@ function WebsitesPanel() {
 
       <aside>
         <PricingRail
-          budget="$3,500 — $15,000"
+          budget="$1,000 — $30,000"
           timeline="2 — 6 weeks"
-          note="Smaller end covers focused marketing sites. Higher end covers full online stores and multi-section sites with custom design."
+          note="Smaller end covers a focused, single-page custom site. Higher end covers full online stores and multi-section sites with custom design."
           ctaSource="services_websites_rail"
         />
       </aside>

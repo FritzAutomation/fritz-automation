@@ -53,7 +53,7 @@ Tell me about your project. I read every inquiry myself.
     `<span class="b"># pricing.toml</span>
 
 <span class="dim">[</span><span class="h">websites</span><span class="dim">]</span>
-range = "<span class="h">$3,500 — $15,000</span>"
+range = "<span class="h">$1,000 — $30,000</span>"
 timeline = "2–6 weeks"
 discovery = "<span class="h">free 30-min call</span>"
 
