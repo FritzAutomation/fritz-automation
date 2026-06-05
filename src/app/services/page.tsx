@@ -266,7 +266,7 @@ function AutomationPanel() {
 
       <aside>
         <PricingRail
-          budget="$6,000 — $40,000"
+          budget="$2,500 — $40,000"
           timeline="4 — 12 weeks"
           note="Smaller end covers focused single-purpose tools. Higher end covers multi-user apps with integrations and custom workflows."
           ctaSource="services_automation_rail"

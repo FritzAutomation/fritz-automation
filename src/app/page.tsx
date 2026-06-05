@@ -226,7 +226,7 @@ export default function HomePage() {
               <div className="mt-[22px] pt-[14px] border-t border-dashed border-[var(--line)] flex items-baseline justify-between">
                 <span className="font-mono text-[13px] text-[var(--accent)]">open →</span>
                 <span className="font-mono text-[11.5px] text-[var(--ink-dim)]">
-                  <span className="text-[var(--ink)]">$6k — $40k</span> · 4–12 wks
+                  <span className="text-[var(--ink)]">$2.5k — $40k</span> · 4–12 wks
                 </span>
               </div>
             </Link>

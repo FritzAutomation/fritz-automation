@@ -58,7 +58,7 @@ timeline = "2–6 weeks"
 discovery = "<span class="h">free 30-min call</span>"
 
 <span class="dim">[</span><span class="h">automation</span><span class="dim">]</span>
-range = "<span class="h">$6,000 — $40,000</span>"
+range = "<span class="h">$2,500 — $40,000</span>"
 timeline = "4–12 weeks"
 includes = ["dashboards", "integrations", "pipelines"]`,
 }
