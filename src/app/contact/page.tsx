@@ -5,6 +5,7 @@ import { PathCrumbs } from '@/components/layout/PathCrumbs'
 import { ScrollReveal } from '@/components/ScrollReveal'
 import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 import { ContactForm } from './ContactForm'
+import { contactInfo } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -151,7 +152,7 @@ export default function ContactPage() {
           </div>
           <h2 className="text-xl font-bold text-[var(--heading)]">Or skip the form.</h2>
           <p className="mt-2 text-[15px] text-[var(--ink-soft)]">
-            Email <a href="mailto:josh@fritzautomation.com" className="text-[var(--accent)] border-b border-dashed border-[var(--accent-glow)] hover:text-[var(--accent-bright)]">josh@fritzautomation.com</a>{' '}
+            Email <a href={`mailto:${contactInfo.email}`} className="text-[var(--accent)] border-b border-dashed border-[var(--accent-glow)] hover:text-[var(--accent-bright)]">{contactInfo.email}</a>{' '}
             directly.
           </p>
         </div>

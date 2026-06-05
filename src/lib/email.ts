@@ -39,7 +39,7 @@ async function getAdminEmails(): Promise<string[]> {
   if (!supabase) {
     // Fallback to default admin email if service client not configured
     console.log('[Email] No service client - using fallback email')
-    return ['forward@fritzautomation.dev']
+    return ['JFritzjunker@FritzAutomation.dev']
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,12 +51,12 @@ async function getAdminEmails(): Promise<string[]> {
 
   if (error) {
     console.error('[Email] Error fetching admin emails:', error)
-    return ['forward@fritzautomation.dev']
+    return ['JFritzjunker@FritzAutomation.dev']
   }
 
   if (!admins || admins.length === 0) {
     console.log('[Email] No admin/superadmin profiles found - using fallback email')
-    return ['forward@fritzautomation.dev']
+    return ['JFritzjunker@FritzAutomation.dev']
   }
 
   const emails = admins.map(a => a.email).filter((email): email is string => email !== null)

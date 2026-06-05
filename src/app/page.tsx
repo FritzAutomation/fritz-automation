@@ -8,6 +8,7 @@ import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 import { StatusAnchor } from '@/components/v3/StatusAnchor'
 import { PhotoCard } from '@/components/v3/PhotoCard'
 import { TimeOfDayGreeting } from '@/components/v3/TimeOfDayGreeting'
+import { contactInfo } from '@/lib/constants'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -390,7 +391,7 @@ export default function HomePage() {
             <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_final_cta' })}>
               <Button size="lg">Start a project</Button>
             </Link>
-            <Link href="mailto:josh@fritzautomation.com">
+            <Link href={`mailto:${contactInfo.email}`}>
               <Button size="lg" variant="outline">Or just email me</Button>
             </Link>
           </div>

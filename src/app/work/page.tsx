@@ -12,6 +12,24 @@ import { useState } from 'react'
 
 const projects = [
   {
+    id: 'snake-alley-film',
+    file: 'snake-alley-film.tsx',
+    title: 'Snake Alley Festival of Film',
+    category: 'Arts & culture',
+    description: 'An editorial site for Burlington\'s annual short-film festival at the historic Capitol Theater. A live countdown to opening night, a multi-block screening schedule, festival passes, and a filmmaker submission flow — all wrapped in a typographic, print-inspired design.',
+    url: 'https://www.snakealleyfestivaloffilm.com',
+    image: '/portfolio/snake-alley-film.png',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    highlights: [
+      'Live opening-night countdown',
+      'Multi-block screening schedule',
+      'Festival passes & ticketing',
+      'Filmmaker submission flow',
+      'Editorial, print-inspired typography',
+      'Fast & mobile-responsive',
+    ],
+  },
+  {
     id: 'iowan-foodie',
     file: 'iowan-foodie.tsx',
     title: 'Iowan Foodie',
@@ -103,7 +121,7 @@ export default function WorkPage() {
               </ul>
               <div className="border-t border-[var(--line)] mt-3.5 pt-3.5">
                 <div className="font-mono text-[10.5px] text-[var(--ink-dim)] px-[18px] pb-2 tracking-[0.1em] uppercase">Filter</div>
-                <div className="font-mono text-[12px] text-[var(--ink-dim)] px-[18px] py-1">type: all · year: 2024–2025</div>
+                <div className="font-mono text-[12px] text-[var(--ink-dim)] px-[18px] py-1">type: all · year: 2024–2026</div>
               </div>
             </aside>
 

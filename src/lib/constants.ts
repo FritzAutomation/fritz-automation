@@ -28,7 +28,7 @@ export const iconPaths: Record<string, string> = {
 
 // Contact information - single source of truth
 export const contactInfo = {
-  email: 'forward@fritzautomation.dev',
+  email: 'JFritzjunker@FritzAutomation.dev',
   github: {
     url: 'https://github.com/FritzAutomation',
     handle: '@FritzAutomation',
