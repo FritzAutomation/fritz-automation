@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import Papa from 'papaparse'
 import { track } from '@vercel/analytics'
 import {
@@ -32,7 +32,34 @@ function formatNumber(n: number): string {
   return n.toLocaleString('en-US', { maximumFractionDigits: 2 })
 }
 
+/**
+ * Resolves the active theme's CSS variables to concrete colors so Recharts
+ * (which needs real color values, not var() strings) follows the dark/dim/paper
+ * theme. Re-reads when the theme changes.
+ */
+function useThemeColors() {
+  const [c, setC] = useState({ accent: '#34d399', grid: '#1e293b', tick: '#64748b', card: '#0b1424', label: '#cbd5e1' })
+  useEffect(() => {
+    const read = () => {
+      const s = getComputedStyle(document.documentElement)
+      const v = (name: string, fallback: string) => s.getPropertyValue(name).trim() || fallback
+      setC({
+        accent: v('--accent', '#34d399'),
+        grid: v('--line', '#1e293b'),
+        tick: v('--ink-dim', '#64748b'),
+        card: v('--bg-card', '#0b1424'),
+        label: v('--ink', '#cbd5e1'),
+      })
+    }
+    read()
+    document.addEventListener('fa:theme-change', read)
+    return () => document.removeEventListener('fa:theme-change', read)
+  }, [])
+  return c
+}
+
 export function CsvDashboard() {
+  const chart = useThemeColors()
   const [data, setData] = useState<ParsedData | null>(null)
   const [filters, setFilters] = useState<Record<string, string>>({})
   const [sortCol, setSortCol] = useState<string | null>(null)
@@ -194,7 +221,7 @@ export function CsvDashboard() {
               track('demo_interaction', { action: 'sample_data_loaded' })
               parseCSV(sampleCsvString, 'sample')
             }}
-            className="px-4 py-2 bg-[var(--accent-glow)] hover:bg-emerald-500/30 text-[var(--accent)] rounded-lg font-mono text-sm transition-colors border border-[var(--accent)]"
+            className="px-4 py-2 bg-[var(--accent-glow)] hover:bg-[color-mix(in_srgb,var(--accent)_28%,transparent)] text-[var(--accent)] rounded-lg font-mono text-sm transition-colors border border-[var(--accent)]"
           >
             Use sample data
           </button>
@@ -227,14 +254,14 @@ export function CsvDashboard() {
             <div className="font-mono text-xs text-[var(--ink-dim)] mb-3">{chartData.bar.label} by category</div>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={chartData.bar.data}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
+                <XAxis dataKey="name" tick={{ fill: chart.tick, fontSize: 11 }} />
+                <YAxis tick={{ fill: chart.tick, fontSize: 11 }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: 8, fontSize: 12 }}
-                  labelStyle={{ color: '#e2e8f0' }}
+                  contentStyle={{ backgroundColor: chart.card, border: `1px solid ${chart.grid}`, borderRadius: 8, fontSize: 12 }}
+                  labelStyle={{ color: chart.label }}
                 />
-                <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" fill={chart.accent} radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -244,14 +271,14 @@ export function CsvDashboard() {
             <div className="font-mono text-xs text-[var(--ink-dim)] mb-3">{chartData.line.label} over time</div>
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={chartData.line.data}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                <XAxis dataKey="date" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
+                <XAxis dataKey="date" tick={{ fill: chart.tick, fontSize: 11 }} />
+                <YAxis tick={{ fill: chart.tick, fontSize: 11 }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: 8, fontSize: 12 }}
-                  labelStyle={{ color: '#e2e8f0' }}
+                  contentStyle={{ backgroundColor: chart.card, border: `1px solid ${chart.grid}`, borderRadius: 8, fontSize: 12 }}
+                  labelStyle={{ color: chart.label }}
                 />
-                <Line type="monotone" dataKey="value" stroke="#10b981" strokeWidth={2} dot={{ fill: '#10b981', r: 3 }} />
+                <Line type="monotone" dataKey="value" stroke={chart.accent} strokeWidth={2} dot={{ fill: chart.accent, r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -278,7 +305,7 @@ export function CsvDashboard() {
                       placeholder="filter..."
                       value={filters[h] || ''}
                       onChange={(e) => setFilters(prev => ({ ...prev, [h]: e.target.value }))}
-                      className="mt-1 w-full bg-[var(--bg-soft)] border border-[var(--line-soft)] rounded px-2 py-0.5 text-xs text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none"
+                      className="mt-1 w-full bg-[var(--bg-soft)] border border-[var(--line-soft)] rounded px-2 py-0.5 text-xs text-[var(--ink)] placeholder-[var(--ink-dim)] focus:border-[var(--accent)] outline-none"
                     />
                   </th>
                 ))}
@@ -306,7 +333,7 @@ export function CsvDashboard() {
       <div className="flex flex-wrap gap-3">
         <button
           onClick={downloadReport}
-          className="px-4 py-2 bg-[var(--accent-glow)] hover:bg-emerald-500/30 text-[var(--accent)] rounded-lg font-mono text-sm transition-colors border border-[var(--accent)]"
+          className="px-4 py-2 bg-[var(--accent-glow)] hover:bg-[color-mix(in_srgb,var(--accent)_28%,transparent)] text-[var(--accent)] rounded-lg font-mono text-sm transition-colors border border-[var(--accent)]"
         >
           $ download report.csv
         </button>

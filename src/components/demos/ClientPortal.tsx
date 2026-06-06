@@ -113,7 +113,7 @@ export function ClientPortal() {
               onClick={() => setSelectedId(p.id)}
               className={`w-full text-left p-3 rounded-lg border transition-colors ${
                 selectedId === p.id
-                  ? 'border-[var(--accent)] bg-emerald-500/5'
+                  ? 'border-[var(--accent)] bg-[var(--accent-glow)]'
                   : 'border-[var(--line)] bg-[var(--surface-overlay)] hover:bg-[var(--bg-card)]/40'
               }`}
             >
@@ -133,17 +133,17 @@ export function ClientPortal() {
                 name="title"
                 placeholder="Project title"
                 required
-                className="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1.5 text-sm text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none"
+                className="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1.5 text-sm text-[var(--ink)] placeholder-[var(--ink-dim)] focus:border-[var(--accent)] outline-none"
               />
               <textarea
                 name="message"
                 placeholder="Tell me about your project..."
                 rows={2}
-                className="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1.5 text-sm text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none resize-none"
+                className="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1.5 text-sm text-[var(--ink)] placeholder-[var(--ink-dim)] focus:border-[var(--accent)] outline-none resize-none"
               />
               <button
                 type="submit"
-                className="w-full py-1.5 bg-[var(--accent-glow)] hover:bg-emerald-500/30 text-[var(--accent)] rounded font-mono text-xs transition-colors border border-[var(--accent)]"
+                className="w-full py-1.5 bg-[var(--accent-glow)] hover:bg-[color-mix(in_srgb,var(--accent)_28%,transparent)] text-[var(--accent)] rounded font-mono text-xs transition-colors border border-[var(--accent)]"
               >
                 $ submit
               </button>
@@ -190,7 +190,7 @@ export function ClientPortal() {
                     value={newNote}
                     onChange={(e) => setNewNote(e.target.value)}
                     placeholder="Add a note..."
-                    className="flex-1 bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1 text-sm text-[var(--ink)] placeholder-slate-600 focus:border-[var(--accent)] outline-none"
+                    className="flex-1 bg-[var(--bg)] border border-[var(--line)] rounded px-2 py-1 text-sm text-[var(--ink)] placeholder-[var(--ink-dim)] focus:border-[var(--accent)] outline-none"
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addNote(selected.id) } }}
                   />
                   <button

@@ -73,7 +73,7 @@ export function CursorEffects() {
       {ripples.map((ripple) => (
         <div
           key={ripple.id}
-          className="absolute animate-cursor-ripple rounded-full border-2 border-primary/40"
+          className="absolute animate-cursor-ripple rounded-full border-2 border-[var(--accent)]/40"
           style={{
             left: ripple.x,
             top: ripple.y,

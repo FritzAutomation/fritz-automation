@@ -26,7 +26,7 @@ export function ScrollProgress() {
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Page scroll progress"
-      className="fixed top-0 left-0 h-[3px] z-[60] pointer-events-none bg-gradient-to-r from-primary to-primary-light"
+      className="fixed top-0 left-0 h-[3px] z-[60] pointer-events-none bg-gradient-to-r from-[var(--accent)] to-[var(--accent-bright)]"
       style={{ width: `${progress}%` }}
     />
   )
