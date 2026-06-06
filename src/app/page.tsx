@@ -128,19 +128,19 @@ export default function HomePage() {
             <HeroCmdPrompt />
             <h1
               className="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-[-0.028em] text-[var(--heading)] max-w-[14ch]"
-              style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.7s both' }}
+              style={{ animation: 'v3-rise 0.6s cubic-bezier(0.2,0.8,0.2,1) 0.38s both' }}
             >
               Custom software<br />for <span className="text-[var(--accent)]">small businesses.</span>
             </h1>
             <p
               className="mt-6 text-lg md:text-xl text-[var(--ink)] max-w-[50ch] leading-relaxed"
-              style={{ animation: 'v3-rise 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.88s both' }}
+              style={{ animation: 'v3-rise 0.6s cubic-bezier(0.2,0.8,0.2,1) 0.52s both' }}
             >
               <span className="text-[var(--heading)] font-semibold">I&apos;m Josh.</span> I build websites that sell, and internal tools that save your team hours. Built by one developer, in <span className="text-[var(--accent)]">Burlington, Iowa</span>.
             </p>
             <div
               className="mt-8 flex flex-wrap gap-3"
-              style={{ animation: 'v3-fade-in 0.5s ease 1.06s both' }}
+              style={{ animation: 'v3-fade-in 0.5s ease 0.66s both' }}
             >
               <Link href="/contact" onClick={() => track('start_project_clicked', { source: 'homepage_hero' })}>
                 <Button size="lg">Start a project</Button>
@@ -150,7 +150,7 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div style={{ animation: 'v3-rise-long 0.7s cubic-bezier(0.2,0.8,0.2,1) 1.15s both' }}>
+          <div style={{ animation: 'v3-rise-long 0.7s cubic-bezier(0.2,0.8,0.2,1) 0.78s both' }}>
             <StatusAnchor />
           </div>
         </div>

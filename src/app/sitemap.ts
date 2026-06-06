@@ -34,6 +34,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    // Individual interactive demos (linked from /demos)
+    ...['csv-dashboard', 'client-portal', 'booking', 'orders', 'quotes', 'gallery'].map((slug) => ({
+      url: `${baseUrl}/demos/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.4,
+    })),
+    {
+      url: `${baseUrl}/shell`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.4,
+    },
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

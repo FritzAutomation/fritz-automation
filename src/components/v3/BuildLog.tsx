@@ -31,11 +31,19 @@ function nowTs() {
  * scrolls into view, so it doesn't overlap footer links / CTAs.
  */
 export function BuildLog({ pageName = 'home' }: { pageName?: string }) {
-  const [rows, setRows] = useState<Entry[]>([{ ts: nowTs(), level: 'ready', text: `serving /${pageName}`, kind: 'e' }])
+  const [rows, setRows] = useState<Entry[]>([{ ts: '--:--:--', level: 'ready', text: `serving /${pageName}`, kind: 'e' }])
   const [hidden, setHidden] = useState(false)
   const idxRef = useRef(0)
   const lastScrollRef = useRef(0)
   const pathname = usePathname()
+
+  // Stamp the real boot time on the client only. Calling nowTs() in the initial
+  // state runs on both the server render and the client hydration render; the
+  // seconds tick over between them and React throws a hydration mismatch. So we
+  // render a stable placeholder for SSR and fill in the real time after mount.
+  useEffect(() => {
+    setRows(curr => curr.map((r, i) => (i === 0 ? { ...r, ts: nowTs() } : r)))
+  }, [])
 
   // Scroll + click event handlers — set up once
   useEffect(() => {
