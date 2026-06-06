@@ -8,6 +8,7 @@ import { GitGraphBackdrop } from '@/components/v3/GitGraphBackdrop'
 import { StatusAnchor } from '@/components/v3/StatusAnchor'
 import { PhotoCard } from '@/components/v3/PhotoCard'
 import { TimeOfDayGreeting } from '@/components/v3/TimeOfDayGreeting'
+import { Testimonials } from '@/components/v3/Testimonials'
 import { contactInfo } from '@/lib/constants'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -369,6 +370,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
+
+      {/* Testimonials (placeholder — see Testimonials.tsx) */}
+      <ScrollReveal>
+        <Testimonials />
       </ScrollReveal>
 
       {/* Final CTA */}

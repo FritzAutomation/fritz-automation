@@ -21,9 +21,9 @@ const tech = ['Next.js', 'React', 'TypeScript', 'Tailwind CSS']
 
 const features = [
   { k: 'Live countdown', v: 'A ticking counter to opening night on every page — quiet urgency that nudges visitors toward tickets.' },
-  { k: 'Multi-block schedule', v: 'Four days and fourteen blocks of shorts, organized so a visitor can find the night they want without a spreadsheet.' },
-  { k: 'Passes & ticketing', v: 'Clear pass tiers and a path to buy, so casual visitors and festival regulars both know exactly what to get.' },
-  { k: 'Filmmaker submissions', v: 'A submission path for filmmakers — the festival fills its program from the same site that sells it.' },
+  { k: 'Multi-block schedule', v: 'Fourteen blocks across four days, grouped by night so a visitor can find the screening they want without wrestling a spreadsheet.' },
+  { k: 'Passes & ticketing', v: 'Three clear ways in — a single $8 block, a day pass, or a full festival pass — so casual visitors and regulars both know exactly what to buy.' },
+  { k: 'Filmmaker submissions', v: 'A clear path for filmmakers to submit their work (via FilmFreeway), so the festival fills its program from the same site that sells it.' },
   { k: 'Editorial design', v: 'Print-inspired serif typography and generous space, so the site feels as considered as the films it screens.' },
 ]
 
@@ -125,6 +125,40 @@ export default function SnakeAlleyCaseStudy() {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+      </ScrollReveal>
+
+      {/* In the program — real screens */}
+      <ScrollReveal>
+      <section className="bg-[var(--bg)] pb-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-5">
+            <figure className="m-0">
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-[var(--line)] bg-[var(--bg-card)]">
+                <Image
+                  src="/portfolio/snake-alley-schedule.png"
+                  alt="The SNAFF schedule page — fourteen blocks across four days"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              <figcaption className="mt-2.5 font-mono text-[12px] text-[var(--ink-dim)]">// the schedule — fourteen blocks, four days</figcaption>
+            </figure>
+            <figure className="m-0">
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-[var(--line)] bg-[var(--bg-card)]">
+                <Image
+                  src="/portfolio/snake-alley-passes.png"
+                  alt="The SNAFF passes page — single ticket, day pass, and festival pass tiers"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              <figcaption className="mt-2.5 font-mono text-[12px] text-[var(--ink-dim)]">// passes — three ways in</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
       </ScrollReveal>
