@@ -18,6 +18,7 @@ const projects = [
     category: 'Arts & culture',
     description: 'An editorial site for Burlington\'s annual short-film festival at the historic Capitol Theater. A live countdown to opening night, a multi-block screening schedule, festival passes, and a filmmaker submission flow — all wrapped in a typographic, print-inspired design.',
     url: 'https://www.snakealleyfestivaloffilm.com',
+    caseStudy: '/work/snake-alley-film',
     image: '/portfolio/snake-alley-film.png',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     highlights: [
@@ -179,14 +180,24 @@ export default function WorkPage() {
                 </div>
               </div>
 
-              <Link
-                href={active.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-7 px-4 py-2.5 rounded-md font-mono text-[13px] border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors"
-              >
-                $ open {active.url} →
-              </Link>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link
+                  href={active.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md font-mono text-[13px] border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent-glow)] hover:text-[var(--accent-bright)] transition-colors"
+                >
+                  $ open {active.url} →
+                </Link>
+                {'caseStudy' in active && active.caseStudy && (
+                  <Link
+                    href={active.caseStudy}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md font-mono text-[13px] border border-[var(--line)] text-[var(--ink-soft)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
+                  >
+                    $ cat case-study.md →
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>

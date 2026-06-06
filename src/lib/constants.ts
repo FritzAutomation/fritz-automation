@@ -85,6 +85,7 @@ export const commandPalettePages = [
   { href: '/work', label: 'Work', section: 'Pages', keywords: ['work', 'portfolio', 'projects', 'websites'] },
   { href: '/services', label: 'Services', section: 'Pages', keywords: ['services', 'websites', 'automation', 'internal tools'] },
   { href: '/demos', label: 'Demos', section: 'Pages', keywords: ['demos', 'examples', 'interactive'] },
+  { href: '/log', label: 'Build log', section: 'Pages', keywords: ['log', 'changelog', 'updates', 'history', 'shipped'] },
   { href: '/about', label: 'About', section: 'Pages', keywords: ['about', 'josh', 'founder', 'story'] },
   { href: '/contact', label: 'Contact', section: 'Pages', keywords: ['contact', 'hire', 'email', 'project'] },
   { href: '/portal', label: 'Client Portal', section: 'Account', keywords: ['login', 'portal', 'account', 'client'] },

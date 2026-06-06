@@ -13,6 +13,7 @@ const quickLinks = [
 
 const resourceLinks = [
   { href: '/demos', label: 'Demos' },
+  { href: '/log', label: 'Build log' },
   { href: '/sitemap.xml', label: 'Sitemap' },
 ]
 
