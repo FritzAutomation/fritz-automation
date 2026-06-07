@@ -12,7 +12,7 @@ import { ShortcutOverlay } from '@/components/ShortcutOverlay'
 import { ContextMenu } from '@/components/ContextMenu'
 import { AnalyticsWrapper } from '@/components/AnalyticsWrapper'
 import { ThemeProvider } from '@/components/v3/ThemeProvider'
-import { BuildLog, MobileTicker } from '@/components/v3/BuildLog'
+import { BuildLog } from '@/components/v3/BuildLog'
 import { PaletteHint } from '@/components/v3/PaletteHint'
 import { ReturningVisitorToast } from '@/components/v3/ReturningVisitorToast'
 import './globals.css'
@@ -107,7 +107,6 @@ export default function RootLayout({
         <ContextMenu />
         <CursorEffects />
         <BuildLog />
-        <MobileTicker />
         <PaletteHint />
         <ReturningVisitorToast />
         <AnalyticsWrapper />
